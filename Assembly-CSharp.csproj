@@ -67,36 +67,6 @@
     <Compile Include="Assets\SwfParser\Scripts\SwfByteArray.cs" />
     <Compile Include="Assets\SwfParser\Scripts\SwfReader.cs" />
     <Compile Include="Assets\SwfParser\Scripts\SwfReadResult.cs" />
-    <Compile Include="Assets\zlib.NET_104\demo\BDS2005\C#\CompressFile\AssemblyInfo.cs" />
-    <Compile Include="Assets\zlib.NET_104\demo\BDS2005\C#\CompressFile\Form1.cs" />
-    <Compile Include="Assets\zlib.NET_104\demo\BDS2005\C#\CompressFile\ZOutputStream.cs" />
-    <Compile Include="Assets\zlib.NET_104\demo\BDS2006\C#\CompressFile\AssemblyInfo.cs" />
-    <Compile Include="Assets\zlib.NET_104\demo\BDS2006\C#\CompressFile\Form1.cs" />
-    <Compile Include="Assets\zlib.NET_104\demo\BDS2006\C#\CompressFile\ZOutputStream.cs" />
-    <Compile Include="Assets\zlib.NET_104\demo\Visual Studio 2003\C#\CompressFile\AssemblyInfo.cs" />
-    <Compile Include="Assets\zlib.NET_104\demo\Visual Studio 2003\C#\CompressFile\Form1.cs" />
-    <Compile Include="Assets\zlib.NET_104\demo\Visual Studio 2003\C#\CompressFile\ZOutputStream.cs" />
-    <Compile Include="Assets\zlib.NET_104\demo\Visual Studio 2005\C#\CompressFile\AssemblyInfo.cs" />
-    <Compile Include="Assets\zlib.NET_104\demo\Visual Studio 2005\C#\CompressFile\Form1.cs" />
-    <Compile Include="Assets\zlib.NET_104\demo\Visual Studio 2005\C#\CompressFile\ZOutputStream.cs" />
-    <Compile Include="Assets\zlib.NET_104\source\Adler32.cs" />
-    <Compile Include="Assets\zlib.NET_104\source\AssemblyInfo.cs" />
-    <Compile Include="Assets\zlib.NET_104\source\Deflate.cs" />
-    <Compile Include="Assets\zlib.NET_104\source\InfBlocks.cs" />
-    <Compile Include="Assets\zlib.NET_104\source\InfCodes.cs" />
-    <Compile Include="Assets\zlib.NET_104\source\Inflate.cs" />
-    <Compile Include="Assets\zlib.NET_104\source\InfTree.cs" />
-    <Compile Include="Assets\zlib.NET_104\source\StaticTree.cs" />
-    <Compile Include="Assets\zlib.NET_104\source\SupportClass.cs" />
-    <Compile Include="Assets\zlib.NET_104\source\Tree.cs" />
-    <Compile Include="Assets\zlib.NET_104\source\ZInputStream.cs" />
-    <Compile Include="Assets\zlib.NET_104\source\Zlib.cs" />
-    <Compile Include="Assets\zlib.NET_104\source\ZOutputStream.cs" />
-    <Compile Include="Assets\zlib.NET_104\source\ZStream.cs" />
-    <Compile Include="Assets\zlib.NET_104\source\ZStreamException.cs" />
-    <None Include="Assets\zlib.NET_104\history.txt" />
-    <None Include="Assets\zlib.NET_104\license.txt" />
-    <None Include="Assets\zlib.NET_104\readme.txt" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>D:/kingBook/projects_unity/unity_swfParse/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
@@ -329,7 +299,7 @@
       <HintPath>D:/kingBook/projects_unity/unity_swfParse/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
     </Reference>
     <Reference Include="zlib.net">
-      <HintPath>D:/kingBook/projects_unity/unity_swfParse/Assets/zlib.NET_104/bin/zlib.net.dll</HintPath>
+      <HintPath>D:/kingBook/projects_unity/unity_swfParse/Assets/SwfParser/zlib/zlib.net.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

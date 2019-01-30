@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 
 public class SwfReader{
 	
@@ -31,7 +32,16 @@ public class SwfReader{
 	}
 
 	private void decompress(SwfByteArray bytes){
-		new ICSharpCode
+		//new ICSharpCode
+		long startPosition=bytes.getBytePosition();
+		//
+		var filePath=bytes.getFileStreamName();
+		int dotId=filePath.LastIndexOf('.');
+		filePath=filePath.Insert(dotId,"_Cache");
+		
+		var fs=new FileStream(filePath,FileMode.Create);
+		bytes.readBytes(fs);
+		Debug.Log("writed");
 	}
 
 	

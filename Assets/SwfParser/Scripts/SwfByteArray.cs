@@ -70,9 +70,15 @@ public class SwfByteArray{
 	}*/
 
 	public SwfByteArray(string swfPath){
-		_fileStream=File.OpenRead(swfPath);
-		_binaryReader=new BinaryReader(_fileStream,Encoding.Unicode);
-		
+		var fs=File.OpenRead(swfPath);
+		init(fs);
+	}
+
+	public void init(FileStream fileStream){
+		dispose();
+
+		_fileStream=fileStream;
+		_binaryReader=new BinaryReader(fileStream,Encoding.Unicode);
 	}
 
 	public void alignBytes(){
@@ -99,9 +105,33 @@ public class SwfByteArray{
 		return _binaryReader.ReadUInt32();
 	}
 
+	public void readBytes(FileStream outFileStream,int offset=0,int length=0){
+		alignBytes();
+		length=length<=0?(int)_fileStream.Length:length;
+		Debug.Log("_fileStream.Position:"+_fileStream.Position);
+		Debug.Log("_fileStream.Length:"+_fileStream.Length);
+		Debug.Log("outFileStream.Length:"+outFileStream.Length);
+		byte[] bytes=_binaryReader.ReadBytes(length);
+		outFileStream.Write(bytes,offset,length);
+	}
+
+	public long getBytePosition(){
+		return _fileStream.Position;
+	}
+
 	public void dispose(){
-		_fileStream.Dispose();
-		_binaryReader.Dispose();
+		if(_fileStream!=null){
+			_fileStream.Dispose();
+			_fileStream=null;
+		}
+		if(_fileStream!=null){
+			_binaryReader.Dispose();
+			_binaryReader=null;
+		}
+	}
+
+	public string getFileStreamName(){
+		return _fileStream.Name;
 	}
 
 	
