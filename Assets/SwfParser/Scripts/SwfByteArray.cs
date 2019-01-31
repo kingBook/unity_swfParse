@@ -203,6 +203,40 @@ public class SwfByteArray{
 		
 	}
 
+	public ushort readUI16(){
+		alignBytes();
+		return _br.ReadUInt16();
+	}
+
+	public void writeUI16(){
+		
+	}
+
+	public uint readUI32(){
+		alignBytes();
+		return _br.ReadUInt32();
+	}
+
+	public void writeUI32(){
+		
+	}
+
+	public byte[] readUI8Array(uint length){
+		byte[] bytes =new byte[length];
+		for(uint i=0;i<length;i++){
+			bytes[i]=readUI8();
+		}
+		return bytes;
+	}
+
+	public ushort[] readUI16Array(uint length){
+		ushort[] ushorts =new ushort[length];
+		for(uint i=0;i<length;i++){
+			ushorts[i]=readUI16();
+		}
+		return ushorts;
+	}
+
 
 
 
@@ -221,10 +255,7 @@ public class SwfByteArray{
 
 	
 
-	public uint readUI32(){
-		alignBytes();
-		return _br.ReadUInt32();
-	}
+	
 
 	public uint readUB(uint length){
 		if(length<=0) return 0;
@@ -276,10 +307,7 @@ public class SwfByteArray{
 		return result;
 	}
 
-	public uint readUI16(){
-		alignBytes();
-		return _br.ReadUInt16();
-	}
+	
 
 	
 
