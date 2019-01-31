@@ -6,42 +6,42 @@ using System.IO;
 public class SwfReader{
 	
 	public SwfReadResult read(SwfByteArray bytes){
-		var header=new SwfHeader();
 		var tags=new List<SwfTag>();
 		//
-		readSwfHeader(bytes,header);
+		var header=readSwfHeader(bytes);
 		//
 		var swf=new Swf();
 		swf.header=header;
 		swf.tags=tags;
 		var readResult=new SwfReadResult();
 		readResult.swf=swf;
+
 		return readResult;
 	}
 
-	private void readSwfHeader(SwfByteArray bytes,SwfHeader header){
+	private SwfHeader readSwfHeader(SwfByteArray bytes){
+		var header=new SwfHeader();
 		header.signature = bytes.readStringWithLength(3);
 		header.fileVersion = bytes.readUI8();
 		header.uncompressedSize = bytes.readUI32();
 		if(header.signature == SwfHeader.COMPRESSED_SIGNATURE){
-			decompress(bytes);
+			bytes.decompress();
 		}
-		/*header.frameSize = readRectangleRecord(context);
+		header.frameSize = readRectangleRecord(bytes);
 		header.frameRate = bytes.readFixed8_8();
-		header.frameCount = bytes.readUI16();*/
+		header.frameCount = bytes.readUI16();
+		return header;
 	}
 
-	private void decompress(SwfByteArray bytes){
-		//new ICSharpCode
-		long startPosition=bytes.getBytePosition();
-		//
-		var filePath=bytes.getFileStreamName();
-		int dotId=filePath.LastIndexOf('.');
-		filePath=filePath.Insert(dotId,"_Cache");
-		
-		var fs=new FileStream(filePath,FileMode.Create);
-		bytes.readBytes(fs);
-		Debug.Log("writed");
+	private RectangleRecord readRectangleRecord(SwfByteArray bytes){
+		bytes.alignBytes();
+		var record=new RectangleRecord();
+		var nBits = bytes.readUB(5);
+		record.xMin = bytes.readSB(nBits);
+		record.xMax = bytes.readSB(nBits);
+		record.yMin = bytes.readSB(nBits);
+		record.yMax = bytes.readSB(nBits);
+		return record;
 	}
 
 	

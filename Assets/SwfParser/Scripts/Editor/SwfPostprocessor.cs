@@ -31,17 +31,17 @@ public class SwfPostprocessor:AssetPostprocessor{
 
 	[MenuItem("SwfParser/run")]
 	public static void run(){
-		parse("D:/kingBook/projects_unity/unity_swfParse/Assets/views.swf");
+		parse(Application.dataPath+"/views.swf");
 	}
 
 
 	public static void parse(string swfPath){
 		Debug.Log(swfPath);
-		var swfRead=new SwfReader();
+		var swfReader=new SwfReader();
 
 		var swfBytes=new SwfByteArray(swfPath);
-		swfRead.read(swfBytes);
-		swfBytes.dispose();
+		swfReader.read(swfBytes);
+		swfBytes.close();
 	}
 
 
