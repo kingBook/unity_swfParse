@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using UnityEngine;
@@ -101,9 +99,7 @@ public class SwfByteArray{
 		return _ms.Length;
 	}
 
-	public void compress(){
-		
-	}
+	public void compress(){ }
 
 	public void decompress(){
 		long msPos=_ms.Position;
@@ -134,26 +130,19 @@ public class SwfByteArray{
 		_ms.Dispose();
 	}
 
-	public void dump(){
-		
+	public void dump(){ }
+
+	public byte[] readBytes(int count){
+		return _br.ReadBytes(count);
 	}
 
-	public void readBytes(){
-		
-		
-	}
-
-	public void writeBytes(){
-		
-	}
+	public void writeBytes(){ }
 
 	public bool readFlag(){
 		return readUB(1)==1;
 	}
 
-	public void writeFlag(){
-		
-	}
+	public void writeFlag(){ }
 
 	public sbyte readSI8(){
 		alignBytes();
@@ -165,18 +154,14 @@ public class SwfByteArray{
 		return _br.ReadInt16();
 	}
 
-	public void writeSI16(){
-		
-	}
+	public void writeSI16(){ }
 
 	public int readSI32(){
 		alignBytes();
 		return _br.ReadInt32();
 	}
 
-	public void writeSI32(){
-		
-	}
+	public void writeSI32(){ }
 
 	public sbyte[] readSI8Array(uint length){
 		sbyte[] sbytes=new sbyte[length];
@@ -199,27 +184,21 @@ public class SwfByteArray{
 		return _br.ReadByte();
 	}
 
-	public void writeUI8(){
-		
-	}
+	public void writeUI8(){ }
 
 	public ushort readUI16(){
 		alignBytes();
 		return _br.ReadUInt16();
 	}
 
-	public void writeUI16(){
-		
-	}
+	public void writeUI16(){ }
 
 	public uint readUI32(){
 		alignBytes();
 		return _br.ReadUInt32();
 	}
 
-	public void writeUI32(){
-		
-	}
+	public void writeUI32(){ }
 
 	public byte[] readUI8Array(uint length){
 		byte[] bytes =new byte[length];
@@ -237,41 +216,111 @@ public class SwfByteArray{
 		return ushorts;
 	}
 
-
-
-
-
-
-
-
-
-
-	public string readStringWithLength(uint length){
+	public uint[] readUI24Array(uint length){
 		alignBytes();
-		byte[] bytes=_br.ReadBytes((int)length);
-		string str=Encoding.UTF8.GetString(bytes);
-		return str;
+		uint[] list=new uint[length];
+		for(uint i=0;i<length;i++){
+			list[i]=(uint)_br.ReadUInt16() << 8 | _br.ReadByte();
+		}
+		return list;
 	}
 
-	
+	public uint[] readUI32Array(uint length){
+		uint[] list=new uint[length];
+		for(uint i=0;i<length;i++){
+			list[i]=readUI32();
+		}
+		return list;
+	}
 
-	
+	public float readFixed8_8(){
+		alignBytes();
+		uint decimalNum = _br.ReadByte();
+		float result = _br.ReadSByte();
+		
+		result += decimalNum / 0xFF;
+			
+		return result;
+	}
+
+	public void writeFixed8_8(){ }
+
+	public float readFixed16_16(){
+		alignBytes();
+		ushort decimalNum = _br.ReadUInt16();
+		float result = _br.ReadInt16();
+			
+		result += (float)decimalNum / 0xFFFF;
+			
+		return result;
+	}
+
+	public float readFloat16(){
+		uint raw = readUI16();
+			
+		uint sign = raw >> 15;
+		uint exp = (raw >> 10) & (uint)filter5;
+		uint sig = raw & (uint)filter10;
+			
+		if(exp == 31){//Handle infinity/NaN
+			exp = 255;
+		}else if(exp == 0){//Handle normalized values
+			exp = 0;
+			sig = 0;
+		}else{
+			exp += 111;
+		}
+			
+		uint temp = sign << 31 | exp << 23 | sig << 13;
+			
+		return unsignedIntAsFloat32(temp);
+	}
+
+	public void writeFloat16(){ }
+
+	public float readFloat(){
+		return _br.ReadSingle();
+	}
+	public void writeFloat(){ }
+
+	public double readDouble(){
+		return _br.ReadDouble();
+	}
+	public void writeDouble(){ }
+
+	public uint readEncodedUI32(){
+		alignBytes();
+		uint result=0;
+		uint bytesRead=0;
+		uint currentByte;
+		bool shouldContinue = true;
+		while(shouldContinue && bytesRead < 5)
+		{
+			currentByte = _br.ReadByte();
+			result = (uint)( ((currentByte & filter7) << (int)((7 * bytesRead)) | result) );
+			shouldContinue = ((currentByte >> 7) == 1);
+			bytesRead++;
+		}
+		return result;
+	}
+
+	public void writeEncodedUI32(){ }
 
 	public uint readUB(uint length){
 		if(length<=0) return 0;
-			
+		
 		int totalBytes = Mathf.CeilToInt((bitPosition + length) / 8.0f);
 		uint iter = 0;
 		uint currentByte = 0;
 		uint result = 0;
-			
+		
 		while(iter < totalBytes){
 			currentByte = _br.ReadByte();
 			result = (result << 8) | currentByte;
 			iter++;
 		}
 			
-		int newBitPosition = ((int)(bitPosition + length) % 8);
+		int newBitPosition = (int)((bitPosition + length) % 8);
 			
 		int excessBits = (totalBytes * 8 - ((int)bitPosition + (int)length));
 		result = result >> excessBits;
@@ -285,6 +334,8 @@ public class SwfByteArray{
 		return result;
 	}
 
+	public void writeUB(){ }
+
 	public int readSB(uint length){
 		if(length<=0) return 0;
 			
@@ -297,23 +348,46 @@ public class SwfByteArray{
 		return (int)result;
 	}
 
-	public float readFixed8_8(){
-		alignBytes();
-		uint decimalNum = _br.ReadByte();
-		float result = _br.ReadSByte();
+	public void writeSB(){ }
+
+	public float readFB(uint length){
+		if(length<=0) return 0;
 			
-		result += decimalNum / 0xFF;
+		int raw = readSB(length);
 			
-		return result;
+		int integer = raw >> 16;
+		float decimalNum = (raw & filter16)/0xFFFF; 
+			
+		return integer + decimalNum;
 	}
 
-	
+	public void writeFB(){ }
 
-	
+	public string readString(){
+		alignBytes();
+		int byteCount = 1;
+		while(_br.ReadByte()>0){
+			byteCount++;
+		}
+		_ms.Position -= byteCount;
+		byte[] bytes = _br.ReadBytes(byteCount);
+		string result = Encoding.UTF8.GetString(bytes);
+		return result;
+	}
+	public void writeString(){
+		
+	}
 
-	
+	public string readStringWithLength(uint length){
+		alignBytes();
+		byte[] bytes=_br.ReadBytes((int)length);
+		string str=Encoding.UTF8.GetString(bytes);
+		return str;
+	}
 
-	
+	public void writeStringWithLength(){
+		
+	}
 
 	public void close(){
 		if(_ms!=null){

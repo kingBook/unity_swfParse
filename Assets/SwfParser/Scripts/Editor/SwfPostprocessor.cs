@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Xml;
 using UnityEditor;
-using System.IO;
-using System;
+using UnityEngine;
 
 public class SwfPostprocessor:AssetPostprocessor{
 	
@@ -15,7 +12,6 @@ public class SwfPostprocessor:AssetPostprocessor{
 				if(extensionName==".swf"){
 					OnSwfPostprocess(str);
 				}
-				
 			}
         }
     }
@@ -25,24 +21,34 @@ public class SwfPostprocessor:AssetPostprocessor{
 		path=path.Substring(id);
 		path=Application.dataPath+path;
 		
-		parse(path);
+		parseAndExportXml(path);
 		
 	}
 
 	[MenuItem("SwfParser/run")]
 	public static void run(){
-		parse(Application.dataPath+"/views.swf");
+		parseAndExportXml(Application.dataPath+"/views.swf");
 	}
 
-
-	public static void parse(string swfPath){
+	public static void parseAndExportXml(string swfPath){
 		Debug.Log(swfPath);
 		var swfReader=new SwfReader();
 
 		var swfBytes=new SwfByteArray(swfPath);
-		swfReader.read(swfBytes);
+		var swf=swfReader.read(swfBytes);
 		swfBytes.close();
+		
+		saveXml(swf.toXml(),swfPath);
 	}
 
+	/**保存xml文件*/
+	private static void saveXml(XmlDocument doc,string swfPath) {
+		int id=swfPath.LastIndexOf('.');
+		string fileName=swfPath.Substring(0,id)+".xml";
+
+		doc.Save(fileName);
+	}
+
+	
 
 }

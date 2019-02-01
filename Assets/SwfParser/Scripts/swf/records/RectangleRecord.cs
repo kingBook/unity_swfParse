@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RectangleRecord{
+public struct RectangleRecord{
 	public int xMin;
 	public int xMax;
 	public int yMin;
