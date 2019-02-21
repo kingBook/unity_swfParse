@@ -35,8 +35,7 @@ public class SwfReader{
 	private SwfTag readTag(SwfByteArray bytes,TagHeaderRecord header){
 		SwfTag tag;
 		switch(header.type){
-
-			//============= control Tags =======
+			//============= Control Tags =======
 			case 9:
 				tag=readSetBackgroundColorTag(bytes,header);
 				break;
@@ -67,9 +66,19 @@ public class SwfReader{
 			case 71:
 				tag=readImportAssets2Tag(bytes,header);
 				break;
-
-
-
+			case 76:
+				tag=readSymbolClassTag(bytes,header);
+				break;
+			case 77:
+				tag=readMetadataTag(bytes,header);
+				break;
+			case 78:
+				tag=readDefineScalingGridTag(bytes,header);
+				break;
+			case 86:
+				tag=readDefineSceneAndFrameLabelDataTag(bytes,header);
+				break;
+			//============= Shape Tags =======
 
 			default:
 				tag=readUnknownTag(bytes,header);
@@ -162,6 +171,53 @@ public class SwfReader{
 			list[i]=record;
 		}
 		tag.list=list;
+		return tag;
+	}
+
+	private SymbolClassTag readSymbolClassTag(SwfByteArray bytes,TagHeaderRecord header){
+		var tag=new SymbolClassTag();
+		tag.numSymbols=bytes.readUI16();
+		var list=new SymbolClassRecord[tag.numSymbols];
+		for(ushort i=0;i<tag.numSymbols;i++){
+			var record=new SymbolClassRecord();
+			record.tag=bytes.readUI16();
+			record.name=bytes.readString();
+			list[i]=record;
+		}
+		return tag;
+	}
+
+	private MetadataTag readMetadataTag(SwfByteArray bytes,TagHeaderRecord header){
+		var tag=new MetadataTag();
+		tag.metadata=bytes.readString();
+		return tag;
+	}
+
+	private DefineScalingGridTag readDefineScalingGridTag(SwfByteArray bytes,TagHeaderRecord header){
+		var tag=new DefineScalingGridTag();
+		tag.characterId=bytes.readUI16();
+		tag.splitter=readRectangleRecord(bytes);
+		return tag;
+	}
+
+	private DefineSceneAndFrameLabelDataTag readDefineSceneAndFrameLabelDataTag(SwfByteArray bytes,TagHeaderRecord header){
+		var tag=new DefineSceneAndFrameLabelDataTag();
+		tag.sceneCount=bytes.readEncodedUI32();
+		var defineSceneList=new DefineSceneRecord[tag.sceneCount];
+		for(uint i=0;i<tag.sceneCount;i++){
+			var record=new DefineSceneRecord();
+			record.offset=bytes.readEncodedUI32();
+			record.name=bytes.readString();
+			defineSceneList[i]=record;
+		}
+		tag.frameLabelCount=bytes.readEncodedUI32();
+		var frameLabelList=new FramelabelRecord[tag.frameLabelCount];
+		for(uint i=0;i<tag.frameLabelCount;i++){
+			var record=new FramelabelRecord();
+			record.frameNum=bytes.readEncodedUI32();
+			record.frameLabel=bytes.readString();
+			frameLabelList[i]=record;
+		}
 		return tag;
 	}
 
