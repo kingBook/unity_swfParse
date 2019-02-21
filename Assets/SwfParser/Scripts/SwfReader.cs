@@ -52,14 +52,25 @@ public class SwfReader{
 			case 56:
 				tag=readExportAssetsTag(bytes,header);
 				break;
-			case 57:
-				tag=readImportAssetsTag(bytes,header);
+			case 64:
+				tag=readEnableDubugger2(bytes,header);
 				break;
-
-				
+			case 65:
+				tag=readScriptLimitsTag(bytes,header);
+				break;
+			case 66:
+				tag=readSetTabIndexTag(bytes,header);
+				break;	
 			case 69:
 				tag=readFileAttributesTag(bytes,header);
 				break;
+			case 71:
+				tag=readImportAssets2Tag(bytes,header);
+				break;
+
+
+
+
 			default:
 				tag=readUnknownTag(bytes,header);
 				break;
@@ -92,7 +103,6 @@ public class SwfReader{
 
 	private ExportAssetsTag readExportAssetsTag(SwfByteArray bytes,TagHeaderRecord header){
 		var tag=new ExportAssetsTag();
-
 		ushort count=bytes.readUI16();
 		var list=new ExportAssetRecord[count];
 		for(ushort i=0;i<count;i++){
@@ -101,14 +111,28 @@ public class SwfReader{
 			record.name=bytes.readString();
 			list[i]=record;
 		}
-
 		tag.list=list;
-
 		return tag;
 	}
 
-	private ImportAssetsTag readImportAssetsTag(SwfByteArray bytes,TagHeaderRecord header){
-		var tag=new ImportAssetsTag();
+	private EnableDubugger2Tag readEnableDubugger2(SwfByteArray bytes,TagHeaderRecord header){
+		var tag=new EnableDubugger2Tag();
+		tag.reserved=bytes.readUI16();
+		tag.password=bytes.readString();
+		return tag;
+	}
+
+	private ScriptLimitsTag readScriptLimitsTag(SwfByteArray bytes,TagHeaderRecord header){
+		var tag=new ScriptLimitsTag();
+		tag.maxRecursionDepth=bytes.readUI16();
+		tag.scriptTimeoutSeconds=bytes.readUI16();
+		return tag;
+	}
+	
+	private SetTabIndexTag readSetTabIndexTag(SwfByteArray bytes,TagHeaderRecord header){
+		var tag=new SetTabIndexTag();
+		tag.depth=bytes.readUI16();
+		tag.tabIndex=bytes.readUI16();
 		return tag;
 	}
 
@@ -122,6 +146,22 @@ public class SwfReader{
 		bytes.readUB(2);
 		tag.useNetwork = bytes.readFlag();
 		bytes.readUB(24);
+		return tag;
+	}
+
+	private ImportAssets2Tag readImportAssets2Tag(SwfByteArray bytes,TagHeaderRecord header){
+		var tag=new ImportAssets2Tag();
+		bytes.readUI8();
+		bytes.readUI8();
+		ushort count=bytes.readUI16();
+		var list=new ImportAssets2Record[count];
+		for(ushort i=0;i<count;i++){
+			var record=new ImportAssets2Record();
+			record.tag=bytes.readUI16();
+			record.name=bytes.readString();
+			list[i]=record;
+		}
+		tag.list=list;
 		return tag;
 	}
 

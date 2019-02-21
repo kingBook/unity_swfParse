@@ -9,7 +9,7 @@ public class FrameLabelTag:SwfTag {
 		var ele=createXmlElement(doc,"FrameLabel");
 		ele.SetAttribute("name",name);
 		ele.SetAttribute("namedAnchorFlag",namedAnchorFlag.ToString());
-		return base.toXml(doc);
+		return ele;
 	}
 
 }

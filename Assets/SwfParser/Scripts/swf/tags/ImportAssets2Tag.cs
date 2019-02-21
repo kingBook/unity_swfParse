@@ -1,12 +1,11 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Xml;
+﻿using System.Xml;
 
-public class ExportAssetsTag:SwfTag {
-	public ExportAssetRecord[] list;
+public class ImportAssets2Tag:SwfTag {
+	public string url;
+	public ImportAssets2Record[] list;
 
 	public override XmlElement toXml(XmlDocument doc) {
-		var ele=createXmlElement(doc,"ExportAssets");
+		var ele=createXmlElement(doc,"ImportAssets2");
 		for(int i=0;i<list.Length;i++){
 			var record=list[i];
 			var recordEle=createXmlElement(doc,"Record");
@@ -16,4 +15,5 @@ public class ExportAssetsTag:SwfTag {
 		}
 		return ele;
 	}
+
 }

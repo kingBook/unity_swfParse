@@ -62,18 +62,22 @@
   <ItemGroup>
     <Compile Include="Assets\SwfParser\Scripts\Debug2.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\records\ExportAssetRecord.cs" />
+    <Compile Include="Assets\SwfParser\Scripts\swf\records\ImportAssets2Record.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\records\RectangleRecord.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\records\RGBRecord.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\records\TagHeaderRecord.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\Swf.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\SwfHeader.cs" />
+    <Compile Include="Assets\SwfParser\Scripts\swf\tags\EnableDubugger2Tag.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\tags\EndTag.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\tags\ExportAssetsTag.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\tags\FileAttributesTag.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\tags\FrameLabelTag.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\tags\ImportAssetsTag.cs" />
+    <Compile Include="Assets\SwfParser\Scripts\swf\tags\ImportAssets2Tag.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\tags\ProtectTag.cs" />
+    <Compile Include="Assets\SwfParser\Scripts\swf\tags\ScriptLimitsTag.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\tags\SetBackgroundColorTag.cs" />
+    <Compile Include="Assets\SwfParser\Scripts\swf\tags\SetTabIndexTag.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\tags\SwfTag.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\tags\UnknownTag.cs" />
     <Compile Include="Assets\SwfParser\Scripts\SwfByteArray.cs" />
