@@ -1,4 +1,4 @@
-﻿public class CurvedEdgeRecord{//:EdgeRecord:ShapeRecord
+﻿public class CurvedEdgeRecord:IEdgeRecord{//:EdgeRecord:ShapeRecord
 	public byte typeFlag;
 	public byte straightFlag;
 	public byte numBits;

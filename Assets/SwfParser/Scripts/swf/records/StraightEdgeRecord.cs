@@ -1,4 +1,4 @@
-﻿public struct StraightEdgeRecord{//:EdgeRecord:ShapeRecord
+﻿public struct StraightEdgeRecord:IEdgeRecord{//:EdgeRecord:ShapeRecord
 	public byte typeFlag;
 	public byte straightFlag;
 	public byte numBits;

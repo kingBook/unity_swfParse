@@ -71,7 +71,9 @@
     <Compile Include="Assets\SwfParser\Scripts\swf\records\FramelabelRecord.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\records\GradientRecord.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\records\GradRecord.cs" />
+    <Compile Include="Assets\SwfParser\Scripts\swf\records\IEdgeRecord.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\records\ImportAssets2Record.cs" />
+    <Compile Include="Assets\SwfParser\Scripts\swf\records\IShapeRecord.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\records\LineStyle2Record.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\records\LineStyleArrayRecord.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\records\LineStyleRecord.cs" />
@@ -107,19 +109,19 @@
     <Compile Include="Assets\SwfParser\Scripts\SwfReader.cs" />
     <None Include="Assets\views.xml" />
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>D:/kingBook/projects_unity/unity_swfParse/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>E:/kingBook/projects_unity/unity_swfParse/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>D:/kingBook/projects_unity/unity_swfParse/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>E:/kingBook/projects_unity/unity_swfParse/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>D:/kingBook/projects_unity/unity_swfParse/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>E:/kingBook/projects_unity/unity_swfParse/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>D:/kingBook/projects_unity/unity_swfParse/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>E:/kingBook/projects_unity/unity_swfParse/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.DataPrivacy">
-      <HintPath>D:/kingBook/projects_unity/unity_swfParse/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+      <HintPath>E:/kingBook/projects_unity/unity_swfParse/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -323,22 +325,22 @@
       <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="zlib.net">
-      <HintPath>D:/kingBook/projects_unity/unity_swfParse/Assets/SwfParser/zlib/zlib.net.dll</HintPath>
+      <HintPath>E:/kingBook/projects_unity/unity_swfParse/Assets/SwfParser/zlib/zlib.net.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Advertisements">
-      <HintPath>D:/kingBook/projects_unity/unity_swfParse/Library/PackageCache/com.unity.ads@2.3.1/Runtime/UnityEngine.Advertisements.dll</HintPath>
+      <HintPath>E:/kingBook/projects_unity/unity_swfParse/Library/PackageCache/com.unity.ads@2.3.1/Runtime/UnityEngine.Advertisements.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Advertisements.Editor">
-      <HintPath>D:/kingBook/projects_unity/unity_swfParse/Library/PackageCache/com.unity.ads@2.3.1/Runtime/UnityEngine.Advertisements.Editor.dll</HintPath>
+      <HintPath>E:/kingBook/projects_unity/unity_swfParse/Library/PackageCache/com.unity.ads@2.3.1/Runtime/UnityEngine.Advertisements.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
-      <HintPath>D:/kingBook/projects_unity/unity_swfParse/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
+      <HintPath>E:/kingBook/projects_unity/unity_swfParse/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>D:/kingBook/projects_unity/unity_swfParse/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
+      <HintPath>E:/kingBook/projects_unity/unity_swfParse/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>D:/kingBook/projects_unity/unity_swfParse/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
+      <HintPath>E:/kingBook/projects_unity/unity_swfParse/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

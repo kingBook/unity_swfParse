@@ -366,10 +366,16 @@ public class SwfReader{
 	private ShapeWithStyleRecord readShapeWithStyleRecord(SwfByteArray bytes,byte shapeType){
 		var record=new ShapeWithStyleRecord();
 		record.fillStyles=readFillStyleArrayRecord(bytes,shapeType);
-		record.lineStyles=
+		record.lineStyles=readLineStyleArrayRecord(bytes,shapeType);
 		record.numFillBits=(byte)bytes.readUB(4);
 		record.numLineBits=(byte)bytes.readUB(4);
-		record.shapeRecords=
+		var list=new List<IShapeRecord>();
+		while(true){
+			var shapeRecord=readShapeRecord(bytes,record.numFillBits,record.numLineBits,shapeType);
+			list.Add(shapeRecord);
+			if(shapeRecord is EndShapeRecord)break;
+		}
+		record.shapeRecords=list.ToArray();
 		return record;
 	}
 
@@ -430,11 +436,11 @@ public class SwfReader{
 		}
 		var list=new ArrayList();
 		if(shapeType==1||shapeType==2||shapeType==3){
-			for(uint i=0;i<count;i++){
+			for(int i=0;i<count;i++){
 				list[i]=readLineStyleRecord(bytes,shapeType);
 			}
 		}else if(shapeType==4){
-			for(uint i=0;i<count;i++){
+			for(int i=0;i<count;i++){
 				list[i]=readLineStyle2Record(bytes,shapeType);
 			}
 		}
@@ -475,5 +481,52 @@ public class SwfReader{
 		return record;
 	}
 	
+	private IShapeRecord readShapeRecord(SwfByteArray bytes,byte numFillBits,byte numLineBits,byte shapeType){
+		IShapeRecord record;
+		bool typeFlag=bytes.readFlag();
+		if(!typeFlag){
+			bool stateNewStyles=bytes.readFlag();
+			bool stateLineStyle=bytes.readFlag();
+			bool stateFillStyle1=bytes.readFlag();
+			bool stateFillStyle0=bytes.readFlag();
+			bool stateMoveTo=bytes.readFlag();
+			if(!stateNewStyles&&!stateLineStyle&&!stateFillStyle1&&!stateFillStyle0&&!stateMoveTo){
+				var endShapeRecord=new EndShapeRecord();
+				endShapeRecord.typeFlag=typeFlag;
+				endShapeRecord.endOfShape=0;
+			}else{
+				var styleChangeRecord=new StyleChangeRecord();
+				styleChangeRecord.stateNewStyles=stateNewStyles;
+				styleChangeRecord.stateLineStyle=stateLineStyle;
+				styleChangeRecord.stateFillStyle1=stateFillStyle1;
+				styleChangeRecord.stateFillStyle0=stateFillStyle0;
+				styleChangeRecord.stateMoveTo=stateMoveTo;
+				if(stateMoveTo){
+					styleChangeRecord.moveBits=(byte)bytes.readUB(5);
+					styleChangeRecord.moveDeltaX=bytes.readSB(styleChangeRecord.moveBits);
+					styleChangeRecord.moveDeltaY=bytes.readSB(styleChangeRecord.moveBits);
+				}
+				if(stateFillStyle0){
+					styleChangeRecord.fillStyle0=bytes.readUB(numFillBits);
+				}
+				if(stateFillStyle1){
+					styleChangeRecord.fillStyle1=bytes.readUB(numFillBits);
+				}
+				if(stateLineStyle){
+					styleChangeRecord.lineStyle=bytes.readUB(numLineBits);
+				}
+				if(stateNewStyles){
+					styleChangeRecord.fillStyles=readFillStyleArrayRecord(bytes,shapeType);
+					styleChangeRecord.lineStyles=readLineStyleArrayRecord(bytes,shapeType);
+					styleChangeRecord.numFillBits=(byte)bytes.readUB(4);
+					styleChangeRecord.numLineBits=(byte)bytes.readUB(4);
+				}
+				
+			}
+		}else{
+			//record=new 
+		}
+		return record;
+	}
 	
 }

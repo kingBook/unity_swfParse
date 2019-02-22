@@ -1,0 +1,4 @@
+﻿public interface IEdgeRecord:IShapeRecord {
+
+	
+}

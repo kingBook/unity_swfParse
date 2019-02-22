@@ -1,10 +1,10 @@
 ﻿public struct StyleChangeRecord{//Shape Record
-	public byte typeFlag;
-	public byte stateNewStyles;
-	public byte stateLineStyle;
-	public byte stateFillStyle1;
-	public byte stateFillStyle0;
-	public byte stateMoveTo;
+	public bool typeFlag;
+	public bool stateNewStyles;
+	public bool stateLineStyle;
+	public bool stateFillStyle1;
+	public bool stateFillStyle0;
+	public bool stateMoveTo;
 	public byte moveBits;
 	public int moveDeltaX;
 	public int moveDeltaY;
