@@ -494,6 +494,7 @@ public class SwfReader{
 				var endShapeRecord=new EndShapeRecord();
 				endShapeRecord.typeFlag=typeFlag;
 				endShapeRecord.endOfShape=0;
+				record=endShapeRecord;
 			}else{
 				var styleChangeRecord=new StyleChangeRecord();
 				styleChangeRecord.stateNewStyles=stateNewStyles;
@@ -521,10 +522,37 @@ public class SwfReader{
 					styleChangeRecord.numFillBits=(byte)bytes.readUB(4);
 					styleChangeRecord.numLineBits=(byte)bytes.readUB(4);
 				}
-				
+				record=styleChangeRecord;
 			}
 		}else{
-			//record=new 
+			bool straightFlag=bytes.readFlag();
+			if(straightFlag){
+				var straightEdgeRecord=new StraightEdgeRecord();
+				straightEdgeRecord.typeFlag=typeFlag;
+				straightEdgeRecord.straightFlag=straightFlag;
+				straightEdgeRecord.numBits=(byte)bytes.readUB(4);
+				straightEdgeRecord.generalLineFlag=bytes.readFlag();
+				if(!straightEdgeRecord.generalLineFlag){
+					straightEdgeRecord.vertLineFlag=(sbyte)bytes.readSB(1);
+				}
+				if(straightEdgeRecord.generalLineFlag||straightEdgeRecord.vertLineFlag==0){
+					straightEdgeRecord.deltaX=bytes.readSB((uint)straightEdgeRecord.numBits+2);
+				}
+				if(straightEdgeRecord.generalLineFlag||straightEdgeRecord.vertLineFlag==1){
+					straightEdgeRecord.deltaY=bytes.readSB((uint)straightEdgeRecord.numBits+2);
+				}
+				record=straightEdgeRecord;
+			}else{
+				var curvedEdgeRecord=new CurvedEdgeRecord();
+				curvedEdgeRecord.typeFlag=typeFlag;
+				curvedEdgeRecord.straightFlag=straightFlag;
+				curvedEdgeRecord.numBits=(byte)bytes.readUB(4);
+				curvedEdgeRecord.controlDeltaX=bytes.readSB((uint)curvedEdgeRecord.numBits+2);
+				curvedEdgeRecord.controlDeltaY=bytes.readSB((uint)curvedEdgeRecord.numBits+2);
+				curvedEdgeRecord.anchorDeltaX=bytes.readSB((uint)curvedEdgeRecord.numBits+2);
+				curvedEdgeRecord.anchorDeltaY=bytes.readSB((uint)curvedEdgeRecord.numBits+2);
+				record=curvedEdgeRecord;
+			}
 		}
 		return record;
 	}

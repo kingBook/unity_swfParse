@@ -1,6 +1,6 @@
 ﻿public struct StraightEdgeRecord:IEdgeRecord{//:EdgeRecord:ShapeRecord
-	public byte typeFlag;
-	public byte straightFlag;
+	public bool typeFlag;
+	public bool straightFlag;
 	public byte numBits;
 	public bool generalLineFlag;
 	public sbyte vertLineFlag;

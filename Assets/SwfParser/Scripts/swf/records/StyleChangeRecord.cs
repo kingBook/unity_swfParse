@@ -1,4 +1,4 @@
-﻿public struct StyleChangeRecord{//Shape Record
+﻿public struct StyleChangeRecord:IShapeRecord{//:Shape Record
 	public bool typeFlag;
 	public bool stateNewStyles;
 	public bool stateLineStyle;
