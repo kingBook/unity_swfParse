@@ -91,6 +91,8 @@
     <Compile Include="Assets\SwfParser\Scripts\swf\tags\DefineScalingGridTag.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\tags\DefineSceneAndFrameLabelDataTag.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\tags\DefineShape2Tag.cs" />
+    <Compile Include="Assets\SwfParser\Scripts\swf\tags\DefineShape3Tag.cs" />
+    <Compile Include="Assets\SwfParser\Scripts\swf\tags\DefineShape4Tag.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\tags\DefineShapeTag.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\tags\EnableDubugger2Tag.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\tags\EndTag.cs" />

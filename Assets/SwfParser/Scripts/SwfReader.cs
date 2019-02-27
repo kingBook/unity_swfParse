@@ -80,8 +80,18 @@ public class SwfReader{
 				break;
 			//============= Shape Tags =======
 			case 2:
-				tag=readDefineShape(bytes,header);
+				tag=readDefineShapeTag(bytes,header);
 				break;
+			case 22:
+				tag=readDefineShape2Tag(bytes,header);
+				break;
+			case 32:
+				tag=readDefineShape3Tag(bytes,header);
+				break;
+			case 83:
+				tag=readDefineShape4Tag(bytes,header);
+				break;
+
 
 			default:
 				tag=readUnknownTag(bytes,header);
@@ -224,11 +234,40 @@ public class SwfReader{
 		return tag;
 	}
 
-	private DefineShapeTag readDefineShape(SwfByteArray bytes,TagHeaderRecord header){
+	private DefineShapeTag readDefineShapeTag(SwfByteArray bytes,TagHeaderRecord header){
 		var tag=new DefineShapeTag();
 		tag.shapeId=bytes.readUI16();
 		tag.shapeBounds=readRectangleRecord(bytes);
 		tag.shapes=readShapeWithStyleRecord(bytes,1);
+		return tag;
+	}
+
+	private DefineShape2Tag readDefineShape2Tag(SwfByteArray bytes,TagHeaderRecord header){
+		var tag=new DefineShape2Tag();
+		tag.shapeId=bytes.readUI16();
+		tag.shapeBounds=readRectangleRecord(bytes);
+		tag.shapes=readShapeWithStyleRecord(bytes,2);
+		return tag;
+	}
+
+	private DefineShape3Tag readDefineShape3Tag(SwfByteArray bytes,TagHeaderRecord header){
+		var tag=new DefineShape3Tag();
+		tag.shapeId=bytes.readUI16();
+		tag.shapeBounds=readRectangleRecord(bytes);
+		tag.shapes=readShapeWithStyleRecord(bytes,3);
+		return tag;
+	}
+
+	private DefineShape4Tag readDefineShape4Tag(SwfByteArray bytes,TagHeaderRecord header){
+		var tag=new DefineShape4Tag();
+		tag.shapeId=bytes.readUI16();
+		tag.shapeBounds=readRectangleRecord(bytes);
+		tag.edgeBounds=readRectangleRecord(bytes);
+		tag.reserved=(byte)bytes.readUB(5);
+		tag.usesFillWindingRule=bytes.readFlag();
+		tag.usesNonScalingStrokes=bytes.readFlag();
+		tag.usesScalingStrokes=bytes.readFlag();
+		tag.shapes=readShapeWithStyleRecord(bytes,4);
 		return tag;
 	}
 
