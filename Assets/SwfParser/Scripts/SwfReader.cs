@@ -197,6 +197,7 @@ public class SwfReader{
 			record.name=bytes.readString();
 			list[i]=record;
 		}
+		tag.list=list;
 		return tag;
 	}
 
@@ -223,6 +224,8 @@ public class SwfReader{
 			record.name=bytes.readString();
 			defineSceneList[i]=record;
 		}
+		tag.defineSceneList=defineSceneList;
+
 		tag.frameLabelCount=bytes.readEncodedUI32();
 		var frameLabelList=new FramelabelRecord[tag.frameLabelCount];
 		for(uint i=0;i<tag.frameLabelCount;i++){
@@ -231,6 +234,7 @@ public class SwfReader{
 			record.frameLabel=bytes.readString();
 			frameLabelList[i]=record;
 		}
+		tag.frameLabelList=frameLabelList;
 		return tag;
 	}
 
@@ -421,10 +425,16 @@ public class SwfReader{
 	private FillStyleArrayRecord readFillStyleArrayRecord(SwfByteArray bytes,byte shapeType){
 		var record=new FillStyleArrayRecord();
 		record.fillStyleCount=bytes.readUI8();
+		var list=new FillStyleRecord[record.fillStyleCount];
+		for(uint i=0;i<record.fillStyleCount;i++){
+			list[i]=readFillStyleRecord(bytes,shapeType);
+		}
+		record.fillStyles=list;
+		/*var record=new FillStyleArrayRecord();
+		record.fillStyleCount=bytes.readUI8();
 		uint count=record.fillStyleCount;
 		if(record.fillStyleCount==0xFF){
 			record.fillStyleCountExtended=bytes.readUI16();
-			Debug.Log("readFillStyleArrayRecord(); fillStyleCountExtended:"+record.fillStyleCountExtended);
 			count+=record.fillStyleCountExtended;
 		}
 		
@@ -432,7 +442,7 @@ public class SwfReader{
 		for(uint i=0;i<count;i++){
 			list[i]=readFillStyleRecord(bytes,shapeType);
 		}
-		record.fillStyles=list;
+		record.fillStyles=list;*/
 		return record;
 	}
 
@@ -468,6 +478,16 @@ public class SwfReader{
 	private LineStyleArrayRecord readLineStyleArrayRecord(SwfByteArray bytes,byte shapeType){
 		var record=new LineStyleArrayRecord();
 		record.lineStyleCount=bytes.readUI8();
+		if(record.lineStyleCount==0xFF){
+			record.lineStyleCountExtended=bytes.readUI16();
+		}
+		var list=new ArrayList();
+		for(int i=0;i<record.lineStyleCount;i++){
+			list.Add(readLineStyleRecord(bytes,shapeType));
+		}
+		record.lineStyles=list;
+		/*var record=new LineStyleArrayRecord();
+		record.lineStyleCount=bytes.readUI8();
 		uint count=record.lineStyleCount;
 		if(record.lineStyleCount==0xFF){
 			record.lineStyleCountExtended=bytes.readUI16();
@@ -476,14 +496,14 @@ public class SwfReader{
 		var list=new ArrayList();
 		if(shapeType==1||shapeType==2||shapeType==3){
 			for(int i=0;i<count;i++){
-				list[i]=readLineStyleRecord(bytes,shapeType);
+				list.Add(readLineStyleRecord(bytes,shapeType));
 			}
 		}else if(shapeType==4){
 			for(int i=0;i<count;i++){
-				list[i]=readLineStyle2Record(bytes,shapeType);
+				list.Add(readLineStyle2Record(bytes,shapeType));
 			}
 		}
-		record.lineStyles=list;
+		record.lineStyles=list;*/
 		return record;
 	}
 
