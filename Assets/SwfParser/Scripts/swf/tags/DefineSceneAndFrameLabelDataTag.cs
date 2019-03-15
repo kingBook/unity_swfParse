@@ -1,4 +1,5 @@
-﻿using System.Xml;
+﻿using System.Text;
+using System.Xml;
 
 public class DefineSceneAndFrameLabelDataTag:SwfTag{
 	public uint sceneCount;

@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Xml;
 
 public struct ShapeWithStyleRecord{
 	public FillStyleArrayRecord fillStyles;
@@ -7,4 +8,22 @@ public struct ShapeWithStyleRecord{
 	public byte numLineBits;
 	public IShapeRecord[] shapeRecords;
 	
+	public XmlElement toXml(XmlDocument doc){
+		var ele=doc.CreateElement("ShapeWithStyle");
+		ele.AppendChild(fillStyles.toXml(doc));
+		ele.AppendChild(lineStyles.toXml(doc));
+		//numFillBits
+		var numFillBitsEle=doc.CreateElement("NumFillBits");
+		numFillBitsEle.InnerText=numFillBits.ToString();
+		ele.AppendChild(numFillBitsEle);
+		//numLineBits
+		var numLineBitsEle=doc.CreateElement("NumLineBits");
+		numLineBitsEle.InnerText=numLineBits.ToString();
+		ele.AppendChild(numLineBitsEle);
+		//
+		for(int i=0;i<shapeRecords.Length;i++){
+			ele.AppendChild(shapeRecords[i].toXml(doc));
+		}
+		return ele;
+	}
 }

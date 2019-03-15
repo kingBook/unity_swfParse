@@ -1,4 +1,6 @@
-﻿using System.Xml;
+﻿using System.IO;
+using System.Text;
+using System.Xml;
 using UnityEditor;
 using UnityEngine;
 
@@ -31,7 +33,7 @@ public class SwfPostprocessor:AssetPostprocessor{
 	}
 
 	public static void parseAndExportXml(string swfPath){
-		Debug.Log(swfPath);
+		//Debug.Log(swfPath);
 		var swfReader=new SwfReader();
 
 		var swfBytes=new SwfByteArray(swfPath);
@@ -39,15 +41,40 @@ public class SwfPostprocessor:AssetPostprocessor{
 		swfBytes.close();
 		
 		saveXml(swf.toXml(),swfPath);
+		//Debug.Log(formatXml(swf.toXml()));
+		EditorUtility.DisplayDialog("Complete","Export "+swfPath+" to complete","OK");
 	}
 
 	/**保存xml文件*/
 	private static void saveXml(XmlDocument doc,string swfPath) {
 		int id=swfPath.LastIndexOf('.');
 		string fileName=swfPath.Substring(0,id)+".xml";
-
 		doc.Save(fileName);
 	}
+
+	private static string formatXml(object xml){
+		XmlDocument xd;
+		if(xml is XmlDocument) {
+			xd=xml as XmlDocument;
+		}else{ 
+			xd = new XmlDocument();
+			xd.LoadXml(xml as string);
+		}
+		StringBuilder sb = new StringBuilder();
+		StringWriter sw = new StringWriter(sb);  
+		XmlTextWriter xtw = null;  
+		try{  
+			xtw = new XmlTextWriter(sw);  
+			xtw.Formatting = Formatting.Indented;  
+			xtw.Indentation = 1;  
+			xtw.IndentChar = '\t';  
+			xd.WriteTo(xtw);  
+		}finally{  
+			if (xtw != null)  
+				xtw.Close();  
+		}  
+		return sb.ToString();
+	} 
 
 	
 

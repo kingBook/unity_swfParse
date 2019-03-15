@@ -15,7 +15,7 @@ public class SwfTag{
 		if(elementName==null)elementName=getClassName();
 		var ele=doc.CreateElement(elementName);
 		ele.SetAttribute("type",header.type.ToString());
-		ele.SetAttribute("length",header.type.ToString());
+		ele.SetAttribute("length",header.length.ToString());
 		return ele;
 	}
 

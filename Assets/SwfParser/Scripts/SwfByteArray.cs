@@ -371,7 +371,7 @@ public class SwfByteArray{
 		}
 		_ms.Position -= byteCount;
 		byte[] bytes = _br.ReadBytes(byteCount);
-		string result = Encoding.UTF8.GetString(bytes);
+		string result = Encoding.UTF8.GetString(bytes,0,byteCount-1);
 		return result;
 	}
 	public void writeString(){
