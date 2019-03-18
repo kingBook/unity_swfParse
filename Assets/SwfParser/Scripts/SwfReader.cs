@@ -15,13 +15,14 @@ public class SwfReader{
 				
 			long startPosition = bytes.getBytePosition();
 			long expectedEndPosition = startPosition + tagHeader.length;
-				
+			
 			SwfTag tag = readTag(bytes, tagHeader);
 			tag.header = tagHeader;
 			swf.tags.Add(tag);
 
 			bytes.alignBytes();
 			long newPosition = bytes.getBytePosition();
+			
 			
 			bytes.setBytePosition(expectedEndPosition);
 			
@@ -481,9 +482,9 @@ public class SwfReader{
 		if(record.lineStyleCount==0xFF){
 			record.lineStyleCountExtended=bytes.readUI16();
 		}
-		var list=new ArrayList();
+		var list=new LineStyleRecord[record.lineStyleCount];
 		for(int i=0;i<record.lineStyleCount;i++){
-			list.Add(readLineStyleRecord(bytes,shapeType));
+			list[i]=readLineStyleRecord(bytes,shapeType);
 		}
 		record.lineStyles=list;
 		/*var record=new LineStyleArrayRecord();

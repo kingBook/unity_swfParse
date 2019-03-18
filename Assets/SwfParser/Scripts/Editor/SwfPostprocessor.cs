@@ -29,7 +29,7 @@ public class SwfPostprocessor:AssetPostprocessor{
 
 	[MenuItem("SwfParser/run")]
 	public static void run(){
-		parseAndExportXml(Application.dataPath+"/views.swf");
+		parseAndExportXml(Application.dataPath+"/views1.swf");
 	}
 
 	public static void parseAndExportXml(string swfPath){
