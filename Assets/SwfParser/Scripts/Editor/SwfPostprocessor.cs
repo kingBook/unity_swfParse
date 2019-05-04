@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Diagnostics;
+using System.IO;
 using System.Text;
 using System.Xml;
 using UnityEditor;
@@ -29,7 +30,11 @@ public class SwfPostprocessor:AssetPostprocessor{
 
 	[MenuItem("SwfParser/run")]
 	public static void run(){
+		Stopwatch sw=new Stopwatch();
+		sw.Start();
 		parseAndExportXml(Application.dataPath+"/views1.swf");
+		sw.Stop();
+		UnityEngine.Debug.Log("passed time:"+sw.ElapsedMilliseconds);
 	}
 
 	public static void parseAndExportXml(string swfPath){

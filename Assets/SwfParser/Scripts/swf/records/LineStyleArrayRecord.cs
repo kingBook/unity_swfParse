@@ -7,7 +7,7 @@ public struct LineStyleArrayRecord {
 
 	/*If Shape1,Shape2, or Shape3, LINESTYLE[count]. 
 	  If Shape4,LINESTYLE2[count] */
-	public LineStyleRecord[] lineStyles;
+	public ILineStyleRecord[] lineStyles;
 
 	public XmlElement toXml(XmlDocument doc){
 		var ele=doc.CreateElement("LineStyleArray");

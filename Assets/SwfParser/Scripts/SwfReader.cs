@@ -11,11 +11,13 @@ public class SwfReader{
 		swf.tags=new List<SwfTag>();
 		//
 		while(bytes.getBytesAvailable()>0){
+			long preHeaderStart = bytes.getBytePosition();
 			TagHeaderRecord tagHeader = readTagHeaderRecord(bytes);
 				
 			long startPosition = bytes.getBytePosition();
 			long expectedEndPosition = startPosition + tagHeader.length;
 			
+			//Debug2.Log("type:"+tagHeader.type,"preHeaderStart:"+preHeaderStart,"length:"+tagHeader.length);
 			SwfTag tag = readTag(bytes, tagHeader);
 			tag.header = tagHeader;
 			swf.tags.Add(tag);
@@ -91,6 +93,25 @@ public class SwfReader{
 				break;
 			case 83:
 				tag=readDefineShape4Tag(bytes,header);
+				break;
+			//============= Bitmaps =======
+			case 6:
+				tag=readDefineBitsTag(bytes,header);
+				break;
+			case 8:
+				tag=readJPEGTablesTag(bytes,header);
+				break;
+			case 21:
+				tag=readDefineBitsJPEG2Tag(bytes,header);
+				break;
+			case 35:
+				tag=readDefineBitsJPEG3Tag(bytes,header);
+				break;
+			/*case 20:
+				tag=readDefineBitsLosslessTag(bytes,header);
+				break;*/
+			case 36:
+				tag=readDefineBitsLossless2Tag(bytes,header);
 				break;
 
 
@@ -276,6 +297,89 @@ public class SwfReader{
 		return tag;
 	}
 
+	private DefineBitsTag readDefineBitsTag(SwfByteArray bytes,TagHeaderRecord header){
+		var tag=new DefineBitsTag();
+		tag.characterID=bytes.readUI16();
+		int length=(int)header.length-2;
+		if(length>0){
+			tag.jpegData=bytes.readBytes(length);
+		}
+		return tag;
+	}
+	
+	private JPEGTablesTag readJPEGTablesTag(SwfByteArray bytes,TagHeaderRecord header){
+		var tag=new JPEGTablesTag();
+		int length=(int)header.length;
+		if(length>0){
+			tag.jpegData=bytes.readBytes(length);
+		}
+		return tag;
+	}
+	
+	private DefineBitsJPEG2Tag readDefineBitsJPEG2Tag(SwfByteArray bytes,TagHeaderRecord header){
+		var tag=new DefineBitsJPEG2Tag();
+		tag.characterID=bytes.readUI16();
+		int length=(int)header.length-2;
+		if(length>0){
+			tag.imageData=bytes.readBytes(length);
+			Debug.Log(tag.imageData);
+		}
+		return tag;
+	}
+
+	private DefineBitsJPEG3Tag readDefineBitsJPEG3Tag(SwfByteArray bytes,TagHeaderRecord header){
+		var tag=new DefineBitsJPEG3Tag();
+		long startPosition = bytes.getBytePosition();
+		tag.characterID=bytes.readUI16();
+		tag.alphaDataOffset=bytes.readUI32();
+		if(tag.alphaDataOffset>0){
+			tag.imageData=bytes.readBytes((int)tag.alphaDataOffset);
+		}
+		int bytesRemaining=(int)(header.length - (bytes.getBytePosition() - startPosition));
+		if(bytesRemaining>0){
+			tag.bitmapAlphaData=bytes.readBytes(bytesRemaining);
+		}
+		return tag;
+	}
+
+	private DefineBitsLossless2Tag readDefineBitsLossless2Tag(SwfByteArray bytes,TagHeaderRecord header){
+		var tag=new DefineBitsLossless2Tag();
+		long startPosition=bytes.getBytePosition();
+		tag.characterID=bytes.readUI16();
+		tag.bitmapFormat=bytes.readUI8();
+		tag.bitmapWidth=bytes.readUI16();
+		tag.bitmapHeight=bytes.readUI16();
+		if(tag.bitmapFormat==3){
+			tag.bitmapColorTableSize=bytes.readUI8();
+		}
+		if(tag.bitmapFormat==3||tag.bitmapFormat==4||tag.bitmapFormat==5){
+			byte[] unzippedData=null;
+				
+			long bytesRead=bytes.getBytePosition()-startPosition;
+			int remainingBytes=(int)(header.length-bytesRead);
+				
+			if(remainingBytes>0){
+				unzippedData=bytes.readBytes(remainingBytes);
+			}
+				
+			/*unzippedData.uncompress();
+				
+			var unzippedDataContext:SWFReaderContext = new SWFReaderContext(new SWFByteArray(unzippedData), context.fileVersion, context.result);
+				
+			if(tag.bitmapFormat == 3)
+			{
+				var imageDataSize:uint = (tag.bitmapWidth + (8 - (tag.bitmapWidth % 8))) * tag.bitmapHeight;
+				tag.zlibBitmapData = readAlphaColorMapDataRecord(unzippedDataContext, tag.bitmapColorTableSize + 1, imageDataSize);
+			}
+			else if(tag.bitmapFormat == 4 || tag.bitmapFormat == 5)
+			{
+				var imageDataSize2:uint = tag.bitmapWidth * tag.bitmapHeight;
+				tag.zlibBitmapData = readAlphaBitmapDataRecord(unzippedDataContext, imageDataSize2);
+			}*/
+		}
+		return tag;
+	}
+
 	private UnknownTag readUnknownTag(SwfByteArray bytes,TagHeaderRecord header){
 		UnknownTag tag=new UnknownTag();
 		if(header.length>0){
@@ -401,7 +505,7 @@ public class SwfReader{
 		record.ratio=bytes.readUI8();
 		if(shapeType==1||shapeType==2){//RGB(Shape1 or Shape2)
 			record.color=readRGBRecord(bytes);
-		}else{//RGBA(Shape3)
+		}else{//RGBA(Shape3,4)
 			record.color=readRGBARecord(bytes);
 		}
 		return record;
@@ -410,13 +514,23 @@ public class SwfReader{
 	private ShapeWithStyleRecord readShapeWithStyleRecord(SwfByteArray bytes,byte shapeType){
 		var record=new ShapeWithStyleRecord();
 		record.fillStyles=readFillStyleArrayRecord(bytes,shapeType);
+		Debug.Log("readShapeWithStyleRecord");
 		record.lineStyles=readLineStyleArrayRecord(bytes,shapeType);
-		record.numFillBits=(byte)bytes.readUB(4);
-		record.numLineBits=(byte)bytes.readUB(4);
+		bytes.alignBytes();
+		byte numFillBits=(byte)bytes.readUB(4);
+		byte numLineBits=(byte)bytes.readUB(4);
+		record.numFillBits=numFillBits;
+		record.numLineBits=numLineBits;
 		var list=new List<IShapeRecord>();
 		while(true){
-			var shapeRecord=readShapeRecord(bytes,record.numFillBits,record.numLineBits,shapeType);
+			var shapeRecord=readShapeRecord(bytes,numFillBits,numLineBits,shapeType);
 			list.Add(shapeRecord);
+			if(shapeRecord is StyleChangeRecord){
+				if(((StyleChangeRecord)shapeRecord).stateNewStyles){
+					numFillBits=((StyleChangeRecord)shapeRecord).numFillBits;
+					numLineBits=((StyleChangeRecord)shapeRecord).numLineBits;
+				}
+			}
 			if(shapeRecord is EndShapeRecord)break;
 		}
 		record.shapeRecords=list.ToArray();
@@ -424,30 +538,30 @@ public class SwfReader{
 	}
 
 	private FillStyleArrayRecord readFillStyleArrayRecord(SwfByteArray bytes,byte shapeType){
-		var record=new FillStyleArrayRecord();
+		/*var record=new FillStyleArrayRecord();
 		record.fillStyleCount=bytes.readUI8();
 		var list=new FillStyleRecord[record.fillStyleCount];
 		for(uint i=0;i<record.fillStyleCount;i++){
 			list[i]=readFillStyleRecord(bytes,shapeType);
 		}
-		record.fillStyles=list;
-		/*var record=new FillStyleArrayRecord();
+		record.fillStyles=list;*/
+		var record=new FillStyleArrayRecord();
 		record.fillStyleCount=bytes.readUI8();
-		uint count=record.fillStyleCount;
-		if(record.fillStyleCount==0xFF){
-			record.fillStyleCountExtended=bytes.readUI16();
-			count+=record.fillStyleCountExtended;
-		}
-		
-		var list=new FillStyleRecord[count];
-		for(uint i=0;i<count;i++){
+		//if(shapeType==2||shapeType==3){
+			if(record.fillStyleCount==0xFF){
+				record.fillStyleCountExtended=bytes.readUI16();
+			}
+		//}
+		var list=new FillStyleRecord[record.fillStyleCount];
+		for(uint i=0;i<record.fillStyleCount;i++){
 			list[i]=readFillStyleRecord(bytes,shapeType);
 		}
-		record.fillStyles=list;*/
+		record.fillStyles=list;
 		return record;
 	}
 
 	private FillStyleRecord readFillStyleRecord(SwfByteArray bytes,byte shapeType){
+		Debug.Log("readFillStyleRecord0:"+bytes.getBytePosition());
 		var record=new FillStyleRecord();
 
 		byte type=bytes.readUI8();
@@ -455,10 +569,10 @@ public class SwfReader{
 
 		if(type==0x00){
 			record.color=readRGBARecord(bytes);
-		}else{
-			record.color=readRGBRecord(bytes);
-		}
-
+		}/*else{
+			record.color=readRGBRecord(bytes);//会出错
+		}*/
+		Debug.Log("readFillStyleRecord1:"+bytes.getBytePosition());
 		if(type==0x10||type==0x12||type==0x13){
 			record.gradientMatrix=readMatrixRecord(bytes);
 		}
@@ -468,7 +582,7 @@ public class SwfReader{
 		}else if(type==0x13){
 			record.gradient=readFocalGradientRecord(bytes,shapeType);
 		}
-
+		Debug.Log("readFillStyleRecord2:"+bytes.getBytePosition());
 		if(type==0x40||type==0x41||type==0x42||type==0x43){
 			record.bitmapId=bytes.readUI16();
 			record.bitmapMatrix=readMatrixRecord(bytes);
@@ -477,34 +591,24 @@ public class SwfReader{
 	}
 
 	private LineStyleArrayRecord readLineStyleArrayRecord(SwfByteArray bytes,byte shapeType){
+		Debug.Log("LineStyleArrayRecord:"+bytes.getBytePosition());
 		var record=new LineStyleArrayRecord();
 		record.lineStyleCount=bytes.readUI8();
 		if(record.lineStyleCount==0xFF){
 			record.lineStyleCountExtended=bytes.readUI16();
 		}
-		var list=new LineStyleRecord[record.lineStyleCount];
-		for(int i=0;i<record.lineStyleCount;i++){
-			list[i]=readLineStyleRecord(bytes,shapeType);
-		}
-		record.lineStyles=list;
-		/*var record=new LineStyleArrayRecord();
-		record.lineStyleCount=bytes.readUI8();
-		uint count=record.lineStyleCount;
-		if(record.lineStyleCount==0xFF){
-			record.lineStyleCountExtended=bytes.readUI16();
-			count+=record.lineStyleCountExtended;
-		}
-		var list=new ArrayList();
+		var list=new ILineStyleRecord[record.lineStyleCount];
 		if(shapeType==1||shapeType==2||shapeType==3){
-			for(int i=0;i<count;i++){
-				list.Add(readLineStyleRecord(bytes,shapeType));
+			for(int i=0;i<record.lineStyleCount;i++){
+				list[i]=readLineStyleRecord(bytes,shapeType);
 			}
 		}else if(shapeType==4){
-			for(int i=0;i<count;i++){
-				list.Add(readLineStyle2Record(bytes,shapeType));
+			Debug.Log("pos:"+bytes.getBytePosition());
+			for(int i=0;i<record.lineStyleCount;i++){
+				list[i]=readLineStyle2Record(bytes,shapeType);
 			}
 		}
-		record.lineStyles=list;*/
+		record.lineStyles=list;
 		return record;
 	}
 
@@ -532,10 +636,12 @@ public class SwfReader{
 		record.noClose=bytes.readFlag();
 		record.endCapStyle=(byte)bytes.readUB(2);
 		if(record.joinStyle==2){
-			record.miterLimitFactor=bytes.readUI16();
+			record.miterLimitFactor=bytes.readFixed8_8();//bytes.readUI16();
 		}
-		if(record.hasFillFlag){
+
+		if(!record.hasFillFlag){
 			record.color=readRGBARecord(bytes);
+		}else{
 			record.fillType=readFillStyleRecord(bytes,shapeType);
 		}
 		return record;
@@ -544,16 +650,19 @@ public class SwfReader{
 	private IShapeRecord readShapeRecord(SwfByteArray bytes,byte numFillBits,byte numLineBits,byte shapeType){
 		IShapeRecord record;
 		bool typeFlag=bytes.readFlag();
+		long start=bytes.getBytePosition();
 		if(!typeFlag){
 			bool stateNewStyles=bytes.readFlag();
 			bool stateLineStyle=bytes.readFlag();
 			bool stateFillStyle1=bytes.readFlag();
 			bool stateFillStyle0=bytes.readFlag();
 			bool stateMoveTo=bytes.readFlag();
-			if(!stateNewStyles&&!stateLineStyle&&!stateFillStyle1&&!stateFillStyle0&&!stateMoveTo){
+
+			bool isEndShapeRecord=!stateNewStyles&&!stateLineStyle&&!stateFillStyle1&&!stateFillStyle0&&!stateMoveTo;
+			if(isEndShapeRecord){
 				var endShapeRecord=new EndShapeRecord();
 				endShapeRecord.typeFlag=typeFlag;
-				endShapeRecord.endOfShape=0;
+				endShapeRecord.endOfShape=bytes.readUB(5);
 				record=endShapeRecord;
 			}else{
 				var styleChangeRecord=new StyleChangeRecord();
@@ -576,12 +685,16 @@ public class SwfReader{
 				if(stateLineStyle){
 					styleChangeRecord.lineStyle=bytes.readUB(numLineBits);
 				}
+				//----------------------------------
 				if(stateNewStyles){
+					Debug.Log("stateNewStyles:"+bytes.getBytePosition());
 					styleChangeRecord.fillStyles=readFillStyleArrayRecord(bytes,shapeType);
+					Debug.Log("stateNewStyles1:"+bytes.getBytePosition());
 					styleChangeRecord.lineStyles=readLineStyleArrayRecord(bytes,shapeType);
 					styleChangeRecord.numFillBits=(byte)bytes.readUB(4);
 					styleChangeRecord.numLineBits=(byte)bytes.readUB(4);
 				}
+				//----------------------------------
 				record=styleChangeRecord;
 			}
 		}else{
@@ -592,14 +705,27 @@ public class SwfReader{
 				straightEdgeRecord.straightFlag=straightFlag;
 				straightEdgeRecord.numBits=(byte)bytes.readUB(4);
 				straightEdgeRecord.generalLineFlag=bytes.readFlag();
-				if(!straightEdgeRecord.generalLineFlag){
-					straightEdgeRecord.vertLineFlag=(sbyte)bytes.readSB(1);
+				
+				/*if(!straightEdgeRecord.generalLineFlag){
+					straightEdgeRecord.vertLineFlag=bytes.readFlag();//(sbyte)bytes.readSB(1);
 				}
-				if(straightEdgeRecord.generalLineFlag||straightEdgeRecord.vertLineFlag==0){
+				if(straightEdgeRecord.generalLineFlag||!straightEdgeRecord.vertLineFlag){
 					straightEdgeRecord.deltaX=bytes.readSB((uint)straightEdgeRecord.numBits+2);
 				}
-				if(straightEdgeRecord.generalLineFlag||straightEdgeRecord.vertLineFlag==1){
+				if(straightEdgeRecord.generalLineFlag||straightEdgeRecord.vertLineFlag){
 					straightEdgeRecord.deltaY=bytes.readSB((uint)straightEdgeRecord.numBits+2);
+				}*/
+				
+				if(straightEdgeRecord.generalLineFlag){
+					straightEdgeRecord.deltaX=bytes.readSB((uint)straightEdgeRecord.numBits+2);
+					straightEdgeRecord.deltaY=bytes.readSB((uint)straightEdgeRecord.numBits+2);
+				}else{
+					straightEdgeRecord.vertLineFlag=bytes.readFlag();//(sbyte)bytes.readSB(1);
+					if(!straightEdgeRecord.vertLineFlag){
+						straightEdgeRecord.deltaX=bytes.readSB((uint)straightEdgeRecord.numBits+2);
+					}else{
+						straightEdgeRecord.deltaY=bytes.readSB((uint)straightEdgeRecord.numBits+2);
+					}
 				}
 				record=straightEdgeRecord;
 			}else{

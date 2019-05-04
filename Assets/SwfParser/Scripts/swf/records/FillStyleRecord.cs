@@ -15,27 +15,33 @@ public struct FillStyleRecord{
 		fillStyleTypeEle.InnerText=fillStyleType.ToString();
 		ele.AppendChild(fillStyleTypeEle);
 		//color
-		var colorEle=doc.CreateElement("Color");
-		colorEle.InnerText=color.ToString();
-		ele.AppendChild(colorEle);
+		if(fillStyleType==0x00){
+			var colorEle=doc.CreateElement("Color");
+			colorEle.InnerText=color.ToString();
+			ele.AppendChild(colorEle);
+		}
 		//gradientMatrix
-		var gradientMatrixEle=doc.CreateElement("GradientMatrix");
-		gradientMatrixEle.InnerText=gradientMatrix.ToString();
-		ele.AppendChild(gradientMatrixEle);
+		if(fillStyleType==0x10||fillStyleType==0x12||fillStyleType==0x13){
+			var gradientMatrixEle=doc.CreateElement("GradientMatrix");
+			gradientMatrixEle.InnerText=gradientMatrix.ToString();
+			ele.AppendChild(gradientMatrixEle);
+		}
 		//gradient
-		if(gradient is GradientRecord){
+		if(fillStyleType==0x10||fillStyleType==0x12){
 			ele.AppendChild( ((GradientRecord)gradient).toXml(doc) );
-		}else if(gradient is FocalGradientRecord){
+		}else if(fillStyleType==0x13){
 			ele.AppendChild( ((FocalGradientRecord)gradient).toXml(doc) );
 		}
-		//bitmapId
-		var bitmapIdEle=doc.CreateElement("BitmapId");
-		bitmapIdEle.InnerText=bitmapId.ToString();
-		ele.AppendChild(bitmapIdEle);
-		//bitmapMatrix
-		var bitmapMatrixEle=doc.CreateElement("BitmapMatrix");
-		bitmapMatrixEle.InnerText=bitmapMatrix.ToString();
-		ele.AppendChild(bitmapMatrixEle);
+		if(fillStyleType==0x40||fillStyleType==0x41||fillStyleType==0x42||fillStyleType==0x43){
+			//bitmapId
+			var bitmapIdEle=doc.CreateElement("BitmapId");
+			bitmapIdEle.InnerText=bitmapId.ToString();
+			ele.AppendChild(bitmapIdEle);
+			//bitmapMatrix
+			var bitmapMatrixEle=doc.CreateElement("BitmapMatrix");
+			bitmapMatrixEle.InnerText=bitmapMatrix.ToString();
+			ele.AppendChild(bitmapMatrixEle);
+		}
 		return ele;
 	}
 

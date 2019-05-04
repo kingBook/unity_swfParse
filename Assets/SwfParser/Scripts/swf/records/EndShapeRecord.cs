@@ -2,7 +2,7 @@
 
 public struct EndShapeRecord:IShapeRecord{//Shape Record
 	public bool typeFlag;
-	public byte endOfShape;
+	public uint endOfShape;
 
 	public XmlElement toXml(XmlDocument doc) {
 		var ele=doc.CreateElement("EndShapeRecord");

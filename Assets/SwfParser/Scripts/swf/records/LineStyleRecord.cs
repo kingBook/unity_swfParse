@@ -1,6 +1,6 @@
 ﻿using System.Xml;
 
-public struct LineStyleRecord{
+public struct LineStyleRecord:ILineStyleRecord{
 	public ushort width;
 	public object color;//RGB(Shape1 or Shape2); RGBA(Shape3)
 
