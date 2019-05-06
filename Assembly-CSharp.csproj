@@ -61,78 +61,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\SwfParser\Scripts\Debug2.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\records\CurvedEdgeRecord.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\records\DefineSceneRecord.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\records\EndShapeRecord.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\records\ExportAssetRecord.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\records\FillStyleArrayRecord.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\records\FillStyleRecord.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\records\FocalGradientRecord.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\records\FramelabelRecord.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\records\GradientRecord.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\records\GradRecord.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\records\IEdgeRecord.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\records\ILineStyleRecord.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\records\ImportAssets2Record.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\records\IShapeRecord.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\records\LineStyle2Record.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\records\LineStyleArrayRecord.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\records\LineStyleRecord.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\records\MatrixRecord.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\records\RectangleRecord.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\records\RGBARecord.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\records\RGBRecord.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\records\ShapeWithStyleRecord.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\records\StraightEdgeRecord.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\records\StyleChangeRecord.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\records\SymbolClassRecord.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\records\TagHeaderRecord.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\Swf.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\SwfHeader.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\tags\DefineBitsJPEG2Tag.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\tags\DefineBitsJPEG3Tag.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\tags\DefineBitsLossless2Tag.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\tags\DefineBitsLosslessTag.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\tags\DefineBitsTag.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\tags\DefineScalingGridTag.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\tags\DefineSceneAndFrameLabelDataTag.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\tags\DefineShape2Tag.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\tags\DefineShape3Tag.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\tags\DefineShape4Tag.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\tags\DefineShapeTag.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\tags\EnableDubugger2Tag.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\tags\EndTag.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\tags\ExportAssetsTag.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\tags\FileAttributesTag.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\tags\FrameLabelTag.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\tags\ImportAssets2Tag.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\tags\JpegTablesTag.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\tags\MetadataTag.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\tags\ProtectTag.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\tags\ScriptLimitsTag.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\tags\SetBackgroundColorTag.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\tags\SetTabIndexTag.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\tags\SwfTag.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\tags\SymbolClassTag.cs" />
-    <Compile Include="Assets\SwfParser\Scripts\swf\tags\UnknownTag.cs" />
     <Compile Include="Assets\SwfParser\Scripts\SwfByteArray.cs" />
     <Compile Include="Assets\SwfParser\Scripts\SwfReader.cs" />
+    <Compile Include="Assets\SwfParser\Scripts\utils\ZlibUtil.cs" />
     <None Include="Assets\views.xml" />
     <None Include="Assets\views1.xml" />
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>E:/kingBook/projects/unity_swfParse/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>D:/kingBook/projects/unity_swfParse/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>E:/kingBook/projects/unity_swfParse/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>D:/kingBook/projects/unity_swfParse/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>E:/kingBook/projects/unity_swfParse/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>D:/kingBook/projects/unity_swfParse/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>E:/kingBook/projects/unity_swfParse/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>D:/kingBook/projects/unity_swfParse/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.DataPrivacy">
-      <HintPath>E:/kingBook/projects/unity_swfParse/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+      <HintPath>D:/kingBook/projects/unity_swfParse/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.8f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -336,22 +285,22 @@
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.8f1/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="zlib.net">
-      <HintPath>E:/kingBook/projects/unity_swfParse/Assets/SwfParser/zlib/zlib.net.dll</HintPath>
+      <HintPath>D:/kingBook/projects/unity_swfParse/Assets/SwfParser/zlib/zlib.net.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Advertisements">
-      <HintPath>E:/kingBook/projects/unity_swfParse/Library/PackageCache/com.unity.ads@2.3.1/Runtime/UnityEngine.Advertisements.dll</HintPath>
+      <HintPath>D:/kingBook/projects/unity_swfParse/Library/PackageCache/com.unity.ads@2.3.1/Runtime/UnityEngine.Advertisements.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Advertisements.Editor">
-      <HintPath>E:/kingBook/projects/unity_swfParse/Library/PackageCache/com.unity.ads@2.3.1/Runtime/UnityEngine.Advertisements.Editor.dll</HintPath>
+      <HintPath>D:/kingBook/projects/unity_swfParse/Library/PackageCache/com.unity.ads@2.3.1/Runtime/UnityEngine.Advertisements.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
-      <HintPath>E:/kingBook/projects/unity_swfParse/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
+      <HintPath>D:/kingBook/projects/unity_swfParse/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>E:/kingBook/projects/unity_swfParse/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
+      <HintPath>D:/kingBook/projects/unity_swfParse/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>E:/kingBook/projects/unity_swfParse/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
+      <HintPath>D:/kingBook/projects/unity_swfParse/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.8f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
@@ -698,6 +647,16 @@
     <Reference Include="System.Xml.Serialization">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.3.8f1/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.Serialization.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="records.csproj">
+      <Project>{DF4257BE-70C6-F8A4-A864-9EDE623C456A}</Project>
+      <Name>records</Name>
+    </ProjectReference>
+    <ProjectReference Include="tags.csproj">
+      <Project>{710EDDF1-778D-F963-05AF-2922498B6DEE}</Project>
+      <Name>tags</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

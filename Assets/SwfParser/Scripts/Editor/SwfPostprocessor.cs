@@ -30,11 +30,7 @@ public class SwfPostprocessor:AssetPostprocessor{
 
 	[MenuItem("SwfParser/run")]
 	public static void run(){
-		Stopwatch sw=new Stopwatch();
-		sw.Start();
 		parseAndExportXml(Application.dataPath+"/views1.swf");
-		sw.Stop();
-		UnityEngine.Debug.Log("passed time:"+sw.ElapsedMilliseconds);
 	}
 
 	public static void parseAndExportXml(string swfPath){
@@ -42,10 +38,24 @@ public class SwfPostprocessor:AssetPostprocessor{
 		var swfReader=new SwfReader();
 
 		var swfBytes=new SwfByteArray(swfPath);
+
+		Stopwatch sw=new Stopwatch();
+		sw.Start();
 		var swf=swfReader.read(swfBytes);
 		swfBytes.close();
+		sw.Stop();
+		UnityEngine.Debug.Log("read passed time:"+sw.ElapsedMilliseconds);
 		
-		saveXml(swf.toXml(),swfPath);
+		sw.Restart();
+		var xml=swf.toXml();
+		sw.Stop();
+		UnityEngine.Debug.Log("convert xml passed time:"+sw.ElapsedMilliseconds);
+
+		sw.Restart();
+		saveXml(xml,swfPath);
+		sw.Stop();
+		UnityEngine.Debug.Log("save passed time:"+sw.ElapsedMilliseconds);
+
 		//Debug.Log(formatXml(swf.toXml()));
 		EditorUtility.DisplayDialog("Complete","Export "+swfPath+" to complete","OK");
 	}

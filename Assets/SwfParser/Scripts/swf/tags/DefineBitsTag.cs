@@ -1,4 +1,5 @@
-﻿using System.Xml;
+﻿using System.Text;
+using System.Xml;
 
 public class DefineBitsTag:SwfTag {
 	public ushort characterID;
@@ -8,14 +9,14 @@ public class DefineBitsTag:SwfTag {
 		var ele=createXmlElement(doc,"DefineBits");
 		ele.SetAttribute("characterID",characterID.ToString());
 
-		string jpegDataStr="";
+		var jpegDataStrBuilder=new StringBuilder("");
 		for(int i=0;i<jpegData.Length;i++){
-			jpegDataStr+=jpegData[i].ToString();
+			jpegDataStrBuilder.Append(jpegData[i]);
 			if(i<jpegData.Length-1){
-				jpegDataStr+=",";
+				jpegDataStrBuilder.Append(',');
 			}
 		}
-		ele.SetAttribute("jpegData",jpegDataStr);
+		ele.SetAttribute("jpegData",jpegDataStrBuilder.ToString());
 		return ele;
 	}
 	

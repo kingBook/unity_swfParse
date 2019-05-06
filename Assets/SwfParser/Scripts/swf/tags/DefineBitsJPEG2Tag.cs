@@ -1,4 +1,5 @@
 ﻿
+using System.Text;
 using System.Xml;
 
 public class DefineBitsJPEG2Tag:SwfTag {
@@ -8,14 +9,14 @@ public class DefineBitsJPEG2Tag:SwfTag {
 	public override XmlElement toXml(XmlDocument doc) {
 		var ele=createXmlElement(doc,"DefineBitsJPEG2");
 		ele.SetAttribute("characterID",characterID.ToString());
-		string imageDataStr="";
+		var  imageDataStrBuilder=new StringBuilder("");
 		for(int i=0;i<imageData.Length;i++){
-			imageDataStr+=imageData[i].ToString();
+			imageDataStrBuilder.Append(imageData[i]);
 			if(i<imageData.Length-1){
-				imageDataStr+=",";
+				imageDataStrBuilder.Append(',');
 			}
 		}
-		ele.SetAttribute("imageData",imageDataStr);
+		ele.SetAttribute("imageData",imageDataStrBuilder.ToString());
 		return ele;
 	}
 	

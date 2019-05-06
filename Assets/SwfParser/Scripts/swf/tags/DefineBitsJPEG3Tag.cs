@@ -1,4 +1,5 @@
 ﻿
+using System.Text;
 using System.Xml;
 
 public class DefineBitsJPEG3Tag:SwfTag {
@@ -12,23 +13,23 @@ public class DefineBitsJPEG3Tag:SwfTag {
 		ele.SetAttribute("characterID",characterID.ToString());
 		ele.SetAttribute("alphaDataOffset",alphaDataOffset.ToString());
 
-		string imageDataStr="";
+		var imageDataStrBuilder=new StringBuilder("");
 		for(int i=0;i<imageData.Length;i++){
-			imageDataStr+=imageData[i].ToString();
+			imageDataStrBuilder.Append(imageData[i]);
 			if(i<imageData.Length-1){
-				imageDataStr+=",";
+				imageDataStrBuilder.Append(',');
 			}
 		}
-		ele.SetAttribute("imageData",imageDataStr);
+		ele.SetAttribute("imageData",imageDataStrBuilder.ToString());
 
-		string alphaDataStr="";
+		var alphaDataStrBuilder=new StringBuilder("");
 		for(int i=0;i<bitmapAlphaData.Length;i++){
-			alphaDataStr+=bitmapAlphaData[i].ToString();
+			alphaDataStrBuilder.Append(bitmapAlphaData[i]);
 			if(i<bitmapAlphaData.Length-1){
-				alphaDataStr+=",";
+				alphaDataStrBuilder.Append(',');
 			}
 		}
-		ele.SetAttribute("bitmapAlphaData",alphaDataStr);
+		ele.SetAttribute("bitmapAlphaData",alphaDataStrBuilder.ToString());
 		return ele;
 	}
 	

@@ -67,6 +67,14 @@ public class SwfByteArray{
 		fs.Close();
 	}
 
+	public SwfByteArray(byte[] bytes){
+		_ms=new MemoryStream();
+		_ms.Write(bytes,0,bytes.Length);
+		_ms.Position=0;
+
+		_br=new BinaryReader(_ms);
+	}
+
 	public void alignBytes(){
 		if(bitPosition!=0){
 			_ms.Position++;
@@ -107,6 +115,7 @@ public class SwfByteArray{
 		zlib.ZOutputStream outZStream=new zlib.ZOutputStream(outMS);
 		
 		copyStream(_ms,outZStream);
+		outZStream.finish();
 
 		outMS.Position=0;
 		_ms.Position=msPos;
