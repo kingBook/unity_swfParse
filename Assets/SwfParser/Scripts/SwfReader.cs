@@ -113,8 +113,13 @@ public class SwfReader{
 			case 36:
 				tag=readDefineBitsLossless2Tag(bytes,header);
 				break;
-
-
+			/*case 90:
+				tag=readDefineBitsJPEG4Tag(bytes,header);
+				break;*/
+			//============= Shape Morphing =======
+			case 46:
+				
+				break;
 			default:
 				tag=readUnknownTag(bytes,header);
 				break;
@@ -373,6 +378,8 @@ public class SwfReader{
 		}
 		return tag;
 	}
+
+	
 
 	private UnknownTag readUnknownTag(SwfByteArray bytes,TagHeaderRecord header){
 		UnknownTag tag=new UnknownTag();

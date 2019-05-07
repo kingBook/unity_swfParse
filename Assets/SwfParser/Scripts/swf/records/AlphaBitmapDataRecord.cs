@@ -8,10 +8,12 @@ public struct AlphaBitmapDataRecord:IAlphaMapData{
 	public XmlElement toXml(XmlDocument doc){
 		var ele=doc.CreateElement("AlphaBitmapData");
 
-		var bitmapPixelDataStrBuilder=new StringBuilder("");
-		for(int i=0;i<bitmapPixelData.Length;i++){
+		var bitmapPixelDataStrBuilder=new StringBuilder();
+		int len=bitmapPixelData.Length;
+		int maxId=len-1;
+		for(var i=0;i<len;i++){
 			bitmapPixelDataStrBuilder.Append(bitmapPixelData[i].ToString());
-			if(i<bitmapPixelData.Length-1){
+			if(i<maxId){
 				bitmapPixelDataStrBuilder.Append(',');
 			}
 		}

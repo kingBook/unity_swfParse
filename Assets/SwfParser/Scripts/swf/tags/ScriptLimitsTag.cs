@@ -8,7 +8,7 @@ public class ScriptLimitsTag:SwfTag {
 		var ele=createXmlElement(doc,"ScriptLimits");
 		ele.SetAttribute("maxRecursionDepth",maxRecursionDepth.ToString());
 		ele.SetAttribute("scriptTimeoutSeconds",scriptTimeoutSeconds.ToString());
-		return base.toXml(doc);
+		return ele;
 	}
 
 }

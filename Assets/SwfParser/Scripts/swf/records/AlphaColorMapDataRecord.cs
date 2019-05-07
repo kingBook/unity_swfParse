@@ -18,10 +18,12 @@ public struct AlphaColorMapDataRecord:IAlphaMapData{
 		}
 		ele.SetAttribute("colorTableRGB",colorTableRGBStrBuilder.ToString());
 
-		var colormapPixelDataStrBuilder=new StringBuilder("");
-		for(int i=0;i<colormapPixelData.Length;i++){
+		var colormapPixelDataStrBuilder=new StringBuilder();
+		int len=colormapPixelData.Length;
+		int maxId=len-1;
+		for(var i=0;i<len;i++){
 			colormapPixelDataStrBuilder.Append(colormapPixelData[i].ToString());
-			if(i<colormapPixelData.Length-1){
+			if(i<maxId){
 				colormapPixelDataStrBuilder.Append(',');
 			}
 		}

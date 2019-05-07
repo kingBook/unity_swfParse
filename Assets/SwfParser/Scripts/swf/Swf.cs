@@ -15,10 +15,16 @@ public class Swf {
 
 		var swfElement=doc.CreateElement("Swf");
 		doc.AppendChild(swfElement);
-
+		var sw=new System.Diagnostics.Stopwatch();
 		for(int i=0;i<tags.Count;i++){
 			var tag=tags[i];
+
+			sw.Restart();
 			var tagXml=tag.toXml(doc);
+			sw.Stop();
+			Debug.LogFormat("type:{0},time:{1}",tag.header.type,sw.ElapsedMilliseconds);
+			
+
 			swfElement.AppendChild(tagXml);
 		}
 		return doc;

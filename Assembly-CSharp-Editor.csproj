@@ -694,14 +694,6 @@
       <Project>{6D9E24F2-5D59-99A1-7CA3-263017D3F44D}</Project>
       <Name>Assembly-CSharp</Name>
     </ProjectReference>
-    <ProjectReference Include="records.csproj">
-      <Project>{DF4257BE-70C6-F8A4-A864-9EDE623C456A}</Project>
-      <Name>records</Name>
-    </ProjectReference>
-    <ProjectReference Include="tags.csproj">
-      <Project>{710EDDF1-778D-F963-05AF-2922498B6DEE}</Project>
-      <Name>tags</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
