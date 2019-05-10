@@ -1,6 +1,6 @@
 ﻿using System.Xml;
 
-public class CurvedEdgeRecord:IEdgeRecord{//:EdgeRecord:ShapeRecord
+public struct CurvedEdgeRecord:IEdgeRecord{//:EdgeRecord:ShapeRecord
 	public bool typeFlag;
 	public bool straightFlag;
 	public byte numBits;

@@ -118,8 +118,13 @@ public class SwfReader{
 				break;*/
 			//============= Shape Morphing =======
 			case 46:
-				
+				tag=readDefineMorphShapeTag(bytes,header);
 				break;
+			/*case 84:
+				tag=readDefineMorphShape2Tag(bytes,header);
+				break;*/
+
+
 			default:
 				tag=readUnknownTag(bytes,header);
 				break;
@@ -379,6 +384,36 @@ public class SwfReader{
 		return tag;
 	}
 
+	private DefineMorphShapeTag readDefineMorphShapeTag(SwfByteArray bytes,TagHeaderRecord header){
+		var tag=new DefineMorphShapeTag();
+		tag.characterId=bytes.readUI16();
+		tag.startBounds=readRectangleRecord(bytes);
+		tag.endBounds=readRectangleRecord(bytes);
+		tag.offset=bytes.readUI32();
+		tag.morphFillStyles=readMorphFillStyleArrayRecord(bytes);
+		tag.morphLineStyles=readMorphLineStyleArrayRecord(bytes,1);
+		tag.startEdges=readSHAPE(bytes,1);
+		tag.endEdges=readSHAPE(bytes,1);
+		return tag;
+	}
+
+	private DefineMorphShape2Tag readDefineMorphShape2Tag(SwfByteArray bytes,TagHeaderRecord header){
+		var tag=new DefineMorphShape2Tag();
+		tag.characterId=bytes.readUI16();
+		tag.startBounds=readRectangleRecord(bytes);
+		tag.endBounds=readRectangleRecord(bytes);
+		tag.startEdgeBounds=readRectangleRecord(bytes);
+		tag.endEdgeBounds=readRectangleRecord(bytes);
+		tag.reserved=(byte)bytes.readUB(6);
+		tag.usesNonScalingStrokes=bytes.readFlag();
+		tag.usesScalingStrokes=bytes.readFlag();
+		tag.offset=bytes.readUI32();
+		tag.morphFillStyles=readMorphFillStyleArrayRecord(bytes);
+		tag.morphLineStyles=readMorphLineStyleArrayRecord(bytes,2);
+		tag.startEdges=readSHAPE(bytes,1);
+		tag.endEdges=readSHAPE(bytes,1);
+		return tag;
+	}
 	
 
 	private UnknownTag readUnknownTag(SwfByteArray bytes,TagHeaderRecord header){
@@ -768,6 +803,137 @@ public class SwfReader{
 			record.bitmapPixelData[i]=readARGBRecord(bytes);
 		}
 		return record;
+	}
+
+	private MorphFillStyleArrayRecord readMorphFillStyleArrayRecord(SwfByteArray bytes){
+		var record=new MorphFillStyleArrayRecord();
+		record.fillStyleCount=bytes.readUI8();
+		if(record.fillStyleCount==0xFF){
+			record.fillStyleCountExtended=bytes.readUI16();
+		}
+		record.fillStyles=new MorphFillStyleRecord[record.fillStyleCount];
+		for(var i=0;i<record.fillStyleCount;i++){
+			record.fillStyles[i]=readMorphFillStyleRecord(bytes);
+		}
+		return record;
+	}
+
+	private MorphFillStyleRecord readMorphFillStyleRecord(SwfByteArray bytes){
+		var record=new MorphFillStyleRecord();
+		record.fillStyleType=bytes.readUI8();
+
+		var type=record.fillStyleType;
+		if(type==0x00){
+			record.startColor=readRGBARecord(bytes);
+			record.endColor=readRGBARecord(bytes);
+		}else if(type==0x10||type==0x12){
+			record.startGradientMatrix=readMatrixRecord(bytes);
+			record.endGradientMatrix=readMatrixRecord(bytes);
+			record.gradient=readMorphGradientRecord(bytes);
+		}else if(type==0x40||type==0x41||type==0x42||type==0x43){
+			record.bitmapId=bytes.readUI16();
+			record.startBitmapMatrix=readMatrixRecord(bytes);
+			record.endBitmapMatrix=readMatrixRecord(bytes);
+		}
+		return record;
+	}
+
+	private MorphGradientRecord readMorphGradientRecord(SwfByteArray bytes){
+		var record=new MorphGradientRecord();
+		record.numGradients=bytes.readUI8();
+		record.gradientRecords=new MorphGradRecord[record.numGradients];
+		for(var i=0;i<record.numGradients;i++){
+			record.gradientRecords[i]=readMorphGradRecord(bytes);
+		}
+		return record;
+	}
+
+	private MorphGradRecord readMorphGradRecord(SwfByteArray bytes){
+		var record=new MorphGradRecord();
+		record.startRatio=bytes.readUI8();
+		record.startColor=readRGBARecord(bytes);
+		record.endRatio=bytes.readUI8();
+		record.endColor=readRGBARecord(bytes);
+		return record;
+	}
+
+	private MorphLineStyleArrayRecord readMorphLineStyleArrayRecord(SwfByteArray bytes,byte morphShapeType){
+		var record=new MorphLineStyleArrayRecord();
+		record.lineStyleCount=bytes.readUI8();
+		if(record.lineStyleCount==0xFF){
+			record.lineStyleCountExtended=bytes.readUI16();
+		}
+		if(morphShapeType==1){
+			record.lineStyles=new MorphLineStyleRecord[record.lineStyleCount];
+			for(var i=0;i<record.lineStyleCount;i++){
+				record.lineStyles[i]=readMorphLineStyleRecord(bytes);
+			}
+		}else if(morphShapeType==2){
+			record.lineStyles=new MorphLineStyle2Record[record.lineStyleCount];
+			for(var i=0;i<record.lineStyleCount;i++){
+				record.lineStyles[i]=readMorphLineStyle2Record(bytes);
+			}
+		}
+		return record;
+	}
+
+	private MorphLineStyleRecord readMorphLineStyleRecord(SwfByteArray bytes){
+		var record=new MorphLineStyleRecord();
+		record.startWidth=bytes.readUI16();
+		record.endWidth=bytes.readUI16();
+		record.startColor=readRGBARecord(bytes);
+		record.endColor=readRGBARecord(bytes);
+		return record;
+	}
+
+	private MorphLineStyle2Record readMorphLineStyle2Record(SwfByteArray bytes){
+		var record=new MorphLineStyle2Record();
+		record.startWidth=bytes.readUI16();
+		record.endWidth=bytes.readUI16();
+		record.startCapStyle=(byte)bytes.readUB(2);
+		record.joinStyle=(byte)bytes.readUB(2);
+		record.hasFillFlag=bytes.readFlag();
+		record.noHScaleFlag=bytes.readFlag();
+		record.noVScaleFlag=bytes.readFlag();
+		record.pixelHintingFlag=bytes.readFlag();
+		record.reserved=(byte)bytes.readUB(5);
+		record.noClose=bytes.readFlag();
+		record.endCapStyle=(byte)bytes.readUB(2);
+		if(record.joinStyle==2){
+			record.miterLimitFactor=bytes.readUI16();
+		}
+		if(!record.hasFillFlag){
+			record.startColor=readRGBARecord(bytes);
+			record.endColor=readRGBARecord(bytes);
+		}else{
+			record.fillType=readMorphFillStyleRecord(bytes);
+		}
+		return record;
+	}
+
+	public SHAPE readSHAPE(SwfByteArray bytes,byte morphShapeType){
+		var shape=new SHAPE();
+		byte numFillBits=(byte)bytes.readUB(4);
+		byte numLineBits=(byte)bytes.readUB(4);
+		shape.numFillBits=numFillBits;
+		shape.numLineBits=numLineBits;
+		var list=new List<IShapeRecord>();
+		//3:DefineMorphShape最小支持版本是SWF3与DefineShape3一样；
+		//4:DefineMorphShape2最小支持版本是SWF8与DefineShape4一样
+		var shapeType=morphShapeType==1?3:4;
+		while(true){
+			var shapeRecord=readShapeRecord(bytes,numFillBits,numLineBits,(byte)shapeType);
+			list.Add(shapeRecord);
+			if(shapeRecord is StyleChangeRecord){
+				if(((StyleChangeRecord)shapeRecord).stateNewStyles){
+					numFillBits=((StyleChangeRecord)shapeRecord).numFillBits;
+					numLineBits=((StyleChangeRecord)shapeRecord).numLineBits;
+				}
+			}
+			if(shapeRecord is EndShapeRecord)break;
+		}
+		shape.shapeRecords=list.ToArray();
+		return shape;
 	}
 	
 }
