@@ -31,10 +31,15 @@ public class MorphLineStyle2Record:IMorphLineStyleRecord{
 		ele.SetAttribute("reserved",reserved.ToString());
 		ele.SetAttribute("noClose",noClose.ToString());
 		ele.SetAttribute("endCapStyle",endCapStyle.ToString());
-		ele.SetAttribute("miterLimitFactor",miterLimitFactor.ToString());
-		ele.SetAttribute("startColor",startColor.ToString());
-		ele.SetAttribute("endColor",endColor.ToString());
-		ele.AppendChild(fillType.toXml(doc));
+		if(joinStyle==2){
+			ele.SetAttribute("miterLimitFactor",miterLimitFactor.ToString());
+		}
+		if(!hasFillFlag){
+			ele.SetAttribute("startColor",startColor.ToString());
+			ele.SetAttribute("endColor",endColor.ToString());
+		}else{
+			ele.AppendChild(fillType.toXml(doc));
+		}
 		return ele;
 	}
 	

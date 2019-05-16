@@ -38,6 +38,8 @@ public class SwfReader{
 	private SwfTag readTag(SwfByteArray bytes,TagHeaderRecord header){
 		SwfTag tag;
 		switch(header.type){
+			//============= Display list tags =======
+
 			//============= Control Tags =======
 			case 9:
 				tag=readSetBackgroundColorTag(bytes,header);
@@ -123,7 +125,9 @@ public class SwfReader{
 			/*case 84:
 				tag=readDefineMorphShape2Tag(bytes,header);
 				break;*/
-
+			//============= Fonts and Text =======
+			//============= Buttons =======
+			//============= Sprites and Movie Clips =======
 
 			default:
 				tag=readUnknownTag(bytes,header);
