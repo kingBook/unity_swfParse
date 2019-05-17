@@ -65,6 +65,7 @@
     <Compile Include="Assets\SwfParser\Scripts\swf\records\AlphaColorMapDataRecord.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\records\ARGBRecord.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\records\CurvedEdgeRecord.cs" />
+    <Compile Include="Assets\SwfParser\Scripts\swf\records\CXFormRecord.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\records\DefineSceneRecord.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\records\EndShapeRecord.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\records\ExportAssetRecord.cs" />
@@ -124,6 +125,7 @@
     <Compile Include="Assets\SwfParser\Scripts\swf\tags\ImportAssets2Tag.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\tags\JpegTablesTag.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\tags\MetadataTag.cs" />
+    <Compile Include="Assets\SwfParser\Scripts\swf\tags\PlaceObjectTag.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\tags\ProtectTag.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\tags\ScriptLimitsTag.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\tags\SetBackgroundColorTag.cs" />

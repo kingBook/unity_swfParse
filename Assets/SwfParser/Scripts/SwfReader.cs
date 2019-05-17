@@ -39,7 +39,10 @@ public class SwfReader{
 		SwfTag tag;
 		switch(header.type){
 			//============= Display list tags =======
-
+			case 4:
+				Debug.Log("=========================================4");
+				tag=readPlaceObjectTag(bytes,header);
+				break;
 			//============= Control Tags =======
 			case 9:
 				tag=readSetBackgroundColorTag(bytes,header);
@@ -132,6 +135,18 @@ public class SwfReader{
 			default:
 				tag=readUnknownTag(bytes,header);
 				break;
+		}
+		return tag;
+	}
+
+	private PlaceObjectTag readPlaceObjectTag(SwfByteArray bytes,TagHeaderRecord header){
+		var tag=new PlaceObjectTag();
+		var originalPos=bytes.getBytePosition();
+		tag.characterId=bytes.readUI16();
+		tag.depth=bytes.readUI16();
+		tag.matrix=readMatrixRecord(bytes);
+		if(header.length>bytes.getBytePosition()-originalPos){
+			tag.colorTransform=readCXFormRecord(bytes);
 		}
 		return tag;
 	}
@@ -938,6 +953,24 @@ public class SwfReader{
 		}
 		shape.shapeRecords=list.ToArray();
 		return shape;
+	}
+
+	public CXFormRecord readCXFormRecord(SwfByteArray bytes){
+		var record=new CXFormRecord();
+		record.hasAddTerms=bytes.readFlag();
+		record.hasMultTerms=bytes.readFlag();
+		record.nBits=(byte)bytes.readUB(4);
+		if(record.hasMultTerms){
+			record.redMultTerm=bytes.readSB(record.nBits);
+			record.greenMultTerm=bytes.readSB(record.nBits);
+			record.blueMultTerm=bytes.readSB(record.nBits);
+		}
+		if(record.hasAddTerms){
+			record.redAddTerm=bytes.readSB(record.nBits);
+			record.greenAddTerm=bytes.readSB(record.nBits);
+			record.blueAddTerm=bytes.readSB(record.nBits);
+		}
+		return record;
 	}
 	
 }
