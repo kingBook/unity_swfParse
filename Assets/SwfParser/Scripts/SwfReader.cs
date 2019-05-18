@@ -11,19 +11,18 @@ public class SwfReader{
 		swf.tags=new List<SwfTag>();
 		//
 		while(bytes.getBytesAvailable()>0){
-			long preHeaderStart = bytes.getBytePosition();
-			TagHeaderRecord tagHeader = readTagHeaderRecord(bytes);
+			long preHeaderStart=bytes.getBytePosition();
+			TagHeaderRecord tagHeader=readTagHeaderRecord(bytes);
 				
-			long startPosition = bytes.getBytePosition();
-			long expectedEndPosition = startPosition + tagHeader.length;
-			
+			long startPosition=bytes.getBytePosition();
+			long expectedEndPosition=startPosition+tagHeader.length;
 			//Debug2.Log("type:"+tagHeader.type,"preHeaderStart:"+preHeaderStart,"length:"+tagHeader.length);
-			SwfTag tag = readTag(bytes, tagHeader);
-			tag.header = tagHeader;
+			SwfTag tag=readTag(bytes,tagHeader);
+			tag.header=tagHeader;
 			swf.tags.Add(tag);
 
 			bytes.alignBytes();
-			long newPosition = bytes.getBytePosition();
+			long newPosition=bytes.getBytePosition();
 			
 			
 			bytes.setBytePosition(expectedEndPosition);
@@ -40,8 +39,10 @@ public class SwfReader{
 		switch(header.type){
 			//============= Display list tags =======
 			case 4:
-				Debug.Log("=========================================4");
 				tag=readPlaceObjectTag(bytes,header);
+				break;
+			case 26:
+				tag=readPlaceObject2Tag(bytes,header);
 				break;
 			//============= Control Tags =======
 			case 9:
@@ -131,6 +132,9 @@ public class SwfReader{
 			//============= Fonts and Text =======
 			//============= Buttons =======
 			//============= Sprites and Movie Clips =======
+			case 39:
+				tag=readDefineSpriteTag(bytes,header);
+				break;
 
 			default:
 				tag=readUnknownTag(bytes,header);
@@ -148,6 +152,41 @@ public class SwfReader{
 		if(header.length>bytes.getBytePosition()-originalPos){
 			tag.colorTransform=readCXFormRecord(bytes);
 		}
+		return tag;
+	}
+
+	private PlaceObject2Tag readPlaceObject2Tag(SwfByteArray bytes,TagHeaderRecord header){
+		var tag=new PlaceObject2Tag();
+		tag.placeFlagHasClipActions=bytes.readFlag();
+		tag.placeFlagHasClipDepth=bytes.readFlag();
+		tag.placeFlagHasName=bytes.readFlag();
+		tag.placeFlagHasRatio=bytes.readFlag();
+		tag.placeFlagHasColorTransform=bytes.readFlag();
+		tag.placeFlagHasMatrix=bytes.readFlag();
+		tag.placeFlagHasCharacter=bytes.readFlag();
+		tag.placeFlagMove=bytes.readFlag();
+		tag.depth=bytes.readUI16();
+		if(tag.placeFlagHasCharacter){
+			tag.characterId=bytes.readUI16();
+		}
+		if(tag.placeFlagHasMatrix){
+			tag.matrix=readMatrixRecord(bytes);
+		}
+		if(tag.placeFlagHasColorTransform){
+			tag.colorTransform=readCXFormWithAlphaRecord(bytes);
+		}
+		if(tag.placeFlagHasRatio){
+			tag.ratio=bytes.readUI16();
+		}
+		if(tag.placeFlagHasName){
+			tag.name=bytes.readString();
+		}
+		if(tag.placeFlagHasClipDepth){
+			tag.clipDepth=bytes.readUI16();
+		}
+		/*if(tag.placeFlagHasClipActions){
+			tag.clipActions=
+		}*/
 		return tag;
 	}
 
@@ -434,6 +473,28 @@ public class SwfReader{
 		return tag;
 	}
 	
+	private DefineSpriteTag readDefineSpriteTag(SwfByteArray bytes,TagHeaderRecord header){
+		var tag=new DefineSpriteTag();
+		tag.spriteId=bytes.readUI16();
+		tag.frameCount=bytes.readUI16();
+		tag.controlTags=readControlTags(bytes);
+		return tag;
+	}
+
+	private SwfTag[] readControlTags(SwfByteArray bytes){
+		var tags=new List<SwfTag>();
+		while(true){
+			var header=readTagHeaderRecord(bytes);
+			long startPosition=bytes.getBytePosition();
+			long expectedEndPosition=startPosition+header.length;
+			var tag=readTag(bytes,header);
+			tag.header=header;
+			tags.Add(tag);
+			bytes.setBytePosition(expectedEndPosition);
+			if(tag is EndTag)break;
+		}
+		return tags.ToArray();
+	}
 
 	private UnknownTag readUnknownTag(SwfByteArray bytes,TagHeaderRecord header){
 		UnknownTag tag=new UnknownTag();
@@ -969,6 +1030,27 @@ public class SwfReader{
 			record.redAddTerm=bytes.readSB(record.nBits);
 			record.greenAddTerm=bytes.readSB(record.nBits);
 			record.blueAddTerm=bytes.readSB(record.nBits);
+		}
+		return record;
+	}
+
+	public CXFormWithAlphaRecord readCXFormWithAlphaRecord(SwfByteArray bytes){
+		var record=new CXFormWithAlphaRecord();
+		record.hasAddTerms=bytes.readFlag();
+		record.hasMultTerms=bytes.readFlag();
+		var nBits=(byte)bytes.readUB(4);
+		record.nBits=nBits;
+		if(record.hasMultTerms){
+			record.redMultTerm=bytes.readSB(nBits);
+			record.greenMultTerm=bytes.readSB(nBits);
+			record.blueMultTerm=bytes.readSB(nBits);
+			record.alphaMultTerm=bytes.readSB(nBits);
+		}
+		if(record.hasAddTerms){
+			record.redAddTerm=bytes.readSB(nBits);
+			record.greenAddTerm=bytes.readSB(nBits);
+			record.blueAddTerm=bytes.readSB(nBits);
+			record.alphaAddTerm=bytes.readSB(nBits);
 		}
 		return record;
 	}
