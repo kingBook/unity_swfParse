@@ -65,14 +65,19 @@
     <Compile Include="Assets\SwfParser\Scripts\swf\records\AlphaBitmapDataRecord.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\records\AlphaColorMapDataRecord.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\records\ARGBRecord.cs" />
+    <Compile Include="Assets\SwfParser\Scripts\swf\records\ColorMatrixFilterRecord.cs" />
+    <Compile Include="Assets\SwfParser\Scripts\swf\records\ConvolutionFilterRecord.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\records\CurvedEdgeRecord.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\records\CXFormRecord.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\records\CXFormWithAlphaRecord.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\records\DefineSceneRecord.cs" />
+    <Compile Include="Assets\SwfParser\Scripts\swf\records\DropShadowFilterRecord.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\records\EndShapeRecord.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\records\ExportAssetRecord.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\records\FillStyleArrayRecord.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\records\FillStyleRecord.cs" />
+    <Compile Include="Assets\SwfParser\Scripts\swf\records\FilterListRecord.cs" />
+    <Compile Include="Assets\SwfParser\Scripts\swf\records\FilterRecord.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\records\FocalGradientRecord.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\records\FramelabelRecord.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\records\GradientRecord.cs" />
@@ -129,6 +134,7 @@
     <Compile Include="Assets\SwfParser\Scripts\swf\tags\JpegTablesTag.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\tags\MetadataTag.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\tags\PlaceObject2Tag.cs" />
+    <Compile Include="Assets\SwfParser\Scripts\swf\tags\PlaceObject3Tag.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\tags\PlaceObjectTag.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\tags\ProtectTag.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\tags\ScriptLimitsTag.cs" />

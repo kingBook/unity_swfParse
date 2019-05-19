@@ -34,6 +34,21 @@ public class SwfReader{
 		return swf;
 	}
 
+	private SwfTag[] readControlTags(SwfByteArray bytes){
+		var tags=new List<SwfTag>();
+		while(true){
+			var header=readTagHeaderRecord(bytes);
+			long startPosition=bytes.getBytePosition();
+			long expectedEndPosition=startPosition+header.length;
+			var tag=readTag(bytes,header);
+			tag.header=header;
+			tags.Add(tag);
+			bytes.setBytePosition(expectedEndPosition);
+			if(tag is EndTag)break;
+		}
+		return tags.ToArray();
+	}
+
 	private SwfTag readTag(SwfByteArray bytes,TagHeaderRecord header){
 		SwfTag tag;
 		switch(header.type){
@@ -43,6 +58,9 @@ public class SwfReader{
 				break;
 			case 26:
 				tag=readPlaceObject2Tag(bytes,header);
+				break;
+			case 70:
+				tag=readPlaceObject3Tag(bytes,header);
 				break;
 			//============= Control Tags =======
 			case 9:
@@ -186,6 +204,65 @@ public class SwfReader{
 		}
 		/*if(tag.placeFlagHasClipActions){
 			tag.clipActions=
+		}*/
+		return tag;
+	}
+
+	private PlaceObject3Tag readPlaceObject3Tag(SwfByteArray bytes,TagHeaderRecord header){
+		var tag=new PlaceObject3Tag();
+		tag.placeFlagHasClipActions=bytes.readFlag();
+		tag.placeFlagHasClipDepth=bytes.readFlag();
+		tag.placeFlagHasName=bytes.readFlag();
+		tag.placeFlagHasRatio=bytes.readFlag();
+		tag.placeFlagHasColorTransform=bytes.readFlag();
+		tag.placeFlagHasMatrix=bytes.readFlag();
+		tag.placeFlagHasCharacter=bytes.readFlag();
+		tag.placeFlagMove=bytes.readFlag();
+		tag.reserved=(byte)bytes.readUB(1);
+		tag.placeFlagOpaqueBackground=bytes.readFlag();
+		tag.placeFlagHasVisible=bytes.readFlag();
+		tag.placeFlagHasImage=bytes.readFlag();
+		tag.placeFlagHasClassName=bytes.readFlag();
+		tag.placeFlagHasCacheAsBitmap=bytes.readFlag();
+		tag.placeFlagHasBlendMode=bytes.readFlag();
+		tag.placeFlagHasFilterList=bytes.readFlag();
+		tag.depth=bytes.readUI16();
+		if(tag.placeFlagHasClassName||(tag.placeFlagHasImage&&tag.placeFlagHasCharacter)){
+			tag.className=bytes.readString();
+		}
+		if(tag.placeFlagHasCharacter){
+			tag.characterId=bytes.readUI16();
+		}
+		if(tag.placeFlagHasMatrix){
+			tag.matrix=readMatrixRecord(bytes);
+		}
+		if(tag.placeFlagHasColorTransform){
+			tag.colorTransform=readCXFormWithAlphaRecord(bytes);
+		}
+		if(tag.placeFlagHasRatio){
+			tag.ratio=bytes.readUI16();
+		}
+		if(tag.placeFlagHasName){
+			tag.name=bytes.readString();
+		}
+		if(tag.placeFlagHasClipDepth){
+			tag.clipDepth=bytes.readUI16();
+		}
+		if(tag.placeFlagHasFilterList){
+			tag.surfaceFilterList=readFilterListRecord(bytes);
+		}
+		if(tag.placeFlagHasBlendMode){
+			tag.blendMode=bytes.readUI8();
+		}
+		if(tag.placeFlagHasCacheAsBitmap){
+			tag.bitmapCache=bytes.readUI8();
+		}
+		if(tag.placeFlagHasVisible){
+			tag.visible=bytes.readUI8();
+			tag.backgroundColor=readRGBARecord(bytes);
+		}
+		/*if(tag.placeFlagHasClipActions){
+			tag.placeFlagHasClipActions=
 		}*/
 		return tag;
 	}
@@ -479,21 +556,6 @@ public class SwfReader{
 		tag.frameCount=bytes.readUI16();
 		tag.controlTags=readControlTags(bytes);
 		return tag;
-	}
-
-	private SwfTag[] readControlTags(SwfByteArray bytes){
-		var tags=new List<SwfTag>();
-		while(true){
-			var header=readTagHeaderRecord(bytes);
-			long startPosition=bytes.getBytePosition();
-			long expectedEndPosition=startPosition+header.length;
-			var tag=readTag(bytes,header);
-			tag.header=header;
-			tags.Add(tag);
-			bytes.setBytePosition(expectedEndPosition);
-			if(tag is EndTag)break;
-		}
-		return tags.ToArray();
 	}
 
 	private UnknownTag readUnknownTag(SwfByteArray bytes,TagHeaderRecord header){
@@ -1052,6 +1114,45 @@ public class SwfReader{
 			record.blueAddTerm=bytes.readSB(nBits);
 			record.alphaAddTerm=bytes.readSB(nBits);
 		}
+		return record;
+	}
+
+	public FilterListRecord readFilterListRecord(SwfByteArray bytes){
+		var record=new FilterListRecord();
+		record.numberOfFilters=bytes.readUI8();
+		var filters=new FilterRecord[record.numberOfFilters];
+		for(var i=0;i<filters.Length;i++){
+			filters[i]=readFilterRecord(bytes);
+		}
+		record.filters=filters;
+		return record;
+	}
+
+	public FilterRecord readFilterRecord(SwfByteArray bytes){
+		var record=new FilterRecord();
+		record.filterId=bytes.readUI8();
+		switch(record.filterId){
+			case 0:
+				record.dropShadowFilter=readDropShadowFilterRecord(bytes);
+				break;
+
+
+		}
+		return record;
+	}
+
+	public DropShadowFilterRecord readDropShadowFilterRecord(SwfByteArray bytes){
+		var record=new DropShadowFilterRecord();
+		record.dropShadowColor=readRGBARecord(bytes);
+		record.blurX=bytes.readFixed16_16();
+		record.blurY=bytes.readFixed16_16();
+		record.angle=bytes.readFixed16_16();
+		record.distance=bytes.readFixed16_16();
+		record.strength=bytes.readFixed8_8();
+		record.innerShadow=bytes.readFlag();
+		record.knockout=bytes.readFlag();
+		record.compositeSource=bytes.readFlag();
+		record.passes=(byte)bytes.readUB(5);
 		return record;
 	}
 	
