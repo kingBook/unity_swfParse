@@ -62,6 +62,15 @@ public class SwfReader{
 			case 70:
 				tag=readPlaceObject3Tag(bytes,header);
 				break;
+			case 5:
+				tag=readRemoveObjectTag(bytes,header);
+				break;
+			case 28:
+				tag=readRemoveObject2Tag(bytes,header);
+				break;
+			case 1:
+				tag=readShowFrameTag(bytes,header);
+				break;
 			//============= Control Tags =======
 			case 9:
 				tag=readSetBackgroundColorTag(bytes,header);
@@ -264,6 +273,24 @@ public class SwfReader{
 		/*if(tag.placeFlagHasClipActions){
 			tag.placeFlagHasClipActions=
 		}*/
+		return tag;
+	}
+
+	private RemoveObjectTag readRemoveObjectTag(SwfByteArray bytes,TagHeaderRecord header){
+		var tag=new RemoveObjectTag();
+		tag.characterId=bytes.readUI16();
+		tag.depth=bytes.readUI16();
+		return tag;
+	}
+
+	private RemoveObject2Tag readRemoveObject2Tag(SwfByteArray bytes,TagHeaderRecord header){
+		var tag=new RemoveObject2Tag();
+		tag.depth=bytes.readUI16();
+		return tag;
+	}
+
+	private ShowFrameTag readShowFrameTag(SwfByteArray bytes,TagHeaderRecord header){
+		var tag=new ShowFrameTag();
 		return tag;
 	}
 
@@ -1053,7 +1080,7 @@ public class SwfReader{
 		return record;
 	}
 
-	public SHAPE readSHAPE(SwfByteArray bytes,byte morphShapeType){
+	private SHAPE readSHAPE(SwfByteArray bytes,byte morphShapeType){
 		var shape=new SHAPE();
 		byte numFillBits=(byte)bytes.readUB(4);
 		byte numLineBits=(byte)bytes.readUB(4);
@@ -1078,7 +1105,7 @@ public class SwfReader{
 		return shape;
 	}
 
-	public CXFormRecord readCXFormRecord(SwfByteArray bytes){
+	private CXFormRecord readCXFormRecord(SwfByteArray bytes){
 		var record=new CXFormRecord();
 		record.hasAddTerms=bytes.readFlag();
 		record.hasMultTerms=bytes.readFlag();
@@ -1096,7 +1123,7 @@ public class SwfReader{
 		return record;
 	}
 
-	public CXFormWithAlphaRecord readCXFormWithAlphaRecord(SwfByteArray bytes){
+	private CXFormWithAlphaRecord readCXFormWithAlphaRecord(SwfByteArray bytes){
 		var record=new CXFormWithAlphaRecord();
 		record.hasAddTerms=bytes.readFlag();
 		record.hasMultTerms=bytes.readFlag();
@@ -1117,7 +1144,7 @@ public class SwfReader{
 		return record;
 	}
 
-	public FilterListRecord readFilterListRecord(SwfByteArray bytes){
+	private FilterListRecord readFilterListRecord(SwfByteArray bytes){
 		var record=new FilterListRecord();
 		record.numberOfFilters=bytes.readUI8();
 		var filters=new FilterRecord[record.numberOfFilters];
@@ -1128,20 +1155,39 @@ public class SwfReader{
 		return record;
 	}
 
-	public FilterRecord readFilterRecord(SwfByteArray bytes){
+	private FilterRecord readFilterRecord(SwfByteArray bytes){
 		var record=new FilterRecord();
 		record.filterId=bytes.readUI8();
 		switch(record.filterId){
 			case 0:
 				record.dropShadowFilter=readDropShadowFilterRecord(bytes);
 				break;
-
-
+			case 1:
+				record.blurFilter=readBlurFilterRecord(bytes);
+				break;
+			case 2:
+				record.glowFilter=readGlowFilterRecord(bytes);
+				break;
+			case 3:
+				record.bevelFilter=readBevelFilterRecord(bytes);
+				break;
+			case 4:
+				record.gradientGlowFilter=readGradientGlowFilterRecord(bytes);
+				break;
+			case 5:
+				record.convolutionFilter=readConvolutionFilterRecord(bytes);
+				break;
+			case 6:
+				record.colorMatrixFilter=readColorMatrixFilterRecord(bytes);
+				break;
+			case 7:
+				record.gradientBevelFilter=readGradientBevelFilterRecord(bytes);
+				break;
 		}
 		return record;
 	}
 
-	public DropShadowFilterRecord readDropShadowFilterRecord(SwfByteArray bytes){
+	private DropShadowFilterRecord readDropShadowFilterRecord(SwfByteArray bytes){
 		var record=new DropShadowFilterRecord();
 		record.dropShadowColor=readRGBARecord(bytes);
 		record.blurX=bytes.readFixed16_16();
@@ -1155,5 +1201,117 @@ public class SwfReader{
 		record.passes=(byte)bytes.readUB(5);
 		return record;
 	}
-	
+
+	private BlurFilterRecord readBlurFilterRecord(SwfByteArray bytes){
+		var record=new BlurFilterRecord();
+		record.blurX=bytes.readFixed16_16();
+		record.blurY=bytes.readFixed16_16();
+		record.passes=(byte)bytes.readUB(5);
+		record.reserved=(byte)bytes.readUB(3);
+		return record;
+	}
+
+	private GlowFilterRecord readGlowFilterRecord(SwfByteArray bytes){
+		var record=new GlowFilterRecord();
+		record.glowColor=readRGBARecord(bytes);
+		record.blurX=bytes.readFixed16_16();
+		record.blurY=bytes.readFixed16_16();
+		record.strength=bytes.readFixed8_8();
+		record.innerGlow=bytes.readFlag();
+		record.knockout=bytes.readFlag();
+		record.compositeSource=bytes.readFlag();
+		record.passes=(byte)bytes.readUB(5);
+		return record;
+	}
+
+	private BevelFilterRecord readBevelFilterRecord(SwfByteArray bytes){
+		var record=new BevelFilterRecord();
+		record.shadowColor=readRGBARecord(bytes);
+		record.highlightColor=readRGBARecord(bytes);
+		record.blurX=bytes.readFixed16_16();
+		record.blurY=bytes.readFixed16_16();
+		record.angle=bytes.readFixed16_16();
+		record.distance=bytes.readFixed16_16();
+		record.strength=bytes.readFixed8_8();
+		record.innerShadow=bytes.readFlag();
+		record.knockout=bytes.readFlag();
+		record.compositeSource=bytes.readFlag();
+		record.onTop=bytes.readFlag();
+		record.passes=(byte)bytes.readUB(4);
+		return record;
+	}
+
+	private GradientGlowFilterRecord readGradientGlowFilterRecord(SwfByteArray bytes){
+		var record=new GradientGlowFilterRecord();
+		var numColors=bytes.readUI8();
+		record.numColors=numColors;
+		record.gradientColors=new RGBARecord[numColors];
+		record.gradientRatio=new byte[numColors];
+		for(var i=0;i<numColors;i++){
+			record.gradientColors[i]=readRGBARecord(bytes);
+			record.gradientRatio[i]=bytes.readUI8();
+		}
+		record.blurX=bytes.readFixed16_16();
+		record.blurY=bytes.readFixed16_16();
+		record.angle=bytes.readFixed16_16();
+		record.distance=bytes.readFixed16_16();
+		record.strength=bytes.readFixed8_8();
+		record.innerShadow=bytes.readFlag();
+		record.knockout=bytes.readFlag();
+		record.compositeSource=bytes.readFlag();
+		record.onTop=bytes.readFlag();
+		record.passes=(byte)bytes.readUB(4);
+		return record;
+	}
+
+	private GradientBevelFilterRecord readGradientBevelFilterRecord(SwfByteArray bytes){
+		var record=new GradientBevelFilterRecord();
+		var numColors=bytes.readUI8();
+		record.numColors=numColors;
+		record.gradientColors=new RGBARecord[numColors];
+		record.gradientRatio=new byte[numColors];
+		for(var i=0;i<numColors;i++){
+			record.gradientColors[i]=readRGBARecord(bytes);
+			record.gradientRatio[i]=bytes.readUI8();
+		}
+		record.blurX=bytes.readFixed16_16();
+		record.blurY=bytes.readFixed16_16();
+		record.angle=bytes.readFixed16_16();
+		record.distance=bytes.readFixed16_16();
+		record.strength=bytes.readFixed8_8();
+		record.innerShadow=bytes.readFlag();
+		record.knockout=bytes.readFlag();
+		record.compositeSource=bytes.readFlag();
+		record.onTop=bytes.readFlag();
+		record.passes=(byte)bytes.readUB(4);
+		return record;
+	}
+
+	private ConvolutionFilterRecord readConvolutionFilterRecord(SwfByteArray bytes){
+		var record=new ConvolutionFilterRecord();
+		record.matrixX=bytes.readUI8();
+		record.matrixY=bytes.readUI8();
+		record.divisor=bytes.readFloat();
+		record.bias=bytes.readFloat();
+		int len=record.matrixX*record.matrixY;
+		record.matrix=new float[len];
+		for(var i=0;i<len;i++){
+			record.matrix[i]=bytes.readFloat();
+		}
+		record.defaultColor=readRGBARecord(bytes);
+		record.reserved=(byte)bytes.readUB(6);
+		record.clamp=bytes.readFlag();
+		record.preserveAlpha=bytes.readFlag();
+		return record;
+	}
+		
+	private ColorMatrixFilterRecord readColorMatrixFilterRecord(SwfByteArray bytes){
+		var record=new ColorMatrixFilterRecord();
+		record.matrix=new float[20];
+		for(byte i=0;i<20;i++){
+			float value=bytes.readFloat();
+			record.matrix[i]=value;
+		}
+		return record;
+	}
 }

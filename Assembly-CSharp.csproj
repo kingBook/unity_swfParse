@@ -65,6 +65,8 @@
     <Compile Include="Assets\SwfParser\Scripts\swf\records\AlphaBitmapDataRecord.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\records\AlphaColorMapDataRecord.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\records\ARGBRecord.cs" />
+    <Compile Include="Assets\SwfParser\Scripts\swf\records\BevelFilterRecord.cs" />
+    <Compile Include="Assets\SwfParser\Scripts\swf\records\BlurFilterRecord.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\records\ColorMatrixFilterRecord.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\records\ConvolutionFilterRecord.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\records\CurvedEdgeRecord.cs" />
@@ -80,6 +82,9 @@
     <Compile Include="Assets\SwfParser\Scripts\swf\records\FilterRecord.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\records\FocalGradientRecord.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\records\FramelabelRecord.cs" />
+    <Compile Include="Assets\SwfParser\Scripts\swf\records\GlowFilterRecord.cs" />
+    <Compile Include="Assets\SwfParser\Scripts\swf\records\GradientBevelFilterRecord.cs" />
+    <Compile Include="Assets\SwfParser\Scripts\swf\records\GradientGlowFilterRecord.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\records\GradientRecord.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\records\GradRecord.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\records\IAlphaMapData.cs" />
@@ -137,9 +142,12 @@
     <Compile Include="Assets\SwfParser\Scripts\swf\tags\PlaceObject3Tag.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\tags\PlaceObjectTag.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\tags\ProtectTag.cs" />
+    <Compile Include="Assets\SwfParser\Scripts\swf\tags\RemoveObject2Tag.cs" />
+    <Compile Include="Assets\SwfParser\Scripts\swf\tags\RemoveObjectTag.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\tags\ScriptLimitsTag.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\tags\SetBackgroundColorTag.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\tags\SetTabIndexTag.cs" />
+    <Compile Include="Assets\SwfParser\Scripts\swf\tags\ShowFrameTag.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\tags\SwfTag.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\tags\SymbolClassTag.cs" />
     <Compile Include="Assets\SwfParser\Scripts\swf\tags\UnknownTag.cs" />
