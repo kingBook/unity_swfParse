@@ -157,7 +157,14 @@ public class SwfReader{
 				tag=readDefineMorphShape2Tag(bytes,header);
 				break;*/
 			//============= Fonts and Text =======
+
 			//============= Buttons =======
+			/*case 7:
+				tag=readDefineButtonTag(bytes,header);
+				break;*/
+			case 34:
+				tag=readDefineButton2Tag(bytes,header);
+				break;
 			//============= Sprites and Movie Clips =======
 			case 39:
 				tag=readDefineSpriteTag(bytes,header);
@@ -574,6 +581,46 @@ public class SwfReader{
 		tag.morphLineStyles=readMorphLineStyleArrayRecord(bytes,2);
 		tag.startEdges=readSHAPE(bytes,1);
 		tag.endEdges=readSHAPE(bytes,1);
+		return tag;
+	}
+
+	private DefineButtonTag readDefineButtonTag(SwfByteArray bytes,TagHeaderRecord header){
+		var tag=new DefineButtonTag();
+		
+		return tag;
+	}
+
+	private DefineButton2Tag readDefineButton2Tag(SwfByteArray bytes,TagHeaderRecord header){
+		var tag=new DefineButton2Tag();
+		tag.buttonId=bytes.readUI16();
+		tag.reservedFlags=(byte)bytes.readUB(7);
+		tag.trackAsMenu=bytes.readFlag();
+		tag.actionOffset=bytes.readUI16();
+
+		var btnRecords=new List<ButtonRecord>();
+		while(true){
+			byte reserved=(byte)bytes.readUB(2);
+			bool hasBlendMode=bytes.readFlag();
+			bool hasFilterList=bytes.readFlag();
+			bool stateHitTest=bytes.readFlag();
+			bool stateDown=bytes.readFlag();
+			bool stateOver=bytes.readFlag();
+			bool stateUp=bytes.readFlag();
+			if(reserved==0 &&
+			!hasBlendMode &&
+			!hasFilterList &&
+			!stateHitTest &&
+			!stateDown &&
+			!stateOver &&
+			!stateUp){
+				break;
+			}else{
+				btnRecords.Add(readButtonRecord(bytes,reserved,hasBlendMode,hasFilterList,stateHitTest,stateDown,stateOver,stateUp,2));
+			}
+		}
+		tag.characters=btnRecords.ToArray();
+		tag.characterEndFlag=0;
+		//tag.actions = readButtonCondAction();
 		return tag;
 	}
 	
@@ -1312,6 +1359,31 @@ public class SwfReader{
 			float value=bytes.readFloat();
 			record.matrix[i]=value;
 		}
+		return record;
+	}
+
+	private ButtonRecord readButtonRecord(SwfByteArray bytes,byte reserved,bool hasBlendMode,bool hasFilterList,bool stateHitTest,bool stateDown,bool stateOver,bool stateUp,byte buttonType){
+		var record=new ButtonRecord();
+		record.buttonReserved=reserved;
+		record.buttonHasBlendMode=hasBlendMode;
+		record.buttonHasFilterList=hasFilterList;
+		record.buttonStateHitTest=stateHitTest;
+		record.buttonStateDown=stateDown;
+		record.buttonStateOver=stateOver;
+		record.buttonStateUp=stateUp;
+		record.characterID=bytes.readUI16();
+		record.placeDepth=bytes.readUI16();
+		record.placeMatrix=readMatrixRecord(bytes);
+		if(buttonType==2){
+			record.colorTransform=readCXFormWithAlphaRecord(bytes);
+			if(hasFilterList){
+				record.filterList=readFilterListRecord(bytes);
+			}
+			if(hasBlendMode){
+				record.blendMode=bytes.readUI8();
+			}
+		}
+		record.buttonType=buttonType;
 		return record;
 	}
 }

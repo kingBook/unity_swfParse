@@ -13,7 +13,7 @@ public class SwfPostprocessor:AssetPostprocessor{
 			if(dotIndex>-1){
 				string extensionName=str.Substring(dotIndex);
 				if(extensionName==".swf"){
-					OnSwfPostprocess(str);
+					//OnSwfPostprocess(str);
 				}
 			}
         }
@@ -30,7 +30,7 @@ public class SwfPostprocessor:AssetPostprocessor{
 
 	[MenuItem("SwfParser/run")]
 	public static void run(){
-		parseAndExportXml(Application.dataPath+"/views.swf");
+		parseAndExportXml(Application.dataPath+"/views1.swf");
 	}
 
 	public static void parseAndExportXml(string swfPath){
