@@ -24,7 +24,6 @@ public class SwfReader{
 			bytes.alignBytes();
 			long newPosition=bytes.getBytePosition();
 			
-			
 			bytes.setBytePosition(expectedEndPosition);
 			
 			if(tag is EndTag){
@@ -597,6 +596,7 @@ public class SwfReader{
 		tag.trackAsMenu=bytes.readFlag();
 		tag.actionOffset=bytes.readUI16();
 
+		var count=0;
 		var btnRecords=new List<ButtonRecord>();
 		while(true){
 			byte reserved=(byte)bytes.readUB(2);
@@ -606,15 +606,19 @@ public class SwfReader{
 			bool stateDown=bytes.readFlag();
 			bool stateOver=bytes.readFlag();
 			bool stateUp=bytes.readFlag();
-			if(reserved==0 &&
+
+			var isEnd=reserved==0 &&
 			!hasBlendMode &&
 			!hasFilterList &&
 			!stateHitTest &&
 			!stateDown &&
 			!stateOver &&
-			!stateUp){
+			!stateUp;
+
+			if(isEnd){
 				break;
 			}else{
+				count++;
 				btnRecords.Add(readButtonRecord(bytes,reserved,hasBlendMode,hasFilterList,stateHitTest,stateDown,stateOver,stateUp,2));
 			}
 		}
@@ -1171,6 +1175,7 @@ public class SwfReader{
 	}
 
 	private CXFormWithAlphaRecord readCXFormWithAlphaRecord(SwfByteArray bytes){
+		bytes.alignBytes();//必须
 		var record=new CXFormWithAlphaRecord();
 		record.hasAddTerms=bytes.readFlag();
 		record.hasMultTerms=bytes.readFlag();

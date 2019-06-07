@@ -36,8 +36,53 @@
     <End type="0" length="0" />
   </DefineSprite>
   <PlaceObject2 type="26" length="21" placeFlagHasClipActions="False" placeFlagHasClipDepth="False" placeFlagHasName="False" placeFlagHasRatio="False" placeFlagHasColorTransform="True" placeFlagHasCharacter="True" placeFlagMove="False" characterId="2" matrix="1,0,3640,0,1,2670">
-    <CXFormWithAlpha hasAddTerms="False" hasMultTerms="False" nBits="0" />
+    <CXFormWithAlpha hasAddTerms="True" hasMultTerms="True" nBits="10" redMultTerm="92" greenMultTerm="92" blueMultTerm="92" alphaMultTerm="256" redAddTerm="-83" greenAddTerm="0" blueAddTerm="0" alphaAddTerm="-90" />
   </PlaceObject2>
+  <DefineButton2 type="34" length="13" buttonId="3" reservedFlags="0" trackAsMenu="False" actionOffset="0" characterEndFlag="0">
+    <ButtonRecord buttonReserved="0" buttonHasBlendMode="False" buttonHasFilterList="False" buttonStateHitTest="True" buttonStateDown="True" buttonStateOver="True" buttonStateUp="True" characterID="1" placeDepth="1" placeMatrix="1,0,0,0,1,0" buttonType="2">
+      <CXFormWithAlpha hasAddTerms="False" hasMultTerms="False" nBits="1" />
+    </ButtonRecord>
+  </DefineButton2>
+  <DefineButton2 type="34" length="13" buttonId="4" reservedFlags="0" trackAsMenu="False" actionOffset="0" characterEndFlag="0">
+    <ButtonRecord buttonReserved="0" buttonHasBlendMode="False" buttonHasFilterList="False" buttonStateHitTest="True" buttonStateDown="True" buttonStateOver="True" buttonStateUp="True" characterID="1" placeDepth="1" placeMatrix="1,0,0,0,1,0" buttonType="2">
+      <CXFormWithAlpha hasAddTerms="False" hasMultTerms="False" nBits="1" />
+    </ButtonRecord>
+  </DefineButton2>
+  <DefineButton2 type="34" length="13" buttonId="5" reservedFlags="0" trackAsMenu="False" actionOffset="0" characterEndFlag="0">
+    <ButtonRecord buttonReserved="0" buttonHasBlendMode="False" buttonHasFilterList="False" buttonStateHitTest="True" buttonStateDown="True" buttonStateOver="True" buttonStateUp="True" characterID="1" placeDepth="1" placeMatrix="1,0,0,0,1,0" buttonType="2">
+      <CXFormWithAlpha hasAddTerms="False" hasMultTerms="False" nBits="1" />
+    </ButtonRecord>
+  </DefineButton2>
+  <DefineButton2 type="34" length="13" buttonId="6" reservedFlags="0" trackAsMenu="False" actionOffset="0" characterEndFlag="0">
+    <ButtonRecord buttonReserved="0" buttonHasBlendMode="False" buttonHasFilterList="False" buttonStateHitTest="True" buttonStateDown="True" buttonStateOver="True" buttonStateUp="True" characterID="1" placeDepth="1" placeMatrix="1,0,0,0,1,0" buttonType="2">
+      <CXFormWithAlpha hasAddTerms="False" hasMultTerms="False" nBits="1" />
+    </ButtonRecord>
+  </DefineButton2>
+  <DefineButton2 type="34" length="153" buttonId="7" reservedFlags="0" trackAsMenu="False" actionOffset="0" characterEndFlag="0">
+    <ButtonRecord buttonReserved="0" buttonHasBlendMode="False" buttonHasFilterList="True" buttonStateHitTest="False" buttonStateDown="False" buttonStateOver="False" buttonStateUp="True" characterID="3" placeDepth="1" placeMatrix="1,0,0,0,1,0" buttonType="2">
+      <CXFormWithAlpha hasAddTerms="False" hasMultTerms="False" nBits="1" />
+      <FilterList>
+        <Filter filterId="6">
+          <ColorMatrixFilter matrix="1,0,0,0,100,0,1,0,0,100,0,0,1,0,100,0,0,0,1,0" />
+        </Filter>
+      </FilterList>
+    </ButtonRecord>
+    <ButtonRecord buttonReserved="0" buttonHasBlendMode="False" buttonHasFilterList="True" buttonStateHitTest="False" buttonStateDown="False" buttonStateOver="True" buttonStateUp="False" characterID="4" placeDepth="1" placeMatrix="1,0,0,0,1,0" buttonType="2">
+      <CXFormWithAlpha hasAddTerms="False" hasMultTerms="False" nBits="1" />
+      <FilterList>
+        <Filter filterId="4">
+          <GradientGlowFilter numColors="2" gradientColors="ffffff00,0000ff00" gradientRatio="0,255" blurX="4" blurY="4" angle="0.7853971" distance="4" strength="1" innerShadow="False" knockout="False" compositeSource="True" onTop="False" passes="1" />
+        </Filter>
+      </FilterList>
+    </ButtonRecord>
+    <ButtonRecord buttonReserved="0" buttonHasBlendMode="False" buttonHasFilterList="False" buttonStateHitTest="False" buttonStateDown="True" buttonStateOver="False" buttonStateUp="False" characterID="5" placeDepth="1" placeMatrix="1,0,0,0,1,0" buttonType="2">
+      <CXFormWithAlpha hasAddTerms="False" hasMultTerms="False" nBits="1" />
+    </ButtonRecord>
+    <ButtonRecord buttonReserved="0" buttonHasBlendMode="False" buttonHasFilterList="False" buttonStateHitTest="False" buttonStateDown="False" buttonStateOver="True" buttonStateUp="False" characterID="6" placeDepth="1" placeMatrix="1,0,0,0,1,0" buttonType="2">
+      <CXFormWithAlpha hasAddTerms="False" hasMultTerms="False" nBits="1" />
+    </ButtonRecord>
+  </DefineButton2>
+  <PlaceObject2 type="26" length="10" placeFlagHasClipActions="False" placeFlagHasClipDepth="False" placeFlagHasName="False" placeFlagHasRatio="False" placeFlagHasColorTransform="False" placeFlagHasCharacter="True" placeFlagMove="False" characterId="7" matrix="1,0,6760,0,1,5789" />
   <ShowFrame type="1" length="0" />
   <End type="0" length="0" />
 </Swf>
