@@ -20,7 +20,7 @@ public class SwfReader{
 			SwfTag tag=readTag(bytes,tagHeader);
 			tag.header=tagHeader;
 			swf.tags.Add(tag);
-
+			
 			bytes.alignBytes();
 			long newPosition=bytes.getBytePosition();
 			
@@ -156,7 +156,12 @@ public class SwfReader{
 				tag=readDefineMorphShape2Tag(bytes,header);
 				break;*/
 			//============= Fonts and Text =======
-
+			case 11:
+				tag=readDefineTextTag(bytes,header);
+				break;
+			case 33:
+				tag=readDefineText2Tag(bytes,header);
+				break;
 			//============= Buttons =======
 			/*case 7:
 				tag=readDefineButtonTag(bytes,header);
@@ -580,6 +585,52 @@ public class SwfReader{
 		tag.morphLineStyles=readMorphLineStyleArrayRecord(bytes,2);
 		tag.startEdges=readSHAPE(bytes,1);
 		tag.endEdges=readSHAPE(bytes,1);
+		return tag;
+	}
+
+	private DefineTextTag readDefineTextTag(SwfByteArray bytes,TagHeaderRecord header){
+		var tag=new DefineTextTag();
+		tag.characterID=bytes.readUI16();
+		tag.textBounds=readRectangleRecord(bytes);
+		tag.textMatrix=readMatrixRecord(bytes);
+		tag.glyphBits=bytes.readUI8();
+		tag.advanceBits=bytes.readUI8();
+
+		var textRecords=new List<TextRecord>();
+		while(true){
+			byte recordType=(byte)bytes.readUB(1);
+			if(recordType==0){
+				bytes.readUB(7);
+				break;
+			}else{
+				textRecords.Add(readTextRecord(bytes,recordType,1,tag.glyphBits,tag.advanceBits));
+			}
+		}
+		tag.textRecords=textRecords.ToArray();
+		tag.endOfRecordsFlag=0;
+		return tag;
+	}
+
+	private DefineText2Tag readDefineText2Tag(SwfByteArray bytes,TagHeaderRecord header){
+		var tag=new DefineText2Tag();
+		tag.characterID=bytes.readUI16();
+		tag.textBounds=readRectangleRecord(bytes);
+		tag.textMatrix=readMatrixRecord(bytes);
+		tag.glyphBits=bytes.readUI8();
+		tag.advanceBits=bytes.readUI8();
+
+		var textRecords=new List<TextRecord>();
+		while(true){
+			byte recordType=(byte)bytes.readUB(1);
+			if(recordType==0){
+				bytes.readUB(7);
+				break;
+			}else{
+				textRecords.Add(readTextRecord(bytes,recordType,2,tag.glyphBits,tag.advanceBits));
+			}
+		}
+		tag.textRecords=textRecords.ToArray();
+		tag.endOfRecordsFlag=0;
 		return tag;
 	}
 
@@ -1389,6 +1440,37 @@ public class SwfReader{
 			}
 		}
 		record.buttonType=buttonType;
+		return record;
+	}
+
+	private TextRecord readTextRecord(SwfByteArray bytes,byte recordType,byte defineTextType,byte glyphBits,byte advanceBits){
+		var record=new TextRecord();
+		record.textRecordType=recordType;
+		record.styleFlagsReserved=(byte)bytes.readUB(3);
+		record.styleFlagsHasFont=bytes.readFlag();
+		record.styleFlagsHasColor=bytes.readFlag();
+		record.styleFlagsHasYOffset=bytes.readFlag();
+		record.styleFlagsHasXOffset=bytes.readFlag();
+		if(record.styleFlagsHasFont)record.fontID=bytes.readUI16();
+		if(record.styleFlagsHasColor){
+			if(defineTextType==2)record.textColor=readRGBARecord(bytes);
+			else record.textColor=readRGBRecord(bytes);
+		}
+		if(record.styleFlagsHasXOffset)record.xOffset=bytes.readSI16();
+		if(record.styleFlagsHasYOffset)record.yOffset=bytes.readSI16();
+		if(record.styleFlagsHasFont)record.textHeight=bytes.readUI16();
+		record.glyphCount=bytes.readUI8();
+		record.glyphEntries=new GlyphEntryRecord[record.glyphCount];
+		for(var i=0;i<record.glyphCount;i++){
+			record.glyphEntries[i]=readGlyphEntryRecord(bytes,glyphBits,advanceBits);
+		}
+		return record;
+	}
+
+	private GlyphEntryRecord readGlyphEntryRecord(SwfByteArray bytes,byte glyphBits,byte advanceBits){
+		var record=new GlyphEntryRecord();
+		record.glyphIndex=bytes.readUB(glyphBits);
+		record.glyphAdvance=bytes.readSB(advanceBits);
 		return record;
 	}
 }
