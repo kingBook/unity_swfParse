@@ -156,6 +156,9 @@ public class SwfReader{
 				tag=readDefineMorphShape2Tag(bytes,header);
 				break;*/
 			//============= Fonts and Text =======
+			case 10:
+				tag=readDefineFontTag(bytes,header);
+				break;
 			case 11:
 				tag=readDefineTextTag(bytes,header);
 				break;
@@ -585,6 +588,11 @@ public class SwfReader{
 		tag.morphLineStyles=readMorphLineStyleArrayRecord(bytes,2);
 		tag.startEdges=readSHAPE(bytes,1);
 		tag.endEdges=readSHAPE(bytes,1);
+		return tag;
+	}
+
+	private DefineFontTag readDefineFontTag(SwfByteArray bytes,TagHeaderRecord header){
+		var tag=new DefineFontTag();
 		return tag;
 	}
 
