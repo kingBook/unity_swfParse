@@ -1,88 +1,231 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<Swf>
-  <FileAttributes type="69" length="4" useDirectBlit="False" useGPU="False" hasMetadata="False" actionScript3="True" useNetwork="False" />
-  <SetBackgroundColor type="9" length="3" backgroundColor="ffffff" />
-  <DefineSceneAndFrameLabelData type="86" length="11" sceneCount="1" frameLabelCount="0">
-    <DefineScene type="86" length="11" offset="0" name="Scene 1" />
-  </DefineSceneAndFrameLabelData>
-  <DefineShape4 shapeId="1" shapeBounds="-790,-780,790,780" edgeBounds="-780,-770,780,770" reserved="0" usesFillWindingRule="False" usesNonScalingStrokes="False" usesScalingStrokes="False">
-    <ShapeWithStyle>
-      <FillStyleArray fillStyleCount="1" fillStyleCountExtended="0">
-        <FillStyle>
-          <FillStyleType>0</FillStyleType>
-          <Color>00cc99ff</Color>
-        </FillStyle>
-      </FillStyleArray>
-      <LineStyleArray lineStyleCount="1" lineStyleCountExtended="0">
-        <LineStyle width="20" startCapStyle="0" joinStyle="0" hasFillFlag="False" noHScaleFlag="False" noVScaleFlag="False" pixelHintingFlag="False" reserved="0" noClose="False" endCapStyle="0" color="ff0000ff" />
-      </LineStyleArray>
-      <NumFillBits>1</NumFillBits>
-      <NumLineBits>1</NumLineBits>
-      <StyleChangeRecord typeFlag="False" stateNewStyles="False" stateLineStyle="True" stateFillStyle1="True" stateFillStyle0="False" stateMoveTo="True">
-        <StateMoveTo moveBits="11" moveDeltaX="-780" moveDeltaY="-770" />
-        <StateFillStyle1>1</StateFillStyle1>
-        <LineStyle>1</LineStyle>
-      </StyleChangeRecord>
-      <StraightEdgeRecord typeFlag="True" straightFlag="True" numBits="10" generalLineFlag="False" vertLineFlag="False" deltaX="1560" deltaY="0" />
-      <StraightEdgeRecord typeFlag="True" straightFlag="True" numBits="10" generalLineFlag="False" vertLineFlag="True" deltaX="0" deltaY="1540" />
-      <StraightEdgeRecord typeFlag="True" straightFlag="True" numBits="10" generalLineFlag="False" vertLineFlag="False" deltaX="-1560" deltaY="0" />
-      <StraightEdgeRecord typeFlag="True" straightFlag="True" numBits="10" generalLineFlag="False" vertLineFlag="True" deltaX="0" deltaY="-1540" />
-      <EndShapeRecord typeFlag="False" endOfShape="0" />
-    </ShapeWithStyle>
-  </DefineShape4>
-  <DefineSprite type="39" length="16" spriteId="2" frameCount="1">
-    <PlaceObject2 type="26" length="6" placeFlagHasClipActions="False" placeFlagHasClipDepth="False" placeFlagHasName="False" placeFlagHasRatio="False" placeFlagHasColorTransform="False" placeFlagHasCharacter="True" placeFlagMove="False" characterId="1" matrix="1,0,0,0,1,0" />
-    <ShowFrame type="1" length="0" />
-    <End type="0" length="0" />
-  </DefineSprite>
-  <PlaceObject2 type="26" length="21" placeFlagHasClipActions="False" placeFlagHasClipDepth="False" placeFlagHasName="False" placeFlagHasRatio="False" placeFlagHasColorTransform="True" placeFlagHasCharacter="True" placeFlagMove="False" characterId="2" matrix="1,0,3640,0,1,2670">
-    <CXFormWithAlpha hasAddTerms="True" hasMultTerms="True" nBits="10" redMultTerm="92" greenMultTerm="92" blueMultTerm="92" alphaMultTerm="256" redAddTerm="-83" greenAddTerm="0" blueAddTerm="0" alphaAddTerm="-90" />
-  </PlaceObject2>
-  <DefineButton2 type="34" length="13" buttonId="3" reservedFlags="0" trackAsMenu="False" actionOffset="0" characterEndFlag="0">
-    <ButtonRecord buttonReserved="0" buttonHasBlendMode="False" buttonHasFilterList="False" buttonStateHitTest="True" buttonStateDown="True" buttonStateOver="True" buttonStateUp="True" characterID="1" placeDepth="1" placeMatrix="1,0,0,0,1,0" buttonType="2">
-      <CXFormWithAlpha hasAddTerms="False" hasMultTerms="False" nBits="1" />
-    </ButtonRecord>
-  </DefineButton2>
-  <DefineButton2 type="34" length="13" buttonId="4" reservedFlags="0" trackAsMenu="False" actionOffset="0" characterEndFlag="0">
-    <ButtonRecord buttonReserved="0" buttonHasBlendMode="False" buttonHasFilterList="False" buttonStateHitTest="True" buttonStateDown="True" buttonStateOver="True" buttonStateUp="True" characterID="1" placeDepth="1" placeMatrix="1,0,0,0,1,0" buttonType="2">
-      <CXFormWithAlpha hasAddTerms="False" hasMultTerms="False" nBits="1" />
-    </ButtonRecord>
-  </DefineButton2>
-  <DefineButton2 type="34" length="13" buttonId="5" reservedFlags="0" trackAsMenu="False" actionOffset="0" characterEndFlag="0">
-    <ButtonRecord buttonReserved="0" buttonHasBlendMode="False" buttonHasFilterList="False" buttonStateHitTest="True" buttonStateDown="True" buttonStateOver="True" buttonStateUp="True" characterID="1" placeDepth="1" placeMatrix="1,0,0,0,1,0" buttonType="2">
-      <CXFormWithAlpha hasAddTerms="False" hasMultTerms="False" nBits="1" />
-    </ButtonRecord>
-  </DefineButton2>
-  <DefineButton2 type="34" length="13" buttonId="6" reservedFlags="0" trackAsMenu="False" actionOffset="0" characterEndFlag="0">
-    <ButtonRecord buttonReserved="0" buttonHasBlendMode="False" buttonHasFilterList="False" buttonStateHitTest="True" buttonStateDown="True" buttonStateOver="True" buttonStateUp="True" characterID="1" placeDepth="1" placeMatrix="1,0,0,0,1,0" buttonType="2">
-      <CXFormWithAlpha hasAddTerms="False" hasMultTerms="False" nBits="1" />
-    </ButtonRecord>
-  </DefineButton2>
-  <DefineButton2 type="34" length="153" buttonId="7" reservedFlags="0" trackAsMenu="False" actionOffset="0" characterEndFlag="0">
-    <ButtonRecord buttonReserved="0" buttonHasBlendMode="False" buttonHasFilterList="True" buttonStateHitTest="False" buttonStateDown="False" buttonStateOver="False" buttonStateUp="True" characterID="3" placeDepth="1" placeMatrix="1,0,0,0,1,0" buttonType="2">
-      <CXFormWithAlpha hasAddTerms="False" hasMultTerms="False" nBits="1" />
-      <FilterList>
-        <Filter filterId="6">
-          <ColorMatrixFilter matrix="1,0,0,0,100,0,1,0,0,100,0,0,1,0,100,0,0,0,1,0" />
-        </Filter>
-      </FilterList>
-    </ButtonRecord>
-    <ButtonRecord buttonReserved="0" buttonHasBlendMode="False" buttonHasFilterList="True" buttonStateHitTest="False" buttonStateDown="False" buttonStateOver="True" buttonStateUp="False" characterID="4" placeDepth="1" placeMatrix="1,0,0,0,1,0" buttonType="2">
-      <CXFormWithAlpha hasAddTerms="False" hasMultTerms="False" nBits="1" />
-      <FilterList>
-        <Filter filterId="4">
-          <GradientGlowFilter numColors="2" gradientColors="ffffff00,0000ff00" gradientRatio="0,255" blurX="4" blurY="4" angle="0.7853971" distance="4" strength="1" innerShadow="False" knockout="False" compositeSource="True" onTop="False" passes="1" />
-        </Filter>
-      </FilterList>
-    </ButtonRecord>
-    <ButtonRecord buttonReserved="0" buttonHasBlendMode="False" buttonHasFilterList="False" buttonStateHitTest="False" buttonStateDown="True" buttonStateOver="False" buttonStateUp="False" characterID="5" placeDepth="1" placeMatrix="1,0,0,0,1,0" buttonType="2">
-      <CXFormWithAlpha hasAddTerms="False" hasMultTerms="False" nBits="1" />
-    </ButtonRecord>
-    <ButtonRecord buttonReserved="0" buttonHasBlendMode="False" buttonHasFilterList="False" buttonStateHitTest="False" buttonStateDown="False" buttonStateOver="True" buttonStateUp="False" characterID="6" placeDepth="1" placeMatrix="1,0,0,0,1,0" buttonType="2">
-      <CXFormWithAlpha hasAddTerms="False" hasMultTerms="False" nBits="1" />
-    </ButtonRecord>
-  </DefineButton2>
-  <PlaceObject2 type="26" length="10" placeFlagHasClipActions="False" placeFlagHasClipDepth="False" placeFlagHasName="False" placeFlagHasRatio="False" placeFlagHasColorTransform="False" placeFlagHasCharacter="True" placeFlagMove="False" characterId="7" matrix="1,0,6760,0,1,5789" />
-  <ShowFrame type="1" length="0" />
-  <End type="0" length="0" />
-</Swf>
+﻿# by www.bejson.com 
+Swf:
+  FileAttributes: {-type: '69', -length: '4', -useDirectBlit: 'False', -useGPU: 'False',
+    -hasMetadata: 'False', -actionScript3: 'True', -useNetwork: 'False'}
+  SetBackgroundColor: {-type: '9', -length: '3', -backgroundColor: ffffff}
+  DefineSceneAndFrameLabelData:
+    -type: '86'
+    -length: '11'
+    -sceneCount: '1'
+    -frameLabelCount: '0'
+    DefineScene: {-type: '86', -length: '11', -offset: '0', -name: Scene 1}
+  DefineShape4:
+    -shapeId: '1'
+    -shapeBounds: -790,-780,790,780
+    -edgeBounds: -780,-770,780,770
+    -reserved: '0'
+    -usesFillWindingRule: 'False'
+    -usesNonScalingStrokes: 'False'
+    -usesScalingStrokes: 'False'
+    ShapeWithStyle:
+      FillStyleArray:
+        -fillStyleCount: '1'
+        -fillStyleCountExtended: '0'
+        FillStyle: {FillStyleType: '0', Color: 00cc99ff}
+      LineStyleArray:
+        -lineStyleCount: '1'
+        -lineStyleCountExtended: '0'
+        LineStyle: {-width: '20', -startCapStyle: '0', -joinStyle: '0', -hasFillFlag: 'False',
+          -noHScaleFlag: 'False', -noVScaleFlag: 'False', -pixelHintingFlag: 'False',
+          -reserved: '0', -noClose: 'False', -endCapStyle: '0', -color: ff0000ff}
+      NumFillBits: '1'
+      NumLineBits: '1'
+      StyleChangeRecord:
+        -typeFlag: 'False'
+        -stateNewStyles: 'False'
+        -stateLineStyle: 'True'
+        -stateFillStyle1: 'True'
+        -stateFillStyle0: 'False'
+        -stateMoveTo: 'True'
+        StateMoveTo: {-moveBits: '11', -moveDeltaX: '-780', -moveDeltaY: '-770'}
+        StateFillStyle1: '1'
+        LineStyle: '1'
+      StraightEdgeRecord:
+      - {-typeFlag: 'True', -straightFlag: 'True', -numBits: '10', -generalLineFlag: 'False',
+        -vertLineFlag: 'False', -deltaX: '1560', -deltaY: '0'}
+      - {-typeFlag: 'True', -straightFlag: 'True', -numBits: '10', -generalLineFlag: 'False',
+        -vertLineFlag: 'True', -deltaX: '0', -deltaY: '1540'}
+      - {-typeFlag: 'True', -straightFlag: 'True', -numBits: '10', -generalLineFlag: 'False',
+        -vertLineFlag: 'False', -deltaX: '-1560', -deltaY: '0'}
+      - {-typeFlag: 'True', -straightFlag: 'True', -numBits: '10', -generalLineFlag: 'False',
+        -vertLineFlag: 'True', -deltaX: '0', -deltaY: '-1540'}
+      EndShapeRecord: {-typeFlag: 'False', -endOfShape: '0'}
+  DefineSprite:
+    -type: '39'
+    -length: '16'
+    -spriteId: '2'
+    -frameCount: '1'
+    PlaceObject2: {-type: '26', -length: '6', -placeFlagHasClipActions: 'False', -placeFlagHasClipDepth: 'False',
+      -placeFlagHasName: 'False', -placeFlagHasRatio: 'False', -placeFlagHasColorTransform: 'False',
+      -placeFlagHasCharacter: 'True', -placeFlagMove: 'False', -characterId: '1',
+      -matrix: '1,0,0,0,1,0'}
+    ShowFrame: {-type: '1', -length: '0'}
+    End: {-type: '0', -length: '0'}
+  PlaceObject2:
+  - -type: '26'
+    -length: '21'
+    -placeFlagHasClipActions: 'False'
+    -placeFlagHasClipDepth: 'False'
+    -placeFlagHasName: 'False'
+    -placeFlagHasRatio: 'False'
+    -placeFlagHasColorTransform: 'True'
+    -placeFlagHasCharacter: 'True'
+    -placeFlagMove: 'False'
+    -characterId: '2'
+    -matrix: 1,0,3640,0,1,2670
+    CXFormWithAlpha: {-hasAddTerms: 'True', -hasMultTerms: 'True', -nBits: '10', -redMultTerm: '92',
+      -greenMultTerm: '92', -blueMultTerm: '92', -alphaMultTerm: '256', -redAddTerm: '-83',
+      -greenAddTerm: '0', -blueAddTerm: '0', -alphaAddTerm: '-90'}
+  - {-type: '26', -length: '10', -placeFlagHasClipActions: 'False', -placeFlagHasClipDepth: 'False',
+    -placeFlagHasName: 'False', -placeFlagHasRatio: 'False', -placeFlagHasColorTransform: 'False',
+    -placeFlagHasCharacter: 'True', -placeFlagMove: 'False', -characterId: '7', -matrix: '1,0,6760,0,1,5789'}
+  DefineButton2:
+  - -type: '34'
+    -length: '13'
+    -buttonId: '3'
+    -reservedFlags: '0'
+    -trackAsMenu: 'False'
+    -actionOffset: '0'
+    -characterEndFlag: '0'
+    ButtonRecord:
+      -buttonReserved: '0'
+      -buttonHasBlendMode: 'False'
+      -buttonHasFilterList: 'False'
+      -buttonStateHitTest: 'True'
+      -buttonStateDown: 'True'
+      -buttonStateOver: 'True'
+      -buttonStateUp: 'True'
+      -characterID: '1'
+      -placeDepth: '1'
+      -placeMatrix: 1,0,0,0,1,0
+      -buttonType: '2'
+      CXFormWithAlpha: {-hasAddTerms: 'False', -hasMultTerms: 'False', -nBits: '1'}
+  - -type: '34'
+    -length: '13'
+    -buttonId: '4'
+    -reservedFlags: '0'
+    -trackAsMenu: 'False'
+    -actionOffset: '0'
+    -characterEndFlag: '0'
+    ButtonRecord:
+      -buttonReserved: '0'
+      -buttonHasBlendMode: 'False'
+      -buttonHasFilterList: 'False'
+      -buttonStateHitTest: 'True'
+      -buttonStateDown: 'True'
+      -buttonStateOver: 'True'
+      -buttonStateUp: 'True'
+      -characterID: '1'
+      -placeDepth: '1'
+      -placeMatrix: 1,0,0,0,1,0
+      -buttonType: '2'
+      CXFormWithAlpha: {-hasAddTerms: 'False', -hasMultTerms: 'False', -nBits: '1'}
+  - -type: '34'
+    -length: '13'
+    -buttonId: '5'
+    -reservedFlags: '0'
+    -trackAsMenu: 'False'
+    -actionOffset: '0'
+    -characterEndFlag: '0'
+    ButtonRecord:
+      -buttonReserved: '0'
+      -buttonHasBlendMode: 'False'
+      -buttonHasFilterList: 'False'
+      -buttonStateHitTest: 'True'
+      -buttonStateDown: 'True'
+      -buttonStateOver: 'True'
+      -buttonStateUp: 'True'
+      -characterID: '1'
+      -placeDepth: '1'
+      -placeMatrix: 1,0,0,0,1,0
+      -buttonType: '2'
+      CXFormWithAlpha: {-hasAddTerms: 'False', -hasMultTerms: 'False', -nBits: '1'}
+  - -type: '34'
+    -length: '13'
+    -buttonId: '6'
+    -reservedFlags: '0'
+    -trackAsMenu: 'False'
+    -actionOffset: '0'
+    -characterEndFlag: '0'
+    ButtonRecord:
+      -buttonReserved: '0'
+      -buttonHasBlendMode: 'False'
+      -buttonHasFilterList: 'False'
+      -buttonStateHitTest: 'True'
+      -buttonStateDown: 'True'
+      -buttonStateOver: 'True'
+      -buttonStateUp: 'True'
+      -characterID: '1'
+      -placeDepth: '1'
+      -placeMatrix: 1,0,0,0,1,0
+      -buttonType: '2'
+      CXFormWithAlpha: {-hasAddTerms: 'False', -hasMultTerms: 'False', -nBits: '1'}
+  - -type: '34'
+    -length: '153'
+    -buttonId: '7'
+    -reservedFlags: '0'
+    -trackAsMenu: 'False'
+    -actionOffset: '0'
+    -characterEndFlag: '0'
+    ButtonRecord:
+    - -buttonReserved: '0'
+      -buttonHasBlendMode: 'False'
+      -buttonHasFilterList: 'True'
+      -buttonStateHitTest: 'False'
+      -buttonStateDown: 'False'
+      -buttonStateOver: 'False'
+      -buttonStateUp: 'True'
+      -characterID: '3'
+      -placeDepth: '1'
+      -placeMatrix: 1,0,0,0,1,0
+      -buttonType: '2'
+      CXFormWithAlpha: {-hasAddTerms: 'False', -hasMultTerms: 'False', -nBits: '1'}
+      FilterList:
+        Filter:
+          -filterId: '6'
+          ColorMatrixFilter: {-matrix: '1,0,0,0,100,0,1,0,0,100,0,0,1,0,100,0,0,0,1,0'}
+    - -buttonReserved: '0'
+      -buttonHasBlendMode: 'False'
+      -buttonHasFilterList: 'True'
+      -buttonStateHitTest: 'False'
+      -buttonStateDown: 'False'
+      -buttonStateOver: 'True'
+      -buttonStateUp: 'False'
+      -characterID: '4'
+      -placeDepth: '1'
+      -placeMatrix: 1,0,0,0,1,0
+      -buttonType: '2'
+      CXFormWithAlpha: {-hasAddTerms: 'False', -hasMultTerms: 'False', -nBits: '1'}
+      FilterList:
+        Filter:
+          -filterId: '4'
+          GradientGlowFilter: {-numColors: '2', -gradientColors: 'ffffff00,0000ff00',
+            -gradientRatio: '0,255', -blurX: '4', -blurY: '4', -angle: '0.7853971',
+            -distance: '4', -strength: '1', -innerShadow: 'False', -knockout: 'False',
+            -compositeSource: 'True', -onTop: 'False', -passes: '1'}
+    - -buttonReserved: '0'
+      -buttonHasBlendMode: 'False'
+      -buttonHasFilterList: 'False'
+      -buttonStateHitTest: 'False'
+      -buttonStateDown: 'True'
+      -buttonStateOver: 'False'
+      -buttonStateUp: 'False'
+      -characterID: '5'
+      -placeDepth: '1'
+      -placeMatrix: 1,0,0,0,1,0
+      -buttonType: '2'
+      CXFormWithAlpha: {-hasAddTerms: 'False', -hasMultTerms: 'False', -nBits: '1'}
+    - -buttonReserved: '0'
+      -buttonHasBlendMode: 'False'
+      -buttonHasFilterList: 'False'
+      -buttonStateHitTest: 'False'
+      -buttonStateDown: 'False'
+      -buttonStateOver: 'True'
+      -buttonStateUp: 'False'
+      -characterID: '6'
+      -placeDepth: '1'
+      -placeMatrix: 1,0,0,0,1,0
+      -buttonType: '2'
+      CXFormWithAlpha: {-hasAddTerms: 'False', -hasMultTerms: 'False', -nBits: '1'}
+  ShowFrame: {-type: '1', -length: '0'}
+  End: {-type: '0', -length: '0'}
