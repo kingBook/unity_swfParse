@@ -13,7 +13,7 @@ public class SwfHeader {
 	public float frameRate;
 	public uint frameCount;
 
-	override public string ToString(){
+	public override string ToString(){
         string str="";
         str+="{\n";
         str+="  signature:"+signature+",\n";

@@ -4,6 +4,7 @@ using System.Text;
 using System.Xml;
 using UnityEditor;
 using UnityEngine;
+using Debug=UnityEngine.Debug;
 
 public class SwfPostprocessor:AssetPostprocessor{
 	
@@ -24,16 +25,18 @@ public class SwfPostprocessor:AssetPostprocessor{
 		path=path.Substring(id);
 		path=Application.dataPath+path;
 		
-		parseAndExportXml(path);
+		parseSwf(path,true,true);
 		
 	}
 
 	[MenuItem("SwfParser/run")]
 	public static void run(){
-		parseAndExportXml(Application.dataPath+"/viewsMax.swf");
+		parseSwf(Application.dataPath+"/test.swf",true,true);
 	}
 
-	public static void parseAndExportXml(string swfPath){
+	public static void parseSwf(string swfPath,bool isExportXml,bool isExportBitmap){
+		// 截取掉xx.swf的文件夹路径，如：E:/kingBook/projects/unity_swfParse/Assets/
+		string swfFolderPath=swfPath.Substring(0,swfPath.LastIndexOf('/')+1);
 		//Debug.Log(swfPath);
 		var swfReader=new SwfReader();
 
@@ -46,17 +49,24 @@ public class SwfPostprocessor:AssetPostprocessor{
 		sw.Stop();
 		UnityEngine.Debug.Log("read passed time:"+sw.ElapsedMilliseconds);
 		
-		sw.Restart();
-		var xml=swf.toXml();
-		sw.Stop();
-		UnityEngine.Debug.Log("convert xml passed time:"+sw.ElapsedMilliseconds);
+		if(isExportXml){
+			sw.Restart();
+			var xml=swf.toXml();
+			sw.Stop();
+			UnityEngine.Debug.Log("convert xml passed time:"+sw.ElapsedMilliseconds);
 
-		sw.Restart();
-		saveXml(xml,swfPath);
-		sw.Stop();
-		UnityEngine.Debug.Log("save passed time:"+sw.ElapsedMilliseconds);
-
-		//Debug.Log(formatXml(swf.toXml()));
+			sw.Restart();
+			saveXml(xml,swfPath);
+			sw.Stop();
+			UnityEngine.Debug.Log("save passed time:"+sw.ElapsedMilliseconds);
+			//Debug.Log(formatXml(swf.toXml()));
+		}
+		if(isExportBitmap){
+			var imageDatas=swf.getImageDatas();
+			for(int i=0,len=imageDatas.Length;i<len;i++){
+				imageDatas[i].saveTo(swfFolderPath);
+			}
+		}
 		EditorUtility.DisplayDialog("Complete","Export "+swfPath+" to complete","OK");
 	}
 

@@ -3,7 +3,6 @@ using System.Collections;
 using System.Xml;
 
 public class SwfTag{
-
 	public TagHeaderRecord header;
 
 	protected string getClassName(){
@@ -19,7 +18,7 @@ public class SwfTag{
 		return ele;
 	}
 
-	virtual public XmlElement toXml(XmlDocument doc){
+	public virtual XmlElement toXml(XmlDocument doc){
 		return createXmlElement(doc);
 	}
 

@@ -10,10 +10,12 @@ public class DefineBitsTag:SwfTag {
 		ele.SetAttribute("characterID",characterID.ToString());
 
 		var jpegDataStrBuilder=new StringBuilder("");
-		for(int i=0;i<jpegData.Length;i++){
-			jpegDataStrBuilder.Append(jpegData[i]);
-			if(i<jpegData.Length-1){
-				jpegDataStrBuilder.Append(',');
+		if(jpegData!=null){
+			for(int i=0;i<jpegData.Length;i++){
+				jpegDataStrBuilder.Append(jpegData[i]);
+				if(i<jpegData.Length-1){
+					jpegDataStrBuilder.Append(',');
+				}
 			}
 		}
 		ele.SetAttribute("jpegData",jpegDataStrBuilder.ToString());

@@ -4,6 +4,5 @@
 	public uint type;
 	public uint length;
 
-	public bool isLong{ get => length>=SHORT_HEADER_MAX_LENGTH;}
-
+	public bool isLong => length>=SHORT_HEADER_MAX_LENGTH;
 }

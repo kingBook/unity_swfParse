@@ -8,27 +8,90 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/records/LineStyle2Record.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/records/GradientGlowFilterRecord.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/tags/DefineSpriteTag.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/tags/SetBackgroundColorTag.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/SwfReader.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/Swf.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/SwfHeader.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/tags/DefineBitsJPEG4Tag.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/tags/DefineFontTag.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/utils/ZlibUtil.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/tags/DefineBitsJPEG3Tag.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/SwfByteArray.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/records/MorphLineStyleArrayRecord.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/Editor/SwfPostprocessor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/tags/DefineShape2Tag.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/tags/DefineMorphShape2Tag.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/tags/JpegTablesTag.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/tags/DefineBitsJPEG2Tag.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/tags/UnknownTag.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/records/MorphLineStyleRecord.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/tags/DefineButton2Tag.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/tags/SetTabIndexTag.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/tags/DefineBitsTag.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/records/BevelFilterRecord.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/records/AlphaColorMapDataRecord.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/records/GradRecord.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/records/TagHeaderRecord.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/SwfReader.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/records/Pix24Record.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/SwfByteArray.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/records/ARGBRecord.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3BD64DD8-08F0-46B3-8BA2-FB6667D0ADC4/30/8c1c84b9/Texture2D.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/records/Pix15Record.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3BD64DD8-08F0-46B3-8BA2-FB6667D0ADC4/ad/058217a2/Color.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/records/LineStyleArrayRecord.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/records/IPixRecord.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/records/IAlphaMapData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/records/BitmapDataRecord.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/tags/SetBackgroundColorTag.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/records/RGBRecord.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/records/IMapData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/records/ColorMapDataRecord.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/records/GradientRecord.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/records/MorphLineStyleRecord.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/tags/SetTabIndexTag.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/records/FilterListRecord.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/records/AlphaBitmapDataRecord.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/records/MorphLineStyleArrayRecord.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/records/FillStyleRecord.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/records/RGBARecord.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/tags/DefineMorphShape2Tag.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/image/ImageType.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/tags/SwfTag.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/tags/UnknownTag.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/image/ImageData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/tags/DefineButton2Tag.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/tags/TagType.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/BE5F9D07-12AA-4746-82F4-895E8CF62944/bd/944c1003/Stopwatch.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/tags/DefineBitsLossless2Tag.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/tags/DefineBitsLosslessTag.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/records/FillStyleRecord.cs" />
+        <option value="$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/tags/TagType.cs" />
+        <option value="$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/tags/SwfTag.cs" />
+        <option value="$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/records/TagHeaderRecord.cs" />
+        <option value="$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/records/IAlphaMapData.cs" />
+        <option value="$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/BitmapData.cs" />
+        <option value="$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/bitmap/BitmapType.cs" />
+        <option value="$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/SwfHeader.cs" />
+        <option value="$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/bitmap/BitmapData.cs" />
+        <option value="$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/tags/DefineBitsLossless2Tag.cs" />
+        <option value="$PROJECT_DIR$/Assets/SwfParser/Scripts/SwfByteArray.cs" />
+        <option value="$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/records/IMapData.cs" />
+        <option value="$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/records/ColorMapDataRecord.cs" />
+        <option value="$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/records/Ipix.cs" />
+        <option value="$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/records/RGBARecord.cs" />
+        <option value="$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/records/RGBRecord.cs" />
+        <option value="$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/records/ARGBRecord.cs" />
+        <option value="$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/records/Pix15Record.cs" />
+        <option value="$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/bitmap/ImageData.cs" />
+        <option value="$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/bitmap/ImageType.cs" />
+        <option value="$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/records/BitmapDataRecord.cs" />
+        <option value="$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/records/IPixRecord.cs" />
+        <option value="$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/records/Pix24Record.cs" />
+        <option value="$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/tags/DefineBitsLosslessTag.cs" />
+        <option value="$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/tags/JpegTablesTag.cs" />
+        <option value="$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/tags/DefineBitsTag.cs" />
         <option value="$PROJECT_DIR$/Assets/SwfParser/Scripts/SwfReader.cs" />
+        <option value="$PROJECT_DIR$/Assets/SwfParser/Scripts/swf/Swf.cs" />
+        <option value="$PROJECT_DIR$/Assets/SwfParser/Scripts/Editor/SwfPostprocessor.cs" />
       </list>
     </option>
   </component>
@@ -38,6 +101,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -59,11 +123,17 @@
     </configuration>
   </component>
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
-  <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.md" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="930" y="371" width="672" height="678" key="search.everywhere.popup" timestamp="1594524668723">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="930" y="371" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1594524668723" />
   </component>
 </project>

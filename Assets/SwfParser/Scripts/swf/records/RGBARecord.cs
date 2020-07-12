@@ -7,7 +7,7 @@ public struct RGBARecord {
 	public byte blue;
 	public byte alpha;
 
-	override public string ToString() {
+	public override string ToString() {
 		uint color=red;
 		color=(color<<8)|green;
 		color=(color<<8)|blue;

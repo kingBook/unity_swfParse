@@ -139,9 +139,9 @@ public class SwfReader{
 			case 35:
 				tag=readDefineBitsJPEG3Tag(bytes,header);
 				break;
-			/*case 20:
+			case 20:
 				tag=readDefineBitsLosslessTag(bytes,header);
-				break;*/
+				break;
 			case 36:
 				tag=readDefineBitsLossless2Tag(bytes,header);
 				break;
@@ -526,10 +526,10 @@ public class SwfReader{
 		}
 		return tag;
 	}
-
-	private DefineBitsLossless2Tag readDefineBitsLossless2Tag(SwfByteArray bytes,TagHeaderRecord header){
-		var tag=new DefineBitsLossless2Tag();
+	
+	private DefineBitsLosslessTag readDefineBitsLosslessTag(SwfByteArray bytes,TagHeaderRecord header){
 		long startPosition=bytes.getBytePosition();
+		var tag=new DefineBitsLosslessTag();
 		tag.characterID=bytes.readUI16();
 		tag.bitmapFormat=bytes.readUI8();
 		tag.bitmapWidth=bytes.readUI16();
@@ -539,23 +539,52 @@ public class SwfReader{
 		}
 		if(tag.bitmapFormat==3||tag.bitmapFormat==4||tag.bitmapFormat==5){
 			byte[] unzippedData=null;
-			
 			long bytesRead=bytes.getBytePosition()-startPosition;
 			int remainingBytes=(int)(header.length-bytesRead);
-			
 			if(remainingBytes>0){
 				unzippedData=bytes.readBytes(remainingBytes);
-				unzippedData=ZlibUtil.deCompressBytes(unzippedData);
-				var unzippedSwfArray=new SwfByteArray(unzippedData);
-				if(tag.bitmapFormat==3){
-					uint imageDataSize=(uint)((tag.bitmapWidth + (8 - (tag.bitmapWidth % 8))) * tag.bitmapHeight);
-					tag.zlibBitmapData=readAlphaColorMapDataRecord(unzippedSwfArray, (uint)(tag.bitmapColorTableSize + 1), imageDataSize);
-				}else if(tag.bitmapFormat==4||tag.bitmapFormat==5){
-					uint imageDataSize2=(uint)(tag.bitmapWidth*tag.bitmapHeight);
-					tag.zlibBitmapData=readAlphaBitmapDataRecord(unzippedSwfArray,imageDataSize2);
-				}
-				unzippedSwfArray.close();
 			}
+			unzippedData=ZlibUtil.deCompressBytes(unzippedData);
+			var unzippedSwfArray=new SwfByteArray(unzippedData);
+			if(tag.bitmapFormat==3){
+				uint imageDataSize=(uint)(tag.bitmapWidth*tag.bitmapHeight);
+				tag.zlibBitmapData=readColorMapDataRecord(unzippedSwfArray, (uint)(tag.bitmapColorTableSize + 1), imageDataSize);
+			}else if(tag.bitmapFormat==4||tag.bitmapFormat==5){
+				uint imageDataSize=(uint)(tag.bitmapWidth*tag.bitmapHeight);
+				tag.zlibBitmapData=readBitmapDataRecord(unzippedSwfArray,tag.bitmapFormat,imageDataSize);
+			}
+		}
+		return tag;
+	}
+
+	private DefineBitsLossless2Tag readDefineBitsLossless2Tag(SwfByteArray bytes,TagHeaderRecord header){
+		long startPosition=bytes.getBytePosition();
+		var tag=new DefineBitsLossless2Tag();
+		tag.characterID=bytes.readUI16();
+		tag.bitmapFormat=bytes.readUI8();
+		tag.bitmapWidth=bytes.readUI16();
+		tag.bitmapHeight=bytes.readUI16();
+		if(tag.bitmapFormat==3){
+			tag.bitmapColorTableSize=bytes.readUI8();
+		}
+		if(tag.bitmapFormat==3||tag.bitmapFormat==4||tag.bitmapFormat==5){
+			byte[] unzippedData=null;
+			long bytesRead=bytes.getBytePosition()-startPosition;
+			int remainingBytes=(int)(header.length-bytesRead);
+			if(remainingBytes>0){
+				unzippedData=bytes.readBytes(remainingBytes);
+			}
+			unzippedData=ZlibUtil.deCompressBytes(unzippedData);
+			var unzippedSwfArray=new SwfByteArray(unzippedData);
+			if(tag.bitmapFormat==3){
+				//uint imageDataSize=(uint)((tag.bitmapWidth + (8 - (tag.bitmapWidth % 8))) * tag.bitmapHeight);//此代码经验证是错的
+				uint imageDataSize=(uint)(tag.bitmapWidth*tag.bitmapHeight);
+				tag.zlibBitmapData=readAlphaColorMapDataRecord(unzippedSwfArray, (uint)(tag.bitmapColorTableSize + 1), imageDataSize);
+			}else if(tag.bitmapFormat==4||tag.bitmapFormat==5){
+				uint imageDataSize=(uint)(tag.bitmapWidth*tag.bitmapHeight);
+				tag.zlibBitmapData=readAlphaBitmapDataRecord(unzippedSwfArray,imageDataSize);
+			}
+			unzippedSwfArray.close();
 		}
 		return tag;
 	}
@@ -1059,10 +1088,58 @@ public class SwfReader{
 		}
 		return record;
 	}
+	
+	private ColorMapDataRecord readColorMapDataRecord(SwfByteArray bytes,uint colorTableSize,uint imageDataSize){
+		var record=new ColorMapDataRecord();
+		
+		record.colorTableRGB=new RGBRecord[colorTableSize];
+		for(uint i=0;i<colorTableSize;i++){
+			record.colorTableRGB[i]=readRGBRecord(bytes);
+		}
+		
+		record.colormapPixelData=new byte[imageDataSize];
+		for(uint i=0;i<imageDataSize;i++){
+			record.colormapPixelData[i]=bytes.readUI8();
+		}
+		return record;
+	}
+	
+	private BitmapDataRecord readBitmapDataRecord(SwfByteArray bytes,byte bitmapformat,uint imageDataSize){
+		var record=new BitmapDataRecord();
+		record.bitmapPixelData=new IPixRecord[imageDataSize];
+		if(bitmapformat==4){
+			for(uint i=0;i<imageDataSize;i++){
+				record.bitmapPixelData[i]=readPix15Record(bytes);
+			}
+		}else if(bitmapformat==5){
+			for(uint i=0;i<imageDataSize;i++){
+				record.bitmapPixelData[i]=readPix24Record(bytes);
+			}
+		}
+		return record;
+	}
+	
+	private Pix15Record readPix15Record(SwfByteArray bytes){
+		var record=new Pix15Record();
+		record.reserved=(byte)bytes.readUB(1);
+		record.red=(byte)bytes.readUB(5);
+		record.green=(byte)bytes.readUB(5);
+		record.blue=(byte)bytes.readUB(5);
+		return record;
+	}
+	
+	private Pix24Record readPix24Record(SwfByteArray bytes){
+		var record=new Pix24Record();
+		record.reserved=bytes.readUI8();
+		record.red=bytes.readUI8();
+		record.green=bytes.readUI8();
+		record.blue=bytes.readUI8();
+		return record;
+	}
 
 	private AlphaColorMapDataRecord readAlphaColorMapDataRecord(SwfByteArray bytes,uint colorTableSize,uint imageDataSize){
 		var record=new AlphaColorMapDataRecord();
-
+		
 		record.colorTableRGB=new RGBARecord[colorTableSize];
 		for(uint i=0;i<colorTableSize;i++){
 			record.colorTableRGB[i]=readRGBARecord(bytes);

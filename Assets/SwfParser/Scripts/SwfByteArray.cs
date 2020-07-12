@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using UnityEngine;
+#pragma warning disable
 
 public class SwfByteArray{
 	private static readonly int filter5 =	(1<<5)-1;
@@ -16,9 +17,9 @@ public class SwfByteArray{
 	private BinaryReader _br;
 	private long bitPosition=0;
 
-	/**
-	* Returns the number of bits required to hold <code>number</code> in a UB
-	*/
+	/// <summary>
+	/// 返回在UB中保存 number 所需的位数
+	/// </summary>
 	public static uint calculateUBBits(uint number){
 		if(number == 0) return 0;
 		uint bits = 0;
@@ -27,16 +28,16 @@ public class SwfByteArray{
 		return bits + 1;
 	}
 
-	/**
-	* Returns the number of bits required to hold <code>number</code> in an SB
-	*/
+	/// <summary>
+	/// 返回在SB中保存 number 所需的位数
+	/// </summary>
 	public static uint calculateSBBits(int number){
 		return number == 0 ? 1 : calculateUBBits((uint)(number < 0 ? ~number : number)) + 1;
 	}
-
-	/**
-	* Returns the number of bits required to hold <code>number</code> in an FB
-	*/
+	
+	/// <summary>
+	/// 返回FB中保存 number 所需的位数
+	/// </summary>
 	public static uint calculateFBBits(float number){
 		int integer = Mathf.FloorToInt(number);
 		int decimalNum = Mathf.RoundToInt(Mathf.Abs(number - integer) * 0xFFFF) & filter16;

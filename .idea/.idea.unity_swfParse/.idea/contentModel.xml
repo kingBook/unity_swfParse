@@ -13,13 +13,19 @@
               <e p="SwfPostprocessor.cs" t="Include" />
             </e>
             <e p="swf" t="Include">
+              <e p="image" t="Include">
+                <e p="ImageData.cs" t="Include" />
+                <e p="ImageType.cs" t="Include" />
+              </e>
               <e p="records" t="Include">
                 <e p="AlphaBitmapDataRecord.cs" t="Include" />
                 <e p="AlphaColorMapDataRecord.cs" t="Include" />
                 <e p="ARGBRecord.cs" t="Include" />
                 <e p="BevelFilterRecord.cs" t="Include" />
+                <e p="BitmapDataRecord.cs" t="Include" />
                 <e p="BlurFilterRecord.cs" t="Include" />
                 <e p="ButtonRecord.cs" t="Include" />
+                <e p="ColorMapDataRecord.cs" t="Include" />
                 <e p="ColorMatrixFilterRecord.cs" t="Include" />
                 <e p="ConvolutionFilterRecord.cs" t="Include" />
                 <e p="CurvedEdgeRecord.cs" t="Include" />
@@ -44,8 +50,10 @@
                 <e p="IAlphaMapData.cs" t="Include" />
                 <e p="IEdgeRecord.cs" t="Include" />
                 <e p="ILineStyleRecord.cs" t="Include" />
+                <e p="IMapData.cs" t="Include" />
                 <e p="IMorphLineStyleRecord.cs" t="Include" />
                 <e p="ImportAssets2Record.cs" t="Include" />
+                <e p="IPixRecord.cs" t="Include" />
                 <e p="IShapeRecord.cs" t="Include" />
                 <e p="LineStyle2Record.cs" t="Include" />
                 <e p="LineStyleArrayRecord.cs" t="Include" />
@@ -58,6 +66,8 @@
                 <e p="MorphLineStyle2Record.cs" t="Include" />
                 <e p="MorphLineStyleArrayRecord.cs" t="Include" />
                 <e p="MorphLineStyleRecord.cs" t="Include" />
+                <e p="Pix15Record.cs" t="Include" />
+                <e p="Pix24Record.cs" t="Include" />
                 <e p="RectangleRecord.cs" t="Include" />
                 <e p="RGBARecord.cs" t="Include" />
                 <e p="RGBRecord.cs" t="Include" />
@@ -112,6 +122,7 @@
                 <e p="ShowFrameTag.cs" t="Include" />
                 <e p="SwfTag.cs" t="Include" />
                 <e p="SymbolClassTag.cs" t="Include" />
+                <e p="TagType.cs" t="Include" />
                 <e p="TextRecord.cs" t="Include" />
                 <e p="UnknownTag.cs" t="Include" />
               </e>
@@ -124,6 +135,7 @@
             </e>
           </e>
         </e>
+        <e p="test.xml" t="Include" />
         <e p="views.xml" t="Include" />
         <e p="views0.xml" t="Include" />
         <e p="views1.xml" t="Include" />
