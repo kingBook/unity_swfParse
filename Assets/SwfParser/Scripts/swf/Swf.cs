@@ -39,11 +39,20 @@ public class Swf {
 				if(imageData.bytes!=null && imageData.bytes.Length>0){
 					imageDatas.Add(imageData);
 				}
+			}else if(tag.header.type==(uint)TagType.DefineBitsJPEG2){
+				var imageData=getDefineBitsJPEG2ImageData((DefineBitsJPEG2Tag)tag);
+				imageDatas.Add(imageData);
+			}else if(tag.header.type==(uint)TagType.DefineBitsJPEG3){
+				var imageData=getDefineBitsJPEG3ImageData((DefineBitsJPEG3Tag)tag);
+				imageDatas.Add(imageData);
 			}else if(tag.header.type==(uint)TagType.DefineBitsLossless){
 				var imageData=getDefineBitsLosslessImageData((DefineBitsLosslessTag)tag);
 				imageDatas.Add(imageData);
 			}else if(tag.header.type==(uint)TagType.DefineBitsLossless2){
 				var imageData=getDefineBitsLossless2ImageData((DefineBitsLossless2Tag)tag);
+				imageDatas.Add(imageData);
+			}else if(tag.header.type==(uint)TagType.DefineBitsJPEG4){
+				var imageData=getDefineBitsJPEG4ImageData((DefineBitsJPEG4Tag)tag);
 				imageDatas.Add(imageData);
 			}
 		}
@@ -57,6 +66,42 @@ public class Swf {
 			imageData.type=ImageType.Jpg;
 			imageData.bytes=defineBits.jpegData;
 		}
+		return imageData;
+	}
+	
+	private ImageData getDefineBitsJPEG2ImageData(DefineBitsJPEG2Tag defineBitsJPEG2){
+		var imageData=new ImageData();
+		imageData.characterID=defineBitsJPEG2.characterID;
+		
+		bool isPng=defineBitsJPEG2.imageData[0]==0x89
+				&& defineBitsJPEG2.imageData[1]==0x50 
+				&& defineBitsJPEG2.imageData[2]==0x4E
+				&& defineBitsJPEG2.imageData[3]==0x47
+				&& defineBitsJPEG2.imageData[4]==0x0D
+				&& defineBitsJPEG2.imageData[5]==0x0A
+				&& defineBitsJPEG2.imageData[6]==0x1A
+				&& defineBitsJPEG2.imageData[7]==0x0A;
+		bool isGif=defineBitsJPEG2.imageData[0]==0x47
+				&& defineBitsJPEG2.imageData[1]==0x49
+				&& defineBitsJPEG2.imageData[2]==0x46
+				&& defineBitsJPEG2.imageData[3]==0x38
+				&& defineBitsJPEG2.imageData[4]==0x39
+				&& defineBitsJPEG2.imageData[5]==0x61;
+		if(isPng){
+			imageData.type=ImageType.Png;
+		}else if(isGif){
+			imageData.type=ImageType.Gif;
+		}else{
+			imageData.type=ImageType.Jpg;
+		}
+		imageData.bytes=defineBitsJPEG2.imageData;
+		return imageData;
+	}
+	
+	private ImageData getDefineBitsJPEG3ImageData(DefineBitsJPEG3Tag defineBitsJPEG3){
+		var imageData=new ImageData();
+		imageData.characterID=defineBitsJPEG3.characterID;
+		
 		return imageData;
 	}
 	
@@ -136,6 +181,11 @@ public class Swf {
 		imageData.characterID=defineBitsLossless2.characterID;
 		imageData.type=ImageType.Png;
 		imageData.bytes=texture.EncodeToPNG();
+		return imageData;
+	}
+	
+	private ImageData getDefineBitsJPEG4ImageData(DefineBitsJPEG4Tag defineBitsJPEG4){
+		var imageData=new ImageData();
 		return imageData;
 	}
 	

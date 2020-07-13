@@ -7,14 +7,18 @@ public struct ImageData{
 	public byte[] bytes;
 	
 	/// <summary>
-	/// 以png或jpg格式，保存位图数据到本地
+	/// 以png或jpg或gif格式，保存位图数据到本地（如果bytes==null或bytes.length<=0将取消）
 	/// </summary>
 	/// <param name="path">如：E:/kingBook/projects/unity_swfParse/Assets/</param>
 	public void saveTo(string path){
+		if(bytes==null||bytes.Length<=0)return;
+		
 		if(type==ImageType.Png){
 			path+=characterID+".png";
 		}else if(type==ImageType.Jpg){
 			path+=characterID+".jpg";
+		}else if(type==ImageType.Gif){
+			path+=characterID+".gif";
 		}
 		FileStream fs=new FileStream(path,FileMode.Create);
 		fs.Write(bytes,0,bytes.Length);

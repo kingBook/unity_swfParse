@@ -2,6 +2,7 @@ https://github.com/icsharpcode/SharpZipLib
 
 http://www.zlib.net/
 
+https://www.m2osw.com/swf_tag_definebitsjpeg3
 
 
 
