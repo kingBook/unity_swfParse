@@ -145,9 +145,9 @@ public class SwfReader{
 			case 36:
 				tag=readDefineBitsLossless2Tag(bytes,header);
 				break;
-			/*case 90:
+			case 90:
 				tag=readDefineBitsJPEG4Tag(bytes,header);
-				break;*/
+				break;
 			//============= Shape Morphing =======
 			case 46:
 				tag=readDefineMorphShapeTag(bytes,header);
@@ -585,6 +585,22 @@ public class SwfReader{
 				tag.zlibBitmapData=readAlphaBitmapDataRecord(unzippedSwfArray,imageDataSize);
 			}
 			unzippedSwfArray.close();
+		}
+		return tag;
+	}
+	
+	private DefineBitsJPEG4Tag readDefineBitsJPEG4Tag(SwfByteArray bytes,TagHeaderRecord header){
+		var tag=new DefineBitsJPEG4Tag();
+		long startPosition = bytes.getBytePosition();
+		tag.characterID=bytes.readUI16();
+		tag.alphaDataOffset=bytes.readUI32();
+		tag.deblockParam=bytes.readFixed8_8();
+		if(tag.alphaDataOffset>0){
+			tag.imageData=bytes.readBytes((int)tag.alphaDataOffset);
+		}
+		int bytesRemaining=(int)(header.length - (bytes.getBytePosition() - startPosition));
+		if(bytesRemaining>0){
+			tag.bitmapAlphaData=bytes.readBytes(bytesRemaining);
 		}
 		return tag;
 	}

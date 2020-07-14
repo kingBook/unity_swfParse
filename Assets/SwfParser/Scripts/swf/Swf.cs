@@ -30,6 +30,9 @@ public class Swf {
 		return doc;
 	}
 	
+	/// <summary>
+	/// 获取所有图像数据
+	/// </summary>
 	public ImageData[] getImageDatas(){
 		var imageDatas=new List<ImageData>();
 		for(int i=0,len=tags.Count;i<len;i++){
@@ -72,7 +75,7 @@ public class Swf {
 	private ImageData getDefineBitsJPEG2ImageData(DefineBitsJPEG2Tag defineBitsJPEG2){
 		var imageData=new ImageData();
 		imageData.characterID=defineBitsJPEG2.characterID;
-		
+		bool isJpg=defineBitsJPEG2.imageData[0]==0xFF && (defineBitsJPEG2.imageData[1]==0xD8||defineBitsJPEG2.imageData[1]==0xD9);
 		bool isPng=defineBitsJPEG2.imageData[0]==0x89
 				&& defineBitsJPEG2.imageData[1]==0x50 
 				&& defineBitsJPEG2.imageData[2]==0x4E
@@ -89,9 +92,7 @@ public class Swf {
 				&& defineBitsJPEG2.imageData[5]==0x61;
 		if(isPng){
 			imageData.type=ImageType.Png;
-		}else if(isGif){
-			imageData.type=ImageType.Gif;
-		}else{
+		}else if(isJpg||isGif){
 			imageData.type=ImageType.Jpg;
 		}
 		imageData.bytes=defineBitsJPEG2.imageData;
@@ -101,7 +102,42 @@ public class Swf {
 	private ImageData getDefineBitsJPEG3ImageData(DefineBitsJPEG3Tag defineBitsJPEG3){
 		var imageData=new ImageData();
 		imageData.characterID=defineBitsJPEG3.characterID;
-		
+		bool isJpg=defineBitsJPEG3.imageData[0]==0xFF && (defineBitsJPEG3.imageData[1]==0xD8||defineBitsJPEG3.imageData[1]==0xD9);
+		bool isPng=defineBitsJPEG3.imageData[0]==0x89
+				&& defineBitsJPEG3.imageData[1]==0x50 
+				&& defineBitsJPEG3.imageData[2]==0x4E
+				&& defineBitsJPEG3.imageData[3]==0x47
+				&& defineBitsJPEG3.imageData[4]==0x0D
+				&& defineBitsJPEG3.imageData[5]==0x0A
+				&& defineBitsJPEG3.imageData[6]==0x1A
+				&& defineBitsJPEG3.imageData[7]==0x0A;
+		bool isGif=defineBitsJPEG3.imageData[0]==0x47
+				&& defineBitsJPEG3.imageData[1]==0x49
+				&& defineBitsJPEG3.imageData[2]==0x46
+				&& defineBitsJPEG3.imageData[3]==0x38
+				&& defineBitsJPEG3.imageData[4]==0x39
+				&& defineBitsJPEG3.imageData[5]==0x61;
+		if(isPng){
+			imageData.type=ImageType.Png;
+			var texture=new Texture2D(16,16);//宽高可以任意LoadImage()时会自动调整
+			texture.LoadImage(defineBitsJPEG3.imageData);
+			texture.Apply();
+			var colors=texture.GetPixels32();
+			var len=defineBitsJPEG3.bitmapAlphaData.Length;
+			
+			var alphaData=new byte[len];
+			Array.Copy(defineBitsJPEG3.bitmapAlphaData,alphaData,len);
+			flipVerticalBitmapAlphaData(alphaData,(ushort)texture.width,(ushort)texture.height);
+			for(var i=0;i<len;i++){
+				colors[i].a=alphaData[i];
+			}
+			texture.SetPixels32(colors);
+			texture.Apply();
+			imageData.bytes=texture.EncodeToJPG(100);
+		}else if(isJpg||isGif){
+			imageData.type=ImageType.Jpg;//.gif也导出为jpg
+			imageData.bytes=defineBitsJPEG3.imageData;
+		}
 		return imageData;
 	}
 	
@@ -111,33 +147,33 @@ public class Swf {
 			//ColorMapDataRecord
 			var colorMapDataRecord=(ColorMapDataRecord)defineBitsLossless.zlibBitmapData;
 			int length=colorMapDataRecord.colormapPixelData.Length;
-			var colors=new Color[length];
+			var colors=new Color32[length];
 			for(int i=0;i<length;i++){
 				var colorIndex=colorMapDataRecord.colormapPixelData[i];
 				var rgb=colorMapDataRecord.colorTableRGB[colorIndex];
-				colors[i]=new Color(rgb.red/255.0f,rgb.green/255.0f,rgb.blue/255.0f);
+				colors[i]=new Color32(rgb.red,rgb.green,rgb.blue,255);
 			}
 			colors=flipVerticalBitmapColors(colors,defineBitsLossless.bitmapWidth,defineBitsLossless.bitmapHeight);
-			texture.SetPixels(colors);
+			texture.SetPixels32(colors);
 			texture.Apply();
 		}else if(defineBitsLossless.bitmapFormat==4||defineBitsLossless.bitmapFormat==5){
 			//BitmapDataRecord
 			var bitmapDataRecord=(BitmapDataRecord)defineBitsLossless.zlibBitmapData;
 			int length=bitmapDataRecord.bitmapPixelData.Length;
-			var colors=new Color[length];
+			var colors=new Color32[length];
 			if(defineBitsLossless.bitmapFormat==4){
 				for(int i=0;i<length;i++){
 					var pix15=(Pix15Record)bitmapDataRecord.bitmapPixelData[i];
-					colors[i]=new Color(pix15.red/255.0f,pix15.green/255.0f,pix15.blue/255.0f);
+					colors[i]=new Color32(pix15.red,pix15.green,pix15.blue,255);
 				}
 			}else if(defineBitsLossless.bitmapFormat==5){
 				for(int i=0;i<length;i++){
 					var pix24=(Pix24Record)bitmapDataRecord.bitmapPixelData[i];
-					colors[i]=new Color(pix24.red/255.0f,pix24.green/255.0f,pix24.blue/255.0f);
+					colors[i]=new Color32(pix24.red,pix24.green,pix24.blue,255);
 				}
 			}
 			colors=flipVerticalBitmapColors(colors,defineBitsLossless.bitmapWidth,defineBitsLossless.bitmapHeight);
-			texture.SetPixels(colors);
+			texture.SetPixels32(colors);
 			texture.Apply();
 		}
 		var imageData=new ImageData();
@@ -155,26 +191,26 @@ public class Swf {
 			//AlphaColorMapDataRecord
 			var alphaColorMapDataRecord=(AlphaColorMapDataRecord)defineBitsLossless2.zlibBitmapData;
 			int length=alphaColorMapDataRecord.colormapPixelData.Length;
-			var colors=new Color[length];
+			var colors=new Color32[length];
 			for(int j=0;j<length;j++){
 				var colorIndex=alphaColorMapDataRecord.colormapPixelData[j];
 				var rgba=alphaColorMapDataRecord.colorTableRGB[colorIndex];
-				colors[j]=new Color(rgba.red/255.0f,rgba.green/255.0f,rgba.blue/255.0f,rgba.alpha/255.0f);
+				colors[j]=new Color32(rgba.red,rgba.green,rgba.blue,rgba.alpha);
 			}
 			colors=flipVerticalBitmapColors(colors,defineBitsLossless2.bitmapWidth,defineBitsLossless2.bitmapHeight);
-			texture.SetPixels(colors);
+			texture.SetPixels32(colors);
 			texture.Apply();
 		}else if(defineBitsLossless2.bitmapFormat==4||defineBitsLossless2.bitmapFormat==5){
 			//AlphaBitmapDataRecord
 			var alphaBitmapDataRecord=(AlphaBitmapDataRecord)defineBitsLossless2.zlibBitmapData;
 			int length=alphaBitmapDataRecord.bitmapPixelData.Length;
-			var colors=new Color[length];
+			var colors=new Color32[length];
 			for(int j=0;j<length;j++){
 				var argb=alphaBitmapDataRecord.bitmapPixelData[j];
-				colors[j]=new Color(argb.red/255.0f,argb.green/255.0f,argb.blue/255.0f,argb.alpha/255.0f);
+				colors[j]=new Color32(argb.red,argb.green,argb.blue,argb.alpha);
 			}
 			colors=flipVerticalBitmapColors(colors,defineBitsLossless2.bitmapWidth,defineBitsLossless2.bitmapHeight);
-			texture.SetPixels(colors);
+			texture.SetPixels32(colors);
 			texture.Apply();
 		}
 		var imageData=new ImageData();
@@ -186,14 +222,51 @@ public class Swf {
 	
 	private ImageData getDefineBitsJPEG4ImageData(DefineBitsJPEG4Tag defineBitsJPEG4){
 		var imageData=new ImageData();
+		imageData.characterID=defineBitsJPEG4.characterID;
+		bool isJpg=defineBitsJPEG4.imageData[0]==0xFF && (defineBitsJPEG4.imageData[1]==0xD8||defineBitsJPEG4.imageData[1]==0xD9);
+		bool isPng=defineBitsJPEG4.imageData[0]==0x89
+				&& defineBitsJPEG4.imageData[1]==0x50 
+				&& defineBitsJPEG4.imageData[2]==0x4E
+				&& defineBitsJPEG4.imageData[3]==0x47
+				&& defineBitsJPEG4.imageData[4]==0x0D
+				&& defineBitsJPEG4.imageData[5]==0x0A
+				&& defineBitsJPEG4.imageData[6]==0x1A
+				&& defineBitsJPEG4.imageData[7]==0x0A;
+		bool isGif=defineBitsJPEG4.imageData[0]==0x47
+				&& defineBitsJPEG4.imageData[1]==0x49
+				&& defineBitsJPEG4.imageData[2]==0x46
+				&& defineBitsJPEG4.imageData[3]==0x38
+				&& defineBitsJPEG4.imageData[4]==0x39
+				&& defineBitsJPEG4.imageData[5]==0x61;
+		if(isPng){
+			imageData.type=ImageType.Png;
+			var texture=new Texture2D(16,16);//宽高可以任意LoadImage()时会自动调整
+			texture.LoadImage(defineBitsJPEG4.imageData);
+			texture.Apply();
+			var colors=texture.GetPixels32();
+			var len=defineBitsJPEG4.bitmapAlphaData.Length;
+			
+			var alphaData=new byte[len];
+			Array.Copy(defineBitsJPEG4.bitmapAlphaData,alphaData,len);
+			flipVerticalBitmapAlphaData(alphaData,(ushort)texture.width,(ushort)texture.height);
+			for(var i=0;i<len;i++){
+				colors[i].a=alphaData[i];
+			}
+			texture.SetPixels32(colors);
+			texture.Apply();
+			imageData.bytes=texture.EncodeToJPG(100);
+		}else if(isJpg||isGif){
+			imageData.type=ImageType.Jpg;//.gif也导出为jpg
+			imageData.bytes=defineBitsJPEG4.imageData;
+		}
 		return imageData;
 	}
 	
 	/// <summary>
 	/// 垂直翻转位图颜色数据
 	/// </summary>
-	private Color[] flipVerticalBitmapColors(Color[] colors,ushort bitmapWidth,ushort bitmapHeight){
-		Color[] tempColors=new Color[colors.Length];
+	private Color32[] flipVerticalBitmapColors(Color32[] colors,ushort bitmapWidth,ushort bitmapHeight){
+		var tempColors=new Color32[colors.Length];
 		int i=bitmapHeight;
 		while(--i>=0){
 			var sourceStartIndex=i*bitmapWidth;
@@ -201,6 +274,20 @@ public class Swf {
 			Array.Copy(colors,sourceStartIndex,tempColors,destStartIndex,bitmapWidth);
 		}
 		return tempColors;
+	}
+	
+	/// <summary>
+	/// 垂直翻转位图Alpha数据
+	/// </summary>
+	private byte[] flipVerticalBitmapAlphaData(byte[] bitmapAlphaData,ushort bitmapWidth,ushort bitmapHeight){
+		var tempAlphaData=new byte[bitmapAlphaData.Length];
+		int i=bitmapHeight;
+		while(--i>=0){
+			var sourceStartIndex=i*bitmapWidth;
+			var destStartIndex=(bitmapHeight-i-1)*bitmapWidth;
+			Array.Copy(bitmapAlphaData,sourceStartIndex,tempAlphaData,destStartIndex,bitmapWidth);
+		}
+		return tempAlphaData;
 	}
 	
 }

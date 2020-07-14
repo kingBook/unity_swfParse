@@ -4,7 +4,7 @@ using System.Xml;
 public class DefineBitsJPEG4Tag:SwfTag {
 	public ushort characterID;
 	public uint alphaDataOffset;
-	public ushort deblockParam;
+	public float deblockParam;
 	public byte[] imageData;
 	public byte[] bitmapAlphaData;
 
