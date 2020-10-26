@@ -942,10 +942,9 @@
 	// run
 	//
 
-	(function () {
+	/*(function () {
 		ft.clear_output();
 		fl.showIdleMessage(false);
-		ft.trace_fmt("cfg.open_documents.length:",cfg.open_documents.length);
 		if (cfg.open_documents.length > 0) {
 			ft.profile_function(cfg.profile_mode, function () {
 				ft.array_foreach(cfg.open_documents, function (uri) {
@@ -987,5 +986,77 @@
 		}
 
 		ft.trace("[Finish]");
+	})();*/
+	// ============================== Edit by kingBook =======================================
+	
+	ftdoc.prepare2 = function (doc) {
+		var selectionRecord=doc.selection;
+		ft.type_assert(doc, Document);
+		ft.profile_function(cfg.profile_mode, function() { ftdoc.prepare_folders(doc);        }, "Prepare folders");
+		ft.profile_function(cfg.profile_mode, function() { ftdoc.full_exit_edit_mode(doc);    }, "Full exit edit mode");
+		ft.profile_function(cfg.profile_mode, function() { ftdoc.remove_unused_items(doc);    }, "Remove unused items");
+		ft.profile_function(cfg.profile_mode, function() { ftdoc.prepare_all_bitmaps(doc);    }, "Prepare all bitmaps");
+		ft.profile_function(cfg.profile_mode, function() { ftdoc.unlock_all_timelines(doc);   }, "Unlock all timelines");
+		ft.profile_function(cfg.profile_mode, function() { ftdoc.prepare_all_labels(doc);     }, "Prepare all labels");
+		ft.profile_function(cfg.profile_mode, function() { ftdoc.prepare_all_tweens(doc);     }, "Prepare all tweens");
+		ft.profile_function(cfg.profile_mode, function() { ftdoc.prepare_all_groups(doc);     }, "Prepare all groups");
+		ft.profile_function(cfg.profile_mode, function() { ftdoc.calculate_item_scales(doc);  }, "Calculate item scales");
+		ft.profile_function(cfg.profile_mode, function() { ftdoc.optimize_all_timelines(doc); }, "Optimize all timelines");
+		ft.profile_function(cfg.profile_mode, function() { ftdoc.rasterize_all_shapes(doc);   }, "Rasterize all shapes");
+		ft.profile_function(cfg.profile_mode, function() { ftdoc.export_swf2(doc,selectionRecord);  }, "Export swf");
+	};
+	
+	ftdoc.export_swf2 = function (doc,selection) {
+		ft.type_assert(doc, Document);
+		doc.selection=selection;
+		
+		//doc.exportSWF(ftdoc.get_export_swf_path(doc));
+	};
+	
+	(function () {
+		ft.clear_output();
+		fl.showIdleMessage(false);
+		if (cfg.open_documents.length > 0) {
+			ft.profile_function(cfg.profile_mode, function () {
+				ft.array_foreach(cfg.open_documents, function (uri) {
+					fl.openDocument(uri);
+				});
+			}, "Open documents");
+		}
+		
+		ft.profile_function(cfg.profile_mode, function() {
+			ft.array_foreach([fl.getDocumentDOM()], function (doc) {
+				ft.profile_function(cfg.profile_mode, function() {
+					try {
+						ft.trace_fmt("[Document] '{0}' conversion started...", doc.name);
+						ftdoc.prepare2(doc);
+						ft.trace_fmt("[Document] '{0}' conversion complete!", doc.name);
+					} catch (e) {
+						ft.trace_fmt("[Document] '{0}' conversion error: '{1}'", doc.name, e);
+					}
+				}, "Prepare document: '{0}'".format(doc.name));
+			});
+		}, "Prepare documents");
+
+		/*if (cfg.revert_after_conversion) {
+			ft.profile_function(cfg.profile_mode, function () {
+				ft.array_foreach(fl.documents, function (doc) {
+					if (doc.canRevert()) {
+						fl.revertDocument(doc);
+					}
+				});
+			}, "Revert documents");
+		}
+
+		if (cfg.close_after_conversion) {
+			ft.profile_function(cfg.profile_mode, function () {
+				ft.array_foreach(fl.documents, function (doc) {
+					fl.closeDocument(doc, false);
+				});
+			}, "Close documents");
+		}*/
+
+		ft.trace("[Finish]");
 	})();
+	// ============================== End edit by kingBook ===================================
 };
