@@ -544,7 +544,7 @@ public class SwfReader{
 			if(remainingBytes>0){
 				unzippedData=bytes.ReadBytes(remainingBytes);
 			}
-			unzippedData=ZlibUtil.deCompressBytes(unzippedData);
+			unzippedData=ZlibUtil.DeCompressBytes(unzippedData);
 			var unzippedSwfArray=new SwfByteArray(unzippedData);
 			if(tag.bitmapFormat==3){
 				uint imageDataSize=(uint)(tag.bitmapWidth*tag.bitmapHeight);
@@ -574,7 +574,7 @@ public class SwfReader{
 			if(remainingBytes>0){
 				unzippedData=bytes.ReadBytes(remainingBytes);
 			}
-			unzippedData=ZlibUtil.deCompressBytes(unzippedData);
+			unzippedData=ZlibUtil.DeCompressBytes(unzippedData);
 			var unzippedSwfArray=new SwfByteArray(unzippedData);
 			if(tag.bitmapFormat==3){
 				//uint imageDataSize=(uint)((tag.bitmapWidth + (8 - (tag.bitmapWidth % 8))) * tag.bitmapHeight);//此代码经验证是错的

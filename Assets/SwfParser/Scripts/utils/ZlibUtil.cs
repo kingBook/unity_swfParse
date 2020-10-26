@@ -22,9 +22,9 @@ public class ZlibUtil{
 	/// </summary>
 	/// <param name="sourceByte">需要被压缩的字节数组</param>
 	/// <returns>压缩后的字节数组</returns>
-	public static byte[] compressBytes(byte[] sourceByte){
+	public static byte[] CompressBytes(byte[] sourceByte){
 		MemoryStream inputStream = new MemoryStream(sourceByte);
-		Stream outStream = compressStream(inputStream);
+		Stream outStream = CompressStream(inputStream);
 		byte[] outPutByteArray = new byte[outStream.Length];
 		outStream.Position = 0;
 		outStream.Read(outPutByteArray, 0, outPutByteArray.Length);
@@ -37,9 +37,9 @@ public class ZlibUtil{
 	/// </summary>
 	/// <param name="sourceByte">需要被解压缩的字节数组</param>
 	/// <returns>解压后的字节数组</returns>
-	public static byte[] deCompressBytes(byte[] sourceByte){
+	public static byte[] DeCompressBytes(byte[] sourceByte){
 		MemoryStream inputStream = new MemoryStream(sourceByte);
-		Stream outputStream = deCompressStream(inputStream);
+		Stream outputStream = DeCompressStream(inputStream);
 		byte[] outputBytes = new byte[outputStream.Length];
 		outputStream.Position = 0;
 		outputStream.Read(outputBytes, 0, outputBytes.Length);
@@ -52,7 +52,7 @@ public class ZlibUtil{
 	/// </summary>
 	/// <param name="sourceStream">需要被压缩的流</param>
 	/// <returns>压缩后的流</returns>
-	public static Stream compressStream(Stream sourceStream){
+	public static Stream CompressStream(Stream sourceStream){
 		MemoryStream streamOut = new MemoryStream();
 		ZOutputStream streamZOut = new ZOutputStream(streamOut, zlibConst.Z_DEFAULT_COMPRESSION);
 		CopyStream(sourceStream, streamZOut);
@@ -64,7 +64,7 @@ public class ZlibUtil{
 	/// </summary>
 	/// <param name="sourceStream">需要被解压缩的流</param>
 	/// <returns>解压后的流</returns>
-	public static Stream deCompressStream(Stream sourceStream){
+	public static Stream DeCompressStream(Stream sourceStream){
 		MemoryStream outStream = new MemoryStream();
 		ZOutputStream outZStream = new ZOutputStream(outStream);
 		CopyStream(sourceStream, outZStream);

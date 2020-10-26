@@ -945,8 +945,7 @@
 	(function () {
 		ft.clear_output();
 		fl.showIdleMessage(false);
-		ft.trace("[Start]");
-
+		ft.trace_fmt("cfg.open_documents.length:",cfg.open_documents.length);
 		if (cfg.open_documents.length > 0) {
 			ft.profile_function(cfg.profile_mode, function () {
 				ft.array_foreach(cfg.open_documents, function (uri) {

@@ -14,7 +14,7 @@ public class SwfPostprocessor:AssetPostprocessor{
 			if(dotIndex>-1){
 				string extensionName=str.Substring(dotIndex);
 				if(extensionName==".swf"){
-					//OnSwfPostprocess(str);
+					OnSwfPostprocess(str);
 				}
 			}
         }
@@ -31,7 +31,8 @@ public class SwfPostprocessor:AssetPostprocessor{
 
 	[MenuItem("SwfParser/Run")]
 	public static void Run(){
-		ParseSwf(Application.dataPath+"/test.swf",true,true);
+		string assetsPath=Application.dataPath;
+		ParseSwf(assetsPath+"/test.swf",true,true);
 	}
 
 	public static void ParseSwf(string swfPath,bool isExportXml,bool isExportBitmap){
@@ -47,7 +48,7 @@ public class SwfPostprocessor:AssetPostprocessor{
 		var swf=swfReader.Read(swfBytes);
 		swfBytes.Close();
 		sw.Stop();
-		UnityEngine.Debug.Log("read passed time:"+sw.ElapsedMilliseconds);
+		Debug.Log("read passed time:"+sw.ElapsedMilliseconds);
 		
 		if(isExportXml){
 			sw.Restart();
@@ -63,6 +64,7 @@ public class SwfPostprocessor:AssetPostprocessor{
 		}
 		if(isExportBitmap){
 			var imageDatas=swf.GetImageDatas();
+			Debug.Log(imageDatas.Length);
 			for(int i=0,len=imageDatas.Length;i<len;i++){
 				imageDatas[i].SaveTo(swfFolderPath);
 			}
