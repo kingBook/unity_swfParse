@@ -11,16 +11,16 @@ public class DefineMorphShapeTag:SwfTag {
 	public SHAPE startEdges;
 	public SHAPE endEdges;
 
-	public override XmlElement toXml(XmlDocument doc){
-		var ele=createXmlElement(doc,"DefineMorphShape");
+	public override XmlElement ToXml(XmlDocument doc){
+		var ele=CreateXmlElement(doc,"DefineMorphShape");
 		ele.SetAttribute("characterId",characterId.ToString());
 		ele.SetAttribute("startBounds",startBounds.ToString());
 		ele.SetAttribute("endBounds",endBounds.ToString());
 		ele.SetAttribute("offset",offset.ToString());
-		ele.AppendChild(morphFillStyles.toXml(doc));
-		ele.AppendChild(morphLineStyles.toXml(doc));
-		ele.AppendChild(startEdges.toXml(doc));
-		ele.AppendChild(endEdges.toXml(doc));
+		ele.AppendChild(morphFillStyles.ToXml(doc));
+		ele.AppendChild(morphLineStyles.ToXml(doc));
+		ele.AppendChild(startEdges.ToXml(doc));
+		ele.AppendChild(endEdges.ToXml(doc));
 		return ele;
 	}
 }

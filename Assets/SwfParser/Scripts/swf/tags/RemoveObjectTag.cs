@@ -6,8 +6,8 @@ public class RemoveObjectTag:SwfTag{
 	public ushort characterId;
 	public ushort depth;
 
-	public override XmlElement toXml(XmlDocument doc){
-		var ele=createXmlElement(doc,"RemoveObject");
+	public override XmlElement ToXml(XmlDocument doc){
+		var ele=CreateXmlElement(doc,"RemoveObject");
 		ele.SetAttribute("characterId",characterId.ToString());
 		ele.SetAttribute("depth",depth.ToString());
 		return ele;

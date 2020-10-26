@@ -8,8 +8,8 @@ public class DefineFontTag:SwfTag{
 	public ushort[] offsetTable;
 	public SHAPE[] glyphShapeTable;
 
-	public override XmlElement toXml(XmlDocument doc){
-		var ele=createXmlElement(doc,"DefineFont");
+	public override XmlElement ToXml(XmlDocument doc){
+		var ele=CreateXmlElement(doc,"DefineFont");
 		ele.SetAttribute("fontID",fontID.ToString());
 
 		var len=offsetTable.Length;
@@ -25,7 +25,7 @@ public class DefineFontTag:SwfTag{
 		maxId=len-1;
 		strBuilder.Clear();
 		for(var i=0;i<len;i++){
-			ele.AppendChild(glyphShapeTable[i].toXml(doc));
+			ele.AppendChild(glyphShapeTable[i].ToXml(doc));
 		}
 		return ele;
 	}

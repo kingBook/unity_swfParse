@@ -10,7 +10,7 @@ public struct ImageData{
 	/// 以png或jpg，保存位图数据到本地（如果bytes==null或bytes.length<=0将取消）
 	/// </summary>
 	/// <param name="path">如：E:/kingBook/projects/unity_swfParse/Assets/</param>
-	public void saveTo(string path){
+	public void SaveTo(string path){
 		if(bytes==null||bytes.Length<=0)return;
 		
 		if(type==ImageType.Png){

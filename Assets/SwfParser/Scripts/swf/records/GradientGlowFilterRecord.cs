@@ -18,7 +18,7 @@ public struct GradientGlowFilterRecord{
 	public bool onTop;
 	public byte passes;
 
-	public XmlElement toXml(XmlDocument doc){
+	public XmlElement ToXml(XmlDocument doc){
 		var ele=doc.CreateElement("GradientGlowFilter");
 		ele.SetAttribute("numColors",numColors.ToString());
 

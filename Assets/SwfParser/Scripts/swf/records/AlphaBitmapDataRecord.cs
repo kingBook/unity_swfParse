@@ -5,7 +5,7 @@ using System.Xml;
 public struct AlphaBitmapDataRecord:IAlphaMapData{
 	public ARGBRecord[] bitmapPixelData;
 
-	public XmlElement toXml(XmlDocument doc){
+	public XmlElement ToXml(XmlDocument doc){
 		var ele=doc.CreateElement("AlphaBitmapData");
 
 		var bitmapPixelDataStrBuilder=new StringBuilder();

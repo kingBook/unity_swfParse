@@ -12,14 +12,14 @@ public class DefineButton2Tag:SwfTag{
 	//public actions;
 	//public actionEndFlag;
 
-	public override XmlElement toXml(XmlDocument doc){
-		var ele=createXmlElement(doc,"DefineButton2");
+	public override XmlElement ToXml(XmlDocument doc){
+		var ele=CreateXmlElement(doc,"DefineButton2");
 		ele.SetAttribute("buttonId",buttonId.ToString());
 		ele.SetAttribute("reservedFlags",reservedFlags.ToString());
 		ele.SetAttribute("trackAsMenu",trackAsMenu.ToString());
 		ele.SetAttribute("actionOffset",actionOffset.ToString());
 		for(int i=0;i<characters.Length;i++){
-			ele.AppendChild(characters[i].toXml(doc));
+			ele.AppendChild(characters[i].ToXml(doc));
 		}
 		ele.SetAttribute("characterEndFlag",characterEndFlag.ToString());
 		return ele;

@@ -9,7 +9,7 @@ public class Swf {
 	public SwfHeader header;
 	public List<SwfTag> tags;
 	
-	public XmlDocument toXml(){
+	public XmlDocument ToXml(){
 		var doc=new XmlDocument();
 		XmlDeclaration declaration = doc.CreateXmlDeclaration("1.0","UTF-8",null);
 		doc.AppendChild(declaration);
@@ -21,7 +21,7 @@ public class Swf {
 			var tag=tags[i];
 			
 			sw.Restart();
-			var tagXml=tag.toXml(doc);
+			var tagXml=tag.ToXml(doc);
 			sw.Stop();
 			Debug.LogFormat("type:{0},time:{1}",tag.header.type,sw.ElapsedMilliseconds);
 			
@@ -33,36 +33,36 @@ public class Swf {
 	/// <summary>
 	/// 获取所有图像数据
 	/// </summary>
-	public ImageData[] getImageDatas(){
+	public ImageData[] GetImageDatas(){
 		var imageDatas=new List<ImageData>();
 		for(int i=0,len=tags.Count;i<len;i++){
 			var tag=tags[i];
 			if(tag.header.type==(uint)TagType.DefineBits){
-				var imageData=getDefineBitsImageData((DefineBitsTag)tag);
+				var imageData=GetDefineBitsImageData((DefineBitsTag)tag);
 				if(imageData.bytes!=null && imageData.bytes.Length>0){
 					imageDatas.Add(imageData);
 				}
 			}else if(tag.header.type==(uint)TagType.DefineBitsJPEG2){
-				var imageData=getDefineBitsJPEG2ImageData((DefineBitsJPEG2Tag)tag);
+				var imageData=GetDefineBitsJPEG2ImageData((DefineBitsJPEG2Tag)tag);
 				imageDatas.Add(imageData);
 			}else if(tag.header.type==(uint)TagType.DefineBitsJPEG3){
-				var imageData=getDefineBitsJPEG3ImageData((DefineBitsJPEG3Tag)tag);
+				var imageData=GetDefineBitsJPEG3ImageData((DefineBitsJPEG3Tag)tag);
 				imageDatas.Add(imageData);
 			}else if(tag.header.type==(uint)TagType.DefineBitsLossless){
-				var imageData=getDefineBitsLosslessImageData((DefineBitsLosslessTag)tag);
+				var imageData=GetDefineBitsLosslessImageData((DefineBitsLosslessTag)tag);
 				imageDatas.Add(imageData);
 			}else if(tag.header.type==(uint)TagType.DefineBitsLossless2){
-				var imageData=getDefineBitsLossless2ImageData((DefineBitsLossless2Tag)tag);
+				var imageData=GetDefineBitsLossless2ImageData((DefineBitsLossless2Tag)tag);
 				imageDatas.Add(imageData);
 			}else if(tag.header.type==(uint)TagType.DefineBitsJPEG4){
-				var imageData=getDefineBitsJPEG4ImageData((DefineBitsJPEG4Tag)tag);
+				var imageData=GetDefineBitsJPEG4ImageData((DefineBitsJPEG4Tag)tag);
 				imageDatas.Add(imageData);
 			}
 		}
 		return imageDatas.ToArray();
 	}
 	
-	private ImageData getDefineBitsImageData(DefineBitsTag defineBits){
+	private ImageData GetDefineBitsImageData(DefineBitsTag defineBits){
 		var imageData=new ImageData();
 		if(defineBits.jpegData!=null){
 			imageData.characterID=defineBits.characterID;
@@ -72,7 +72,7 @@ public class Swf {
 		return imageData;
 	}
 	
-	private ImageData getDefineBitsJPEG2ImageData(DefineBitsJPEG2Tag defineBitsJPEG2){
+	private ImageData GetDefineBitsJPEG2ImageData(DefineBitsJPEG2Tag defineBitsJPEG2){
 		var imageData=new ImageData();
 		imageData.characterID=defineBitsJPEG2.characterID;
 		bool isJpg=defineBitsJPEG2.imageData[0]==0xFF && (defineBitsJPEG2.imageData[1]==0xD8||defineBitsJPEG2.imageData[1]==0xD9);
@@ -99,7 +99,7 @@ public class Swf {
 		return imageData;
 	}
 	
-	private ImageData getDefineBitsJPEG3ImageData(DefineBitsJPEG3Tag defineBitsJPEG3){
+	private ImageData GetDefineBitsJPEG3ImageData(DefineBitsJPEG3Tag defineBitsJPEG3){
 		var imageData=new ImageData();
 		imageData.characterID=defineBitsJPEG3.characterID;
 		bool isJpg=defineBitsJPEG3.imageData[0]==0xFF && (defineBitsJPEG3.imageData[1]==0xD8||defineBitsJPEG3.imageData[1]==0xD9);
@@ -127,7 +127,7 @@ public class Swf {
 			
 			var alphaData=new byte[len];
 			Array.Copy(defineBitsJPEG3.bitmapAlphaData,alphaData,len);
-			flipVerticalBitmapAlphaData(alphaData,(ushort)texture.width,(ushort)texture.height);
+			FlipVerticalBitmapAlphaData(alphaData,(ushort)texture.width,(ushort)texture.height);
 			for(var i=0;i<len;i++){
 				colors[i].a=alphaData[i];
 			}
@@ -141,7 +141,7 @@ public class Swf {
 		return imageData;
 	}
 	
-	private ImageData getDefineBitsLosslessImageData(DefineBitsLosslessTag defineBitsLossless){
+	private ImageData GetDefineBitsLosslessImageData(DefineBitsLosslessTag defineBitsLossless){
 		var texture=new Texture2D(defineBitsLossless.bitmapWidth,defineBitsLossless.bitmapHeight);
 		if(defineBitsLossless.bitmapFormat==3){
 			//ColorMapDataRecord
@@ -153,7 +153,7 @@ public class Swf {
 				var rgb=colorMapDataRecord.colorTableRGB[colorIndex];
 				colors[i]=new Color32(rgb.red,rgb.green,rgb.blue,255);
 			}
-			colors=flipVerticalBitmapColors(colors,defineBitsLossless.bitmapWidth,defineBitsLossless.bitmapHeight);
+			colors=FlipVerticalBitmapColors(colors,defineBitsLossless.bitmapWidth,defineBitsLossless.bitmapHeight);
 			texture.SetPixels32(colors);
 			texture.Apply();
 		}else if(defineBitsLossless.bitmapFormat==4||defineBitsLossless.bitmapFormat==5){
@@ -172,7 +172,7 @@ public class Swf {
 					colors[i]=new Color32(pix24.red,pix24.green,pix24.blue,255);
 				}
 			}
-			colors=flipVerticalBitmapColors(colors,defineBitsLossless.bitmapWidth,defineBitsLossless.bitmapHeight);
+			colors=FlipVerticalBitmapColors(colors,defineBitsLossless.bitmapWidth,defineBitsLossless.bitmapHeight);
 			texture.SetPixels32(colors);
 			texture.Apply();
 		}
@@ -185,7 +185,7 @@ public class Swf {
 		return imageData;
 	}
 	
-	private ImageData getDefineBitsLossless2ImageData(DefineBitsLossless2Tag defineBitsLossless2){
+	private ImageData GetDefineBitsLossless2ImageData(DefineBitsLossless2Tag defineBitsLossless2){
 		var texture=new Texture2D(defineBitsLossless2.bitmapWidth,defineBitsLossless2.bitmapHeight);
 		if(defineBitsLossless2.bitmapFormat==3){
 			//AlphaColorMapDataRecord
@@ -197,7 +197,7 @@ public class Swf {
 				var rgba=alphaColorMapDataRecord.colorTableRGB[colorIndex];
 				colors[j]=new Color32(rgba.red,rgba.green,rgba.blue,rgba.alpha);
 			}
-			colors=flipVerticalBitmapColors(colors,defineBitsLossless2.bitmapWidth,defineBitsLossless2.bitmapHeight);
+			colors=FlipVerticalBitmapColors(colors,defineBitsLossless2.bitmapWidth,defineBitsLossless2.bitmapHeight);
 			texture.SetPixels32(colors);
 			texture.Apply();
 		}else if(defineBitsLossless2.bitmapFormat==4||defineBitsLossless2.bitmapFormat==5){
@@ -209,7 +209,7 @@ public class Swf {
 				var argb=alphaBitmapDataRecord.bitmapPixelData[j];
 				colors[j]=new Color32(argb.red,argb.green,argb.blue,argb.alpha);
 			}
-			colors=flipVerticalBitmapColors(colors,defineBitsLossless2.bitmapWidth,defineBitsLossless2.bitmapHeight);
+			colors=FlipVerticalBitmapColors(colors,defineBitsLossless2.bitmapWidth,defineBitsLossless2.bitmapHeight);
 			texture.SetPixels32(colors);
 			texture.Apply();
 		}
@@ -220,7 +220,7 @@ public class Swf {
 		return imageData;
 	}
 	
-	private ImageData getDefineBitsJPEG4ImageData(DefineBitsJPEG4Tag defineBitsJPEG4){
+	private ImageData GetDefineBitsJPEG4ImageData(DefineBitsJPEG4Tag defineBitsJPEG4){
 		var imageData=new ImageData();
 		imageData.characterID=defineBitsJPEG4.characterID;
 		bool isJpg=defineBitsJPEG4.imageData[0]==0xFF && (defineBitsJPEG4.imageData[1]==0xD8||defineBitsJPEG4.imageData[1]==0xD9);
@@ -248,7 +248,7 @@ public class Swf {
 			
 			var alphaData=new byte[len];
 			Array.Copy(defineBitsJPEG4.bitmapAlphaData,alphaData,len);
-			flipVerticalBitmapAlphaData(alphaData,(ushort)texture.width,(ushort)texture.height);
+			FlipVerticalBitmapAlphaData(alphaData,(ushort)texture.width,(ushort)texture.height);
 			for(var i=0;i<len;i++){
 				colors[i].a=alphaData[i];
 			}
@@ -265,7 +265,7 @@ public class Swf {
 	/// <summary>
 	/// 垂直翻转位图颜色数据
 	/// </summary>
-	private Color32[] flipVerticalBitmapColors(Color32[] colors,ushort bitmapWidth,ushort bitmapHeight){
+	private Color32[] FlipVerticalBitmapColors(Color32[] colors,ushort bitmapWidth,ushort bitmapHeight){
 		var tempColors=new Color32[colors.Length];
 		int i=bitmapHeight;
 		while(--i>=0){
@@ -279,7 +279,7 @@ public class Swf {
 	/// <summary>
 	/// 垂直翻转位图Alpha数据
 	/// </summary>
-	private byte[] flipVerticalBitmapAlphaData(byte[] bitmapAlphaData,ushort bitmapWidth,ushort bitmapHeight){
+	private byte[] FlipVerticalBitmapAlphaData(byte[] bitmapAlphaData,ushort bitmapWidth,ushort bitmapHeight){
 		var tempAlphaData=new byte[bitmapAlphaData.Length];
 		int i=bitmapHeight;
 		while(--i>=0){

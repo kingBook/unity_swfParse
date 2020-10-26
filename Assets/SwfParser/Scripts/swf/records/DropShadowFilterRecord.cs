@@ -13,7 +13,7 @@ public struct DropShadowFilterRecord{
 	public bool compositeSource;
 	public byte passes;
 	
-	public XmlElement toXml(XmlDocument doc){
+	public XmlElement ToXml(XmlDocument doc){
 		var ele=doc.CreateElement("DropShadowFilter");
 		ele.SetAttribute("dropShadowColor",dropShadowColor.ToString());
 		ele.SetAttribute("blurX",blurX.ToString());

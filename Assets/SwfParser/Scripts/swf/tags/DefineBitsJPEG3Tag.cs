@@ -8,8 +8,8 @@ public class DefineBitsJPEG3Tag:SwfTag {
 	public byte[] imageData;
 	public byte[] bitmapAlphaData;
 
-	public override XmlElement toXml(XmlDocument doc) {
-		var ele=createXmlElement(doc,"DefineBitsJPEG3");
+	public override XmlElement ToXml(XmlDocument doc) {
+		var ele=CreateXmlElement(doc,"DefineBitsJPEG3");
 		ele.SetAttribute("characterID",characterID.ToString());
 		ele.SetAttribute("alphaDataOffset",alphaDataOffset.ToString());
 

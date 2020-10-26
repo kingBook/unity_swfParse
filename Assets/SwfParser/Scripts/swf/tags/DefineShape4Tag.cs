@@ -10,7 +10,7 @@ public class DefineShape4Tag:SwfTag{
 	public bool usesScalingStrokes;
 	public ShapeWithStyleRecord shapes;
 
-	public override XmlElement toXml(XmlDocument doc) {
+	public override XmlElement ToXml(XmlDocument doc) {
 		var ele=doc.CreateElement("DefineShape4");
 		ele.SetAttribute("shapeId",shapeId.ToString());
 		ele.SetAttribute("shapeBounds",shapeBounds.ToString());
@@ -19,7 +19,7 @@ public class DefineShape4Tag:SwfTag{
 		ele.SetAttribute("usesFillWindingRule",usesFillWindingRule.ToString());
 		ele.SetAttribute("usesNonScalingStrokes",usesNonScalingStrokes.ToString());
 		ele.SetAttribute("usesScalingStrokes",usesScalingStrokes.ToString());
-		ele.AppendChild(shapes.toXml(doc));
+		ele.AppendChild(shapes.ToXml(doc));
 		return ele;
 	}
 

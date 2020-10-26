@@ -6,6 +6,6 @@ using System.Xml;
 /// <see cref="AlphaBitmapDataRecord"/>
 /// </summary>
 public interface IAlphaMapData{
-	XmlElement toXml(XmlDocument doc);
+	XmlElement ToXml(XmlDocument doc);
 	
 }

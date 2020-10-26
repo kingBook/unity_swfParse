@@ -7,12 +7,12 @@ public class PlaceObjectTag:SwfTag{
 	public MatrixRecord matrix;
 	public CXFormRecord colorTransform;
 
-	public override XmlElement toXml(XmlDocument doc) {
-		var ele=createXmlElement(doc,"PlaceObject");
+	public override XmlElement ToXml(XmlDocument doc) {
+		var ele=CreateXmlElement(doc,"PlaceObject");
 		ele.SetAttribute("characterId",characterId.ToString());
 		ele.SetAttribute("depth",depth.ToString());
 		ele.SetAttribute("matrix",matrix.ToString());
-		ele.AppendChild(colorTransform.toXml(doc));
+		ele.AppendChild(colorTransform.ToXml(doc));
 		return ele;
 	}
 

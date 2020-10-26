@@ -7,7 +7,7 @@ public class MorphLineStyleRecord:IMorphLineStyleRecord{
 	public RGBARecord startColor;
 	public RGBARecord endColor;
 	
-	public XmlElement toXml(XmlDocument doc){
+	public XmlElement ToXml(XmlDocument doc){
 		var ele=doc.CreateElement("MorphLineStyle");
 		ele.SetAttribute("startWidth",startWidth.ToString());
 		ele.SetAttribute("endWidth",endWidth.ToString());

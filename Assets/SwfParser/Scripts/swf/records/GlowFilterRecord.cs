@@ -12,7 +12,7 @@ public struct GlowFilterRecord{
 	public bool compositeSource;
 	public byte passes;
 
-	public XmlElement toXml(XmlDocument doc){
+	public XmlElement ToXml(XmlDocument doc){
 		var ele=doc.CreateElement("GlowFilter");
 		ele.SetAttribute("glowColor",glowColor.ToString());
 		ele.SetAttribute("blurX",blurX.ToString());

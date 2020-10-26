@@ -14,7 +14,7 @@ public struct CXFormWithAlphaRecord{
 	public int blueAddTerm;
 	public int alphaAddTerm;
 
-	public XmlElement toXml(XmlDocument doc){
+	public XmlElement ToXml(XmlDocument doc){
 		var ele=doc.CreateElement("CXFormWithAlpha");
 		ele.SetAttribute("hasAddTerms",hasAddTerms.ToString());
 		ele.SetAttribute("hasMultTerms",hasMultTerms.ToString());

@@ -4,7 +4,7 @@ public struct LineStyleRecord:ILineStyleRecord{
 	public ushort width;
 	public object color;//RGB(Shape1 or Shape2); RGBA(Shape3)
 
-	public XmlElement toXml(XmlDocument doc){
+	public XmlElement ToXml(XmlDocument doc){
 		var ele=doc.CreateElement("LineStyle");
 		ele.SetAttribute("width",width.ToString());
 		ele.SetAttribute("color",color.ToString());

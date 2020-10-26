@@ -12,33 +12,33 @@ public struct FilterRecord{
 	public ColorMatrixFilterRecord colorMatrixFilter;
 	public GradientBevelFilterRecord gradientBevelFilter;
 
-	public XmlElement toXml(XmlDocument doc){
+	public XmlElement ToXml(XmlDocument doc){
 		var ele=doc.CreateElement("Filter");
 		ele.SetAttribute("filterId",filterId.ToString());
 		switch(filterId){
 			case 0:
-				ele.AppendChild(dropShadowFilter.toXml(doc));
+				ele.AppendChild(dropShadowFilter.ToXml(doc));
 				break;
 			case 1:
-				ele.AppendChild(blurFilter.toXml(doc));
+				ele.AppendChild(blurFilter.ToXml(doc));
 				break;
 			case 2:
-				ele.AppendChild(glowFilter.toXml(doc));
+				ele.AppendChild(glowFilter.ToXml(doc));
 				break;
 			case 3:
-				ele.AppendChild(bevelFilter.toXml(doc));
+				ele.AppendChild(bevelFilter.ToXml(doc));
 				break;
 			case 4:
-				ele.AppendChild(gradientGlowFilter.toXml(doc));
+				ele.AppendChild(gradientGlowFilter.ToXml(doc));
 				break;
 			case 5:
-				ele.AppendChild(convolutionFilter.toXml(doc));
+				ele.AppendChild(convolutionFilter.ToXml(doc));
 				break;
 			case 6:
-				ele.AppendChild(colorMatrixFilter.toXml(doc));
+				ele.AppendChild(colorMatrixFilter.ToXml(doc));
 				break;
 			case 7:
-				ele.AppendChild(gradientBevelFilter.toXml(doc));
+				ele.AppendChild(gradientBevelFilter.ToXml(doc));
 				break;
 		}
 		return ele;

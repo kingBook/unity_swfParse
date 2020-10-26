@@ -6,7 +6,7 @@ public struct ColorMapDataRecord:IMapData{
 	public RGBRecord[] colorTableRGB;
 	public byte[] colormapPixelData;
 
-	public XmlElement toXml(XmlDocument doc){
+	public XmlElement ToXml(XmlDocument doc){
 		var ele=doc.CreateElement("ColorMapData");
 
 		var colorTableRGBStrBuilder=new StringBuilder("");

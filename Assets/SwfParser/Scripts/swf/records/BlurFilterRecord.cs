@@ -7,7 +7,7 @@ public struct BlurFilterRecord {
 	public float blurY;
 	public byte passes;
 	public byte reserved;
-	public XmlElement toXml(XmlDocument doc){
+	public XmlElement ToXml(XmlDocument doc){
 		var ele=doc.CreateElement("BlurFilter");
 		ele.SetAttribute("blurX",blurX.ToString());
 		ele.SetAttribute("blurY",blurY.ToString());

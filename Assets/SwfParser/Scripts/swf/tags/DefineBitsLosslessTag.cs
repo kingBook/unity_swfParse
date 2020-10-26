@@ -8,14 +8,14 @@ public class DefineBitsLosslessTag:SwfTag {
 	public byte bitmapColorTableSize;
 	public IMapData zlibBitmapData;
 	
-	public override XmlElement toXml(XmlDocument doc) {
-		var ele=createXmlElement(doc,"DefineBitsLossless");
+	public override XmlElement ToXml(XmlDocument doc) {
+		var ele=CreateXmlElement(doc,"DefineBitsLossless");
 		ele.SetAttribute("characterID",characterID.ToString());
 		ele.SetAttribute("bitmapFormat",bitmapFormat.ToString());
 		ele.SetAttribute("bitmapWidth",bitmapWidth.ToString());
 		ele.SetAttribute("bitmapHeight",bitmapHeight.ToString());
 		ele.SetAttribute("bitmapColorTableSize",bitmapFormat.ToString());
-		ele.AppendChild(zlibBitmapData.toXml(doc));
+		ele.AppendChild(zlibBitmapData.ToXml(doc));
 		return ele;
 	}
 	

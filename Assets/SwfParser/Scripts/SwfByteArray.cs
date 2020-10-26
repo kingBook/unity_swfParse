@@ -5,22 +5,22 @@ using UnityEngine;
 #pragma warning disable
 
 public class SwfByteArray{
-	private static readonly int filter5 =	(1<<5)-1;
-	private static readonly int filter7 =	(1<<7)-1;
-	private static readonly int filter8 =	(1<<8)-1;
-	private static readonly int filter10 =	(1<<10)-1;
-	private static readonly int filter13 =	(1<<13)-1;
-	private static readonly int filter16 =	(1<<16)-1;
-	private static readonly int filter23 =	(1<<23)-1;
+	private static readonly int s_filter5  =	(1<<5)-1;
+	private static readonly int s_filter7  =	(1<<7)-1;
+	private static readonly int s_filter8  =	(1<<8)-1;
+	private static readonly int s_filter10 =	(1<<10)-1;
+	private static readonly int s_filter13 =	(1<<13)-1;
+	private static readonly int s_filter16 =	(1<<16)-1;
+	private static readonly int s_filter23 =	(1<<23)-1;
 
-	private MemoryStream _ms;
-	private BinaryReader _br;
-	private long bitPosition=0;
+	private MemoryStream m_memoryStream;
+	private BinaryReader m_binaryReader;
+	private long m_bitPosition=0;
 
 	/// <summary>
 	/// 返回在UB中保存 number 所需的位数
 	/// </summary>
-	public static uint calculateUBBits(uint number){
+	public static uint CalculateUBBits(uint number){
 		if(number == 0) return 0;
 		uint bits = 0;
         uint b=number >>= 1;
@@ -31,102 +31,102 @@ public class SwfByteArray{
 	/// <summary>
 	/// 返回在SB中保存 number 所需的位数
 	/// </summary>
-	public static uint calculateSBBits(int number){
-		return number == 0 ? 1 : calculateUBBits((uint)(number < 0 ? ~number : number)) + 1;
+	public static uint CalculateSBBits(int number){
+		return number == 0 ? 1 : CalculateUBBits((uint)(number < 0 ? ~number : number)) + 1;
 	}
 	
 	/// <summary>
 	/// 返回FB中保存 number 所需的位数
 	/// </summary>
-	public static uint calculateFBBits(float number){
+	public static uint CalculateFBBits(float number){
 		int integer = Mathf.FloorToInt(number);
-		int decimalNum = Mathf.RoundToInt(Mathf.Abs(number - integer) * 0xFFFF) & filter16;
+		int decimalNum = Mathf.RoundToInt(Mathf.Abs(number - integer) * 0xFFFF) & s_filter16;
 
-		int sbVersion = ((integer & filter16) << 16) | (decimalNum);
+		int sbVersion = ((integer & s_filter16) << 16) | (decimalNum);
 		
-		return number == 0 ? 1 : calculateSBBits(sbVersion);
+		return number == 0 ? 1 : CalculateSBBits(sbVersion);
 	}
 
-	private static uint float32AsUnsignedInt(float value){
+	private static uint Float32AsUnsignedInt(float value){
 		byte[] bytes=BitConverter.GetBytes(value);
 		return BitConverter.ToUInt32(bytes,0);
 	}
 		
-	private static float unsignedIntAsFloat32(uint value){
+	private static float UnsignedIntAsFloat32(uint value){
 		byte[] bytes=BitConverter.GetBytes(value);
 		return BitConverter.ToSingle(bytes,0);
 	}
 
 	public SwfByteArray(string swfPath){
 		var fs=File.OpenRead(swfPath);
-		_ms=new MemoryStream();
-		copyStream(fs,_ms);
-		_ms.Position=0;
+		m_memoryStream=new MemoryStream();
+		CopyStream(fs,m_memoryStream);
+		m_memoryStream.Position=0;
 		
-		_br=new BinaryReader(_ms);
+		m_binaryReader=new BinaryReader(m_memoryStream);
 
 		fs.Close();
 	}
 
 	public SwfByteArray(byte[] bytes){
-		_ms=new MemoryStream();
-		_ms.Write(bytes,0,bytes.Length);
-		_ms.Position=0;
+		m_memoryStream=new MemoryStream();
+		m_memoryStream.Write(bytes,0,bytes.Length);
+		m_memoryStream.Position=0;
 
-		_br=new BinaryReader(_ms);
+		m_binaryReader=new BinaryReader(m_memoryStream);
 	}
 
-	public void alignBytes(){
-		if(bitPosition!=0){
-			_ms.Position++;
-			bitPosition=0;
+	public void AlignBytes(){
+		if(m_bitPosition!=0){
+			m_memoryStream.Position++;
+			m_bitPosition=0;
 		}
 	}
 
-	public long getBytePosition(){
-		return _ms.Position;
+	public long GetBytePosition(){
+		return m_memoryStream.Position;
 	}
 
-	public void setBytePosition(long value){
-		bitPosition=0;
-		_ms.Position=value;
+	public void SetBytePosition(long value){
+		m_bitPosition=0;
+		m_memoryStream.Position=value;
 	}
 
-	public long getBitPosition(){
-		return bitPosition;
+	public long GetBitPosition(){
+		return m_bitPosition;
 	}
 
-	public void setBitPosition(long value){
-		bitPosition=value;
+	public void SetBitPosition(long value){
+		m_bitPosition=value;
 	}
 
-	public long getBytesAvailable(){
-		return _ms.Length-_ms.Position;
+	public long GetBytesAvailable(){
+		return m_memoryStream.Length-m_memoryStream.Position;
 	}
 
-	public long getLength(){
-		return _ms.Length;
+	public long GetLength(){
+		return m_memoryStream.Length;
 	}
 
-	public void compress(){ }
+	public void Compress(){ }
 
-	public void decompress(){
-		long msPos=_ms.Position;
+	public void Decompress(){
+		long msPos=m_memoryStream.Position;
 		MemoryStream outMS=new MemoryStream();
 		zlib.ZOutputStream outZStream=new zlib.ZOutputStream(outMS);
 		
-		copyStream(_ms,outZStream);
+		CopyStream(m_memoryStream,outZStream);
 		outZStream.finish();
 
 		outMS.Position=0;
-		_ms.Position=msPos;
-		copyStream(outMS,_ms);
-		_ms.Position=msPos;
+		m_memoryStream.Position=msPos;
+		CopyStream(outMS,m_memoryStream);
+		m_memoryStream.Position=msPos;
 		
 		outMS.Close();
 		outZStream.Close();
 	}
-	private void copyStream(Stream input,Stream output){
+	private void CopyStream(Stream input,Stream output){
 		byte[] buffer=new byte[2000];
 		int len;
 		while((len=input.Read(buffer,0,2000))>0){
@@ -135,142 +135,142 @@ public class SwfByteArray{
 		output.Flush();
 	}
 
-	public void clear(){
-		bitPosition=0;
-		_ms.Dispose();
+	public void Clear(){
+		m_bitPosition=0;
+		m_memoryStream.Dispose();
 	}
 
-	public void dump(){ }
+	public void Dump(){ }
 
-	public byte[] readBytes(int count){
-		return _br.ReadBytes(count);
+	public byte[] ReadBytes(int count){
+		return m_binaryReader.ReadBytes(count);
 	}
 
-	public void writeBytes(){ }
+	public void WriteBytes(){ }
 
-	public bool readFlag(){
-		return readUB(1)==1;
+	public bool ReadFlag(){
+		return ReadUB(1)==1;
 	}
 
-	public void writeFlag(){ }
+	public void WriteFlag(){ }
 
-	public sbyte readSI8(){
-		alignBytes();
-		return _br.ReadSByte();
+	public sbyte ReadSI8(){
+		AlignBytes();
+		return m_binaryReader.ReadSByte();
 	}
 
-	public short readSI16(){
-		alignBytes();
-		return _br.ReadInt16();
+	public short ReadSI16(){
+		AlignBytes();
+		return m_binaryReader.ReadInt16();
 	}
 
-	public void writeSI16(){ }
+	public void WriteSI16(){ }
 
-	public int readSI32(){
-		alignBytes();
-		return _br.ReadInt32();
+	public int ReadSI32(){
+		AlignBytes();
+		return m_binaryReader.ReadInt32();
 	}
 
-	public void writeSI32(){ }
+	public void WriteSI32(){ }
 
-	public sbyte[] readSI8Array(uint length){
+	public sbyte[] ReadSI8Array(uint length){
 		sbyte[] sbytes=new sbyte[length];
 		for(uint i=0;i<length;i++){
-			sbytes[i]=readSI8();
+			sbytes[i]=ReadSI8();
 		}
 		return sbytes;
 	}
 
-	public short[] readSI16Array(uint length){
+	public short[] ReadSI16Array(uint length){
 		short[] shorts=new short[length];
 		for(uint i=0;i<length;i++){
-			shorts[i]=readSI16();
+			shorts[i]=ReadSI16();
 		}
 		return shorts;
 	}
 
-	public byte readUI8(){
-		alignBytes();
-		return _br.ReadByte();
+	public byte ReadUI8(){
+		AlignBytes();
+		return m_binaryReader.ReadByte();
 	}
 
-	public void writeUI8(){ }
+	public void WriteUI8(){ }
 
-	public ushort readUI16(){
-		alignBytes();
-		return _br.ReadUInt16();
+	public ushort ReadUI16(){
+		AlignBytes();
+		return m_binaryReader.ReadUInt16();
 	}
 
-	public void writeUI16(){ }
+	public void WriteUI16(){ }
 
-	public uint readUI32(){
-		alignBytes();
-		return _br.ReadUInt32();
+	public uint ReadUI32(){
+		AlignBytes();
+		return m_binaryReader.ReadUInt32();
 	}
 
-	public void writeUI32(){ }
+	public void WriteUI32(){ }
 
-	public byte[] readUI8Array(uint length){
+	public byte[] ReadUI8Array(uint length){
 		byte[] bytes =new byte[length];
 		for(uint i=0;i<length;i++){
-			bytes[i]=readUI8();
+			bytes[i]=ReadUI8();
 		}
 		return bytes;
 	}
 
-	public ushort[] readUI16Array(uint length){
+	public ushort[] ReadUI16Array(uint length){
 		ushort[] ushorts =new ushort[length];
 		for(uint i=0;i<length;i++){
-			ushorts[i]=readUI16();
+			ushorts[i]=ReadUI16();
 		}
 		return ushorts;
 	}
 
-	public uint[] readUI24Array(uint length){
-		alignBytes();
+	public uint[] ReadUI24Array(uint length){
+		AlignBytes();
 		uint[] list=new uint[length];
 		for(uint i=0;i<length;i++){
-			list[i]=(uint)_br.ReadUInt16() << 8 | _br.ReadByte();
+			list[i]=(uint)m_binaryReader.ReadUInt16() << 8 | m_binaryReader.ReadByte();
 		}
 		return list;
 	}
 
-	public uint[] readUI32Array(uint length){
+	public uint[] ReadUI32Array(uint length){
 		uint[] list=new uint[length];
 		for(uint i=0;i<length;i++){
-			list[i]=readUI32();
+			list[i]=ReadUI32();
 		}
 		return list;
 	}
 
-	public float readFixed8_8(){
-		alignBytes();
-		uint decimalNum = _br.ReadByte();
-		float result = _br.ReadSByte();
+	public float ReadFixed8_8(){
+		AlignBytes();
+		uint decimalNum = m_binaryReader.ReadByte();
+		float result = m_binaryReader.ReadSByte();
 		
 		result += decimalNum / 0xFF;
 			
 		return result;
 	}
 
-	public void writeFixed8_8(){ }
+	public void WriteFixed8_8(){ }
 
-	public float readFixed16_16(){
-		alignBytes();
-		ushort decimalNum = _br.ReadUInt16();
-		float result = _br.ReadInt16();
+	public float ReadFixed16_16(){
+		AlignBytes();
+		ushort decimalNum = m_binaryReader.ReadUInt16();
+		float result = m_binaryReader.ReadInt16();
 			
 		result += (float)decimalNum / 0xFFFF;
 			
 		return result;
 	}
 
-	public float readFloat16(){
-		uint raw = readUI16();
+	public float ReadFloat16(){
+		uint raw = ReadUI16();
 			
 		uint sign = raw >> 15;
-		uint exp = (raw >> 10) & (uint)filter5;
-		uint sig = raw & (uint)filter10;
+		uint exp = (raw >> 10) & (uint)s_filter5;
+		uint sig = raw & (uint)s_filter10;
 			
 		if(exp == 31){//Handle infinity/NaN
 			exp = 255;
@@ -283,73 +283,73 @@ public class SwfByteArray{
 			
 		uint temp = sign << 31 | exp << 23 | sig << 13;
 			
-		return unsignedIntAsFloat32(temp);
+		return UnsignedIntAsFloat32(temp);
 	}
 
-	public void writeFloat16(){ }
+	public void WriteFloat16(){ }
 
-	public float readFloat(){
-		return _br.ReadSingle();
+	public float ReadFloat(){
+		return m_binaryReader.ReadSingle();
 	}
-	public void writeFloat(){ }
+	public void WriteFloat(){ }
 
-	public double readDouble(){
-		return _br.ReadDouble();
+	public double ReadDouble(){
+		return m_binaryReader.ReadDouble();
 	}
-	public void writeDouble(){ }
+	public void WriteDouble(){ }
 
-	public uint readEncodedUI32(){
-		alignBytes();
+	public uint ReadEncodedUI32(){
+		AlignBytes();
 		uint result=0;
 		uint bytesRead=0;
 		uint currentByte;
 		bool shouldContinue = true;
 		while(shouldContinue && bytesRead < 5)
 		{
-			currentByte = _br.ReadByte();
-			result = (uint)( ((currentByte & filter7) << (int)((7 * bytesRead)) | result) );
+			currentByte = m_binaryReader.ReadByte();
+			result = (uint)( ((currentByte & s_filter7) << (int)((7 * bytesRead)) | result) );
 			shouldContinue = ((currentByte >> 7) == 1);
 			bytesRead++;
 		}
 		return result;
 	}
 
-	public void writeEncodedUI32(){ }
+	public void WriteEncodedUI32(){ }
 
-	public uint readUB(uint length){
+	public uint ReadUB(uint length){
 		if(length<=0) return 0;
 		
-		int totalBytes = Mathf.CeilToInt((bitPosition + length) / 8.0f);
+		int totalBytes = Mathf.CeilToInt((m_bitPosition + length) / 8.0f);
 		uint iter = 0;
 		uint currentByte = 0;
 		uint result = 0;
 		
 		while(iter < totalBytes){
-			currentByte = _br.ReadByte();
+			currentByte = m_binaryReader.ReadByte();
 			result = (result << 8) | currentByte;
 			iter++;
 		}
 			
-		int newBitPosition = (int)((bitPosition + length) % 8);
+		int newBitPosition = (int)((m_bitPosition + length) % 8);
 			
-		int excessBits = (totalBytes * 8 - ((int)bitPosition + (int)length));
+		int excessBits = (totalBytes * 8 - ((int)m_bitPosition + (int)length));
 		result = result >> excessBits;
 		int filterBit=(1<<(int)length)-1;
 		result = (uint)(result & filterBit);
 			
-		bitPosition = newBitPosition;
-		if(bitPosition > 0){
-			_ms.Position--;
+		m_bitPosition = newBitPosition;
+		if(m_bitPosition > 0){
+			m_memoryStream.Position--;
 		}
 		return result;
 	}
 
-	public void writeUB(){ }
+	public void WriteUB(){ }
 
-	public int readSB(uint length){
+	public int ReadSB(uint length){
 		if(length<=0) return 0;
 			
-		uint result = readUB(length);
+		uint result = ReadUB(length);
 		uint leadingDigit = result >> ((int)length - 1);
 		if(leadingDigit == 1)
 		{
@@ -358,55 +358,55 @@ public class SwfByteArray{
 		return (int)result;
 	}
 
-	public void writeSB(){ }
+	public void WriteSB(){ }
 
-	public float readFB(uint length){
+	public float ReadFB(uint length){
 		if(length<=0) return 0;
 			
-		int raw = readSB(length);
+		int raw = ReadSB(length);
 			
 		int integer = raw >> 16;
-		float decimalNum = (raw & filter16)/0xFFFF; 
+		float decimalNum = (raw & s_filter16)/0xFFFF; 
 			
 		return integer + decimalNum;
 	}
 
-	public void writeFB(){ }
+	public void WriteFB(){ }
 
-	public string readString(){
-		alignBytes();
+	public string ReadString(){
+		AlignBytes();
 		int byteCount = 1;
-		while(_br.ReadByte()>0){
+		while(m_binaryReader.ReadByte()>0){
 			byteCount++;
 		}
-		_ms.Position -= byteCount;
-		byte[] bytes = _br.ReadBytes(byteCount);
+		m_memoryStream.Position -= byteCount;
+		byte[] bytes = m_binaryReader.ReadBytes(byteCount);
 		string result = Encoding.UTF8.GetString(bytes,0,byteCount-1);
 		return result;
 	}
-	public void writeString(){
+	public void WriteString(){
 		
 	}
 
-	public string readStringWithLength(uint length){
-		alignBytes();
-		byte[] bytes=_br.ReadBytes((int)length);
+	public string ReadStringWithLength(uint length){
+		AlignBytes();
+		byte[] bytes=m_binaryReader.ReadBytes((int)length);
 		string str=Encoding.UTF8.GetString(bytes);
 		return str;
 	}
 
-	public void writeStringWithLength(){
+	public void WriteStringWithLength(){
 		
 	}
 
-	public void close(){
-		if(_ms!=null){
-			_ms.Close();
-			_ms=null;
+	public void Close(){
+		if(m_memoryStream!=null){
+			m_memoryStream.Close();
+			m_memoryStream=null;
 		}
-		if(_ms!=null){
-			_br.Close();
-			_br=null;
+		if(m_memoryStream!=null){
+			m_binaryReader.Close();
+			m_binaryReader=null;
 		}
 	}
 	

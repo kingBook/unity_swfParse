@@ -9,7 +9,7 @@ public struct CurvedEdgeRecord:IEdgeRecord{//:EdgeRecord:ShapeRecord
 	public int anchorDeltaX;
 	public int anchorDeltaY;
 
-	public XmlElement toXml(XmlDocument doc) {
+	public XmlElement ToXml(XmlDocument doc) {
 		var ele=doc.CreateElement("CurvedEdgeRecord");
 		ele.SetAttribute("typeFlag",typeFlag.ToString());
 		ele.SetAttribute("straightFlag",straightFlag.ToString());

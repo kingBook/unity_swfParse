@@ -19,8 +19,8 @@ public class PlaceObject2Tag:SwfTag {
 	public ushort clipDepth;
 	//public clipActions;
 
-	public override XmlElement toXml(XmlDocument doc) {
-		var ele=createXmlElement(doc,"PlaceObject2");
+	public override XmlElement ToXml(XmlDocument doc) {
+		var ele=CreateXmlElement(doc,"PlaceObject2");
 		ele.SetAttribute("placeFlagHasClipActions",placeFlagHasClipActions.ToString());
 		ele.SetAttribute("placeFlagHasClipDepth",placeFlagHasClipDepth.ToString());
 		ele.SetAttribute("placeFlagHasName",placeFlagHasName.ToString());
@@ -30,7 +30,7 @@ public class PlaceObject2Tag:SwfTag {
 		ele.SetAttribute("placeFlagMove",placeFlagMove.ToString());
 		if(placeFlagHasCharacter)ele.SetAttribute("characterId",characterId.ToString());
 		if(placeFlagHasMatrix)ele.SetAttribute("matrix",matrix.ToString());
-		if(placeFlagHasColorTransform)ele.AppendChild(colorTransform.toXml(doc));
+		if(placeFlagHasColorTransform)ele.AppendChild(colorTransform.ToXml(doc));
 		if(placeFlagHasRatio)ele.SetAttribute("ratio",ratio.ToString());
 		if(placeFlagHasName)ele.SetAttribute("name",name.ToString());
 		if(placeFlagHasClipDepth)ele.SetAttribute("clipDepth",clipDepth.ToString());

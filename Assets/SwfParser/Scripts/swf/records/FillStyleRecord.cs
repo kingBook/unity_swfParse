@@ -8,7 +8,7 @@ public struct FillStyleRecord{
 	public ushort bitmapId;
 	public MatrixRecord bitmapMatrix;
 
-	public XmlElement toXml(XmlDocument doc){
+	public XmlElement ToXml(XmlDocument doc){
 		var ele=doc.CreateElement("FillStyle");
 		//fillStyleType
 		var fillStyleTypeEle=doc.CreateElement("FillStyleType");
@@ -28,9 +28,9 @@ public struct FillStyleRecord{
 		}
 		//gradient
 		if(fillStyleType==0x10||fillStyleType==0x12){
-			ele.AppendChild( ((GradientRecord)gradient).toXml(doc) );
+			ele.AppendChild( ((GradientRecord)gradient).ToXml(doc) );
 		}else if(fillStyleType==0x13){
-			ele.AppendChild( ((FocalGradientRecord)gradient).toXml(doc) );
+			ele.AppendChild( ((FocalGradientRecord)gradient).ToXml(doc) );
 		}
 		if(fillStyleType==0x40||fillStyleType==0x41||fillStyleType==0x42||fillStyleType==0x43){
 			//bitmapId

@@ -4,7 +4,7 @@ using System.Xml;
 public struct ColorMatrixFilterRecord{
 	public float[] matrix;
 
-	public XmlElement toXml(XmlDocument doc){
+	public XmlElement ToXml(XmlDocument doc){
 		var ele=doc.CreateElement("ColorMatrixFilter");
 		var str="";
 		for(int i=0;i<20;i++){

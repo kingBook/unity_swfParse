@@ -6,6 +6,6 @@ using System.Xml;
 /// <see cref="BitmapDataRecord"/>
 /// </summary>
 public interface IMapData{
-	XmlElement toXml(XmlDocument doc);
+	XmlElement ToXml(XmlDocument doc);
 	
 }

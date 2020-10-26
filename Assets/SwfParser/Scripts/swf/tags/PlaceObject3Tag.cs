@@ -33,8 +33,8 @@ public class PlaceObject3Tag:SwfTag{
 	public RGBARecord backgroundColor;
 	//public clipActions;
 
-	public override XmlElement toXml(XmlDocument doc){
-		var ele=createXmlElement(doc,"PlaceObject3");
+	public override XmlElement ToXml(XmlDocument doc){
+		var ele=CreateXmlElement(doc,"PlaceObject3");
 		ele.SetAttribute("placeFlagHasClipActions",placeFlagHasClipActions.ToString());
 		ele.SetAttribute("placeFlagHasClipDepth",placeFlagHasClipDepth.ToString());
 		ele.SetAttribute("placeFlagHasName",placeFlagHasName.ToString());
@@ -74,7 +74,7 @@ public class PlaceObject3Tag:SwfTag{
 			ele.SetAttribute("clipDepth",clipDepth.ToString());
 		}
 		if(placeFlagHasFilterList){
-			ele.AppendChild(surfaceFilterList.toXml(doc));
+			ele.AppendChild(surfaceFilterList.ToXml(doc));
 		}
 		if(placeFlagHasBlendMode){
 			ele.SetAttribute("blendMode",blendMode.ToString());

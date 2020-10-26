@@ -12,7 +12,7 @@ public class MorphFillStyleRecord {
 	public MatrixRecord startBitmapMatrix;
 	public MatrixRecord endBitmapMatrix;
 
-	public XmlElement toXml(XmlDocument doc){
+	public XmlElement ToXml(XmlDocument doc){
 		var type=fillStyleType;
 		var ele=doc.CreateElement("MorphFillStyle");
 		ele.SetAttribute("fillStyleType",fillStyleType.ToString());
@@ -22,7 +22,7 @@ public class MorphFillStyleRecord {
 		}else if(type==0x10||type==0x12){
 			ele.SetAttribute("startGradientMatrix",startGradientMatrix.ToString());
 			ele.SetAttribute("endGradientMatrix",endGradientMatrix.ToString());
-			ele.AppendChild(gradient.toXml(doc));
+			ele.AppendChild(gradient.ToXml(doc));
 		}else if(type==0x40||type==0x41||type==0x42||type==0x43){
 			ele.SetAttribute("bitmapId",bitmapId.ToString());
 			ele.SetAttribute("startBitmapMatrix",startBitmapMatrix.ToString());

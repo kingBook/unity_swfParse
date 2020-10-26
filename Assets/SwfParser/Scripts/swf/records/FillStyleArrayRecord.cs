@@ -5,12 +5,12 @@ public struct FillStyleArrayRecord{
 	public ushort fillStyleCountExtended;
 	public FillStyleRecord[] fillStyles;
 
-	public XmlElement toXml(XmlDocument doc){
+	public XmlElement ToXml(XmlDocument doc){
 		var ele=doc.CreateElement("FillStyleArray");
 		ele.SetAttribute("fillStyleCount",fillStyleCount.ToString());
 		ele.SetAttribute("fillStyleCountExtended",fillStyleCountExtended.ToString());
 		for(int i=0;i<fillStyles.Length;i++){
-			ele.AppendChild(fillStyles[i].toXml(doc));
+			ele.AppendChild(fillStyles[i].ToXml(doc));
 		}
 		return ele;
 	}

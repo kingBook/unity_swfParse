@@ -18,7 +18,7 @@ public struct StyleChangeRecord:IShapeRecord{//:Shape Record
 	public byte numFillBits;
 	public byte numLineBits;
 
-	public XmlElement toXml(XmlDocument doc) {
+	public XmlElement ToXml(XmlDocument doc) {
 		var ele=doc.CreateElement("StyleChangeRecord");
 		ele.SetAttribute("typeFlag",typeFlag.ToString());
 		ele.SetAttribute("stateNewStyles",stateNewStyles.ToString());
@@ -49,8 +49,8 @@ public struct StyleChangeRecord:IShapeRecord{//:Shape Record
 			ele.AppendChild(stateLineStyleEle);
 		}
 		if(stateNewStyles){
-			ele.AppendChild(fillStyles.toXml(doc));
-			ele.AppendChild(lineStyles.toXml(doc));
+			ele.AppendChild(fillStyles.ToXml(doc));
+			ele.AppendChild(lineStyles.ToXml(doc));
 			//numFillBits
 			var numFillBitsEle=doc.CreateElement("NumFillBits");
 			numFillBitsEle.InnerText=numFillBits.ToString();

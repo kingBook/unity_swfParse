@@ -9,8 +9,8 @@ public class DefineButtonTag:SwfTag{
 	//public actions;
 	//public actionEndFlag;
 
-	public override XmlElement toXml(XmlDocument doc) {
-		return base.toXml(doc);
+	public override XmlElement ToXml(XmlDocument doc) {
+		return base.ToXml(doc);
 	}
 
 }

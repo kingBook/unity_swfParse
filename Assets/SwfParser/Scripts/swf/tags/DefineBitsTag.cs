@@ -5,8 +5,8 @@ public class DefineBitsTag:SwfTag {
 	public ushort characterID;
 	public byte[] jpegData;
 
-	public override XmlElement toXml(XmlDocument doc) {
-		var ele=createXmlElement(doc,"DefineBits");
+	public override XmlElement ToXml(XmlDocument doc) {
+		var ele=CreateXmlElement(doc,"DefineBits");
 		ele.SetAttribute("characterID",characterID.ToString());
 
 		var jpegDataStrBuilder=new StringBuilder("");

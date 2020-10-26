@@ -6,7 +6,7 @@ public struct AlphaColorMapDataRecord:IAlphaMapData{
 	public RGBARecord[] colorTableRGB;
 	public byte[] colormapPixelData;
 
-	public XmlElement toXml(XmlDocument doc){
+	public XmlElement ToXml(XmlDocument doc){
 		var ele=doc.CreateElement("AlphaColorMapData");
 
 		var colorTableRGBStrBuilder=new StringBuilder("");

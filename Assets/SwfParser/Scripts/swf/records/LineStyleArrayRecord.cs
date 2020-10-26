@@ -9,12 +9,12 @@ public struct LineStyleArrayRecord {
 	  If Shape4,LINESTYLE2[count] */
 	public ILineStyleRecord[] lineStyles;
 
-	public XmlElement toXml(XmlDocument doc){
+	public XmlElement ToXml(XmlDocument doc){
 		var ele=doc.CreateElement("LineStyleArray");
 		ele.SetAttribute("lineStyleCount",lineStyleCount.ToString());
 		ele.SetAttribute("lineStyleCountExtended",lineStyleCountExtended.ToString());
 		for(int i=0;i<lineStyles.Length;i++){
-			ele.AppendChild(lineStyles[i].toXml(doc));
+			ele.AppendChild(lineStyles[i].ToXml(doc));
 		}
 		return ele;
 	}

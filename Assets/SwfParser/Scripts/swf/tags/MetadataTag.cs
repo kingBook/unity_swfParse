@@ -3,8 +3,8 @@
 public class MetadataTag:SwfTag {
 	public string metadata;
 
-	public override XmlElement toXml(XmlDocument doc) {
-		var ele=createXmlElement(doc,"Metadata");
+	public override XmlElement ToXml(XmlDocument doc) {
+		var ele=CreateXmlElement(doc,"Metadata");
 		ele.SetAttribute("metadata",metadata);
 		return ele;
 	}

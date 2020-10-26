@@ -15,7 +15,7 @@ public struct LineStyle2Record:ILineStyleRecord{
 	public RGBARecord color;
 	public FillStyleRecord fillType;
 
-	public XmlElement toXml(XmlDocument doc){
+	public XmlElement ToXml(XmlDocument doc){
 		var ele=doc.CreateElement("LineStyle");
 		ele.SetAttribute("width",width.ToString());
 		ele.SetAttribute("startCapStyle",startCapStyle.ToString());
@@ -33,7 +33,7 @@ public struct LineStyle2Record:ILineStyleRecord{
 		if(!hasFillFlag){
 			ele.SetAttribute("color",color.ToString());
 		}else{
-			ele.AppendChild(fillType.toXml(doc));
+			ele.AppendChild(fillType.ToXml(doc));
 		}
 		ele.SetAttribute("color",color.ToString());
 		return ele;

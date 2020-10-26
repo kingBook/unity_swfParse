@@ -3,8 +3,8 @@
 public class JPEGTablesTag:SwfTag {
 	public byte[] jpegData;
 
-	public override XmlElement toXml(XmlDocument doc) {
-		var ele=createXmlElement(doc,"JPEGTables");
+	public override XmlElement ToXml(XmlDocument doc) {
+		var ele=CreateXmlElement(doc,"JPEGTables");
 		string jpegDataStr="";
 		if(jpegData!=null){
 			for(int i=0;i<jpegData.Length;i++){

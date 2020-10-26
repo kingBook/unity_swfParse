@@ -17,7 +17,7 @@ public struct GradientBevelFilterRecord{
 	public bool onTop;
 	public byte passes;
 
-	public XmlElement toXml(XmlDocument doc){
+	public XmlElement ToXml(XmlDocument doc){
 		var ele=doc.CreateElement("GradientBevelFilter");
 		ele.SetAttribute("numColors",numColors.ToString());
 

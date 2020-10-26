@@ -12,7 +12,7 @@ public struct ConvolutionFilterRecord{
 	public bool clamp;
 	public bool preserveAlpha;
 
-	public XmlElement toXml(XmlDocument doc){
+	public XmlElement ToXml(XmlDocument doc){
 		var ele=doc.CreateElement("ConvolutionFilter");
 		ele.SetAttribute("matrixX",matrixX.ToString());
 		ele.SetAttribute("matrixY",matrixY.ToString());

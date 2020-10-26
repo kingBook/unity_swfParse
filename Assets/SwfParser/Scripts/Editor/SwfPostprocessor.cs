@@ -25,16 +25,16 @@ public class SwfPostprocessor:AssetPostprocessor{
 		path=path.Substring(id);
 		path=Application.dataPath+path;
 		
-		parseSwf(path,true,true);
+		ParseSwf(path,true,true);
 		
 	}
 
-	[MenuItem("SwfParser/run")]
-	public static void run(){
-		parseSwf(Application.dataPath+"/test.swf",true,true);
+	[MenuItem("SwfParser/Run")]
+	public static void Run(){
+		ParseSwf(Application.dataPath+"/test.swf",true,true);
 	}
 
-	public static void parseSwf(string swfPath,bool isExportXml,bool isExportBitmap){
+	public static void ParseSwf(string swfPath,bool isExportXml,bool isExportBitmap){
 		// 截取掉xx.swf的文件夹路径，如：E:/kingBook/projects/unity_swfParse/Assets/
 		string swfFolderPath=swfPath.Substring(0,swfPath.LastIndexOf('/')+1);
 		//Debug.Log(swfPath);
@@ -44,40 +44,40 @@ public class SwfPostprocessor:AssetPostprocessor{
 
 		Stopwatch sw=new Stopwatch();
 		sw.Start();
-		var swf=swfReader.read(swfBytes);
-		swfBytes.close();
+		var swf=swfReader.Read(swfBytes);
+		swfBytes.Close();
 		sw.Stop();
 		UnityEngine.Debug.Log("read passed time:"+sw.ElapsedMilliseconds);
 		
 		if(isExportXml){
 			sw.Restart();
-			var xml=swf.toXml();
+			var xml=swf.ToXml();
 			sw.Stop();
 			UnityEngine.Debug.Log("convert xml passed time:"+sw.ElapsedMilliseconds);
 
 			sw.Restart();
-			saveXml(xml,swfPath);
+			SaveXml(xml,swfPath);
 			sw.Stop();
 			UnityEngine.Debug.Log("save passed time:"+sw.ElapsedMilliseconds);
 			//Debug.Log(formatXml(swf.toXml()));
 		}
 		if(isExportBitmap){
-			var imageDatas=swf.getImageDatas();
+			var imageDatas=swf.GetImageDatas();
 			for(int i=0,len=imageDatas.Length;i<len;i++){
-				imageDatas[i].saveTo(swfFolderPath);
+				imageDatas[i].SaveTo(swfFolderPath);
 			}
 		}
 		EditorUtility.DisplayDialog("Complete","Export "+swfPath+" to complete","OK");
 	}
 
 	/**保存xml文件*/
-	private static void saveXml(XmlDocument doc,string swfPath) {
+	private static void SaveXml(XmlDocument doc,string swfPath) {
 		int id=swfPath.LastIndexOf('.');
 		string fileName=swfPath.Substring(0,id)+".xml";
 		doc.Save(fileName);
 	}
 
-	private static string formatXml(object xml){
+	private static string FormatXml(object xml){
 		XmlDocument xd;
 		if(xml is XmlDocument) {
 			xd=xml as XmlDocument;

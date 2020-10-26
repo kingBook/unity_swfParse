@@ -16,7 +16,7 @@ public struct BevelFilterRecord{
 	public bool onTop;
 	public byte passes;
 
-	public XmlElement toXml(XmlDocument doc){
+	public XmlElement ToXml(XmlDocument doc){
 		var ele=doc.CreateElement("BevelFilter");
 		ele.SetAttribute("shadowColor",shadowColor.ToString());
 		ele.SetAttribute("highlightColor",highlightColor.ToString());

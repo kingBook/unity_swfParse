@@ -12,7 +12,7 @@ public struct CXFormRecord{
 	public int greenAddTerm;
 	public int blueAddTerm;
 
-	public XmlElement toXml(XmlDocument doc){
+	public XmlElement ToXml(XmlDocument doc){
 		var ele=doc.CreateElement("CXForm");
 		ele.SetAttribute("hasAddTerms",hasAddTerms.ToString());
 		ele.SetAttribute("hasMultTerms",hasMultTerms.ToString());

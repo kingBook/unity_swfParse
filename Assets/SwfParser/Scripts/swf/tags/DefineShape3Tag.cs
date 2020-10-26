@@ -5,11 +5,11 @@ public class DefineShape3Tag:SwfTag{
 	public RectangleRecord shapeBounds;
 	public ShapeWithStyleRecord shapes;
 
-	public override XmlElement toXml(XmlDocument doc){
-		var ele=createXmlElement(doc,"DefineShape3");
+	public override XmlElement ToXml(XmlDocument doc){
+		var ele=CreateXmlElement(doc,"DefineShape3");
 		ele.SetAttribute("shapeId",shapeId.ToString());
 		ele.SetAttribute("shapeBounds",shapeBounds.ToString());
-		ele.AppendChild(shapes.toXml(doc));
+		ele.AppendChild(shapes.ToXml(doc));
 		return ele;
 	}
 	

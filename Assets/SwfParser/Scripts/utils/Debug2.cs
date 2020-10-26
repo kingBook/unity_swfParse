@@ -11,7 +11,7 @@ public static class Debug2 {
 		UnityEngine.Debug.LogFormat(format,args);
 	}
 
-	public static string formatXml(object xml){
+	public static string FormatXml(object xml){
 		XmlDocument xd;
 		if(xml is XmlDocument) {
 			xd=xml as XmlDocument;

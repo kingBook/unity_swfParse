@@ -9,8 +9,8 @@ public class FileAttributesTag:SwfTag {
 	public bool actionScript3;
 	public bool useNetwork;
 
-	public override XmlElement toXml(XmlDocument doc) {
-		var ele=createXmlElement(doc,"FileAttributes");
+	public override XmlElement ToXml(XmlDocument doc) {
+		var ele=CreateXmlElement(doc,"FileAttributes");
 		ele.SetAttribute("useDirectBlit",useDirectBlit.ToString());
 		ele.SetAttribute("useGPU",useGPU.ToString());
 		ele.SetAttribute("hasMetadata",hasMetadata.ToString());

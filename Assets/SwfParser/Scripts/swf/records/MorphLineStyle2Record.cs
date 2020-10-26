@@ -18,7 +18,7 @@ public class MorphLineStyle2Record:IMorphLineStyleRecord{
 	public RGBARecord endColor;
 	public MorphFillStyleRecord fillType;
 
-	public XmlElement toXml(XmlDocument doc){
+	public XmlElement ToXml(XmlDocument doc){
 		var ele=doc.CreateElement("MorphLineStyle2");
 		ele.SetAttribute("startWidth",startWidth.ToString());
 		ele.SetAttribute("endWidth",endWidth.ToString());
@@ -38,7 +38,7 @@ public class MorphLineStyle2Record:IMorphLineStyleRecord{
 			ele.SetAttribute("startColor",startColor.ToString());
 			ele.SetAttribute("endColor",endColor.ToString());
 		}else{
-			ele.AppendChild(fillType.toXml(doc));
+			ele.AppendChild(fillType.ToXml(doc));
 		}
 		return ele;
 	}

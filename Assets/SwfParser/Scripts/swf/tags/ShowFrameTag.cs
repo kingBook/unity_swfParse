@@ -3,7 +3,7 @@ using System.Collections;
 using System.Xml;
 
 public class ShowFrameTag:SwfTag{
-	public override XmlElement toXml(XmlDocument doc) {
-		return createXmlElement(doc,"ShowFrame");
+	public override XmlElement ToXml(XmlDocument doc) {
+		return CreateXmlElement(doc,"ShowFrame");
 	}
 }

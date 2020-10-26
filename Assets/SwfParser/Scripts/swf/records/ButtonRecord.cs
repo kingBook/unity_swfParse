@@ -20,7 +20,7 @@ public struct ButtonRecord{
 
 	public byte buttonType;//表示DefineButton1/表示DefineButton2
 
-	public XmlElement toXml(XmlDocument doc){
+	public XmlElement ToXml(XmlDocument doc){
 		var ele=doc.CreateElement("ButtonRecord");
 		ele.SetAttribute("buttonReserved",buttonReserved.ToString());
 		ele.SetAttribute("buttonHasBlendMode",buttonHasBlendMode.ToString());
@@ -33,8 +33,8 @@ public struct ButtonRecord{
 		ele.SetAttribute("placeDepth",placeDepth.ToString());
 		ele.SetAttribute("placeMatrix",placeMatrix.ToString());
 		if(buttonType==2){
-			ele.AppendChild(colorTransform.toXml(doc));
-			if(buttonHasFilterList)ele.AppendChild(filterList.toXml(doc));
+			ele.AppendChild(colorTransform.ToXml(doc));
+			if(buttonHasFilterList)ele.AppendChild(filterList.ToXml(doc));
 			if(buttonHasBlendMode)ele.SetAttribute("blendMode",blendMode.ToString());
 		}
 		ele.SetAttribute("buttonType",buttonType.ToString());

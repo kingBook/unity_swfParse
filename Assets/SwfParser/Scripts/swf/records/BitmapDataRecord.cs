@@ -5,7 +5,7 @@ using System.Xml;
 public struct BitmapDataRecord:IMapData{
 	public IPixRecord[] bitmapPixelData;
 
-	public XmlElement toXml(XmlDocument doc){
+	public XmlElement ToXml(XmlDocument doc){
 		var ele=doc.CreateElement("BitmapData");
 
 		var bitmapPixelDataStrBuilder=new StringBuilder();
