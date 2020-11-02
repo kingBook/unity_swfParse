@@ -9,7 +9,7 @@ using Debug=UnityEngine.Debug;
 public class SwfPostprocessor:AssetPostprocessor{
 	
 	private static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths){
-        foreach (string str in importedAssets){
+		foreach (string str in importedAssets){
 			int dotIndex=str.LastIndexOf('.');
 			if(dotIndex>-1){
 				string extensionName=str.Substring(dotIndex);
@@ -17,8 +17,8 @@ public class SwfPostprocessor:AssetPostprocessor{
 					OnSwfPostprocess(str);
 				}
 			}
-        }
-    }
+		}
+	}
 
 	private static void OnSwfPostprocess(string path){
 		int id=path.IndexOf('/');
@@ -54,12 +54,12 @@ public class SwfPostprocessor:AssetPostprocessor{
 			sw.Restart();
 			var xml=swf.ToXml();
 			sw.Stop();
-			UnityEngine.Debug.Log("convert xml passed time:"+sw.ElapsedMilliseconds);
+			Debug.Log("convert xml passed time:"+sw.ElapsedMilliseconds);
 
 			sw.Restart();
 			SaveXml(xml,swfPath);
 			sw.Stop();
-			UnityEngine.Debug.Log("save passed time:"+sw.ElapsedMilliseconds);
+			Debug.Log("save passed time:"+sw.ElapsedMilliseconds);
 			//Debug.Log(formatXml(swf.toXml()));
 		}
 		if(isExportBitmap){
