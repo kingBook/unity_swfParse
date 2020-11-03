@@ -69,7 +69,8 @@ public class SwfPostprocessor:AssetPostprocessor{
 				imageDatas[i].SaveTo(swfFolderPath);
 			}
 		}
-		EditorUtility.DisplayDialog("Complete","Export "+swfPath+" to complete","OK");
+
+		EditorUtility.DisplayDialog("Complete","Import complete\n\n"+swfPath.Replace(Application.dataPath,"Assets"),"OK");
 	}
 
 	/**保存xml文件*/
