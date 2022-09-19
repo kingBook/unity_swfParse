@@ -1,6 +1,5 @@
 ﻿using System.Xml;
 
 public interface IShapeRecord {
-	XmlElement ToXml(XmlDocument doc);
+    XmlElement ToXml(XmlDocument doc);
 }
-

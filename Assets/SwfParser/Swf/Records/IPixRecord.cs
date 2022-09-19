@@ -3,6 +3,6 @@
 /// <see cref="Pix15Record"/>
 /// <see cref="Pix24Record"/>
 /// </summary>
-public interface IPixRecord{
-	
+public interface IPixRecord {
+
 }

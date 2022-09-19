@@ -1,7 +1,6 @@
-﻿
-using System.Xml;
+﻿using System.Xml;
 
 public interface IMorphLineStyleRecord {
 
-	XmlElement ToXml(XmlDocument doc);
+    XmlElement ToXml(XmlDocument doc);
 }

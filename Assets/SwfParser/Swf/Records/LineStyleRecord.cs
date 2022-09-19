@@ -1,13 +1,14 @@
 ﻿using System.Xml;
 
-public struct LineStyleRecord:ILineStyleRecord{
-	public ushort width;
-	public object color;//RGB(Shape1 or Shape2); RGBA(Shape3)
+public struct LineStyleRecord : ILineStyleRecord {
 
-	public XmlElement ToXml(XmlDocument doc){
-		var ele=doc.CreateElement("LineStyle");
-		ele.SetAttribute("width",width.ToString());
-		ele.SetAttribute("color",color.ToString());
-		return ele;
-	}
+    public ushort width;
+    public object color; //RGB(Shape1 or Shape2); RGBA(Shape3)
+
+    public XmlElement ToXml(XmlDocument doc) {
+        var ele = doc.CreateElement("LineStyle");
+        ele.SetAttribute("width", width.ToString());
+        ele.SetAttribute("color", color.ToString());
+        return ele;
+    }
 }

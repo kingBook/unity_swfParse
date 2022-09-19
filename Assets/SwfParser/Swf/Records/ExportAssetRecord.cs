@@ -1,5 +1,6 @@
 ﻿public struct ExportAssetRecord {
-	public ushort tag;
-	public string name;
-	
+
+    public ushort tag;
+    public string name;
+
 }

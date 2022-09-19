@@ -1,4 +1,4 @@
-﻿public interface IEdgeRecord:IShapeRecord {
+﻿public interface IEdgeRecord : IShapeRecord {
 
-	
+
 }

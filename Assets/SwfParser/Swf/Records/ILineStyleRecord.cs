@@ -1,5 +1,5 @@
 ﻿using System.Xml;
 
-public interface ILineStyleRecord{
-	XmlElement ToXml(XmlDocument doc);
+public interface ILineStyleRecord {
+    XmlElement ToXml(XmlDocument doc);
 }
