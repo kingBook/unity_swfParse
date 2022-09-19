@@ -2,16 +2,134 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="86f92028-92cf-411e-8a42-d5debec3a197" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.unity_swfParse/.idea/.idea.unity_swfParse.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.unity_swfParse/.idea/contentModel.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.unity_swfParse/.idea/indexLayout.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.unity_swfParse/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.unity_swfParse/riderModule.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Editor/SwfPostprocessor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Editor/SwfPostprocessor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Image/ImageData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Image/ImageData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Image/ImageType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Image/ImageType.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/ARGBRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/ARGBRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/AlphaBitmapDataRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/AlphaBitmapDataRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/AlphaColorMapDataRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/AlphaColorMapDataRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/BevelFilterRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/BevelFilterRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/BitmapDataRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/BitmapDataRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/BlurFilterRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/BlurFilterRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/ButtonRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/ButtonRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/CXFormRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/CXFormRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/CXFormWithAlphaRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/CXFormWithAlphaRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/ColorMapDataRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/ColorMapDataRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/ColorMatrixFilterRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/ColorMatrixFilterRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/ConvolutionFilterRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/ConvolutionFilterRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/CurvedEdgeRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/CurvedEdgeRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/DefineSceneRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/DefineSceneRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/DropShadowFilterRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/DropShadowFilterRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/EndShapeRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/EndShapeRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/ExportAssetRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/ExportAssetRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/FillStyleArrayRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/FillStyleArrayRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/FillStyleRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/FillStyleRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/FilterListRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/FilterListRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/FilterRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/FilterRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/FocalGradientRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/FocalGradientRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/FramelabelRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/FramelabelRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/GlowFilterRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/GlowFilterRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/GlyphEntryRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/GlyphEntryRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/GradRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/GradRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/GradientBevelFilterRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/GradientBevelFilterRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/GradientGlowFilterRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/GradientGlowFilterRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/GradientRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/GradientRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/IAlphaMapData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/IAlphaMapData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/IEdgeRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/IEdgeRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/ILineStyleRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/ILineStyleRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/IMapData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/IMapData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/IMorphLineStyleRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/IMorphLineStyleRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/IPixRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/IPixRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/IShapeRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/IShapeRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/ImportAssets2Record.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/ImportAssets2Record.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/LineStyle2Record.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/LineStyle2Record.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/LineStyleArrayRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/LineStyleArrayRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/LineStyleRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/LineStyleRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/MatrixRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/MatrixRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/MorphFillStyleArrayRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/MorphFillStyleArrayRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/MorphFillStyleRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/MorphFillStyleRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/MorphGradientRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/MorphGradientRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/MorphGradrecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/MorphGradrecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/MorphLineStyle2Record.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/MorphLineStyle2Record.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/MorphLineStyleArrayRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/MorphLineStyleArrayRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/MorphLineStyleRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/MorphLineStyleRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/Pix15Record.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/Pix15Record.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/Pix24Record.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/Pix24Record.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/RGBARecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/RGBARecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/RGBRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/RGBRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/RectangleRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/RectangleRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/SHAPE.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/SHAPE.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/ShapeWithStyleRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/ShapeWithStyleRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/StraightEdgeRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/StraightEdgeRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/StyleChangeRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/StyleChangeRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/SymbolClassRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/SymbolClassRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/TagHeaderRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Records/TagHeaderRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Swf.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Swf.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/SwfHeader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/SwfHeader.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineBitsJPEG2Tag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineBitsJPEG2Tag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineBitsJPEG3Tag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineBitsJPEG3Tag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineBitsJPEG4Tag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineBitsJPEG4Tag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineBitsLossless2Tag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineBitsLossless2Tag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineBitsLosslessTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineBitsLosslessTag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineBitsTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineBitsTag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineButton2Tag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineButton2Tag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineButtonTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineButtonTag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineFontTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineFontTag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineMorphShape2Tag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineMorphShape2Tag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineMorphShapeTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineMorphShapeTag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineScalingGridTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineScalingGridTag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineSceneAndFrameLabelDataTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineSceneAndFrameLabelDataTag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineShape2Tag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineShape2Tag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineShape3Tag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineShape3Tag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineShape4Tag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineShape4Tag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineShapeTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineShapeTag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineSpriteTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineSpriteTag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineText2Tag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineText2Tag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineTextTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineTextTag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DynamicTextTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DynamicTextTag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/EnableDubugger2Tag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/EnableDubugger2Tag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/EndTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/EndTag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/ExportAssetsTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/ExportAssetsTag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/FileAttributesTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/FileAttributesTag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/FrameLabelTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/FrameLabelTag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/ImportAssets2Tag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/ImportAssets2Tag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/JpegTablesTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/JpegTablesTag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/MetadataTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/MetadataTag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/PlaceObject2Tag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/PlaceObject2Tag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/PlaceObject3Tag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/PlaceObject3Tag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/PlaceObjectTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/PlaceObjectTag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/ProtectTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/ProtectTag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/RemoveObject2Tag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/RemoveObject2Tag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/RemoveObjectTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/RemoveObjectTag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/ScriptLimitsTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/ScriptLimitsTag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/SetBackgroundColorTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/SetBackgroundColorTag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/SetTabIndexTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/SetTabIndexTag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/ShowFrameTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/ShowFrameTag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/SwfTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/SwfTag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/SymbolClassTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/SymbolClassTag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/TagType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/TagType.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/TextRecord.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/TextRecord.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/UnknownTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/UnknownTag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/SwfByteArray.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/SwfByteArray.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/SwfReader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/SwfReader.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Ztils/Debug2.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Ztils/Debug2.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Ztils/ZlibUtil.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Ztils/ZlibUtil.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Editor/SwfPostprocessor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Swf/Records/FilterListRecord.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Swf/Records/GlowFilterRecord.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Swf/Records/GradientBevelFilterRecord.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Swf/Records/GradientGlowFilterRecord.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Swf/Records/Pix15Record.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Swf/Records/Pix24Record.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Swf/Records/RGBARecord.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Swf/Records/SymbolClassRecord.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -56,18 +174,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Discover.Launch.Via.Unity": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Discover.Launch.Via.Unity&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="UnitTests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2019.1.4f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2019.4.28f1c1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath D:\kingBook\projects\unity_swfParse -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="D:\kingBook\projects\unity_swfParse" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -103,6 +221,7 @@
       <option name="presentableId" value="Default" />
       <updated>1663576363056</updated>
       <workItem from="1663576370706" duration="207000" />
+      <workItem from="1663577050248" duration="1865000" />
     </task>
     <servers />
   </component>
@@ -128,11 +247,5 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="930" y="371" width="672" height="678" key="search.everywhere.popup" timestamp="1594524668723">
-      <screen x="0" y="0" width="1920" height="1050" />
-    </state>
-    <state x="930" y="371" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1594524668723" />
   </component>
 </project>
