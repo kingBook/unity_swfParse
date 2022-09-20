@@ -62,6 +62,7 @@ public class SwfPostprocessor : AssetPostprocessor {
             Debug.Log("save passed time:" + sw.ElapsedMilliseconds);
             //Debug.Log(formatXml(swf.toXml()));
         }
+        
         if (isExportBitmap) {
             var imageDatas = swf.GetImageDatas();
             Debug.Log(imageDatas.Length);

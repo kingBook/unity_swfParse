@@ -31,6 +31,7 @@ public class Swf {
         return doc;
     }
 
+    #region GetImageDatas
     /// <summary>
     /// 获取所有图像数据
     /// </summary>
@@ -39,95 +40,101 @@ public class Swf {
         for (int i = 0, len = tags.Count; i < len; i++) {
             var tag = tags[i];
             if (tag.header.type == (uint)TagType.DefineBits) {
-                var imageData = GetDefineBitsImageData((DefineBitsTag)tag);
+                var defineBitsTag = (DefineBitsTag)tag;
+                var imageData = GetDefineBitsImageData(defineBitsTag);
                 if (imageData.bytes != null && imageData.bytes.Length > 0) {
                     imageDatas.Add(imageData);
                 }
             } else if (tag.header.type == (uint)TagType.DefineBitsJPEG2) {
-                var imageData = GetDefineBitsJPEG2ImageData((DefineBitsJPEG2Tag)tag);
+                var defineBitsJpeg2Tag = (DefineBitsJPEG2Tag)tag;
+                var imageData = GetDefineBitsJpeg2ImageData(defineBitsJpeg2Tag);
                 imageDatas.Add(imageData);
             } else if (tag.header.type == (uint)TagType.DefineBitsJPEG3) {
-                var imageData = GetDefineBitsJPEG3ImageData((DefineBitsJPEG3Tag)tag);
+                var defineBitsJpeg3Tag = (DefineBitsJPEG3Tag)tag;
+                var imageData = GetDefineBitsJpeg3ImageData(defineBitsJpeg3Tag);
                 imageDatas.Add(imageData);
             } else if (tag.header.type == (uint)TagType.DefineBitsLossless) {
-                var imageData = GetDefineBitsLosslessImageData((DefineBitsLosslessTag)tag);
+                var defineBitsLosslessTag = (DefineBitsLosslessTag)tag;
+                var imageData = GetDefineBitsLosslessImageData(defineBitsLosslessTag);
                 imageDatas.Add(imageData);
             } else if (tag.header.type == (uint)TagType.DefineBitsLossless2) {
-                var imageData = GetDefineBitsLossless2ImageData((DefineBitsLossless2Tag)tag);
+                var defineBitsLossless2Tag = (DefineBitsLossless2Tag)tag;
+                var imageData = GetDefineBitsLossless2ImageData(defineBitsLossless2Tag);
                 imageDatas.Add(imageData);
             } else if (tag.header.type == (uint)TagType.DefineBitsJPEG4) {
-                var imageData = GetDefineBitsJPEG4ImageData((DefineBitsJPEG4Tag)tag);
+                var defineBitsJpeg4Tag = (DefineBitsJPEG4Tag)tag;
+                var imageData = GetDefineBitsJPEG4ImageData(defineBitsJpeg4Tag);
                 imageDatas.Add(imageData);
             }
         }
         return imageDatas.ToArray();
     }
 
-    private ImageData GetDefineBitsImageData(DefineBitsTag defineBits) {
+    private ImageData GetDefineBitsImageData(DefineBitsTag defineBitsTag) {
         var imageData = new ImageData();
-        if (defineBits.jpegData != null) {
-            imageData.characterID = defineBits.characterID;
+        if (defineBitsTag.jpegData != null) {
+            imageData.characterID = defineBitsTag.characterID;
             imageData.type = ImageType.Jpg;
-            imageData.bytes = defineBits.jpegData;
+            imageData.bytes = defineBitsTag.jpegData;
         }
         return imageData;
     }
 
-    private ImageData GetDefineBitsJPEG2ImageData(DefineBitsJPEG2Tag defineBitsJPEG2) {
+    private ImageData GetDefineBitsJpeg2ImageData(DefineBitsJPEG2Tag defineBitsJpeg2Tag) {
         var imageData = new ImageData();
-        imageData.characterID = defineBitsJPEG2.characterID;
-        bool isJpg = defineBitsJPEG2.imageData[0] == 0xFF && (defineBitsJPEG2.imageData[1] == 0xD8 || defineBitsJPEG2.imageData[1] == 0xD9);
-        bool isPng = defineBitsJPEG2.imageData[0] == 0x89
-                     && defineBitsJPEG2.imageData[1] == 0x50
-                     && defineBitsJPEG2.imageData[2] == 0x4E
-                     && defineBitsJPEG2.imageData[3] == 0x47
-                     && defineBitsJPEG2.imageData[4] == 0x0D
-                     && defineBitsJPEG2.imageData[5] == 0x0A
-                     && defineBitsJPEG2.imageData[6] == 0x1A
-                     && defineBitsJPEG2.imageData[7] == 0x0A;
-        bool isGif = defineBitsJPEG2.imageData[0] == 0x47
-                     && defineBitsJPEG2.imageData[1] == 0x49
-                     && defineBitsJPEG2.imageData[2] == 0x46
-                     && defineBitsJPEG2.imageData[3] == 0x38
-                     && defineBitsJPEG2.imageData[4] == 0x39
-                     && defineBitsJPEG2.imageData[5] == 0x61;
+        imageData.characterID = defineBitsJpeg2Tag.characterID;
+        bool isJpg = defineBitsJpeg2Tag.imageData[0] == 0xFF && (defineBitsJpeg2Tag.imageData[1] == 0xD8 || defineBitsJpeg2Tag.imageData[1] == 0xD9);
+        bool isPng = defineBitsJpeg2Tag.imageData[0] == 0x89
+                     && defineBitsJpeg2Tag.imageData[1] == 0x50
+                     && defineBitsJpeg2Tag.imageData[2] == 0x4E
+                     && defineBitsJpeg2Tag.imageData[3] == 0x47
+                     && defineBitsJpeg2Tag.imageData[4] == 0x0D
+                     && defineBitsJpeg2Tag.imageData[5] == 0x0A
+                     && defineBitsJpeg2Tag.imageData[6] == 0x1A
+                     && defineBitsJpeg2Tag.imageData[7] == 0x0A;
+        bool isGif = defineBitsJpeg2Tag.imageData[0] == 0x47
+                     && defineBitsJpeg2Tag.imageData[1] == 0x49
+                     && defineBitsJpeg2Tag.imageData[2] == 0x46
+                     && defineBitsJpeg2Tag.imageData[3] == 0x38
+                     && defineBitsJpeg2Tag.imageData[4] == 0x39
+                     && defineBitsJpeg2Tag.imageData[5] == 0x61;
         if (isPng) {
             imageData.type = ImageType.Png;
         } else if (isJpg || isGif) {
             imageData.type = ImageType.Jpg;
         }
-        imageData.bytes = defineBitsJPEG2.imageData;
+        imageData.bytes = defineBitsJpeg2Tag.imageData;
         return imageData;
     }
 
-    private ImageData GetDefineBitsJPEG3ImageData(DefineBitsJPEG3Tag defineBitsJPEG3) {
+    private ImageData GetDefineBitsJpeg3ImageData(DefineBitsJPEG3Tag defineBitsJpeg3Tag) {
         var imageData = new ImageData();
-        imageData.characterID = defineBitsJPEG3.characterID;
-        bool isJpg = defineBitsJPEG3.imageData[0] == 0xFF && (defineBitsJPEG3.imageData[1] == 0xD8 || defineBitsJPEG3.imageData[1] == 0xD9);
-        bool isPng = defineBitsJPEG3.imageData[0] == 0x89
-                     && defineBitsJPEG3.imageData[1] == 0x50
-                     && defineBitsJPEG3.imageData[2] == 0x4E
-                     && defineBitsJPEG3.imageData[3] == 0x47
-                     && defineBitsJPEG3.imageData[4] == 0x0D
-                     && defineBitsJPEG3.imageData[5] == 0x0A
-                     && defineBitsJPEG3.imageData[6] == 0x1A
-                     && defineBitsJPEG3.imageData[7] == 0x0A;
-        bool isGif = defineBitsJPEG3.imageData[0] == 0x47
-                     && defineBitsJPEG3.imageData[1] == 0x49
-                     && defineBitsJPEG3.imageData[2] == 0x46
-                     && defineBitsJPEG3.imageData[3] == 0x38
-                     && defineBitsJPEG3.imageData[4] == 0x39
-                     && defineBitsJPEG3.imageData[5] == 0x61;
+        imageData.characterID = defineBitsJpeg3Tag.characterID;
+        bool isJpg = defineBitsJpeg3Tag.imageData[0] == 0xFF && (defineBitsJpeg3Tag.imageData[1] == 0xD8 || defineBitsJpeg3Tag.imageData[1] == 0xD9);
+        bool isPng = defineBitsJpeg3Tag.imageData[0] == 0x89
+                     && defineBitsJpeg3Tag.imageData[1] == 0x50
+                     && defineBitsJpeg3Tag.imageData[2] == 0x4E
+                     && defineBitsJpeg3Tag.imageData[3] == 0x47
+                     && defineBitsJpeg3Tag.imageData[4] == 0x0D
+                     && defineBitsJpeg3Tag.imageData[5] == 0x0A
+                     && defineBitsJpeg3Tag.imageData[6] == 0x1A
+                     && defineBitsJpeg3Tag.imageData[7] == 0x0A;
+        bool isGif = defineBitsJpeg3Tag.imageData[0] == 0x47
+                     && defineBitsJpeg3Tag.imageData[1] == 0x49
+                     && defineBitsJpeg3Tag.imageData[2] == 0x46
+                     && defineBitsJpeg3Tag.imageData[3] == 0x38
+                     && defineBitsJpeg3Tag.imageData[4] == 0x39
+                     && defineBitsJpeg3Tag.imageData[5] == 0x61;
         if (isPng) {
             imageData.type = ImageType.Png;
             var texture = new Texture2D(16, 16); //宽高可以任意LoadImage()时会自动调整
-            texture.LoadImage(defineBitsJPEG3.imageData);
+            texture.LoadImage(defineBitsJpeg3Tag.imageData);
             texture.Apply();
             var colors = texture.GetPixels32();
-            var len = defineBitsJPEG3.bitmapAlphaData.Length;
+            var len = defineBitsJpeg3Tag.bitmapAlphaData.Length;
 
             var alphaData = new byte[len];
-            Array.Copy(defineBitsJPEG3.bitmapAlphaData, alphaData, len);
+            Array.Copy(defineBitsJpeg3Tag.bitmapAlphaData, alphaData, len);
             FlipVerticalBitmapAlphaData(alphaData, (ushort)texture.width, (ushort)texture.height);
             for (var i = 0; i < len; i++) {
                 colors[i].a = alphaData[i];
@@ -137,16 +144,16 @@ public class Swf {
             imageData.bytes = texture.EncodeToJPG(100);
         } else if (isJpg || isGif) {
             imageData.type = ImageType.Jpg; //.gif也导出为jpg
-            imageData.bytes = defineBitsJPEG3.imageData;
+            imageData.bytes = defineBitsJpeg3Tag.imageData;
         }
         return imageData;
     }
 
-    private ImageData GetDefineBitsLosslessImageData(DefineBitsLosslessTag defineBitsLossless) {
-        var texture = new Texture2D(defineBitsLossless.bitmapWidth, defineBitsLossless.bitmapHeight);
-        if (defineBitsLossless.bitmapFormat == 3) {
+    private ImageData GetDefineBitsLosslessImageData(DefineBitsLosslessTag defineBitsLosslessTag) {
+        var texture = new Texture2D(defineBitsLosslessTag.bitmapWidth, defineBitsLosslessTag.bitmapHeight);
+        if (defineBitsLosslessTag.bitmapFormat == 3) {
             //ColorMapDataRecord
-            var colorMapDataRecord = (ColorMapDataRecord)defineBitsLossless.zlibBitmapData;
+            var colorMapDataRecord = (ColorMapDataRecord)defineBitsLosslessTag.zlibBitmapData;
             int length = colorMapDataRecord.colormapPixelData.Length;
             var colors = new Color32[length];
             for (int i = 0; i < length; i++) {
@@ -154,31 +161,31 @@ public class Swf {
                 var rgb = colorMapDataRecord.colorTableRGB[colorIndex];
                 colors[i] = new Color32(rgb.red, rgb.green, rgb.blue, 255);
             }
-            colors = FlipVerticalBitmapColors(colors, defineBitsLossless.bitmapWidth, defineBitsLossless.bitmapHeight);
+            colors = FlipVerticalBitmapColors(colors, defineBitsLosslessTag.bitmapWidth, defineBitsLosslessTag.bitmapHeight);
             texture.SetPixels32(colors);
             texture.Apply();
-        } else if (defineBitsLossless.bitmapFormat == 4 || defineBitsLossless.bitmapFormat == 5) {
+        } else if (defineBitsLosslessTag.bitmapFormat == 4 || defineBitsLosslessTag.bitmapFormat == 5) {
             //BitmapDataRecord
-            var bitmapDataRecord = (BitmapDataRecord)defineBitsLossless.zlibBitmapData;
+            var bitmapDataRecord = (BitmapDataRecord)defineBitsLosslessTag.zlibBitmapData;
             int length = bitmapDataRecord.bitmapPixelData.Length;
             var colors = new Color32[length];
-            if (defineBitsLossless.bitmapFormat == 4) {
+            if (defineBitsLosslessTag.bitmapFormat == 4) {
                 for (int i = 0; i < length; i++) {
                     var pix15 = (Pix15Record)bitmapDataRecord.bitmapPixelData[i];
                     colors[i] = new Color32(pix15.red, pix15.green, pix15.blue, 255);
                 }
-            } else if (defineBitsLossless.bitmapFormat == 5) {
+            } else if (defineBitsLosslessTag.bitmapFormat == 5) {
                 for (int i = 0; i < length; i++) {
                     var pix24 = (Pix24Record)bitmapDataRecord.bitmapPixelData[i];
                     colors[i] = new Color32(pix24.red, pix24.green, pix24.blue, 255);
                 }
             }
-            colors = FlipVerticalBitmapColors(colors, defineBitsLossless.bitmapWidth, defineBitsLossless.bitmapHeight);
+            colors = FlipVerticalBitmapColors(colors, defineBitsLosslessTag.bitmapWidth, defineBitsLosslessTag.bitmapHeight);
             texture.SetPixels32(colors);
             texture.Apply();
         }
         var imageData = new ImageData();
-        imageData.characterID = defineBitsLossless.characterID;
+        imageData.characterID = defineBitsLosslessTag.characterID;
         //Png或Jpg都可以
         //imageData.type=ImageType.Png;
         imageData.type = ImageType.Jpg;
@@ -186,77 +193,77 @@ public class Swf {
         return imageData;
     }
 
-    private ImageData GetDefineBitsLossless2ImageData(DefineBitsLossless2Tag defineBitsLossless2) {
-        var texture = new Texture2D(defineBitsLossless2.bitmapWidth, defineBitsLossless2.bitmapHeight);
-        if (defineBitsLossless2.bitmapFormat == 3) {
+    private ImageData GetDefineBitsLossless2ImageData(DefineBitsLossless2Tag defineBitsLossless2Tag) {
+        var texture = new Texture2D(defineBitsLossless2Tag.bitmapWidth, defineBitsLossless2Tag.bitmapHeight);
+        if (defineBitsLossless2Tag.bitmapFormat == 3) {
             //AlphaColorMapDataRecord
-            uint bitmapWidth = defineBitsLossless2.bitmapWidth;
+            uint bitmapWidth = defineBitsLossless2Tag.bitmapWidth;
             while ((bitmapWidth % 4) != 0) {
                 bitmapWidth = (bitmapWidth / 4 + 1) * 4;
             }
-            var alphaColorMapDataRecord = (AlphaColorMapDataRecord)defineBitsLossless2.zlibBitmapData;
-            var colors = new Color32[defineBitsLossless2.bitmapWidth * defineBitsLossless2.bitmapHeight];
+            var alphaColorMapDataRecord = (AlphaColorMapDataRecord)defineBitsLossless2Tag.zlibBitmapData;
+            var colors = new Color32[defineBitsLossless2Tag.bitmapWidth * defineBitsLossless2Tag.bitmapHeight];
             int length = alphaColorMapDataRecord.colormapPixelData.Length;
             int idx = 0;
             for (int j = 0; j < length; j++) {
                 var colorIndex = alphaColorMapDataRecord.colormapPixelData[j];
                 var rgba = alphaColorMapDataRecord.colorTableRGB[colorIndex];
                 long index = j % bitmapWidth;
-                if (index < defineBitsLossless2.bitmapWidth) {
+                if (index < defineBitsLossless2Tag.bitmapWidth) {
                     colors[idx++] = new Color32(rgba.red, rgba.green, rgba.blue, rgba.alpha);
                 }
             }
-            colors = FlipVerticalBitmapColors(colors, defineBitsLossless2.bitmapWidth, defineBitsLossless2.bitmapHeight);
+            colors = FlipVerticalBitmapColors(colors, defineBitsLossless2Tag.bitmapWidth, defineBitsLossless2Tag.bitmapHeight);
             texture.SetPixels32(colors);
             texture.Apply();
-        } else if (defineBitsLossless2.bitmapFormat == 4 || defineBitsLossless2.bitmapFormat == 5) {
+        } else if (defineBitsLossless2Tag.bitmapFormat == 4 || defineBitsLossless2Tag.bitmapFormat == 5) {
             //AlphaBitmapDataRecord
-            var alphaBitmapDataRecord = (AlphaBitmapDataRecord)defineBitsLossless2.zlibBitmapData;
+            var alphaBitmapDataRecord = (AlphaBitmapDataRecord)defineBitsLossless2Tag.zlibBitmapData;
             int length = alphaBitmapDataRecord.bitmapPixelData.Length;
             var colors = new Color32[length];
             for (int j = 0; j < length; j++) {
                 var argb = alphaBitmapDataRecord.bitmapPixelData[j];
                 colors[j] = new Color32(argb.red, argb.green, argb.blue, argb.alpha);
             }
-            colors = FlipVerticalBitmapColors(colors, defineBitsLossless2.bitmapWidth, defineBitsLossless2.bitmapHeight);
+            colors = FlipVerticalBitmapColors(colors, defineBitsLossless2Tag.bitmapWidth, defineBitsLossless2Tag.bitmapHeight);
             texture.SetPixels32(colors);
             texture.Apply();
         }
         var imageData = new ImageData();
-        imageData.characterID = defineBitsLossless2.characterID;
+        imageData.characterID = defineBitsLossless2Tag.characterID;
         imageData.type = ImageType.Png;
         imageData.bytes = texture.EncodeToPNG();
         return imageData;
     }
 
-    private ImageData GetDefineBitsJPEG4ImageData(DefineBitsJPEG4Tag defineBitsJPEG4) {
+    private ImageData GetDefineBitsJPEG4ImageData(DefineBitsJPEG4Tag defineBitsJpeg4Tag) {
         var imageData = new ImageData();
-        imageData.characterID = defineBitsJPEG4.characterID;
-        bool isJpg = defineBitsJPEG4.imageData[0] == 0xFF && (defineBitsJPEG4.imageData[1] == 0xD8 || defineBitsJPEG4.imageData[1] == 0xD9);
-        bool isPng = defineBitsJPEG4.imageData[0] == 0x89
-                     && defineBitsJPEG4.imageData[1] == 0x50
-                     && defineBitsJPEG4.imageData[2] == 0x4E
-                     && defineBitsJPEG4.imageData[3] == 0x47
-                     && defineBitsJPEG4.imageData[4] == 0x0D
-                     && defineBitsJPEG4.imageData[5] == 0x0A
-                     && defineBitsJPEG4.imageData[6] == 0x1A
-                     && defineBitsJPEG4.imageData[7] == 0x0A;
-        bool isGif = defineBitsJPEG4.imageData[0] == 0x47
-                     && defineBitsJPEG4.imageData[1] == 0x49
-                     && defineBitsJPEG4.imageData[2] == 0x46
-                     && defineBitsJPEG4.imageData[3] == 0x38
-                     && defineBitsJPEG4.imageData[4] == 0x39
-                     && defineBitsJPEG4.imageData[5] == 0x61;
+        imageData.characterID = defineBitsJpeg4Tag.characterID;
+        bool isJpg = defineBitsJpeg4Tag.imageData[0] == 0xFF && (defineBitsJpeg4Tag.imageData[1] == 0xD8 || defineBitsJpeg4Tag.imageData[1] == 0xD9);
+        bool isPng = defineBitsJpeg4Tag.imageData[0] == 0x89
+                     && defineBitsJpeg4Tag.imageData[1] == 0x50
+                     && defineBitsJpeg4Tag.imageData[2] == 0x4E
+                     && defineBitsJpeg4Tag.imageData[3] == 0x47
+                     && defineBitsJpeg4Tag.imageData[4] == 0x0D
+                     && defineBitsJpeg4Tag.imageData[5] == 0x0A
+                     && defineBitsJpeg4Tag.imageData[6] == 0x1A
+                     && defineBitsJpeg4Tag.imageData[7] == 0x0A;
+        bool isGif = defineBitsJpeg4Tag.imageData[0] == 0x47
+                     && defineBitsJpeg4Tag.imageData[1] == 0x49
+                     && defineBitsJpeg4Tag.imageData[2] == 0x46
+                     && defineBitsJpeg4Tag.imageData[3] == 0x38
+                     && defineBitsJpeg4Tag.imageData[4] == 0x39
+                     && defineBitsJpeg4Tag.imageData[5] == 0x61;
         if (isPng) {
             imageData.type = ImageType.Png;
             var texture = new Texture2D(16, 16); //宽高可以任意LoadImage()时会自动调整
-            texture.LoadImage(defineBitsJPEG4.imageData);
+            texture.LoadImage(defineBitsJpeg4Tag.imageData);
             texture.Apply();
             var colors = texture.GetPixels32();
-            var len = defineBitsJPEG4.bitmapAlphaData.Length;
+            var len = defineBitsJpeg4Tag.bitmapAlphaData.Length;
 
             var alphaData = new byte[len];
-            Array.Copy(defineBitsJPEG4.bitmapAlphaData, alphaData, len);
+            Array.Copy(defineBitsJpeg4Tag.bitmapAlphaData, alphaData, len);
             FlipVerticalBitmapAlphaData(alphaData, (ushort)texture.width, (ushort)texture.height);
             for (var i = 0; i < len; i++) {
                 colors[i].a = alphaData[i];
@@ -266,7 +273,7 @@ public class Swf {
             imageData.bytes = texture.EncodeToJPG(100);
         } else if (isJpg || isGif) {
             imageData.type = ImageType.Jpg; //.gif也导出为jpg
-            imageData.bytes = defineBitsJPEG4.imageData;
+            imageData.bytes = defineBitsJpeg4Tag.imageData;
         }
         return imageData;
     }
@@ -298,5 +305,6 @@ public class Swf {
         }
         return tempAlphaData;
     }
+    #endregion
 
 }

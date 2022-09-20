@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="86f92028-92cf-411e-8a42-d5debec3a197" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.unity_swfParse/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.unity_swfParse/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Editor/SwfPostprocessor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Editor/SwfPostprocessor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Swf.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Swf.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/SymbolClassTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/SymbolClassTag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/SwfReader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/SwfReader.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/test.fla" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/test.fla" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/test.swf" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/test.swf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/test.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/test.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -10,6 +16,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/72beca6012c7404d8521ba134a35bf68117400/70/c654a859/Mathf.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Editor/SwfPostprocessor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Swf/Records/FilterListRecord.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Swf/Records/GlowFilterRecord.cs" root0="FORCE_HIGHLIGHTING" />
@@ -59,6 +66,9 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="1ePDUcw6HTpQHYqJa22pcT3vLps" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -113,7 +123,7 @@
       <workItem from="1663576370706" duration="207000" />
       <workItem from="1663577050248" duration="1865000" />
       <workItem from="1663637461581" duration="68000" />
-      <workItem from="1663637546657" duration="642000" />
+      <workItem from="1663637546657" duration="20634000" />
     </task>
     <servers />
   </component>

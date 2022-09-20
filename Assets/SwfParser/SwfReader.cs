@@ -398,14 +398,14 @@ public class SwfReader {
     private SymbolClassTag ReadSymbolClassTag(SwfByteArray bytes, TagHeaderRecord header) {
         var tag = new SymbolClassTag();
         tag.numSymbols = bytes.ReadUI16();
-        var list = new SymbolClassRecord[tag.numSymbols];
+        var symbols = new SymbolClassRecord[tag.numSymbols];
         for (ushort i = 0; i < tag.numSymbols; i++) {
             var record = new SymbolClassRecord();
             record.tag = bytes.ReadUI16();
             record.name = bytes.ReadString();
-            list[i] = record;
+            symbols[i] = record;
         }
-        tag.list = list;
+        tag.symbols = symbols;
         return tag;
     }
 
