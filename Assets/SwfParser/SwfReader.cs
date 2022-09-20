@@ -577,8 +577,11 @@ public class SwfReader {
             unzippedData = ZlibUtil.DeCompressBytes(unzippedData);
             var unzippedSwfArray = new SwfByteArray(unzippedData);
             if (tag.bitmapFormat == 3) {
-                //uint imageDataSize=(uint)((tag.bitmapWidth + (8 - (tag.bitmapWidth % 8))) * tag.bitmapHeight);//此代码经验证是错的
-                uint imageDataSize = (uint)(tag.bitmapWidth * tag.bitmapHeight);
+                uint bitmapWidth = tag.bitmapWidth;
+                while ((bitmapWidth%4)!=0) {
+                    bitmapWidth = (bitmapWidth / 4 + 1) * 4;
+                }
+                uint imageDataSize = bitmapWidth * tag.bitmapHeight;
                 tag.zlibBitmapData = ReadAlphaColorMapDataRecord(unzippedSwfArray, (uint)(tag.bitmapColorTableSize + 1), imageDataSize);
             } else if (tag.bitmapFormat == 4 || tag.bitmapFormat == 5) {
                 uint imageDataSize = (uint)(tag.bitmapWidth * tag.bitmapHeight);

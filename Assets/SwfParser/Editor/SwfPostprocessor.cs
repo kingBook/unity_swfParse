@@ -32,7 +32,7 @@ public class SwfPostprocessor : AssetPostprocessor {
     [MenuItem("SwfParser/Run")]
     public static void Run() {
         string assetsPath = Application.dataPath;
-        ParseSwf(assetsPath + "/test.swf", true, true);
+        ParseSwf(assetsPath + "/test.fla_export/test.fla.swf", true, true);
     }
 
     public static void ParseSwf(string swfPath, bool isExportXml, bool isExportBitmap) {
@@ -69,6 +69,8 @@ public class SwfPostprocessor : AssetPostprocessor {
                 imageDatas[i].SaveTo(swfFolderPath);
             }
         }
+        
+        AssetDatabase.Refresh();
 
         EditorUtility.DisplayDialog("Complete", "Import complete\n\n" + swfPath.Replace(Application.dataPath, "Assets"), "OK");
     }

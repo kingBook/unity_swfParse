@@ -190,13 +190,21 @@ public class Swf {
         var texture = new Texture2D(defineBitsLossless2.bitmapWidth, defineBitsLossless2.bitmapHeight);
         if (defineBitsLossless2.bitmapFormat == 3) {
             //AlphaColorMapDataRecord
+            uint bitmapWidth = defineBitsLossless2.bitmapWidth;
+            while ((bitmapWidth % 4) != 0) {
+                bitmapWidth = (bitmapWidth / 4 + 1) * 4;
+            }
             var alphaColorMapDataRecord = (AlphaColorMapDataRecord)defineBitsLossless2.zlibBitmapData;
+            var colors = new Color32[defineBitsLossless2.bitmapWidth * defineBitsLossless2.bitmapHeight];
             int length = alphaColorMapDataRecord.colormapPixelData.Length;
-            var colors = new Color32[length];
+            int idx = 0;
             for (int j = 0; j < length; j++) {
                 var colorIndex = alphaColorMapDataRecord.colormapPixelData[j];
                 var rgba = alphaColorMapDataRecord.colorTableRGB[colorIndex];
-                colors[j] = new Color32(rgba.red, rgba.green, rgba.blue, rgba.alpha);
+                long index = j % bitmapWidth;
+                if (index < defineBitsLossless2.bitmapWidth) {
+                    colors[idx++] = new Color32(rgba.red, rgba.green, rgba.blue, rgba.alpha);
+                }
             }
             colors = FlipVerticalBitmapColors(colors, defineBitsLossless2.bitmapWidth, defineBitsLossless2.bitmapHeight);
             texture.SetPixels32(colors);
