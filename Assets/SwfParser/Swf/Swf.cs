@@ -46,13 +46,12 @@ public class Swf {
     /// <param name="isOnlyExportLinkage"> 仅导出有链接类名的库元件 </param>
     /// <returns></returns>
     public ImageData[] GetImageDatas(bool isOnlyExportLinkage) {
+        // 获取有链接类名的 DefineSprite(在SymbolClassTag中定义) 的所有 CharacterId
         List<ushort> characterIds = null;
         if (isOnlyExportLinkage) {
             characterIds = new List<ushort>();
             GetLinkageDefineSpriteTagsNeededCharacterIds(characterIds);
         }
-        
-        Debug2.Log(characterIds);
 
         var imageDatas = new List<ImageData>();
         for (int i = 0, len = tags.Count; i < len; i++) {
