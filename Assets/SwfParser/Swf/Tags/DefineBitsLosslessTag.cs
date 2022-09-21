@@ -1,6 +1,7 @@
-﻿using System.Xml;
+﻿using System.Collections.Generic;
+using System.Xml;
 
-public class DefineBitsLosslessTag : SwfTag {
+public class DefineBitsLosslessTag : SwfTag, ICharacterIdTag {
 
     public ushort characterID;
     public byte bitmapFormat;
@@ -20,4 +21,9 @@ public class DefineBitsLosslessTag : SwfTag {
         return ele;
     }
 
+    public void GetNeededCharacterIds(List<ushort> characterIds, Swf swf) {
+        if (characterIds.IndexOf(characterID) < 0) {
+            characterIds.Add(characterID);
+        }
+    }
 }

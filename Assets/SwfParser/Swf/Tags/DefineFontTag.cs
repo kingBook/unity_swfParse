@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System.Xml;
 using System.Text;
 
-public class DefineFontTag : SwfTag {
+public class DefineFontTag : SwfTag, ICharacterIdTag {
 
     public ushort fontID;
     public ushort[] offsetTable;
@@ -29,5 +30,11 @@ public class DefineFontTag : SwfTag {
             ele.AppendChild(glyphShapeTable[i].ToXml(doc));
         }
         return ele;
+    }
+
+    public void GetNeededCharacterIds(List<ushort> characterIds, Swf swf) {
+        if (characterIds.IndexOf(fontID) < 0) {
+            characterIds.Add(fontID);
+        }
     }
 }

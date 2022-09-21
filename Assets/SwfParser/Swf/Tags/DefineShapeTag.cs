@@ -1,6 +1,7 @@
-﻿using System.Xml;
+﻿using System.Collections.Generic;
+using System.Xml;
 
-public class DefineShapeTag : SwfTag {
+public class DefineShapeTag : SwfTag, ICharacterIdTag {
 
     public ushort shapeId;
     public RectangleRecord shapeBounds;
@@ -14,4 +15,21 @@ public class DefineShapeTag : SwfTag {
         return ele;
     }
 
+    public void GetNeededCharacterIds(List<ushort> characterIds, Swf swf) {
+        if (characterIds.IndexOf(shapeId) < 0) {
+            characterIds.Add(shapeId);
+            
+            // bitmapId
+            FillStyleRecord[] fillStyles = shapes.fillStyles.fillStyles;
+            for (int i = 0, len = fillStyles.Length; i < len; i++) {
+                var fillStyle = fillStyles[i];
+                var type = fillStyle.fillStyleType;
+                if (type == 0x40 || type == 0x41 || type == 0x42 || type == 0x43) {
+                    if (characterIds.IndexOf(fillStyle.bitmapId) < 0) {
+                        characterIds.Add(fillStyle.bitmapId);
+                    }
+                }
+            }
+        }
+    }
 }

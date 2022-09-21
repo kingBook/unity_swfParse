@@ -12,7 +12,7 @@ public struct MorphFillStyleArrayRecord {
         if (fillStyleCount == 0xFF) {
             ele.SetAttribute("fillStyleCountExtended", fillStyleCountExtended.ToString());
         }
-        for (int i = 0; i < fillStyles.Length; i++) {
+        for (int i = 0, len = fillStyles.Length; i < len; i++) {
             ele.AppendChild(fillStyles[i].ToXml(doc));
         }
         return ele;

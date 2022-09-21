@@ -13,7 +13,7 @@ public struct LineStyleArrayRecord {
         var ele = doc.CreateElement("LineStyleArray");
         ele.SetAttribute("lineStyleCount", lineStyleCount.ToString());
         ele.SetAttribute("lineStyleCountExtended", lineStyleCountExtended.ToString());
-        for (int i = 0; i < lineStyles.Length; i++) {
+        for (int i = 0, len = lineStyles.Length; i < len; i++) {
             ele.AppendChild(lineStyles[i].ToXml(doc));
         }
         return ele;

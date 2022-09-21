@@ -1,13 +1,13 @@
 ﻿using System.Text;
 using System.Xml;
 
-public class DefineBitsJPEG4Tag : SwfTag {
+public class DefineBitsJPEG4Tag : DefineBitsJPEG3Tag {
 
-    public ushort characterID;
-    public uint alphaDataOffset;
+    //public ushort characterID;
+    //public uint alphaDataOffset;
     public float deblockParam;
-    public byte[] imageData;
-    public byte[] bitmapAlphaData;
+    //public byte[] imageData;
+    //public byte[] bitmapAlphaData;
 
     public override XmlElement ToXml(XmlDocument doc) {
         var ele = CreateXmlElement(doc, "DefineBitsJPEG4");

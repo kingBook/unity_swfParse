@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class DynamicTextTag : SwfTag {
+public class DynamicTextTag : SwfTag, ICharacterIdTag {
 
     public ushort characterID;
     public RectangleRecord bounds;
@@ -33,4 +34,10 @@ public class DynamicTextTag : SwfTag {
     public short leading;
     public string variableName;
     public string initialText;
+
+    public void GetNeededCharacterIds(List<ushort> characterIds, Swf swf) {
+        if (characterIds.IndexOf(characterID) < 0) {
+            characterIds.Add(characterID);
+        }
+    }
 }

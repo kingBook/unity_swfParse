@@ -22,7 +22,7 @@ public struct ShapeWithStyleRecord {
         numLineBitsEle.InnerText = numLineBits.ToString();
         ele.AppendChild(numLineBitsEle);
         //
-        for (int i = 0; i < shapeRecords.Length; i++) {
+        for (int i = 0, len = shapeRecords.Length; i < len; i++) {
             ele.AppendChild(shapeRecords[i].ToXml(doc));
         }
         return ele;

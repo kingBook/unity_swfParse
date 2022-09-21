@@ -152,9 +152,11 @@ public class SwfReader {
             case 46:
                 tag = ReadDefineMorphShapeTag(bytes, header);
                 break;
-            /*case 84:
-                tag=readDefineMorphShape2Tag(bytes,header);
-                break;*/
+            case 84:
+                tag=ReadUnknownTag(bytes, header);
+                Debug.LogError("DefineMorphShape2Tag is not implemented.");
+                //tag=ReadDefineMorphShape2Tag(bytes,header);
+                break;
             //============= Fonts and Text =======
             case 10:
                 tag = ReadDefineFontTag(bytes, header);
@@ -166,9 +168,11 @@ public class SwfReader {
                 tag = ReadDefineText2Tag(bytes, header);
                 break;
             //============= Buttons =======
-            /*case 7:
-                tag=readDefineButtonTag(bytes,header);
-                break;*/
+            case 7:
+                tag=ReadUnknownTag(bytes, header);
+                Debug.LogError("DefineButtonTag is not implemented.");
+                //tag=ReadDefineButtonTag(bytes,header);
+                break;
             case 34:
                 tag = ReadDefineButton2Tag(bytes, header);
                 break;
@@ -886,10 +890,10 @@ public class SwfReader {
         while (true) {
             var shapeRecord = ReadShapeRecord(bytes, numFillBits, numLineBits, shapeType);
             list.Add(shapeRecord);
-            if (shapeRecord is StyleChangeRecord) {
-                if (((StyleChangeRecord)shapeRecord).stateNewStyles) {
-                    numFillBits = ((StyleChangeRecord)shapeRecord).numFillBits;
-                    numLineBits = ((StyleChangeRecord)shapeRecord).numLineBits;
+            if (shapeRecord is StyleChangeRecord changeRecord) {
+                if (changeRecord.stateNewStyles) {
+                    numFillBits = changeRecord.numFillBits;
+                    numLineBits = changeRecord.numLineBits;
                 }
             }
             if (shapeRecord is EndShapeRecord) break;

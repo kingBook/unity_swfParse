@@ -1,11 +1,11 @@
 ﻿using System.Text;
 using System.Xml;
 
-public class DefineBitsJPEG3Tag : SwfTag {
+public class DefineBitsJPEG3Tag : DefineBitsJPEG2Tag {
 
-    public ushort characterID;
+    //public ushort characterID;
     public uint alphaDataOffset;
-    public byte[] imageData;
+    //public byte[] imageData;
     public byte[] bitmapAlphaData;
 
     public override XmlElement ToXml(XmlDocument doc) {

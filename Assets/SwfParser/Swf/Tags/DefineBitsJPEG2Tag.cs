@@ -1,8 +1,9 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Text;
 using System.Xml;
 
-public class DefineBitsJPEG2Tag : SwfTag {
-    
+public class DefineBitsJPEG2Tag : SwfTag, ICharacterIdTag {
+
     public ushort characterID;
     public byte[] imageData;
 
@@ -20,4 +21,9 @@ public class DefineBitsJPEG2Tag : SwfTag {
         return ele;
     }
 
+    public void GetNeededCharacterIds(List<ushort> characterIds, Swf swf) {
+        if (characterIds.IndexOf(characterID) < 0) {
+            characterIds.Add(characterID);
+        }
+    }
 }

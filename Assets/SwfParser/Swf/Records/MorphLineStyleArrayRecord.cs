@@ -12,7 +12,7 @@ public class MorphLineStyleArrayRecord {
         if (lineStyleCount == 0xFF) {
             ele.SetAttribute("lineStyleCountExtended", lineStyleCountExtended.ToString());
         }
-        for (var i = 0; i < lineStyles.Length; i++) {
+        for (int i = 0, len = lineStyles.Length; i < len; i++) {
             ele.AppendChild(lineStyles[i].ToXml(doc));
         }
         return ele;

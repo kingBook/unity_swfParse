@@ -1,4 +1,6 @@
-﻿using System.Xml;
+﻿using System;
+using System.Collections.Generic;
+using System.Xml;
 
 public class SymbolClassTag : SwfTag {
 
@@ -16,4 +18,5 @@ public class SymbolClassTag : SwfTag {
         }
         return ele;
     }
+
 }

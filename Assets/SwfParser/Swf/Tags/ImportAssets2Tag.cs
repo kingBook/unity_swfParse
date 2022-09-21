@@ -7,7 +7,7 @@ public class ImportAssets2Tag : SwfTag {
 
     public override XmlElement ToXml(XmlDocument doc) {
         var ele = CreateXmlElement(doc, "ImportAssets2");
-        for (int i = 0; i < list.Length; i++) {
+        for (int i = 0, len = list.Length; i < len; i++) {
             var record = list[i];
             var recordEle = CreateXmlElement(doc, "Record");
             recordEle.SetAttribute("tag", record.tag.ToString());

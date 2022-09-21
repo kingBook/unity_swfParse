@@ -1,6 +1,7 @@
-﻿using System.Xml;
+﻿using System.Collections.Generic;
+using System.Xml;
 
-public class PlaceObjectTag : SwfTag {
+public class PlaceObjectTag : SwfTag, ICharacterIdTag {
 
     public ushort characterId;
     public ushort depth;
@@ -16,4 +17,9 @@ public class PlaceObjectTag : SwfTag {
         return ele;
     }
 
+    public void GetNeededCharacterIds(List<ushort> characterIds, Swf swf) {
+        if (characterIds.IndexOf(characterId) < 0) {
+            characterIds.Add(characterId);
+        }
+    }
 }

@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System.Xml;
 
-public class DefineButton2Tag : SwfTag {
+public class DefineButton2Tag : SwfTag, ICharacterIdTag {
 
     public ushort buttonId;
     public byte reservedFlags;
@@ -27,4 +28,9 @@ public class DefineButton2Tag : SwfTag {
         return ele;
     }
 
+    public void GetNeededCharacterIds(List<ushort> characterIds, Swf swf) {
+        if (characterIds.IndexOf(buttonId) < 0) {
+            characterIds.Add(buttonId);
+        }
+    }
 }

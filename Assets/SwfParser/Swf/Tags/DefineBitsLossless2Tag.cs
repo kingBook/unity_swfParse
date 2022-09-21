@@ -1,6 +1,7 @@
-﻿using System.Xml;
+﻿using System.Collections.Generic;
+using System.Xml;
 
-public class DefineBitsLossless2Tag : SwfTag {
+public class DefineBitsLossless2Tag : SwfTag, ICharacterIdTag {
 
     public ushort characterID;
     public byte bitmapFormat;
@@ -18,6 +19,12 @@ public class DefineBitsLossless2Tag : SwfTag {
         ele.SetAttribute("bitmapColorTableSize", bitmapFormat.ToString());
         ele.AppendChild(zlibBitmapData.ToXml(doc));
         return ele;
+    }
+
+    public void GetNeededCharacterIds(List<ushort> characterIds, Swf swf) {
+        if (characterIds.IndexOf(characterID) < 0) {
+            characterIds.Add(characterID);
+        }
     }
 
 }

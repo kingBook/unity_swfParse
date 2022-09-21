@@ -1,4 +1,6 @@
-﻿public class DefineMorphShape2Tag : SwfTag {
+﻿using System.Collections.Generic;
+
+public class DefineMorphShape2Tag : SwfTag, ICharacterIdTag {
 
     public ushort characterId;
     public RectangleRecord startBounds;
@@ -13,4 +15,22 @@
     public MorphLineStyleArrayRecord morphLineStyles;
     public SHAPE startEdges;
     public SHAPE endEdges;
+
+    public void GetNeededCharacterIds(List<ushort> characterIds, Swf swf) {
+        if (characterIds.IndexOf(characterId) < 0) {
+            characterIds.Add(characterId);
+
+            // bitmapId
+            var fillStyles = morphFillStyles.fillStyles;
+            for (int i = 0, len = fillStyles.Length; i < len; i++) {
+                var fillStyle = fillStyles[i];
+                var type = fillStyle.fillStyleType;
+                if (type == 0x40 || type == 0x41 || type == 0x42 || type == 0x43) {
+                    if (characterIds.IndexOf(fillStyle.bitmapId) < 0) {
+                        characterIds.Add(fillStyle.bitmapId);
+                    }
+                }
+            }
+        }
+    }
 }

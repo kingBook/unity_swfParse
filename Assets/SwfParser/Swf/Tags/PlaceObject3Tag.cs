@@ -1,6 +1,7 @@
-﻿using System.Xml;
+﻿using System.Collections.Generic;
+using System.Xml;
 
-public class PlaceObject3Tag : SwfTag {
+public class PlaceObject3Tag : SwfTag, ICharacterIdTag {
 
     public bool placeFlagHasClipActions;
     public bool placeFlagHasClipDepth;
@@ -90,5 +91,11 @@ public class PlaceObject3Tag : SwfTag {
             ele.AppendChild(clipActions.toXml(doc));
         }*/
         return ele;
+    }
+
+    public void GetNeededCharacterIds(List<ushort> characterIds, Swf swf) {
+        if (placeFlagHasCharacter && characterIds.IndexOf(characterId) < 0) {
+            characterIds.Add(characterId);
+        }
     }
 }

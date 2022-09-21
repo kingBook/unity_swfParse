@@ -1,10 +1,10 @@
 ﻿using System.Xml;
 
-public class DefineShape2Tag : SwfTag {
+public class DefineShape2Tag : DefineShapeTag {
 
-    public ushort shapeId;
-    public RectangleRecord shapeBounds;
-    public ShapeWithStyleRecord shapes;
+    //public ushort shapeId;
+    //public RectangleRecord shapeBounds;
+    //public ShapeWithStyleRecord shapes;
 
     public override XmlElement ToXml(XmlDocument doc) {
         var ele = CreateXmlElement(doc, "DefineShape2");

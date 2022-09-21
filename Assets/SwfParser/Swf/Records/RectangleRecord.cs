@@ -8,7 +8,7 @@ public struct RectangleRecord {
     public int yMin;
     public int yMax;
 
-    override public string ToString() {
-        return xMin + "," + yMin + "," + xMax + "," + yMax;
+    public override string ToString() {
+        return $"{xMin},{yMin},{xMax},{yMax}";
     }
 }

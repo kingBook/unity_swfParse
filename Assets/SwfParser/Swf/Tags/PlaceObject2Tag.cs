@@ -1,6 +1,7 @@
-﻿using System.Xml;
+﻿using System.Collections.Generic;
+using System.Xml;
 
-public class PlaceObject2Tag : SwfTag {
+public class PlaceObject2Tag : SwfTag, ICharacterIdTag {
 
     public bool placeFlagHasClipActions;
     public bool placeFlagHasClipDepth;
@@ -37,5 +38,11 @@ public class PlaceObject2Tag : SwfTag {
         if (placeFlagHasClipDepth) ele.SetAttribute("clipDepth", clipDepth.ToString());
         //if(placeFlagHasClipActions)ele.AppendChild(clipActions.toXml(doc));
         return ele;
+    }
+
+    public void GetNeededCharacterIds(List<ushort> characterIds, Swf swf) {
+        if (placeFlagHasCharacter && characterIds.IndexOf(characterId) < 0) {
+            characterIds.Add(characterId);
+        }
     }
 }

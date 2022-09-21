@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿#if UNITY_EDITOR
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Xml;
@@ -25,17 +26,17 @@ public class SwfPostprocessor : AssetPostprocessor {
         path = path.Substring(id);
         path = Application.dataPath + path;
 
-        ParseSwf(path, true, true);
+        ParseSwf(path, true, true, true);
 
     }
 
     [MenuItem("SwfParser/Run")]
     public static void Run() {
         string assetsPath = Application.dataPath;
-        ParseSwf(assetsPath + "/test.fla_export/test.fla.swf", true, true);
+        ParseSwf($"{assetsPath}/test.fla_export/test.fla.swf", true, true, true);
     }
 
-    public static void ParseSwf(string swfPath, bool isExportXml, bool isExportBitmap) {
+    public static void ParseSwf(string swfPath, bool isExportXml, bool isExportBitmap, bool isOnlyExportLinkage) {
         // 截取掉xx.swf的文件夹路径，如：E:/kingBook/projects/unity_swfParse/Assets/
         string swfFolderPath = swfPath.Substring(0, swfPath.LastIndexOf('/') + 1);
         //Debug.Log(swfPath);
@@ -62,15 +63,15 @@ public class SwfPostprocessor : AssetPostprocessor {
             Debug.Log("save passed time:" + sw.ElapsedMilliseconds);
             //Debug.Log(formatXml(swf.toXml()));
         }
-        
+
         if (isExportBitmap) {
-            var imageDatas = swf.GetImageDatas();
+            var imageDatas = swf.GetImageDatas(isOnlyExportLinkage);
             Debug.Log(imageDatas.Length);
             for (int i = 0, len = imageDatas.Length; i < len; i++) {
                 imageDatas[i].SaveTo(swfFolderPath);
             }
         }
-        
+
         AssetDatabase.Refresh();
 
         EditorUtility.DisplayDialog("Complete", "Import complete\n\n" + swfPath.Replace(Application.dataPath, "Assets"), "OK");
@@ -85,11 +86,11 @@ public class SwfPostprocessor : AssetPostprocessor {
 
     private static string FormatXml(object xml) {
         XmlDocument xd;
-        if (xml is XmlDocument) {
-            xd = xml as XmlDocument;
+        if (xml is XmlDocument document) {
+            xd = document;
         } else {
             xd = new XmlDocument();
-            xd.LoadXml(xml as string);
+            xd.LoadXml((string)xml);
         }
         StringBuilder sb = new StringBuilder();
         StringWriter sw = new StringWriter(sb);
@@ -101,10 +102,11 @@ public class SwfPostprocessor : AssetPostprocessor {
             xtw.IndentChar = '\t';
             xd.WriteTo(xtw);
         } finally {
-            if (xtw != null) xtw.Close();
+            xtw?.Close();
         }
         return sb.ToString();
     }
 
 
 }
+#endif
