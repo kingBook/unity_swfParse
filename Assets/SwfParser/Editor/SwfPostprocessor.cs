@@ -72,12 +72,26 @@ public class SwfPostprocessor : AssetPostprocessor {
             }
         }
 
+        // 根据有链接类名的库元件，创建 GameObject
+        CreateGameObjectsWithSymbolClass(swf, isCreatePrefabAsset:true);
+
         AssetDatabase.Refresh();
 
         EditorUtility.DisplayDialog("Complete", "Import complete\n\n" + swfPath.Replace(Application.dataPath, "Assets"), "OK");
     }
 
-    /**保存xml文件*/
+    private static void CreateGameObjectsWithSymbolClass(Swf swf, bool isCreatePrefabAsset) {
+        for (int i = 0, len = swf.symbolClassTags.Count; i < len; i++) {
+            var symbolClassTag = swf.symbolClassTags[i];
+            for (int j = 0, lenJ = symbolClassTag.numSymbols; j < lenJ; j++) {
+                var symbol = symbolClassTag.symbols[j];
+
+                GameObject inst = new GameObject(symbol.name,typeof(MovieClip));
+            }
+        }
+    }
+
+    /// <summary> 保存xml文件 </summary>
     private static void SaveXml(XmlDocument doc, string swfPath) {
         int id = swfPath.LastIndexOf('.');
         string fileName = swfPath.Substring(0, id) + ".xml";

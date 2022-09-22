@@ -8,7 +8,9 @@ using System.Text;
 public class Swf {
 
     public SwfHeader header;
-    public List<SwfTag> tags;
+    public readonly List<SwfTag> tags = new List<SwfTag>(256);
+    public readonly List<SymbolClassTag> symbolClassTags = new List<SymbolClassTag>(24);
+    public readonly List<DefineSpriteTag> defineSpriteTags = new List<DefineSpriteTag>(128);
 
     public XmlDocument ToXml() {
         var doc = new XmlDocument();
@@ -29,14 +31,6 @@ public class Swf {
             swfElement.AppendChild(tagXml);
         }
         return doc;
-    }
-
-    public void GetTags<T>(List<T> output) where T : SwfTag {
-        foreach (var tag in tags) {
-            if (tag is T tempTag) {
-                output.Add(tempTag);
-            }
-        }
     }
 
     #region GetImageDatas
@@ -100,12 +94,6 @@ public class Swf {
     }
 
     private void GetLinkageDefineSpriteTagsNeededCharacterIds(List<ushort> characterIds) {
-        var symbolClassTags = new List<SymbolClassTag>();
-        GetTags(symbolClassTags);
-
-        var defineSpriteTags = new List<DefineSpriteTag>();
-        GetTags(defineSpriteTags);
-
         for (int i = 0, len = defineSpriteTags.Count; i < len; i++) {
             var defineSpriteTag = defineSpriteTags[i];
             bool isLinkageDefineSpriteTag = false; // 是否为导出链接类的 DefineSpriteTag

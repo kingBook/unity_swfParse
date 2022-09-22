@@ -5,10 +5,11 @@ using System.IO;
 
 public class SwfReader {
 
+    private readonly List<SwfTag> m_tempTags = new List<SwfTag>(256);
+
     public Swf Read(SwfByteArray bytes) {
         var swf = new Swf();
         swf.header = ReadSwfHeader(bytes);
-        swf.tags = new List<SwfTag>();
         //
         while (bytes.GetBytesAvailable() > 0) {
             long preHeaderStart = bytes.GetBytePosition();
@@ -20,6 +21,11 @@ public class SwfReader {
             SwfTag tag = ReadTag(bytes, tagHeader);
             tag.header = tagHeader;
             swf.tags.Add(tag);
+            if (tag is DefineSpriteTag defineSpriteTag) {
+                swf.defineSpriteTags.Add(defineSpriteTag);
+            } else if (tag is SymbolClassTag symbolClassTag) {
+                swf.symbolClassTags.Add(symbolClassTag);
+            }
 
             bytes.AlignBytes();
             long newPosition = bytes.GetBytePosition();
@@ -34,18 +40,18 @@ public class SwfReader {
     }
 
     private SwfTag[] ReadControlTags(SwfByteArray bytes) {
-        var tags = new List<SwfTag>();
+        m_tempTags.Clear();
         while (true) {
             var header = ReadTagHeaderRecord(bytes);
             long startPosition = bytes.GetBytePosition();
             long expectedEndPosition = startPosition + header.length;
             var tag = ReadTag(bytes, header);
             tag.header = header;
-            tags.Add(tag);
+            m_tempTags.Add(tag);
             bytes.SetBytePosition(expectedEndPosition);
             if (tag is EndTag) break;
         }
-        return tags.ToArray();
+        return m_tempTags.ToArray();
     }
 
     private SwfTag ReadTag(SwfByteArray bytes, TagHeaderRecord header) {
@@ -153,7 +159,7 @@ public class SwfReader {
                 tag = ReadDefineMorphShapeTag(bytes, header);
                 break;
             case 84:
-                tag=ReadUnknownTag(bytes, header);
+                tag = ReadUnknownTag(bytes, header);
                 Debug.LogError("DefineMorphShape2Tag is not implemented.");
                 //tag=ReadDefineMorphShape2Tag(bytes,header);
                 break;
@@ -169,7 +175,7 @@ public class SwfReader {
                 break;
             //============= Buttons =======
             case 7:
-                tag=ReadUnknownTag(bytes, header);
+                tag = ReadUnknownTag(bytes, header);
                 Debug.LogError("DefineButtonTag is not implemented.");
                 //tag=ReadDefineButtonTag(bytes,header);
                 break;
@@ -582,7 +588,7 @@ public class SwfReader {
             var unzippedSwfArray = new SwfByteArray(unzippedData);
             if (tag.bitmapFormat == 3) {
                 uint bitmapWidth = tag.bitmapWidth;
-                while ((bitmapWidth%4)!=0) {
+                while ((bitmapWidth % 4) != 0) {
                     bitmapWidth = (bitmapWidth / 4 + 1) * 4;
                 }
                 uint imageDataSize = bitmapWidth * tag.bitmapHeight;
