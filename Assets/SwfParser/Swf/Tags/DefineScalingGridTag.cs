@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Xml;
 
-public class DefineScalingGridTag : SwfTag,ICharacterIdTag {
+public class DefineScalingGridTag : SwfTag, ICharacterIdTag {
 
     public ushort characterId;
     public RectangleRecord splitter;
@@ -18,5 +18,9 @@ public class DefineScalingGridTag : SwfTag,ICharacterIdTag {
         if (characterIds.IndexOf(characterId) < 0) {
             characterIds.Add(characterId);
         }
+    }
+
+    public ushort GetCharacterId() {
+        return characterId;
     }
 }

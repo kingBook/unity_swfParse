@@ -33,4 +33,8 @@ public class DefineMorphShape2Tag : SwfTag, ICharacterIdTag {
             }
         }
     }
+
+    public ushort GetCharacterId() {
+        return characterId;
+    }
 }

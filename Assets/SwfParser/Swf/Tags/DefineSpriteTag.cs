@@ -44,4 +44,8 @@ public class DefineSpriteTag : SwfTag, ICharacterIdTag {
             }
         }
     }
+
+    public ushort GetCharacterId() {
+        return spriteId;
+    }
 }

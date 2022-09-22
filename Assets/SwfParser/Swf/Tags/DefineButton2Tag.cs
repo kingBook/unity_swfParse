@@ -33,4 +33,8 @@ public class DefineButton2Tag : SwfTag, ICharacterIdTag {
             characterIds.Add(buttonId);
         }
     }
+
+    public ushort GetCharacterId() {
+        return buttonId;
+    }
 }

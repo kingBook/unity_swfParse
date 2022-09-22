@@ -26,17 +26,17 @@ public class SwfPostprocessor : AssetPostprocessor {
         path = path.Substring(id);
         path = Application.dataPath + path;
 
-        ParseSwf(path, true, true, true);
+        ParseSwf(path, true);
 
     }
 
     [MenuItem("SwfParser/Run")]
     public static void Run() {
         string assetsPath = Application.dataPath;
-        ParseSwf($"{assetsPath}/test.fla_export/test.fla.swf", true, true, true);
+        ParseSwf($"{assetsPath}/test.fla_export/test.fla.swf", true);
     }
 
-    public static void ParseSwf(string swfPath, bool isExportXml, bool isExportBitmap, bool isOnlyExportLinkage) {
+    public static void ParseSwf(string swfPath, bool isExportXml) {
         // 截取掉xx.swf的文件夹路径，如：E:/kingBook/projects/unity_swfParse/Assets/
         string swfFolderPath = swfPath.Substring(0, swfPath.LastIndexOf('/') + 1);
         //Debug.Log(swfPath);
@@ -47,10 +47,12 @@ public class SwfPostprocessor : AssetPostprocessor {
         Stopwatch sw = new Stopwatch();
         sw.Start();
         var swf = swfReader.Read(swfBytes);
+        swf.InitLinkageDefineSpritesNeededCharacters();
         swfBytes.Close();
         sw.Stop();
         Debug.Log("read passed time:" + sw.ElapsedMilliseconds);
 
+        // 导出 .xml
         if (isExportXml) {
             sw.Restart();
             var xml = swf.ToXml();
@@ -64,31 +66,39 @@ public class SwfPostprocessor : AssetPostprocessor {
             //Debug.Log(formatXml(swf.toXml()));
         }
 
-        if (isExportBitmap) {
-            var imageDatas = swf.GetImageDatas(isOnlyExportLinkage);
-            Debug.Log(imageDatas.Length);
-            for (int i = 0, len = imageDatas.Length; i < len; i++) {
-                imageDatas[i].SaveTo(swfFolderPath);
-            }
+        // 导出 bitmapData
+        var imageDatas = swf.GetImageDatas(isOnlyExportLinkage:true);
+        for (int i = 0, len = imageDatas.Length; i < len; i++) {
+            imageDatas[i].SaveTo(swfFolderPath);
         }
+        
+        // 导出 RuntimeSwfData
+        var runtimeSwfData = swf.GetRuntimeSwfData(isOnlyExportLinkage:true);
+        
 
         // 根据有链接类名的库元件，创建 GameObject
-        CreateGameObjectsWithSymbolClass(swf, isCreatePrefabAsset:true);
+        CreateGameObjectsWithSymbolClassTags(swf, isCreatePrefabAsset:true);
 
         AssetDatabase.Refresh();
 
         EditorUtility.DisplayDialog("Complete", "Import complete\n\n" + swfPath.Replace(Application.dataPath, "Assets"), "OK");
     }
 
-    private static void CreateGameObjectsWithSymbolClass(Swf swf, bool isCreatePrefabAsset) {
+    private static void CreateGameObjectsWithSymbolClassTags(Swf swf, bool isCreatePrefabAsset) {
         for (int i = 0, len = swf.symbolClassTags.Count; i < len; i++) {
             var symbolClassTag = swf.symbolClassTags[i];
             for (int j = 0, lenJ = symbolClassTag.numSymbols; j < lenJ; j++) {
-                var symbol = symbolClassTag.symbols[j];
-
-                GameObject inst = new GameObject(symbol.name,typeof(MovieClip));
+                var symbolClass = symbolClassTag.symbols[j];
+                CreateGameObjectWithSymbolClass(swf, symbolClass, isCreatePrefabAsset);
             }
         }
+    }
+
+    private static void CreateGameObjectWithSymbolClass(Swf swf, SymbolClassRecord symbolClass, bool isCreatePrefabAsset) {
+        //swf.defineSpriteTags
+
+
+        GameObject inst = new GameObject(symbolClass.name, typeof(MovieClip));
     }
 
     /// <summary> 保存xml文件 </summary>

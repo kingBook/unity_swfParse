@@ -26,4 +26,8 @@ public class DefineBitsJPEG2Tag : SwfTag, ICharacterIdTag {
             characterIds.Add(characterID);
         }
     }
+
+    public ushort GetCharacterId() {
+        return characterID;
+    }
 }

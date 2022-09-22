@@ -27,4 +27,8 @@ public class DefineBitsLossless2Tag : SwfTag, ICharacterIdTag {
         }
     }
 
+    public ushort GetCharacterId() {
+        return characterID;
+    }
+
 }

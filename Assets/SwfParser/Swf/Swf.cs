@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml;
 using System.Text;
 
@@ -9,8 +10,43 @@ public class Swf {
 
     public SwfHeader header;
     public readonly List<SwfTag> tags = new List<SwfTag>(256);
+
     public readonly List<SymbolClassTag> symbolClassTags = new List<SymbolClassTag>(24);
     public readonly List<DefineSpriteTag> defineSpriteTags = new List<DefineSpriteTag>(128);
+    public readonly List<ushort> linkageDefineSpritesCharacterIds = new List<ushort>(256);
+    public readonly List<ICharacterIdTag> linkageDefineSpritesCharacterIdTags = new List<ICharacterIdTag>(256);
+
+    /// <summary>
+    /// 初始化有链接类名的 DefineSprite(在SymbolClassTag中定义) 的所有 Character
+    /// </summary>
+    public void InitLinkageDefineSpritesNeededCharacters() {
+        for (int i = 0, len = defineSpriteTags.Count; i < len; i++) {
+            var defineSpriteTag = defineSpriteTags[i];
+            bool isLinkageDefineSpriteTag = false; // 是否为导出链接类的 DefineSpriteTag
+            for (int j = 0, lenJ = symbolClassTags.Count; j < lenJ; j++) {
+                var symbols = symbolClassTags[j].symbols;
+                for (int k = 0, lenK = symbols.Length; k < lenK; k++) {
+                    if (defineSpriteTag.spriteId == symbols[k].tag) {
+                        isLinkageDefineSpriteTag = true;
+                        break;
+                    }
+                }
+                if (isLinkageDefineSpriteTag) break;
+            }
+            if (isLinkageDefineSpriteTag) {
+                defineSpriteTag.GetNeededCharacterIds(linkageDefineSpritesCharacterIds, this);
+            }
+        }
+
+        for (int i = 0, len = tags.Count; i < len; i++) {
+            var tag = tags[i];
+            if (tag is ICharacterIdTag characterIdTag) {
+                if (linkageDefineSpritesCharacterIds.IndexOf(characterIdTag.GetCharacterId()) > -1) {
+                    linkageDefineSpritesCharacterIdTags.Add(characterIdTag);
+                }
+            }
+        }
+    }
 
     public XmlDocument ToXml() {
         var doc = new XmlDocument();
@@ -41,18 +77,13 @@ public class Swf {
     /// <returns></returns>
     public ImageData[] GetImageDatas(bool isOnlyExportLinkage) {
         // 获取有链接类名的 DefineSprite(在SymbolClassTag中定义) 的所有 CharacterId
-        List<ushort> characterIds = null;
-        if (isOnlyExportLinkage) {
-            characterIds = new List<ushort>();
-            GetLinkageDefineSpriteTagsNeededCharacterIds(characterIds);
-        }
 
         var imageDatas = new List<ImageData>();
         for (int i = 0, len = tags.Count; i < len; i++) {
             var tag = tags[i];
             if (tag.header.type == (uint)TagType.DefineBits) {
                 var defineBitsTag = (DefineBitsTag)tag;
-                if (isOnlyExportLinkage && characterIds.IndexOf(defineBitsTag.characterID) > -1) {
+                if (isOnlyExportLinkage && linkageDefineSpritesCharacterIds.IndexOf(defineBitsTag.characterID) > -1) {
                     var imageData = GetDefineBitsImageData(defineBitsTag);
                     if (imageData.bytes != null && imageData.bytes.Length > 0) {
                         imageDatas.Add(imageData);
@@ -60,59 +91,38 @@ public class Swf {
                 }
             } else if (tag.header.type == (uint)TagType.DefineBitsJPEG2) {
                 var defineBitsJpeg2Tag = (DefineBitsJPEG2Tag)tag;
-                if (isOnlyExportLinkage && characterIds.IndexOf(defineBitsJpeg2Tag.characterID) > -1) {
+                if (isOnlyExportLinkage && linkageDefineSpritesCharacterIds.IndexOf(defineBitsJpeg2Tag.characterID) > -1) {
                     var imageData = GetDefineBitsJpeg2ImageData(defineBitsJpeg2Tag);
                     imageDatas.Add(imageData);
                 }
             } else if (tag.header.type == (uint)TagType.DefineBitsJPEG3) {
                 var defineBitsJpeg3Tag = (DefineBitsJPEG3Tag)tag;
-                if (isOnlyExportLinkage && characterIds.IndexOf(defineBitsJpeg3Tag.characterID) > -1) {
+                if (isOnlyExportLinkage && linkageDefineSpritesCharacterIds.IndexOf(defineBitsJpeg3Tag.characterID) > -1) {
                     var imageData = GetDefineBitsJpeg3ImageData(defineBitsJpeg3Tag);
                     imageDatas.Add(imageData);
                 }
             } else if (tag.header.type == (uint)TagType.DefineBitsLossless) {
                 var defineBitsLosslessTag = (DefineBitsLosslessTag)tag;
-                if (isOnlyExportLinkage && characterIds.IndexOf(defineBitsLosslessTag.characterID) > -1) {
+                if (isOnlyExportLinkage && linkageDefineSpritesCharacterIds.IndexOf(defineBitsLosslessTag.characterID) > -1) {
                     var imageData = GetDefineBitsLosslessImageData(defineBitsLosslessTag);
                     imageDatas.Add(imageData);
                 }
             } else if (tag.header.type == (uint)TagType.DefineBitsLossless2) {
                 var defineBitsLossless2Tag = (DefineBitsLossless2Tag)tag;
-                if (isOnlyExportLinkage && characterIds.IndexOf(defineBitsLossless2Tag.characterID) > -1) {
+                if (isOnlyExportLinkage && linkageDefineSpritesCharacterIds.IndexOf(defineBitsLossless2Tag.characterID) > -1) {
                     var imageData = GetDefineBitsLossless2ImageData(defineBitsLossless2Tag);
                     imageDatas.Add(imageData);
                 }
             } else if (tag.header.type == (uint)TagType.DefineBitsJPEG4) {
                 var defineBitsJpeg4Tag = (DefineBitsJPEG4Tag)tag;
-                if (isOnlyExportLinkage && characterIds.IndexOf(defineBitsJpeg4Tag.characterID) > -1) {
-                    var imageData = GetDefineBitsJPEG4ImageData(defineBitsJpeg4Tag);
+                if (isOnlyExportLinkage && linkageDefineSpritesCharacterIds.IndexOf(defineBitsJpeg4Tag.characterID) > -1) {
+                    var imageData = GetDefineBitsJpeg4ImageData(defineBitsJpeg4Tag);
                     imageDatas.Add(imageData);
                 }
             }
         }
         return imageDatas.ToArray();
     }
-
-    private void GetLinkageDefineSpriteTagsNeededCharacterIds(List<ushort> characterIds) {
-        for (int i = 0, len = defineSpriteTags.Count; i < len; i++) {
-            var defineSpriteTag = defineSpriteTags[i];
-            bool isLinkageDefineSpriteTag = false; // 是否为导出链接类的 DefineSpriteTag
-            for (int j = 0, lenJ = symbolClassTags.Count; j < lenJ; j++) {
-                var symbols = symbolClassTags[j].symbols;
-                for (int k = 0, lenK = symbols.Length; k < lenK; k++) {
-                    if (defineSpriteTag.spriteId == symbols[k].tag) {
-                        isLinkageDefineSpriteTag = true;
-                        break;
-                    }
-                }
-                if (isLinkageDefineSpriteTag) break;
-            }
-            if (isLinkageDefineSpriteTag) {
-                defineSpriteTag.GetNeededCharacterIds(characterIds, this);
-            }
-        }
-    }
-
 
     private ImageData GetDefineBitsImageData(DefineBitsTag defineBitsTag) {
         var imageData = new ImageData();
@@ -179,7 +189,7 @@ public class Swf {
 
             var alphaData = new byte[len];
             Array.Copy(defineBitsJpeg3Tag.bitmapAlphaData, alphaData, len);
-            FlipVerticalBitmapAlphaData(alphaData, (ushort)texture.width, (ushort)texture.height);
+            alphaData = FlipVerticalBitmapAlphaData(alphaData, (ushort)texture.width, (ushort)texture.height);
             for (var i = 0; i < len; i++) {
                 colors[i].a = alphaData[i];
             }
@@ -280,7 +290,7 @@ public class Swf {
         return imageData;
     }
 
-    private ImageData GetDefineBitsJPEG4ImageData(DefineBitsJPEG4Tag defineBitsJpeg4Tag) {
+    private ImageData GetDefineBitsJpeg4ImageData(DefineBitsJPEG4Tag defineBitsJpeg4Tag) {
         var imageData = new ImageData();
         imageData.characterID = defineBitsJpeg4Tag.characterID;
         bool isJpg = defineBitsJpeg4Tag.imageData[0] == 0xFF && (defineBitsJpeg4Tag.imageData[1] == 0xD8 || defineBitsJpeg4Tag.imageData[1] == 0xD9);
@@ -308,7 +318,7 @@ public class Swf {
 
             var alphaData = new byte[len];
             Array.Copy(defineBitsJpeg4Tag.bitmapAlphaData, alphaData, len);
-            FlipVerticalBitmapAlphaData(alphaData, (ushort)texture.width, (ushort)texture.height);
+            alphaData = FlipVerticalBitmapAlphaData(alphaData, (ushort)texture.width, (ushort)texture.height);
             for (var i = 0; i < len; i++) {
                 colors[i].a = alphaData[i];
             }
@@ -348,6 +358,19 @@ public class Swf {
             Array.Copy(bitmapAlphaData, sourceStartIndex, tempAlphaData, destStartIndex, bitmapWidth);
         }
         return tempAlphaData;
+    }
+    #endregion
+
+    #region GetRuntimeSwfData
+    public RuntimeSwfData GetRuntimeSwfData(bool isOnlyExportLinkage) {
+        var runtimeSwfData = new RuntimeSwfData();
+
+        runtimeSwfData.runtimeTagDatas = new RuntimeTagData[linkageDefineSpritesCharacterIds.Max()];
+        for (int i = 0, len = linkageDefineSpritesCharacterIdTags.Count; i < len; i++) {
+            var characterIdTag = linkageDefineSpritesCharacterIdTags[i];
+            runtimeSwfData.runtimeTagDatas[characterIdTag.GetCharacterId()] = characterIdTag.ToRuntimeData();
+        }
+        return runtimeSwfData;
     }
     #endregion
 

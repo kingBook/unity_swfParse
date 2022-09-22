@@ -22,4 +22,8 @@ public class PlaceObjectTag : SwfTag, ICharacterIdTag {
             characterIds.Add(characterId);
         }
     }
+
+    public ushort GetCharacterId() {
+        return characterId;
+    }
 }

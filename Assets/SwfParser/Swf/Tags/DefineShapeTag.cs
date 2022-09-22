@@ -32,4 +32,8 @@ public class DefineShapeTag : SwfTag, ICharacterIdTag {
             }
         }
     }
+
+    public ushort GetCharacterId() {
+        return shapeId;
+    }
 }

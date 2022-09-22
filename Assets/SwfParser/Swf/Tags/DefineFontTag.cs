@@ -37,4 +37,8 @@ public class DefineFontTag : SwfTag, ICharacterIdTag {
             characterIds.Add(fontID);
         }
     }
+
+    public ushort GetCharacterId() {
+        return fontID;
+    }
 }
