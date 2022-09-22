@@ -361,16 +361,16 @@ public class Swf {
     }
     #endregion
 
-    #region GetRuntimeSwfData
-    public RuntimeSwfData GetRuntimeSwfData(bool isOnlyExportLinkage) {
-        var runtimeSwfData = new RuntimeSwfData();
+    #region GetSwfData
+    public SwfData GetSwfData(bool isOnlyExportLinkage) {
+        var swfData = new SwfData();
 
-        runtimeSwfData.runtimeTagDatas = new RuntimeTagData[linkageDefineSpritesCharacterIds.Max()];
+        swfData.runtimeTagDatas = new TagData[linkageDefineSpritesCharacterIds.Max()];
         for (int i = 0, len = linkageDefineSpritesCharacterIdTags.Count; i < len; i++) {
             var characterIdTag = linkageDefineSpritesCharacterIdTags[i];
-            runtimeSwfData.runtimeTagDatas[characterIdTag.GetCharacterId()] = characterIdTag.ToRuntimeData();
+            swfData.runtimeTagDatas[characterIdTag.GetCharacterId()] = characterIdTag.ToData();
         }
-        return runtimeSwfData;
+        return swfData;
     }
     #endregion
 

@@ -6,6 +6,6 @@ public interface ICharacterIdTag {
 
     ushort GetCharacterId();
 
-    RuntimeTagData ToRuntimeData();
+    TagData ToData();
 
 }

@@ -73,7 +73,7 @@ public class SwfPostprocessor : AssetPostprocessor {
         }
         
         // 导出 RuntimeSwfData
-        var runtimeSwfData = swf.GetRuntimeSwfData(isOnlyExportLinkage:true);
+        var runtimeSwfData = swf.GetSwfData(isOnlyExportLinkage:true);
         
 
         // 根据有链接类名的库元件，创建 GameObject
