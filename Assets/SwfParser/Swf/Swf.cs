@@ -364,13 +364,13 @@ public class Swf {
 
     #region GetSwfData
     public SwfData GetSwfData(bool isOnlyExportLinkage) {
-        var swfData = new SwfData();
-
-        swfData.tagDatas = new TagData[linkageDefineSpritesCharacterIds.Max()];
+        var swfData = ScriptableObject.CreateInstance<SwfData>();
+        swfData.tagTypeAndIndices = new TagTypeAndIndex[linkageDefineSpritesCharacterIds.Max()+1];
+        
         for (int i = 0, len = linkageDefineSpritesCharacterIdTags.Count; i < len; i++) {
             var characterIdTag = linkageDefineSpritesCharacterIdTags[i];
-            TagData tagData = null;
             TagType tagType = (TagType)(((SwfTag)characterIdTag).header.type);
+            int dataIndex = -1;
 
             switch (tagType) {
                 case TagType.DefineBits:
@@ -380,30 +380,47 @@ public class Swf {
                 case TagType.DefineBitsJPEG4:
                 case TagType.DefineBitsLossless:
                 case TagType.DefineBitsLossless2:
-                    tagData = GetDefineBitsTagData(characterIdTag);
+                    dataIndex = swfData.defineBitsTagDatas.Count;
+                    var defineBitsTagData = GetDefineBitsTagData(characterIdTag);
+                    swfData.defineBitsTagDatas.Add(defineBitsTagData);
                     break;
                 case TagType.DefineShape:
                 case TagType.DefineShape2:
                 case TagType.DefineShape3:
                 case TagType.DefineShape4:
-                    tagData = GetDefineShapeTagData((DefineShapeTag)characterIdTag);
+                    dataIndex = swfData.defineShapeTagDatas.Count;
+                    var defineShapeTagData = GetDefineShapeTagData((DefineShapeTag)characterIdTag);
+                    swfData.defineShapeTagDatas.Add(defineShapeTagData);
                     break;
                 case TagType.PlaceObject:
-                    tagData = ((PlaceObjectTag)characterIdTag).ToData();
+                    dataIndex = swfData.placeObjectTagDatas.Count;
+                    var placeObjectTagData = ((PlaceObjectTag)characterIdTag).ToData();
+                    swfData.placeObjectTagDatas.Add(placeObjectTagData);
                     break;
                 case TagType.PlaceObject2:
-
+                    dataIndex = swfData.placeObject2TagDatas.Count;
+                    var placeObject2TagData=((PlaceObject2Tag)characterIdTag).ToData();
+                    swfData.placeObject2TagDatas.Add(placeObject2TagData);
                     break;
                 case TagType.PlaceObject3:
-
+                    dataIndex = swfData.placeObject3TagDatas.Count;
+                    var placeObject3TagData=((PlaceObject3Tag)characterIdTag).ToData();
+                    swfData.placeObject3TagDatas.Add(placeObject3TagData);
                     break;
                 default:
-                    tagData = new UnknownTagData { type = (uint)tagType };
+                    dataIndex = swfData.unknownTagDatas.Count;
+                    var unknownTagData = new UnknownTagData();
+                    unknownTagData.type = (uint)tagType;
+                    swfData.unknownTagDatas.Add(unknownTagData);
                     break;
             }
-            swfData.tagDatas[characterIdTag.GetCharacterId()] = tagData;
-        }
+            
+            TagTypeAndIndex tagTypeAndIndex = new TagTypeAndIndex();
+            tagTypeAndIndex.tagType = (uint)tagType;
+            tagTypeAndIndex.index = dataIndex;
+            swfData.tagTypeAndIndices[characterIdTag.GetCharacterId()] = tagTypeAndIndex;
 
+        }
         return swfData;
     }
 

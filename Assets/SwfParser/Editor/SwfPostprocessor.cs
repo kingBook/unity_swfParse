@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Xml;
+using System.Xml.Serialization;
 using UnityEditor;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
@@ -22,24 +23,24 @@ public class SwfPostprocessor : AssetPostprocessor {
     }
 
     private static void OnSwfPostprocess(string path) {
-        int id = path.IndexOf('/');
-        path = path.Substring(id);
+        int idx = path.IndexOf('/');
+        path = path.Substring(idx);
         path = Application.dataPath + path;
 
-        ParseSwf(path, true);
+        ParseSwf(path);
 
     }
 
     [MenuItem("SwfParser/Run")]
     public static void Run() {
         string assetsPath = Application.dataPath;
-        ParseSwf($"{assetsPath}/test.fla_export/test.fla.swf", true);
+        ParseSwf($"{assetsPath}/test.fla_export/test.fla.swf");
     }
 
-    public static void ParseSwf(string swfPath, bool isExportXml) {
+    public static void ParseSwf(string swfPath) {
         // 截取掉xx.swf的文件夹路径，如：E:/kingBook/projects/unity_swfParse/Assets/
         string swfFolderPath = swfPath.Substring(0, swfPath.LastIndexOf('/') + 1);
-        //Debug.Log(swfPath);
+        
         var swfReader = new SwfReader();
 
         var swfBytes = new SwfByteArray(swfPath);
@@ -53,7 +54,7 @@ public class SwfPostprocessor : AssetPostprocessor {
         Debug.Log("read passed time:" + sw.ElapsedMilliseconds);
 
         // 导出 .xml
-        if (isExportXml) {
+        if (SwfParseConfig.isExportXml) {
             sw.Restart();
             var xml = swf.ToXml();
             sw.Stop();
@@ -74,6 +75,7 @@ public class SwfPostprocessor : AssetPostprocessor {
 
         // 导出运行时 SwfData
         var swfData = swf.GetSwfData(isOnlyExportLinkage:true);
+        SaveSwfData(swfData, swfPath);
 
 
         // 根据有链接类名的库元件，创建 GameObject
@@ -103,9 +105,9 @@ public class SwfPostprocessor : AssetPostprocessor {
 
     /// <summary> 保存xml文件 </summary>
     private static void SaveXml(XmlDocument doc, string swfPath) {
-        int id = swfPath.LastIndexOf('.');
-        string fileName = swfPath.Substring(0, id) + ".xml";
-        doc.Save(fileName);
+        int dotIdx = swfPath.LastIndexOf('.');
+        string xmlPath = $"{swfPath.Substring(0, dotIdx)}.xml";
+        doc.Save(xmlPath);
     }
 
     private static string FormatXml(object xml) {
@@ -129,6 +131,26 @@ public class SwfPostprocessor : AssetPostprocessor {
             xtw?.Close();
         }
         return sb.ToString();
+    }
+
+    private static void SaveSwfData(SwfData swfData, string swfPath) {
+        int dotIdx = swfPath.LastIndexOf('.');
+        string swfDataPath = $"{swfPath.Substring(0, dotIdx)}.swfData";
+        
+        if (SwfParseConfig.isExportSwfDataAsset) {
+            string swfDataRelativePath = $"{swfDataPath.Replace(Application.dataPath, "Assets")}.asset";
+            AssetDatabase.CreateAsset(swfData, swfDataRelativePath);
+        }
+        
+        /*FileStream fileStream = new FileStream(swfDataPath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
+        StreamWriter streamWriter = new StreamWriter(fileStream, System.Text.Encoding.UTF8);
+        XmlSerializer xmlSerializer = new XmlSerializer(swfData.GetType());
+        xmlSerializer.Serialize(streamWriter, swfData);
+        streamWriter.Close();
+        fileStream.Close();*/
+
+
+
     }
 
 

@@ -102,5 +102,40 @@ public class PlaceObject3Tag : SwfTag, ICharacterIdTag {
     public ushort GetCharacterId() {
         return characterId;
     }
+    
+    public PlaceObject3TagData ToData() {
+        var data = new PlaceObject3TagData();
+        data.type = header.type;
+        data.placeFlagHasClipActions = placeFlagHasClipActions;
+        data.placeFlagHasClipDepth = placeFlagHasClipDepth;
+        data.placeFlagHasName = placeFlagHasName;
+        data.placeFlagHasRatio = placeFlagHasRatio;
+        data.placeFlagHasColorTransform = placeFlagHasColorTransform;
+        data.placeFlagHasMatrix = placeFlagHasMatrix;
+        data.placeFlagHasCharacter = placeFlagHasCharacter;
+        data.placeFlagMove = placeFlagMove;
+        data.reserved = reserved;
+        data.placeFlagOpaqueBackground = placeFlagOpaqueBackground;
+        data.placeFlagHasVisible = placeFlagHasVisible;
+        data.placeFlagHasImage = placeFlagHasImage;
+        data.placeFlagHasClassName = placeFlagHasClassName;
+        data.placeFlagHasCacheAsBitmap = placeFlagHasCacheAsBitmap;
+        data.placeFlagHasBlendMode = placeFlagHasBlendMode;
+        data.placeFlagHasFilterList = placeFlagHasFilterList;
+        data.depth = depth;
+        data.className = className;
+        data.characterId = characterId;
+        data.matrix = matrix;
+        data.colorTransform = colorTransform;
+        data.ratio = ratio;
+        data.name = name;
+        data.clipDepth = clipDepth;
+        data.surfaceFilterList = surfaceFilterList;
+        data.blendMode = blendMode;
+        data.bitmapCache = bitmapCache;
+        data.visible = visible;
+        data.backgroundColor = backgroundColor;
+        return data;
+    }
 
 }

@@ -1,3 +1,4 @@
+[System.Serializable]
 public class PlaceObjectTagData : TagData {
 
     public ushort characterId;

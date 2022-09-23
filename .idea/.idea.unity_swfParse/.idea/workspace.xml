@@ -2,40 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="86f92028-92cf-411e-8a42-d5debec3a197" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/SwfParser/Runtime/Datas/DefineBitsTagData.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/SwfParser/Runtime/Datas/DefineBitsTagData.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/SwfParser/Runtime/Datas/PlaceObject2TagData.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/SwfParser/Runtime/Datas/PlaceObject2TagData.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/SwfParser/Runtime/Datas/PlaceObject3TagData.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/SwfParser/Runtime/Datas/PlaceObject3TagData.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/SwfParser/Runtime/Datas/PlaceObjectTagData.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/SwfParser/Runtime/Datas/PlaceObjectTagData.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/SwfParser/Runtime/Datas/UnknownTagData.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/SwfParser/Runtime/Datas/UnknownTagData.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/unity_swfParse.sln.DotSettings.user" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/SwfParser/Editor/SwfParseConfig.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/SwfParser/Editor/SwfParseConfig.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.unity_swfParse/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.unity_swfParse/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Editor/EditorTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Editor/EditorTest.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Editor/SwfPostprocessor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Editor/SwfPostprocessor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Runtime/Datas/DefineShapeTagData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Runtime/Datas/DefineShapeTagData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Runtime/Datas/DefineBitsTagData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Runtime/Datas/DefineBitsTagData.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Runtime/Datas/SwfData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Runtime/Datas/SwfData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Runtime/Datas/TagData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Runtime/Datas/TagData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Runtime/Datas/TagData.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Runtime/Datas/TagData.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Swf.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Swf.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineBitsLosslessTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineBitsLosslessTag.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineBitsTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineBitsTag.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineButton2Tag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineButton2Tag.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineButtonTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineButtonTag.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineFontTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineFontTag.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineMorphShape2Tag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineMorphShape2Tag.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineMorphShapeTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineMorphShapeTag.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineScalingGridTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineScalingGridTag.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineShapeTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineShapeTag.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineSpriteTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineSpriteTag.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/ICharacterIdTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/ICharacterIdTag.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/PlaceObject2Tag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/PlaceObject2Tag.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/PlaceObject3Tag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/PlaceObject3Tag.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/PlaceObjectTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/PlaceObjectTag.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/RemoveObjectTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/RemoveObjectTag.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/test.fla" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/test.fla" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/test.fla_export/test.fla.swf" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/test.fla_export/test.fla.swf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/test.fla_export/test.fla.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/test.fla_export/test.fla.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,11 +19,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5406a456cf734443b3d02a7d123287f1299290/71/697903b1/ValueType.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/72beca6012c7404d8521ba134a35bf68117400/70/c654a859/Mathf.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/72beca6012c7404d8521ba134a35bf68117400/c3/31b463ce/Rect.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b6a0e6615ee04ea7ad535b38f9316104568788/e9/55898dcb/StreamWriter.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Editor/SwfPostprocessor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Runtime/Datas/SwfData.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Runtime/Datas/TagData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/SwfParser/Runtime/MovieClip.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -99,16 +76,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Discover.Launch.Via.Unity&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Discover.Launch.Via.Unity": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "settings.editor.selected.configurable": "preferences.sourceCode.C#",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="UnitTests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2019.4.28f1c1\Editor\Unity.exe" />
@@ -155,7 +132,7 @@
       <workItem from="1663810132216" duration="14025000" />
       <workItem from="1663832133130" duration="7265000" />
       <workItem from="1663858234134" duration="621000" />
-      <workItem from="1663896265289" duration="8864000" />
+      <workItem from="1663896265289" duration="19410000" />
     </task>
     <servers />
   </component>
@@ -182,23 +159,8 @@
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/SwfParser/Swf/Swf.cs</url>
-          <line>409</line>
-          <properties documentPath="D:\kingBook\projects\unity_swfParse\Assets\SwfParser\Swf\Swf.cs" initialLine="409" containingFunctionPresentation="method 'GetDefineBitsTagData'">
-            <startOffsets>
-              <option value="20057" />
-            </startOffsets>
-            <endOffsets>
-              <option value="20058" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
