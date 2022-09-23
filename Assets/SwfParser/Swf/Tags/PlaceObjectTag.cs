@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Xml;
+using UnityEngine;
 
 public class PlaceObjectTag : SwfTag, ICharacterIdTag {
 
@@ -25,5 +26,15 @@ public class PlaceObjectTag : SwfTag, ICharacterIdTag {
 
     public ushort GetCharacterId() {
         return characterId;
+    }
+
+    public PlaceObjectTagData ToData() {
+        var data = new PlaceObjectTagData();
+        data.type = header.type;
+        data.characterId = characterId;
+        data.depth = depth;
+        data.matrix = matrix;
+        data.colorTransform = colorTransform;
+        return data;
     }
 }

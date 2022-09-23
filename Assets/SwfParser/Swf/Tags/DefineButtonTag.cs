@@ -26,4 +26,5 @@ public class DefineButtonTag : SwfTag, ICharacterIdTag {
         return buttonId;
     }
 
+
 }

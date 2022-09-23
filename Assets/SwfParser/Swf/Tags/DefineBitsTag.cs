@@ -33,4 +33,5 @@ public class DefineBitsTag : SwfTag, ICharacterIdTag {
     public ushort GetCharacterId() {
         return characterID;
     }
+
 }

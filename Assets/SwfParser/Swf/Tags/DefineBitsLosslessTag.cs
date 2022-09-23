@@ -30,4 +30,5 @@ public class DefineBitsLosslessTag : SwfTag, ICharacterIdTag {
     public ushort GetCharacterId() {
         return characterID;
     }
+
 }

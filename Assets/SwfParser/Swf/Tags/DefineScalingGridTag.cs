@@ -23,4 +23,5 @@ public class DefineScalingGridTag : SwfTag, ICharacterIdTag {
     public ushort GetCharacterId() {
         return characterId;
     }
+
 }

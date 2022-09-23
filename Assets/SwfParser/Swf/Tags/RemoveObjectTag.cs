@@ -21,4 +21,8 @@ public class RemoveObjectTag : SwfTag, ICharacterIdTag {
         }
     }
 
+    public ushort GetCharacterId() {
+        return characterId;
+    }
+
 }

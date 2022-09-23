@@ -49,4 +49,5 @@ public class PlaceObject2Tag : SwfTag, ICharacterIdTag {
     public ushort GetCharacterId() {
         return characterId;
     }
+
 }

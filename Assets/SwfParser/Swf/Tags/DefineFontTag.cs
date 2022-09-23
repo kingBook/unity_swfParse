@@ -41,4 +41,5 @@ public class DefineFontTag : SwfTag, ICharacterIdTag {
     public ushort GetCharacterId() {
         return fontID;
     }
+
 }

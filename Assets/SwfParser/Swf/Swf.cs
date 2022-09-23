@@ -181,7 +181,7 @@ public class Swf {
                      && defineBitsJpeg3Tag.imageData[5] == 0x61;
         if (isPng) {
             imageData.type = ImageType.Png;
-            var texture = new Texture2D(16, 16); //宽高可以任意LoadImage()时会自动调整
+            var texture = new Texture2D(16, 16); // 宽高可以任意LoadImage()时会自动调整
             texture.LoadImage(defineBitsJpeg3Tag.imageData);
             texture.Apply();
             var colors = texture.GetPixels32();
@@ -197,7 +197,7 @@ public class Swf {
             texture.Apply();
             imageData.bytes = texture.EncodeToJPG(100);
         } else if (isJpg || isGif) {
-            imageData.type = ImageType.Jpg; //.gif也导出为jpg
+            imageData.type = ImageType.Jpg; // .gif也导出为jpg
             imageData.bytes = defineBitsJpeg3Tag.imageData;
         }
         return imageData;
@@ -240,7 +240,7 @@ public class Swf {
         }
         var imageData = new ImageData();
         imageData.characterID = defineBitsLosslessTag.characterID;
-        //Png或Jpg都可以
+        // Png或Jpg都可以
         //imageData.type=ImageType.Png;
         imageData.type = ImageType.Jpg;
         imageData.bytes = texture.EncodeToJPG();
@@ -361,16 +361,74 @@ public class Swf {
     }
     #endregion
 
+
     #region GetSwfData
     public SwfData GetSwfData(bool isOnlyExportLinkage) {
         var swfData = new SwfData();
 
-        swfData.runtimeTagDatas = new TagData[linkageDefineSpritesCharacterIds.Max()];
+        swfData.tagDatas = new TagData[linkageDefineSpritesCharacterIds.Max()];
         for (int i = 0, len = linkageDefineSpritesCharacterIdTags.Count; i < len; i++) {
             var characterIdTag = linkageDefineSpritesCharacterIdTags[i];
-            swfData.runtimeTagDatas[characterIdTag.GetCharacterId()] = characterIdTag.ToData();
+            TagData tagData = null;
+            TagType tagType = (TagType)(((SwfTag)characterIdTag).header.type);
+
+            switch (tagType) {
+                case TagType.DefineBits:
+                case TagType.JPEGTables:
+                case TagType.DefineBitsJPEG2:
+                case TagType.DefineBitsJPEG3:
+                case TagType.DefineBitsJPEG4:
+                case TagType.DefineBitsLossless:
+                case TagType.DefineBitsLossless2:
+                    tagData = GetDefineBitsTagData(characterIdTag);
+                    break;
+                case TagType.DefineShape:
+                case TagType.DefineShape2:
+                case TagType.DefineShape3:
+                case TagType.DefineShape4:
+                    tagData = GetDefineShapeTagData((DefineShapeTag)characterIdTag);
+                    break;
+                case TagType.PlaceObject:
+                    tagData = ((PlaceObjectTag)characterIdTag).ToData();
+                    break;
+                case TagType.PlaceObject2:
+
+                    break;
+                case TagType.PlaceObject3:
+
+                    break;
+                default:
+                    tagData = new UnknownTagData { type = (uint)tagType };
+                    break;
+            }
+            swfData.tagDatas[characterIdTag.GetCharacterId()] = tagData;
         }
+
         return swfData;
+    }
+
+    private DefineBitsTagData GetDefineBitsTagData(ICharacterIdTag characterIdTag) {
+        var data = new DefineBitsTagData();
+        data.type = ((SwfTag)characterIdTag).header.type;
+        data.characterID = characterIdTag.GetCharacterId();
+        return data;
+    }
+
+    private DefineShapeTagData GetDefineShapeTagData(DefineShapeTag tag) {
+        var data = new DefineShapeTagData();
+        data.type = tag.header.type;
+        data.shapeId = tag.shapeId;
+
+        // bitmapId
+        FillStyleRecord[] fillStyles = tag.shapes.fillStyles.fillStyles;
+        if (fillStyles.Length >= 2) {
+            var fillStyle = fillStyles[1];
+            var type = fillStyle.fillStyleType;
+            if (type == 0x40 || type == 0x41 || type == 0x42 || type == 0x43) {
+                data.bitmapId = fillStyle.bitmapId;
+            }
+        }
+        return data;
     }
     #endregion
 

@@ -71,10 +71,10 @@ public class SwfPostprocessor : AssetPostprocessor {
         for (int i = 0, len = imageDatas.Length; i < len; i++) {
             imageDatas[i].SaveTo(swfFolderPath);
         }
-        
-        // 导出 RuntimeSwfData
-        var runtimeSwfData = swf.GetSwfData(isOnlyExportLinkage:true);
-        
+
+        // 导出运行时 SwfData
+        var swfData = swf.GetSwfData(isOnlyExportLinkage:true);
+
 
         // 根据有链接类名的库元件，创建 GameObject
         CreateGameObjectsWithSymbolClassTags(swf, isCreatePrefabAsset:true);
