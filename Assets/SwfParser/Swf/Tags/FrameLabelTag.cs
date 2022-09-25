@@ -12,4 +12,11 @@ public class FrameLabelTag : SwfTag {
         return ele;
     }
 
+    public FrameLabelTagData ToData() {
+        var data = new FrameLabelTagData();
+        data.name = name;
+        data.namedAnchorFlag = namedAnchorFlag;
+        return data;
+    }
+
 }

@@ -49,4 +49,60 @@ public class DefineSpriteTag : SwfTag, ICharacterIdTag {
         return spriteId;
     }
 
+    public DefineSpriteTagData ToData() {
+        var data = new DefineSpriteTagData();
+        data.spriteId = spriteId;
+        data.frameCount = frameCount;
+
+        int len = controlTags.Length;
+        data.tagTypeAndIndices = new TagTypeAndIndex[len];
+        for (int i = 0; i < len; i++) {
+            var controlTag = controlTags[i];
+            TagType controlTagType = (TagType)controlTag.header.type;
+            int dataIndex = -1;
+            switch (controlTagType) {
+                case TagType.ShowFrame:
+                    dataIndex = data.showFrameTagDatas.Count;
+                    var showFrameTag = (ShowFrameTag)controlTag;
+                    data.showFrameTagDatas.Add(showFrameTag.ToData());
+                    break;
+                case TagType.PlaceObject:
+                    dataIndex = data.placeObjectTagDatas.Count;
+                    var placeObjectTagData = ((PlaceObjectTag)controlTag).ToData();
+                    data.placeObjectTagDatas.Add(placeObjectTagData);
+                    break;
+                case TagType.PlaceObject2:
+                    dataIndex = data.placeObject2TagDatas.Count;
+                    var placeObject2TagData = ((PlaceObject2Tag)controlTag).ToData();
+                    data.placeObject2TagDatas.Add(placeObject2TagData);
+                    break;
+                case TagType.PlaceObject3:
+                    dataIndex = data.placeObject3TagDatas.Count;
+                    var placeObject3TagData = ((PlaceObject3Tag)controlTag).ToData();
+                    data.placeObject3TagDatas.Add(placeObject3TagData);
+                    break;
+                case TagType.RemoveObject:
+                    dataIndex = data.removeObjectTagDatas.Count;
+                    var removeObjectTagData = ((RemoveObjectTag)controlTag).ToData();
+                    data.removeObjectTagDatas.Add(removeObjectTagData);
+                    break;
+                case TagType.RemoveObject2:
+                    dataIndex = data.removeObject2TagDatas.Count;
+                    var removeObject2TagData = ((RemoveObject2Tag)controlTag).ToData();
+                    data.removeObject2TagDatas.Add(removeObject2TagData);
+                    break;
+                case TagType.FrameLabel:
+                    dataIndex = data.frameLabelTagDatas.Count;
+                    var frameLabelTagData = ((FrameLabelTag)controlTag).ToData();
+                    data.frameLabelTagDatas.Add(frameLabelTagData);
+                    break;
+            }
+            TagTypeAndIndex tagTypeAndIndex = new TagTypeAndIndex();
+            tagTypeAndIndex.tagType = controlTag.header.type;
+            tagTypeAndIndex.index = dataIndex;
+            data.tagTypeAndIndices[i] = tagTypeAndIndex;
+        }
+        return data;
+    }
+
 }

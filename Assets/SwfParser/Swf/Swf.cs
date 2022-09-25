@@ -373,6 +373,7 @@ public class Swf {
             int dataIndex = -1;
 
             switch (tagType) {
+                // bitmap
                 case TagType.DefineBits:
                 case TagType.JPEGTables:
                 case TagType.DefineBitsJPEG2:
@@ -384,6 +385,7 @@ public class Swf {
                     var defineBitsTagData = GetDefineBitsTagData(characterIdTag);
                     swfData.defineBitsTagDatas.Add(defineBitsTagData);
                     break;
+                // shape
                 case TagType.DefineShape:
                 case TagType.DefineShape2:
                 case TagType.DefineShape3:
@@ -392,20 +394,11 @@ public class Swf {
                     var defineShapeTagData = GetDefineShapeTagData((DefineShapeTag)characterIdTag);
                     swfData.defineShapeTagDatas.Add(defineShapeTagData);
                     break;
-                case TagType.PlaceObject:
-                    dataIndex = swfData.placeObjectTagDatas.Count;
-                    var placeObjectTagData = ((PlaceObjectTag)characterIdTag).ToData();
-                    swfData.placeObjectTagDatas.Add(placeObjectTagData);
-                    break;
-                case TagType.PlaceObject2:
-                    dataIndex = swfData.placeObject2TagDatas.Count;
-                    var placeObject2TagData=((PlaceObject2Tag)characterIdTag).ToData();
-                    swfData.placeObject2TagDatas.Add(placeObject2TagData);
-                    break;
-                case TagType.PlaceObject3:
-                    dataIndex = swfData.placeObject3TagDatas.Count;
-                    var placeObject3TagData=((PlaceObject3Tag)characterIdTag).ToData();
-                    swfData.placeObject3TagDatas.Add(placeObject3TagData);
+                // sprite and movieClip
+                case TagType.DefineSprite:
+                    dataIndex = swfData.defineSpriteTagDatas.Count;
+                    var defineSpriteData = ((DefineSpriteTag)characterIdTag).ToData();
+                    swfData.defineSpriteTagDatas.Add(defineSpriteData);
                     break;
                 default:
                     dataIndex = swfData.unknownTagDatas.Count;

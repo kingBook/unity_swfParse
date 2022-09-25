@@ -11,5 +11,11 @@ public class RemoveObject2Tag : SwfTag {
         ele.SetAttribute("depth", depth.ToString());
         return ele;
     }
+    
+    public RemoveObject2TagData ToData() {
+        var data = new RemoveObject2TagData();
+        data.depth = depth;
+        return data;
+    }
 
 }

@@ -25,4 +25,11 @@ public class RemoveObjectTag : SwfTag, ICharacterIdTag {
         return characterId;
     }
 
+    public RemoveObjectTagData ToData() {
+        var data = new RemoveObjectTagData();
+        data.characterId = characterId;
+        data.depth = depth;
+        return data;
+    }
+
 }
