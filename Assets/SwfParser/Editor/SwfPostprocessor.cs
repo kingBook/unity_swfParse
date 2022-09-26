@@ -40,7 +40,7 @@ public class SwfPostprocessor : AssetPostprocessor {
     public static void ParseSwf(string swfPath) {
         // 截取掉xx.swf的文件夹路径，如：E:/kingBook/projects/unity_swfParse/Assets/
         string swfFolderPath = swfPath.Substring(0, swfPath.LastIndexOf('/') + 1);
-        
+
         var swfReader = new SwfReader();
 
         var swfBytes = new SwfByteArray(swfPath);
@@ -79,28 +79,71 @@ public class SwfPostprocessor : AssetPostprocessor {
 
 
         // 根据有链接类名的库元件，创建 GameObject
-        CreateGameObjectsWithSymbolClassTags(swf, isCreatePrefabAsset:true);
+        CreateGameObjectsWithSymbolClassTags(swf, swfData, isCreatePrefabAsset:true);
 
         AssetDatabase.Refresh();
 
         EditorUtility.DisplayDialog("Complete", "Import complete\n\n" + swfPath.Replace(Application.dataPath, "Assets"), "OK");
     }
 
-    private static void CreateGameObjectsWithSymbolClassTags(Swf swf, bool isCreatePrefabAsset) {
+    private static void CreateGameObjectsWithSymbolClassTags(Swf swf, SwfData swfData, bool isCreatePrefabAsset) {
         for (int i = 0, len = swf.symbolClassTags.Count; i < len; i++) {
             var symbolClassTag = swf.symbolClassTags[i];
             for (int j = 0, lenJ = symbolClassTag.numSymbols; j < lenJ; j++) {
                 var symbolClass = symbolClassTag.symbols[j];
-                CreateGameObjectWithSymbolClass(swf, symbolClass, isCreatePrefabAsset);
+                CreateGameObjectWithSymbolClass(swfData, symbolClass, isCreatePrefabAsset);
             }
         }
     }
 
-    private static void CreateGameObjectWithSymbolClass(Swf swf, SymbolClassRecord symbolClass, bool isCreatePrefabAsset) {
-        //swf.defineSpriteTags
-
-
+    private static void CreateGameObjectWithSymbolClass(SwfData swfData, SymbolClassRecord symbolClass, bool isCreatePrefabAsset) {
         GameObject inst = new GameObject(symbolClass.name, typeof(MovieClip));
+
+        for (int i = 0, len = swfData.defineSpriteTagDatas.Count; i < len; i++) {
+            var defineSpriteTagData = swfData.defineSpriteTagDatas[i];
+            if (defineSpriteTagData.spriteId == symbolClass.tag) {
+                for (int j = 0, lenJ = defineSpriteTagData.tagTypeAndIndices.Length; j < lenJ; j++) {
+                    var tagTypeAndIndex = defineSpriteTagData.tagTypeAndIndices[j];
+                    //
+                    //var ctrlTagData = swfData.
+                    TagType tagType = (TagType)tagTypeAndIndex.tagType;
+                    switch (tagType) {
+                        // bitmap
+                        case TagType.DefineBits:
+                        case TagType.JPEGTables:
+                        case TagType.DefineBitsJPEG2:
+                        case TagType.DefineBitsJPEG3:
+                        case TagType.DefineBitsJPEG4:
+                        case TagType.DefineBitsLossless:
+                        case TagType.DefineBitsLossless2:
+                            // dataIndex = swfData.defineBitsTagDatas.Count;
+                            // var defineBitsTagData = GetDefineBitsTagData(characterIdTag);
+                            // swfData.defineBitsTagDatas.Add(defineBitsTagData);
+                            break;
+                        // shape
+                        case TagType.DefineShape:
+                        case TagType.DefineShape2:
+                        case TagType.DefineShape3:
+                        case TagType.DefineShape4:
+                            // dataIndex = swfData.defineShapeTagDatas.Count;
+                            // var defineShapeTagData = GetDefineShapeTagData((DefineShapeTag)characterIdTag);
+                            // swfData.defineShapeTagDatas.Add(defineShapeTagData);
+                            break;
+                        // sprite and movieClip
+                        case TagType.DefineSprite:
+                            // dataIndex = swfData.defineSpriteTagDatas.Count;
+                            // var defineSpriteData = ((DefineSpriteTag)characterIdTag).ToData(swfData);
+                            // swfData.defineSpriteTagDatas.Add(defineSpriteData);
+                            break;
+                        default:
+                            
+                            break;
+                    }
+                }
+            }
+        }
+        
+        
     }
 
     /// <summary> 保存xml文件 </summary>
@@ -136,19 +179,18 @@ public class SwfPostprocessor : AssetPostprocessor {
     private static void SaveSwfData(SwfData swfData, string swfPath) {
         int dotIdx = swfPath.LastIndexOf('.');
         string swfDataPath = $"{swfPath.Substring(0, dotIdx)}.swfData";
-        
+
         if (SwfParseConfig.isExportSwfDataAsset) {
             string swfDataRelativePath = $"{swfDataPath.Replace(Application.dataPath, "Assets")}.asset";
             AssetDatabase.CreateAsset(swfData, swfDataRelativePath);
         }
-        
+
         /*FileStream fileStream = new FileStream(swfDataPath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
         StreamWriter streamWriter = new StreamWriter(fileStream, System.Text.Encoding.UTF8);
         XmlSerializer xmlSerializer = new XmlSerializer(swfData.GetType());
         xmlSerializer.Serialize(streamWriter, swfData);
         streamWriter.Close();
         fileStream.Close();*/
-
 
 
     }

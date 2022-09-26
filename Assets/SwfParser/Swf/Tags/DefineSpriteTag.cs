@@ -49,7 +49,7 @@ public class DefineSpriteTag : SwfTag, ICharacterIdTag {
         return spriteId;
     }
 
-    public DefineSpriteTagData ToData() {
+    public DefineSpriteTagData ToData(SwfData swfData) {
         var data = new DefineSpriteTagData();
         data.spriteId = spriteId;
         data.frameCount = frameCount;
@@ -62,39 +62,39 @@ public class DefineSpriteTag : SwfTag, ICharacterIdTag {
             int dataIndex = -1;
             switch (controlTagType) {
                 case TagType.ShowFrame:
-                    dataIndex = data.showFrameTagDatas.Count;
+                    dataIndex = swfData.showFrameTagDatas.Count;
                     var showFrameTag = (ShowFrameTag)controlTag;
-                    data.showFrameTagDatas.Add(showFrameTag.ToData());
+                    swfData.showFrameTagDatas.Add(showFrameTag.ToData());
                     break;
                 case TagType.PlaceObject:
-                    dataIndex = data.placeObjectTagDatas.Count;
+                    dataIndex = swfData.placeObjectTagDatas.Count;
                     var placeObjectTagData = ((PlaceObjectTag)controlTag).ToData();
-                    data.placeObjectTagDatas.Add(placeObjectTagData);
+                    swfData.placeObjectTagDatas.Add(placeObjectTagData);
                     break;
                 case TagType.PlaceObject2:
-                    dataIndex = data.placeObject2TagDatas.Count;
+                    dataIndex = swfData.placeObject2TagDatas.Count;
                     var placeObject2TagData = ((PlaceObject2Tag)controlTag).ToData();
-                    data.placeObject2TagDatas.Add(placeObject2TagData);
+                    swfData.placeObject2TagDatas.Add(placeObject2TagData);
                     break;
                 case TagType.PlaceObject3:
-                    dataIndex = data.placeObject3TagDatas.Count;
+                    dataIndex = swfData.placeObject3TagDatas.Count;
                     var placeObject3TagData = ((PlaceObject3Tag)controlTag).ToData();
-                    data.placeObject3TagDatas.Add(placeObject3TagData);
+                    swfData.placeObject3TagDatas.Add(placeObject3TagData);
                     break;
                 case TagType.RemoveObject:
-                    dataIndex = data.removeObjectTagDatas.Count;
+                    dataIndex = swfData.removeObjectTagDatas.Count;
                     var removeObjectTagData = ((RemoveObjectTag)controlTag).ToData();
-                    data.removeObjectTagDatas.Add(removeObjectTagData);
+                    swfData.removeObjectTagDatas.Add(removeObjectTagData);
                     break;
                 case TagType.RemoveObject2:
-                    dataIndex = data.removeObject2TagDatas.Count;
+                    dataIndex = swfData.removeObject2TagDatas.Count;
                     var removeObject2TagData = ((RemoveObject2Tag)controlTag).ToData();
-                    data.removeObject2TagDatas.Add(removeObject2TagData);
+                    swfData.removeObject2TagDatas.Add(removeObject2TagData);
                     break;
                 case TagType.FrameLabel:
-                    dataIndex = data.frameLabelTagDatas.Count;
+                    dataIndex = swfData.frameLabelTagDatas.Count;
                     var frameLabelTagData = ((FrameLabelTag)controlTag).ToData();
-                    data.frameLabelTagDatas.Add(frameLabelTagData);
+                    swfData.frameLabelTagDatas.Add(frameLabelTagData);
                     break;
             }
             TagTypeAndIndex tagTypeAndIndex = new TagTypeAndIndex();

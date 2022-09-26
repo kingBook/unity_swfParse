@@ -2,26 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="86f92028-92cf-411e-8a42-d5debec3a197" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/SwfParser/Runtime/TagData/DefineSpriteTagData.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/SwfParser/Runtime/TagData/DefineSpriteTagData.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/SwfParser/Runtime/TagData/FrameLabelTagData.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/SwfParser/Runtime/TagData/FrameLabelTagData.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/SwfParser/Runtime/TagData/RemoveObject2TagData.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/SwfParser/Runtime/TagData/RemoveObject2TagData.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/SwfParser/Runtime/TagData/RemoveObjectTagData.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/SwfParser/Runtime/TagData/RemoveObjectTagData.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/SwfParser/Runtime/TagData/ShowFrameTagData.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/SwfParser/Runtime/TagData/ShowFrameTagData.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/test.fla_export/test.fla.swfData.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/test.fla_export/test.fla.swfData.asset.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.unity_swfParse/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.unity_swfParse/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Editor/SwfPostprocessor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Editor/SwfPostprocessor.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Runtime/Datas/SwfData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Runtime/Datas/SwfData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Runtime/TagData/DefineSpriteTagData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Runtime/TagData/DefineSpriteTagData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Runtime/TagData/FrameLabelTagData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Runtime/TagData/FrameLabelTagData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Runtime/TagData/RemoveObject2TagData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Runtime/TagData/RemoveObject2TagData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Runtime/TagData/RemoveObjectTagData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Runtime/TagData/RemoveObjectTagData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Runtime/TagData/ShowFrameTagData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Runtime/TagData/ShowFrameTagData.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Swf.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Swf.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineSpriteTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/DefineSpriteTag.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/FrameLabelTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/FrameLabelTag.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/RemoveObject2Tag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/RemoveObject2Tag.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/RemoveObjectTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/RemoveObjectTag.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/ShowFrameTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SwfParser/Swf/Tags/ShowFrameTag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/test.fla_export/test.fla.swfData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/test.fla_export/test.fla.swfData.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,16 +73,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Discover.Launch.Via.Unity": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "settings.editor.selected.configurable": "Inspections-C#",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Discover.Launch.Via.Unity&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;Inspections-C#&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="UnitTests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2019.4.28f1c1\Editor\Unity.exe" />
@@ -143,6 +134,7 @@
       <workItem from="1663933567121" duration="1896000" />
       <workItem from="1663996346817" duration="66000" />
       <workItem from="1663996439536" duration="11250000" />
+      <workItem from="1664170255385" duration="4567000" />
     </task>
     <servers />
   </component>

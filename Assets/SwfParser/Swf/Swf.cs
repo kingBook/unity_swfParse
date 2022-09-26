@@ -397,7 +397,7 @@ public class Swf {
                 // sprite and movieClip
                 case TagType.DefineSprite:
                     dataIndex = swfData.defineSpriteTagDatas.Count;
-                    var defineSpriteData = ((DefineSpriteTag)characterIdTag).ToData();
+                    var defineSpriteData = ((DefineSpriteTag)characterIdTag).ToData(swfData);
                     swfData.defineSpriteTagDatas.Add(defineSpriteData);
                     break;
                 default:
