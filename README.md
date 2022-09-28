@@ -5,6 +5,9 @@ http://www.zlib.net/
 https://www.m2osw.com/swf_tag_definebitsjpeg3
 
 
+RemoveObject2Tag 需要导出但是没有characterID ，又不能继承 RemoveObjectTag
+
+
 
 public static void CopyStream(System.IO.Stream input, System.IO.Stream output)
 {
