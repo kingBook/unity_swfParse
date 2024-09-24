@@ -14,7 +14,6 @@ public class SwfReader {
             long expectedEndPosition = startPosition + tagHeader.length;
             //Debug2.Log("type:"+tagHeader.type,"preHeaderStart:"+preHeaderStart,"length:"+tagHeader.length);
             SwfTag tag = ReadTag(bytes, tagHeader);
-            tag.header = tagHeader;
             swf.tags.Add(tag);
             if (tag is DefineSpriteTag defineSpriteTag) {
                 swf.defineSpriteTags.Add(defineSpriteTag);
