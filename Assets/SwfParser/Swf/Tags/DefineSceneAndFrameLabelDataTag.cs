@@ -8,6 +8,20 @@ public class DefineSceneAndFrameLabelDataTag : SwfTag {
     public uint frameLabelCount;
     public FramelabelRecord[] frameLabelList;
 
+    public DefineSceneAndFrameLabelDataTag(SwfByteArray bytes, TagHeaderRecord header) : base(header) {
+        sceneCount = bytes.ReadEncodedUI32();
+        defineSceneList = new DefineSceneRecord[sceneCount];
+        for (uint i = 0; i < sceneCount; i++) {
+            defineSceneList[i] = new DefineSceneRecord(bytes);
+        }
+
+        frameLabelCount = bytes.ReadEncodedUI32();
+        frameLabelList = new FramelabelRecord[frameLabelCount];
+        for (uint i = 0; i < frameLabelCount; i++) {
+            frameLabelList[i] = new FramelabelRecord(bytes);
+        }
+    }
+
     public override XmlElement ToXml(XmlDocument doc) {
         var ele = CreateXmlElement(doc, "DefineSceneAndFrameLabelData");
         ele.SetAttribute("sceneCount", sceneCount.ToString());

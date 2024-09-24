@@ -8,6 +8,11 @@ public class RemoveObjectTag : SwfTag, ICharacterIdTag {
     public ushort characterId;
     public ushort depth;
 
+    public RemoveObjectTag(SwfByteArray bytes, TagHeaderRecord header) : base(header) {
+        characterId = bytes.ReadUI16();
+        depth = bytes.ReadUI16();
+    }
+
     public override XmlElement ToXml(XmlDocument doc) {
         var ele = CreateXmlElement(doc, "RemoveObject");
         ele.SetAttribute("characterId", characterId.ToString());

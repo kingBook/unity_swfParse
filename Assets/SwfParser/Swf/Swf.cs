@@ -16,6 +16,10 @@ public class Swf {
     public readonly List<ushort> linkageDefineSpritesCharacterIds = new List<ushort>(256);
     public readonly List<ICharacterIdTag> linkageDefineSpritesCharacterIdTags = new List<ICharacterIdTag>(256);
 
+    public Swf(SwfByteArray bytes) {
+        header = new SwfHeader(bytes);
+    }
+
     /// <summary>
     /// 初始化有链接类名的 DefineSprite(在SymbolClassTag中定义) 的所有 Character
     /// </summary>
@@ -359,14 +363,14 @@ public class Swf {
         }
         return tempAlphaData;
     }
-    #endregion
+    #endregion // GetImageDatas
 
 
     #region GetSwfData
     public SwfData GetSwfData(bool isOnlyExportLinkage) {
         var swfData = ScriptableObject.CreateInstance<SwfData>();
-        swfData.tagTypeAndIndices = new TagTypeAndIndex[linkageDefineSpritesCharacterIds.Max()+1];
-        
+        swfData.tagTypeAndIndices = new TagTypeAndIndex[linkageDefineSpritesCharacterIds.Max() + 1];
+
         for (int i = 0, len = linkageDefineSpritesCharacterIdTags.Count; i < len; i++) {
             var characterIdTag = linkageDefineSpritesCharacterIdTags[i];
             TagType tagType = (TagType)(((SwfTag)characterIdTag).header.type);
@@ -407,7 +411,7 @@ public class Swf {
                     swfData.unknownTagDatas.Add(unknownTagData);
                     break;
             }
-            
+
             TagTypeAndIndex tagTypeAndIndex = new TagTypeAndIndex();
             tagTypeAndIndex.tagType = (uint)tagType;
             tagTypeAndIndex.index = dataIndex;
@@ -440,6 +444,6 @@ public class Swf {
         }
         return data;
     }
-    #endregion
+    #endregion // GetSwfData
 
 }

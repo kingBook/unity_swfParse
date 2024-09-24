@@ -6,6 +6,11 @@ public class DefineScalingGridTag : SwfTag, ICharacterIdTag {
     public ushort characterId;
     public RectangleRecord splitter;
 
+    public DefineScalingGridTag(SwfByteArray bytes, TagHeaderRecord header) : base(header) {
+        characterId = bytes.ReadUI16();
+        splitter = new RectangleRecord(bytes);
+    }
+
     public override XmlElement ToXml(XmlDocument doc) {
         var ele = CreateXmlElement(doc, "DefineScalingGrid");
         ele.SetAttribute("characterId", characterId.ToString());

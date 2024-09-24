@@ -12,6 +12,22 @@ public struct ConvolutionFilterRecord {
     public bool clamp;
     public bool preserveAlpha;
 
+    public ConvolutionFilterRecord(SwfByteArray bytes) {
+        matrixX = bytes.ReadUI8();
+        matrixY = bytes.ReadUI8();
+        divisor = bytes.ReadFloat();
+        bias = bytes.ReadFloat();
+        int len = matrixX * matrixY;
+        matrix = new float[len];
+        for (var i = 0; i < len; i++) {
+            matrix[i] = bytes.ReadFloat();
+        }
+        defaultColor = new RGBARecord(bytes);
+        reserved = (byte)bytes.ReadUB(6);
+        clamp = bytes.ReadFlag();
+        preserveAlpha = bytes.ReadFlag();
+    }
+
     public XmlElement ToXml(XmlDocument doc) {
         var ele = doc.CreateElement("ConvolutionFilter");
         ele.SetAttribute("matrixX", matrixX.ToString());

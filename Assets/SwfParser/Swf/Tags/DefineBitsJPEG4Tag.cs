@@ -9,6 +9,20 @@ public class DefineBitsJPEG4Tag : DefineBitsJPEG3Tag {
     //public byte[] imageData;
     //public byte[] bitmapAlphaData;
 
+    public DefineBitsJPEG4Tag(SwfByteArray bytes, TagHeaderRecord header) : base(header) {
+        long startPosition = bytes.GetBytePosition();
+        characterID = bytes.ReadUI16();
+        alphaDataOffset = bytes.ReadUI32();
+        deblockParam = bytes.ReadFixed8_8();
+        if (alphaDataOffset > 0) {
+            imageData = bytes.ReadBytes((int)alphaDataOffset);
+        }
+        int bytesRemaining = (int)(header.length - (bytes.GetBytePosition() - startPosition));
+        if (bytesRemaining > 0) {
+            bitmapAlphaData = bytes.ReadBytes(bytesRemaining);
+        }
+    }
+
     public override XmlElement ToXml(XmlDocument doc) {
         var ele = CreateXmlElement(doc, "DefineBitsJPEG4");
         ele.SetAttribute("characterID", characterID.ToString());

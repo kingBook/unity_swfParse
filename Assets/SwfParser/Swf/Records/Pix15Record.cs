@@ -7,6 +7,13 @@ public struct Pix15Record : IPixRecord {
     public byte green;
     public byte blue;
 
+    public Pix15Record(SwfByteArray bytes) {
+        reserved = (byte)bytes.ReadUB(1);
+        red = (byte)bytes.ReadUB(5);
+        green = (byte)bytes.ReadUB(5);
+        blue = (byte)bytes.ReadUB(5);
+    }
+
     public override string ToString() {
         uint color = red;
         color = (color << 8) | green;

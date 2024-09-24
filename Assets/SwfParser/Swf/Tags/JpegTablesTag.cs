@@ -4,6 +4,13 @@ public class JPEGTablesTag : SwfTag {
 
     public byte[] jpegData;
 
+    public JPEGTablesTag(SwfByteArray bytes, TagHeaderRecord header) : base(header) {
+        int length = (int)header.length;
+        if (length > 0) {
+            jpegData = bytes.ReadBytes(length);
+        }
+    }
+
     public override XmlElement ToXml(XmlDocument doc) {
         var ele = CreateXmlElement(doc, "JPEGTables");
         string jpegDataStr = "";

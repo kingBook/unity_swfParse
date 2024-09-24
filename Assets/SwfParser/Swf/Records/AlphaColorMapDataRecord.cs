@@ -6,6 +6,18 @@ public struct AlphaColorMapDataRecord : IAlphaMapData {
     public RGBARecord[] colorTableRGB;
     public byte[] colormapPixelData;
 
+    public AlphaColorMapDataRecord(SwfByteArray bytes, uint colorTableSize, uint imageDataSize) {
+        colorTableRGB = new RGBARecord[colorTableSize];
+        for (uint i = 0; i < colorTableSize; i++) {
+            colorTableRGB[i] = new RGBARecord(bytes);
+        }
+
+        colormapPixelData = new byte[imageDataSize];
+        for (uint i = 0; i < imageDataSize; i++) {
+            colormapPixelData[i] = bytes.ReadUI8();
+        }
+    }
+
     public XmlElement ToXml(XmlDocument doc) {
         var ele = doc.CreateElement("AlphaColorMapData");
 

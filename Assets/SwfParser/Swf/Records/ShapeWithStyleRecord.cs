@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.Xml;
 
 public struct ShapeWithStyleRecord {
@@ -8,6 +9,27 @@ public struct ShapeWithStyleRecord {
     public byte numFillBits;
     public byte numLineBits;
     public IShapeRecord[] shapeRecords;
+
+    public ShapeWithStyleRecord(SwfReader swfReader, SwfByteArray bytes, byte shapeType) {
+        fillStyles = new FillStyleArrayRecord(bytes, shapeType);
+        lineStyles = new LineStyleArrayRecord(bytes, shapeType);
+        bytes.AlignBytes();
+        numFillBits = (byte)bytes.ReadUB(4);
+        numLineBits = (byte)bytes.ReadUB(4);
+        var list = new List<IShapeRecord>();
+        while (true) {
+            var shapeRecord = swfReader.ReadShapeRecord(bytes, numFillBits, numLineBits, shapeType);
+            list.Add(shapeRecord);
+            if (shapeRecord is StyleChangeRecord changeRecord) {
+                if (changeRecord.stateNewStyles) {
+                    numFillBits = changeRecord.numFillBits;
+                    numLineBits = changeRecord.numLineBits;
+                }
+            }
+            if (shapeRecord is EndShapeRecord) break;
+        }
+        shapeRecords = list.ToArray();
+    }
 
     public XmlElement ToXml(XmlDocument doc) {
         var ele = doc.CreateElement("ShapeWithStyle");

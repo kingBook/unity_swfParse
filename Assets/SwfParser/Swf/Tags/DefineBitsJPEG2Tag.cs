@@ -7,6 +7,18 @@ public class DefineBitsJPEG2Tag : SwfTag, ICharacterIdTag {
     public ushort characterID;
     public byte[] imageData;
 
+    public DefineBitsJPEG2Tag(TagHeaderRecord header) : base(header) {
+        // empty constructor
+    }
+
+    public DefineBitsJPEG2Tag(SwfByteArray bytes, TagHeaderRecord header) : base(header) {
+        characterID = bytes.ReadUI16();
+        int length = (int)header.length - 2;
+        if (length > 0) {
+            imageData = bytes.ReadBytes(length);
+        }
+    }
+
     public override XmlElement ToXml(XmlDocument doc) {
         var ele = CreateXmlElement(doc, "DefineBitsJPEG2");
         ele.SetAttribute("characterID", characterID.ToString());

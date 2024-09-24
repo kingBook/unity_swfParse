@@ -7,6 +7,16 @@ public class DefineShapeTag : SwfTag, ICharacterIdTag {
     public RectangleRecord shapeBounds;
     public ShapeWithStyleRecord shapes;
 
+    public DefineShapeTag(TagHeaderRecord header) : base(header) {
+        // empty constructor
+    }
+
+    public DefineShapeTag(SwfReader swfReader, SwfByteArray bytes, TagHeaderRecord header) : base(header) {
+        shapeId = bytes.ReadUI16();
+        shapeBounds = new RectangleRecord(bytes);
+        shapes = new ShapeWithStyleRecord(swfReader, bytes, 1);
+    }
+
     public override XmlElement ToXml(XmlDocument doc) {
         var ele = CreateXmlElement(doc, "DefineShape");
         ele.SetAttribute("shapeId", shapeId.ToString());

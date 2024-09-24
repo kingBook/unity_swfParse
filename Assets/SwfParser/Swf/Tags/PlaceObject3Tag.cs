@@ -35,6 +35,63 @@ public class PlaceObject3Tag : SwfTag, ICharacterIdTag {
     public RGBARecord backgroundColor;
     //public clipActions;
 
+    public PlaceObject3Tag(SwfByteArray bytes, TagHeaderRecord header) : base(header) {
+        placeFlagHasClipActions = bytes.ReadFlag();
+        placeFlagHasClipDepth = bytes.ReadFlag();
+        placeFlagHasName = bytes.ReadFlag();
+        placeFlagHasRatio = bytes.ReadFlag();
+        placeFlagHasColorTransform = bytes.ReadFlag();
+        placeFlagHasMatrix = bytes.ReadFlag();
+        placeFlagHasCharacter = bytes.ReadFlag();
+        placeFlagMove = bytes.ReadFlag();
+        reserved = (byte)bytes.ReadUB(1);
+        placeFlagOpaqueBackground = bytes.ReadFlag();
+        placeFlagHasVisible = bytes.ReadFlag();
+        placeFlagHasImage = bytes.ReadFlag();
+        placeFlagHasClassName = bytes.ReadFlag();
+        placeFlagHasCacheAsBitmap = bytes.ReadFlag();
+        placeFlagHasBlendMode = bytes.ReadFlag();
+        placeFlagHasFilterList = bytes.ReadFlag();
+        depth = bytes.ReadUI16();
+        if (placeFlagHasClassName || (placeFlagHasImage && placeFlagHasCharacter)) {
+            className = bytes.ReadString();
+        }
+        if (placeFlagHasCharacter) {
+            characterId = bytes.ReadUI16();
+        }
+        if (placeFlagHasMatrix) {
+            matrix = new MatrixRecord(bytes);
+        }
+        if (placeFlagHasColorTransform) {
+            colorTransform = new CXFormWithAlphaRecord(bytes);
+        }
+        if (placeFlagHasRatio) {
+            ratio = bytes.ReadUI16();
+        }
+        if (placeFlagHasName) {
+            name = bytes.ReadString();
+        }
+        if (placeFlagHasClipDepth) {
+            clipDepth = bytes.ReadUI16();
+        }
+        if (placeFlagHasFilterList) {
+            surfaceFilterList = new FilterListRecord(bytes);
+        }
+        if (placeFlagHasBlendMode) {
+            blendMode = bytes.ReadUI8();
+        }
+        if (placeFlagHasCacheAsBitmap) {
+            bitmapCache = bytes.ReadUI8();
+        }
+        if (placeFlagHasVisible) {
+            visible = bytes.ReadUI8();
+            backgroundColor = new RGBARecord(bytes);
+        }
+        /*if(tag.placeFlagHasClipActions){
+            tag.placeFlagHasClipActions=
+        }*/
+    }
+
     public override XmlElement ToXml(XmlDocument doc) {
         var ele = CreateXmlElement(doc, "PlaceObject3");
         ele.SetAttribute("placeFlagHasClipActions", placeFlagHasClipActions.ToString());
@@ -102,7 +159,7 @@ public class PlaceObject3Tag : SwfTag, ICharacterIdTag {
     public ushort GetCharacterId() {
         return characterId;
     }
-    
+
     public PlaceObject3TagData ToData() {
         var data = new PlaceObject3TagData();
         data.type = header.type;

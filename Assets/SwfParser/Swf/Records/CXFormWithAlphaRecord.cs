@@ -14,6 +14,36 @@ public struct CXFormWithAlphaRecord {
     public int blueAddTerm;
     public int alphaAddTerm;
 
+    public CXFormWithAlphaRecord(SwfByteArray bytes) {
+        bytes.AlignBytes(); //必须
+
+        hasAddTerms = bytes.ReadFlag();
+        hasMultTerms = bytes.ReadFlag();
+        nBits = (byte)bytes.ReadUB(4);
+        if (hasMultTerms) {
+            redMultTerm = bytes.ReadSB(nBits);
+            greenMultTerm = bytes.ReadSB(nBits);
+            blueMultTerm = bytes.ReadSB(nBits);
+            alphaMultTerm = bytes.ReadSB(nBits);
+        } else {
+            redMultTerm = 0;
+            greenMultTerm = 0;
+            blueMultTerm = 0;
+            alphaMultTerm = 0;
+        }
+        if (hasAddTerms) {
+            redAddTerm = bytes.ReadSB(nBits);
+            greenAddTerm = bytes.ReadSB(nBits);
+            blueAddTerm = bytes.ReadSB(nBits);
+            alphaAddTerm = bytes.ReadSB(nBits);
+        } else {
+            redAddTerm = 0;
+            greenAddTerm = 0;
+            blueAddTerm = 0;
+            alphaAddTerm = 0;
+        }
+    }
+
     public XmlElement ToXml(XmlDocument doc) {
         var ele = doc.CreateElement("CXFormWithAlpha");
         ele.SetAttribute("hasAddTerms", hasAddTerms.ToString());

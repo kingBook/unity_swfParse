@@ -7,6 +7,12 @@ public struct RGBRecord {
     public byte green;
     public byte blue;
 
+    public RGBRecord(SwfByteArray bytes) {
+        red = bytes.ReadUI8();
+        green = bytes.ReadUI8();
+        blue = bytes.ReadUI8();
+    }
+
     public override string ToString() {
         uint color = red;
         color = (color << 8) | green;

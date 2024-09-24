@@ -3,7 +3,7 @@ using System.Collections;
 using System.Xml;
 
 public struct BevelFilterRecord {
-    
+
     public RGBARecord shadowColor;
     public RGBARecord highlightColor;
     public float blurX;
@@ -16,6 +16,21 @@ public struct BevelFilterRecord {
     public bool compositeSource;
     public bool onTop;
     public byte passes;
+
+    public BevelFilterRecord(SwfByteArray bytes) {
+        shadowColor = new RGBARecord(bytes);
+        highlightColor = new RGBARecord(bytes);
+        blurX = bytes.ReadFixed16_16();
+        blurY = bytes.ReadFixed16_16();
+        angle = bytes.ReadFixed16_16();
+        distance = bytes.ReadFixed16_16();
+        strength = bytes.ReadFixed8_8();
+        innerShadow = bytes.ReadFlag();
+        knockout = bytes.ReadFlag();
+        compositeSource = bytes.ReadFlag();
+        onTop = bytes.ReadFlag();
+        passes = (byte)bytes.ReadUB(4);
+    }
 
     public XmlElement ToXml(XmlDocument doc) {
         var ele = doc.CreateElement("BevelFilter");

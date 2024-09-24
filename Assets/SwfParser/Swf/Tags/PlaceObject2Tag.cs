@@ -21,6 +21,39 @@ public class PlaceObject2Tag : SwfTag, ICharacterIdTag {
     public ushort clipDepth;
     //public clipActions;
 
+    public PlaceObject2Tag(SwfByteArray bytes, TagHeaderRecord header) : base(header) {
+        placeFlagHasClipActions = bytes.ReadFlag();
+        placeFlagHasClipDepth = bytes.ReadFlag();
+        placeFlagHasName = bytes.ReadFlag();
+        placeFlagHasRatio = bytes.ReadFlag();
+        placeFlagHasColorTransform = bytes.ReadFlag();
+        placeFlagHasMatrix = bytes.ReadFlag();
+        placeFlagHasCharacter = bytes.ReadFlag();
+        placeFlagMove = bytes.ReadFlag();
+        depth = bytes.ReadUI16();
+        if (placeFlagHasCharacter) {
+            characterId = bytes.ReadUI16();
+        }
+        if (placeFlagHasMatrix) {
+            matrix = new MatrixRecord(bytes);
+        }
+        if (placeFlagHasColorTransform) {
+            colorTransform = new CXFormWithAlphaRecord(bytes);
+        }
+        if (placeFlagHasRatio) {
+            ratio = bytes.ReadUI16();
+        }
+        if (placeFlagHasName) {
+            name = bytes.ReadString();
+        }
+        if (placeFlagHasClipDepth) {
+            clipDepth = bytes.ReadUI16();
+        }
+        /*if(tag.placeFlagHasClipActions){
+            tag.clipActions=
+        }*/
+    }
+
     public override XmlElement ToXml(XmlDocument doc) {
         var ele = CreateXmlElement(doc, "PlaceObject2");
         ele.SetAttribute("placeFlagHasClipActions", placeFlagHasClipActions.ToString());
@@ -49,7 +82,7 @@ public class PlaceObject2Tag : SwfTag, ICharacterIdTag {
     public ushort GetCharacterId() {
         return characterId;
     }
-    
+
     public PlaceObject2TagData ToData() {
         var data = new PlaceObject2TagData();
         data.type = header.type;

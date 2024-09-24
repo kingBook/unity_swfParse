@@ -2,9 +2,21 @@
 using System.Xml;
 
 public struct ColorMapDataRecord : IMapData {
-    
+
     public RGBRecord[] colorTableRGB;
     public byte[] colormapPixelData;
+
+    public ColorMapDataRecord(SwfByteArray bytes, uint colorTableSize, uint imageDataSize) {
+        colorTableRGB = new RGBRecord[colorTableSize];
+        for (uint i = 0; i < colorTableSize; i++) {
+            colorTableRGB[i] = new RGBRecord(bytes);
+        }
+
+        colormapPixelData = new byte[imageDataSize];
+        for (uint i = 0; i < imageDataSize; i++) {
+            colormapPixelData[i] = bytes.ReadUI8();
+        }
+    }
 
     public XmlElement ToXml(XmlDocument doc) {
         var ele = doc.CreateElement("ColorMapData");

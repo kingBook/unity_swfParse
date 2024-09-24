@@ -2,11 +2,18 @@
 using System.Text;
 
 public struct ARGBRecord {
-    
+
     public byte alpha;
     public byte red;
     public byte green;
     public byte blue;
+
+    public ARGBRecord(SwfByteArray bytes) {
+        alpha = bytes.ReadUI8();
+        red = bytes.ReadUI8();
+        green = bytes.ReadUI8();
+        blue = bytes.ReadUI8();
+    }
 
     public override string ToString() {
         uint color = alpha;

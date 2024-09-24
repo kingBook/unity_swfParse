@@ -9,6 +9,39 @@ public struct FillStyleRecord {
     public ushort bitmapId;
     public MatrixRecord bitmapMatrix;
 
+    public FillStyleRecord(SwfByteArray bytes, byte shapeType) {
+        // default value
+        color = new RGBRecord();
+        gradientMatrix = new MatrixRecord();
+        gradient = new GradientRecord();
+        bitmapId = 0;
+        bitmapMatrix = new MatrixRecord();
+        //
+        byte type = bytes.ReadUI8();
+        fillStyleType = type;
+
+        if (type == 0x00) {
+            if (shapeType == 3 || shapeType == 4) {
+                color = new RGBARecord(bytes);
+            } else if (shapeType == 1 || shapeType == 2) {
+                color = new RGBRecord(bytes);
+            }
+        }
+        if (type == 0x10 || type == 0x12 || type == 0x13) {
+            gradientMatrix = new MatrixRecord(bytes);
+        }
+
+        if (type == 0x10 || type == 0x12) {
+            gradient = new GradientRecord(bytes, shapeType);
+        } else if (type == 0x13) {
+            gradient = new FocalGradientRecord(bytes, shapeType);
+        }
+        if (type == 0x40 || type == 0x41 || type == 0x42 || type == 0x43) {
+            bitmapId = bytes.ReadUI16();
+            bitmapMatrix = new MatrixRecord(bytes);
+        }
+    }
+
     public XmlElement ToXml(XmlDocument doc) {
         var ele = doc.CreateElement("FillStyle");
         //fillStyleType

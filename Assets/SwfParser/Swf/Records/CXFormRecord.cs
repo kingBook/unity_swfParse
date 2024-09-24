@@ -1,7 +1,7 @@
 ﻿using System.Xml;
 
 public struct CXFormRecord {
-    
+
     public bool hasAddTerms;
     public bool hasMultTerms;
     public byte nBits;
@@ -11,6 +11,30 @@ public struct CXFormRecord {
     public int redAddTerm;
     public int greenAddTerm;
     public int blueAddTerm;
+
+    public CXFormRecord(SwfByteArray bytes) {
+        hasAddTerms = bytes.ReadFlag();
+        hasMultTerms = bytes.ReadFlag();
+        nBits = (byte)bytes.ReadUB(4);
+        if (hasMultTerms) {
+            redMultTerm = bytes.ReadSB(nBits);
+            greenMultTerm = bytes.ReadSB(nBits);
+            blueMultTerm = bytes.ReadSB(nBits);
+        } else {
+            redMultTerm = 0;
+            greenMultTerm = 0;
+            blueMultTerm = 0;
+        }
+        if (hasAddTerms) {
+            redAddTerm = bytes.ReadSB(nBits);
+            greenAddTerm = bytes.ReadSB(nBits);
+            blueAddTerm = bytes.ReadSB(nBits);
+        } else {
+            redAddTerm = 0;
+            greenAddTerm = 0;
+            blueAddTerm = 0;
+        }
+    }
 
     public XmlElement ToXml(XmlDocument doc) {
         var ele = doc.CreateElement("CXForm");

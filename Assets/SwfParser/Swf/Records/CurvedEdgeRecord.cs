@@ -10,6 +10,16 @@ public struct CurvedEdgeRecord : IEdgeRecord { //:EdgeRecord:ShapeRecord
     public int anchorDeltaX;
     public int anchorDeltaY;
 
+    public CurvedEdgeRecord(SwfByteArray bytes, bool typeFlag, bool straightFlag) {
+        this.typeFlag = typeFlag;
+        this.straightFlag = straightFlag;
+        numBits = (byte)bytes.ReadUB(4);
+        controlDeltaX = bytes.ReadSB((uint)numBits + 2);
+        controlDeltaY = bytes.ReadSB((uint)numBits + 2);
+        anchorDeltaX = bytes.ReadSB((uint)numBits + 2);
+        anchorDeltaY = bytes.ReadSB((uint)numBits + 2);
+    }
+
     public XmlElement ToXml(XmlDocument doc) {
         var ele = doc.CreateElement("CurvedEdgeRecord");
         ele.SetAttribute("typeFlag", typeFlag.ToString());

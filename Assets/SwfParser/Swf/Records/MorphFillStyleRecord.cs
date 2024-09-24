@@ -12,6 +12,24 @@ public class MorphFillStyleRecord {
     public MatrixRecord startBitmapMatrix;
     public MatrixRecord endBitmapMatrix;
 
+    public MorphFillStyleRecord(SwfByteArray bytes) {
+        fillStyleType = bytes.ReadUI8();
+
+        var type = fillStyleType;
+        if (type == 0x00) {
+            startColor = new RGBARecord(bytes);
+            endColor = new RGBARecord(bytes);
+        } else if (type == 0x10 || type == 0x12) {
+            startGradientMatrix = new MatrixRecord(bytes);
+            endGradientMatrix = new MatrixRecord(bytes);
+            gradient = new MorphGradientRecord(bytes);
+        } else if (type == 0x40 || type == 0x41 || type == 0x42 || type == 0x43) {
+            bitmapId = bytes.ReadUI16();
+            startBitmapMatrix = new MatrixRecord(bytes);
+            endBitmapMatrix = new MatrixRecord(bytes);
+        }
+    }
+
     public XmlElement ToXml(XmlDocument doc) {
         var type = fillStyleType;
         var ele = doc.CreateElement("MorphFillStyle");

@@ -1,8 +1,16 @@
 ﻿using System.Xml;
 
 public struct ColorMatrixFilterRecord {
-    
+
     public float[] matrix;
+
+    public ColorMatrixFilterRecord(SwfByteArray bytes) {
+        matrix = new float[20];
+        for (byte i = 0; i < 20; i++) {
+            float value = bytes.ReadFloat();
+            matrix[i] = value;
+        }
+    }
 
     public XmlElement ToXml(XmlDocument doc) {
         var ele = doc.CreateElement("ColorMatrixFilter");

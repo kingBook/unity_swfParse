@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
+using UnityEngine.UI;
 
 public class DefineButtonTag : SwfTag, ICharacterIdTag {
 
@@ -11,6 +12,15 @@ public class DefineButtonTag : SwfTag, ICharacterIdTag {
     public byte characterEndFlag;
     //public actions;
     //public actionEndFlag;
+
+    public DefineButtonTag(SwfByteArray bytes, TagHeaderRecord header) : base(header) {
+        // default value
+        buttonId = 0;
+        characters = new ButtonRecord[0];
+        characterEndFlag = 0;
+        //
+
+    }
 
     public override XmlElement ToXml(XmlDocument doc) {
         return base.ToXml(doc);

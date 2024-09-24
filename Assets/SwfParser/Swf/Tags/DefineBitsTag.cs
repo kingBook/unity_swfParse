@@ -7,6 +7,14 @@ public class DefineBitsTag : SwfTag, ICharacterIdTag {
     public ushort characterID;
     public byte[] jpegData;
 
+    public DefineBitsTag(SwfByteArray bytes, TagHeaderRecord header) : base(header) {
+        characterID = bytes.ReadUI16();
+        int length = (int)header.length - 2;
+        if (length > 0) {
+            jpegData = bytes.ReadBytes(length);
+        }
+    }
+
     public override XmlElement ToXml(XmlDocument doc) {
         var ele = CreateXmlElement(doc, "DefineBits");
         ele.SetAttribute("characterID", characterID.ToString());

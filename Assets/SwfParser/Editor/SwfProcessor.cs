@@ -3,46 +3,21 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Xml;
-using System.Xml.Serialization;
 using UnityEditor;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
-public class SwfPostprocessor : AssetPostprocessor {
-
-    private static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths) {
-        foreach (string str in importedAssets) {
-            int dotIndex = str.LastIndexOf('.');
-            if (dotIndex > -1) {
-                string extensionName = str.Substring(dotIndex);
-                if (extensionName == ".swf") {
-                    OnSwfPostprocess(str);
-                }
-            }
-        }
-    }
-
-    private static void OnSwfPostprocess(string path) {
-        int idx = path.IndexOf('/');
-        path = path.Substring(idx);
-        path = Application.dataPath + path;
-
-        ParseSwf(path);
-
-    }
-
-    [MenuItem("SwfParser/Run")]
-    public static void Run() {
-        string assetsPath = Application.dataPath;
-        ParseSwf($"{assetsPath}/test.fla_export/test.fla.swf");
-    }
+public static class SwfProcessor {
 
     public static void ParseSwf(string swfPath) {
+        // 转为绝对路径
+        int idx = swfPath.IndexOf('/');
+        swfPath = swfPath.Substring(idx);
+        swfPath = Application.dataPath + swfPath;
         // 截取掉xx.swf的文件夹路径，如：E:/kingBook/projects/unity_swfParse/Assets/
         string swfFolderPath = swfPath.Substring(0, swfPath.LastIndexOf('/') + 1);
 
         var swfReader = new SwfReader();
-
         var swfBytes = new SwfByteArray(swfPath);
 
         Stopwatch sw = new Stopwatch();
@@ -68,21 +43,19 @@ public class SwfPostprocessor : AssetPostprocessor {
         }
 
         // 导出 bitmapData
-        var imageDatas = swf.GetImageDatas(isOnlyExportLinkage:true);
+        var imageDatas = swf.GetImageDatas(isOnlyExportLinkage: true);
         for (int i = 0, len = imageDatas.Length; i < len; i++) {
             imageDatas[i].SaveTo(swfFolderPath);
         }
 
         // 导出运行时 SwfData
-        var swfData = swf.GetSwfData(isOnlyExportLinkage:true);
+        var swfData = swf.GetSwfData(isOnlyExportLinkage: true);
         SaveSwfData(swfData, swfPath);
-
 
         // 根据有链接类名的库元件，创建 GameObject
         CreateGameObjectsWithSymbolClassTags(swf, swfData, isCreatePrefabAsset:true);
 
         AssetDatabase.Refresh();
-
         EditorUtility.DisplayDialog("Complete", "Import complete\n\n" + swfPath.Replace(Application.dataPath, "Assets"), "OK");
     }
 
@@ -191,6 +164,7 @@ public class SwfPostprocessor : AssetPostprocessor {
         xmlSerializer.Serialize(streamWriter, swfData);
         streamWriter.Close();
         fileStream.Close();*/
+
 
 
     }

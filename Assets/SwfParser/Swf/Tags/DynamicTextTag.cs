@@ -35,6 +35,10 @@ public class DynamicTextTag : SwfTag, ICharacterIdTag {
     public string variableName;
     public string initialText;
 
+    public DynamicTextTag(TagHeaderRecord header) : base(header) {
+        // empty constructor
+    }
+
     public void GetNeededCharacterIds(List<ushort> characterIds, Swf swf) {
         if (characterIds.IndexOf(characterID) < 0) {
             characterIds.Add(characterID);

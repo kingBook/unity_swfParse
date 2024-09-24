@@ -15,6 +15,33 @@ public struct LineStyle2Record : ILineStyleRecord {
     public RGBARecord color;
     public FillStyleRecord fillType;
 
+    public LineStyle2Record(SwfByteArray bytes, byte shapeType) {
+        // default value
+        miterLimitFactor = 0;
+        color = new RGBARecord();
+        fillType = new FillStyleRecord();
+        //
+        width = bytes.ReadUI16();
+        startCapStyle = (byte)bytes.ReadUB(2);
+        joinStyle = (byte)bytes.ReadUB(2);
+        hasFillFlag = bytes.ReadFlag();
+        noHScaleFlag = bytes.ReadFlag();
+        noVScaleFlag = bytes.ReadFlag();
+        pixelHintingFlag = bytes.ReadFlag();
+        reserved = (byte)bytes.ReadUB(5);
+        noClose = bytes.ReadFlag();
+        endCapStyle = (byte)bytes.ReadUB(2);
+        if (joinStyle == 2) {
+            miterLimitFactor = bytes.ReadFixed8_8(); //bytes.readUI16();
+        }
+
+        if (!hasFillFlag) {
+            color = new RGBARecord(bytes);
+        } else {
+            fillType = new FillStyleRecord(bytes, shapeType);
+        }
+    }
+
     public XmlElement ToXml(XmlDocument doc) {
         var ele = doc.CreateElement("LineStyle");
         ele.SetAttribute("width", width.ToString());

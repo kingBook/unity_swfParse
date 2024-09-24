@@ -9,6 +9,16 @@ public class PlaceObjectTag : SwfTag, ICharacterIdTag {
     public MatrixRecord matrix;
     public CXFormRecord colorTransform;
 
+    public PlaceObjectTag(SwfByteArray bytes, TagHeaderRecord header) : base(header) {
+        var originalPos = bytes.GetBytePosition();
+        characterId = bytes.ReadUI16();
+        depth = bytes.ReadUI16();
+        matrix = new MatrixRecord(bytes);
+        if (header.length > bytes.GetBytePosition() - originalPos) {
+            colorTransform = new CXFormRecord(bytes);
+        }
+    }
+
     public override XmlElement ToXml(XmlDocument doc) {
         var ele = CreateXmlElement(doc, "PlaceObject");
         ele.SetAttribute("characterId", characterId.ToString());

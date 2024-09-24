@@ -6,6 +6,10 @@ public class SwfTag {
 
     public TagHeaderRecord header;
 
+    public SwfTag(TagHeaderRecord header) {
+        this.header = header;
+    }
+
     protected string GetClassName() {
         var className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name;
         return className;

@@ -13,6 +13,17 @@ public struct GlowFilterRecord {
     public bool compositeSource;
     public byte passes;
 
+    public GlowFilterRecord(SwfByteArray bytes) {
+        glowColor = new RGBARecord(bytes);
+        blurX = bytes.ReadFixed16_16();
+        blurY = bytes.ReadFixed16_16();
+        strength = bytes.ReadFixed8_8();
+        innerGlow = bytes.ReadFlag();
+        knockout = bytes.ReadFlag();
+        compositeSource = bytes.ReadFlag();
+        passes = (byte)bytes.ReadUB(5);
+    }
+
     public XmlElement ToXml(XmlDocument doc) {
         var ele = doc.CreateElement("GlowFilter");
         ele.SetAttribute("glowColor", glowColor.ToString());

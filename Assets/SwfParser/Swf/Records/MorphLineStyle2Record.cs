@@ -18,6 +18,29 @@ public class MorphLineStyle2Record : IMorphLineStyleRecord {
     public RGBARecord endColor;
     public MorphFillStyleRecord fillType;
 
+    public MorphLineStyle2Record(SwfByteArray bytes) {
+        startWidth = bytes.ReadUI16();
+        endWidth = bytes.ReadUI16();
+        startCapStyle = (byte)bytes.ReadUB(2);
+        joinStyle = (byte)bytes.ReadUB(2);
+        hasFillFlag = bytes.ReadFlag();
+        noHScaleFlag = bytes.ReadFlag();
+        noVScaleFlag = bytes.ReadFlag();
+        pixelHintingFlag = bytes.ReadFlag();
+        reserved = (byte)bytes.ReadUB(5);
+        noClose = bytes.ReadFlag();
+        endCapStyle = (byte)bytes.ReadUB(2);
+        if (joinStyle == 2) {
+            miterLimitFactor = bytes.ReadUI16();
+        }
+        if (!hasFillFlag) {
+            startColor = new RGBARecord(bytes);
+            endColor = new RGBARecord(bytes);
+        } else {
+            fillType = new MorphFillStyleRecord(bytes);
+        }
+    }
+
     public XmlElement ToXml(XmlDocument doc) {
         var ele = doc.CreateElement("MorphLineStyle2");
         ele.SetAttribute("startWidth", startWidth.ToString());

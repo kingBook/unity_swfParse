@@ -14,6 +14,32 @@
     public int translateX;
     public int translateY;
 
+    public MatrixRecord(SwfByteArray bytes) {
+        hasScale = bytes.ReadFlag();
+        if (hasScale) {
+            nScaleBits = (byte)bytes.ReadUB(5);
+            scaleX = bytes.ReadFB(nScaleBits);
+            scaleY = bytes.ReadFB(nScaleBits);
+        } else {
+            nScaleBits = 0;
+            scaleX = 0;
+            scaleY = 0;
+        }
+        hasRotate = bytes.ReadFlag();
+        if (hasRotate) {
+            nRotateBits = (byte)bytes.ReadUB(5);
+            rotateSkew0 = bytes.ReadFB(nRotateBits);
+            rotateSkew1 = bytes.ReadFB(nRotateBits);
+        } else {
+            nRotateBits = 0;
+            rotateSkew0 = 0;
+            rotateSkew1 = 0;
+        }
+        nTranslateBits = (byte)bytes.ReadUB(5);
+        translateX = bytes.ReadSB(nTranslateBits);
+        translateY = bytes.ReadSB(nTranslateBits);
+    }
+
     public override string ToString() {
         //[scaleX, skewX, tx,
         //  skewY, scaleY,ty]

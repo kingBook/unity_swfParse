@@ -12,6 +12,46 @@ public struct FilterRecord {
     public ColorMatrixFilterRecord colorMatrixFilter;
     public GradientBevelFilterRecord gradientBevelFilter;
 
+    public FilterRecord(SwfByteArray bytes) {
+        // default value
+        dropShadowFilter = new DropShadowFilterRecord();
+        blurFilter = new BlurFilterRecord();
+        glowFilter = new GlowFilterRecord();
+        bevelFilter = new BevelFilterRecord();
+        gradientGlowFilter = new GradientGlowFilterRecord();
+        convolutionFilter = new ConvolutionFilterRecord();
+        colorMatrixFilter = new ColorMatrixFilterRecord();
+        gradientBevelFilter = new GradientBevelFilterRecord();
+        //
+        filterId = bytes.ReadUI8();
+        switch (filterId) {
+            case 0:
+                dropShadowFilter = new DropShadowFilterRecord(bytes);
+                break;
+            case 1:
+                blurFilter = new BlurFilterRecord(bytes);
+                break;
+            case 2:
+                glowFilter = new GlowFilterRecord(bytes);
+                break;
+            case 3:
+                bevelFilter = new BevelFilterRecord(bytes);
+                break;
+            case 4:
+                gradientGlowFilter = new GradientGlowFilterRecord(bytes);
+                break;
+            case 5:
+                convolutionFilter = new ConvolutionFilterRecord(bytes);
+                break;
+            case 6:
+                colorMatrixFilter = new ColorMatrixFilterRecord(bytes);
+                break;
+            case 7:
+                gradientBevelFilter = new GradientBevelFilterRecord(bytes);
+                break;
+        }
+    }
+
     public XmlElement ToXml(XmlDocument doc) {
         var ele = doc.CreateElement("Filter");
         ele.SetAttribute("filterId", filterId.ToString());

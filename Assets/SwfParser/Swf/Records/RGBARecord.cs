@@ -8,6 +8,13 @@ public struct RGBARecord {
     public byte blue;
     public byte alpha;
 
+    public RGBARecord(SwfByteArray bytes) {
+        red = bytes.ReadUI8();
+        green = bytes.ReadUI8();
+        blue = bytes.ReadUI8();
+        alpha = bytes.ReadUI8();
+    }
+
     public override string ToString() {
         uint color = red;
         color = (color << 8) | green;

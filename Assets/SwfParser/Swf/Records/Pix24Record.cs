@@ -7,6 +7,13 @@ public struct Pix24Record : IPixRecord {
     public byte green;
     public byte blue;
 
+    public Pix24Record(SwfByteArray bytes) {
+        reserved = bytes.ReadUI8();
+        red = bytes.ReadUI8();
+        green = bytes.ReadUI8();
+        blue = bytes.ReadUI8();
+    }
+
     public override string ToString() {
         uint color = red;
         color = (color << 8) | green;

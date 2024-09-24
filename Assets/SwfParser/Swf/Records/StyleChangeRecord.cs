@@ -1,4 +1,5 @@
 ﻿using System.Xml;
+using UnityEditor.Profiling.Memory.Experimental;
 
 public struct StyleChangeRecord : IShapeRecord { //:Shape Record
 
@@ -18,6 +19,49 @@ public struct StyleChangeRecord : IShapeRecord { //:Shape Record
     public LineStyleArrayRecord lineStyles;
     public byte numFillBits;
     public byte numLineBits;
+
+    public StyleChangeRecord(SwfByteArray bytes, bool typeFlag, bool stateNewStyles, bool stateLineStyle, bool stateFillStyle1, bool stateFillStyle0, bool stateMoveTo, byte numFillBits, byte numLineBits, byte shapeType) {
+        // default value
+        moveBits = 0;
+        moveDeltaX = 0;
+        moveDeltaY = 0;
+        fillStyle0 = 0;
+        fillStyle1 = 0;
+        lineStyle = 0;
+        fillStyles = new FillStyleArrayRecord();
+        lineStyles = new LineStyleArrayRecord();
+        this.numFillBits = 0;
+        this.numLineBits = 0;
+        //
+        this.typeFlag = typeFlag;
+        this.stateNewStyles = stateNewStyles;
+        this.stateLineStyle = stateLineStyle;
+        this.stateFillStyle1 = stateFillStyle1;
+        this.stateFillStyle0 = stateFillStyle0;
+        this.stateMoveTo = stateMoveTo;
+        if (stateMoveTo) {
+            moveBits = (byte)bytes.ReadUB(5);
+            moveDeltaX = bytes.ReadSB(moveBits);
+            moveDeltaY = bytes.ReadSB(moveBits);
+        }
+        if (stateFillStyle0) {
+            fillStyle0 = bytes.ReadUB(numFillBits);
+        }
+        if (stateFillStyle1) {
+            fillStyle1 = bytes.ReadUB(numFillBits);
+        }
+        if (stateLineStyle) {
+            lineStyle = bytes.ReadUB(numLineBits);
+        }
+        //----------------------------------
+        if (stateNewStyles) {
+            fillStyles = new FillStyleArrayRecord(bytes, shapeType);
+            lineStyles = new LineStyleArrayRecord(bytes, shapeType);
+            this.numFillBits = (byte)bytes.ReadUB(4);
+            this.numLineBits = (byte)bytes.ReadUB(4);
+        }
+        //----------------------------------
+    }
 
     public XmlElement ToXml(XmlDocument doc) {
         var ele = doc.CreateElement("StyleChangeRecord");

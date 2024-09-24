@@ -7,6 +7,12 @@ public class DefineSpriteTag : SwfTag, ICharacterIdTag {
     public ushort frameCount;
     public SwfTag[] controlTags;
 
+    public DefineSpriteTag(SwfReader swfReader, SwfByteArray bytes, TagHeaderRecord header) : base(header) {
+        spriteId = bytes.ReadUI16();
+        frameCount = bytes.ReadUI16();
+        controlTags = swfReader.ReadControlTags(bytes);
+    }
+
     public override XmlElement ToXml(XmlDocument doc) {
         var ele = CreateXmlElement(doc, "DefineSprite");
         ele.SetAttribute("spriteId", spriteId.ToString());

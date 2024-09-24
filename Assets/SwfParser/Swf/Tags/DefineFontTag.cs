@@ -10,6 +10,10 @@ public class DefineFontTag : SwfTag, ICharacterIdTag {
     public ushort[] offsetTable;
     public SHAPE[] glyphShapeTable;
 
+    public DefineFontTag(SwfByteArray bytes, TagHeaderRecord header) : base(header) {
+
+    }
+
     public override XmlElement ToXml(XmlDocument doc) {
         var ele = CreateXmlElement(doc, "DefineFont");
         ele.SetAttribute("fontID", fontID.ToString());
