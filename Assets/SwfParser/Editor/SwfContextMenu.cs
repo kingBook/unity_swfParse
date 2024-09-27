@@ -6,7 +6,7 @@ using UnityEditor;
 /// </summary>
 public class SwfContextMenu : Editor {
 
-    [MenuItem("Assets/Parse Swf", true)]
+    [MenuItem("Assets/Parse swf", true)]
     private static bool ValidateParseSwf() {
         if (EditorApplication.isPlaying) return false;
 
@@ -21,7 +21,7 @@ public class SwfContextMenu : Editor {
         return false;
     }
 
-    [MenuItem("Assets/Parse Swf")]
+    [MenuItem("Assets/Parse swf")]
     private static void ParseSwf() {
         if (EditorApplication.isPlaying) return;
 

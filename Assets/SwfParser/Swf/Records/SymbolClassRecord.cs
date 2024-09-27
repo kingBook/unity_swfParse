@@ -1,10 +1,11 @@
-﻿public struct SymbolClassRecord {
+﻿[System.Serializable]
+public struct SymbolClassRecord {
 
-    public ushort tag;
+    public ushort tagId;
     public string name;
 
     public SymbolClassRecord(SwfByteArray bytes) {
-        tag = bytes.ReadUI16();
+        tagId = bytes.ReadUI16();
         name = bytes.ReadString();
     }
 

@@ -7,10 +7,24 @@ public class DefineSpriteTag : SwfTag, ICharacterIdTag {
     public ushort frameCount;
     public SwfTag[] controlTags;
 
-    public DefineSpriteTag(SwfReader swfReader, SwfByteArray bytes, TagHeaderRecord header) : base(header) {
+    public DefineSpriteTag(TagFactory tagFactory, SwfReader swfReader, SwfByteArray bytes, TagHeaderRecord header) : base(header) {
         spriteId = bytes.ReadUI16();
         frameCount = bytes.ReadUI16();
-        controlTags = swfReader.ReadControlTags(bytes);
+        controlTags = ReadControlTags(tagFactory, swfReader, bytes);
+    }
+
+    private SwfTag[] ReadControlTags(TagFactory tagFactory, SwfReader swfReader, SwfByteArray bytes) {
+        var tempTags = new List<SwfTag>();
+        while (true) {
+            var header = new TagHeaderRecord(bytes);
+            long startPosition = bytes.GetBytePosition();
+            long expectedEndPosition = startPosition + header.length;
+            var tag = tagFactory.CreateTag(tagFactory, swfReader, bytes, header);
+            tempTags.Add(tag);
+            bytes.SetBytePosition(expectedEndPosition);
+            if (tag is EndTag) break;
+        }
+        return tempTags.ToArray();
     }
 
     public override XmlElement ToXml(XmlDocument doc) {

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml;
-
+﻿using System.Xml;
+[System.Serializable]
 public class SymbolClassTag : SwfTag {
 
     public ushort numSymbols;
@@ -20,7 +18,7 @@ public class SymbolClassTag : SwfTag {
         for (int i = 0, len = symbols.Length; i < len; i++) {
             var record = symbols[i];
             var recordEle = CreateXmlElement(doc, "Record");
-            recordEle.SetAttribute("tag", record.tag.ToString());
+            recordEle.SetAttribute("tag", record.tagId.ToString());
             recordEle.SetAttribute("name", record.name);
             ele.AppendChild(recordEle);
         }

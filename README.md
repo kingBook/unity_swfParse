@@ -53,3 +53,14 @@ private void decompressFile(string inFile, string outFile)
 		inFileStream.Close();
 	}
 }
+
+==============================================================================
+// swf 显示列表
+.swf
+    ├ DefineSprite
+      ├ frame1
+        ├ PlaceObject2
+          ├ DefineShape
+            ├ DefineBitsLossless2（位图数据）
+==============================================================================
+

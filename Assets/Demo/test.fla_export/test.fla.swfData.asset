@@ -1,0 +1,321 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbd06eb9277b49c1a27827257752ee4c, type: 3}
+  m_Name: test.fla.swfData
+  m_EditorClassIdentifier: 
+  symbolClassTags:
+  - numSymbols: 5
+    symbols:
+    - tagId: 20
+      name: _OneFrame
+    - tagId: 17
+      name: _MultipleBitmap
+    - tagId: 14
+      name: _Mc
+    - tagId: 5
+      name: _TextDynamic
+    - tagId: 3
+      name: _TextStatic
+  tagTypeAndIndices:
+  - tagType: 0
+    index: 0
+  - tagType: 0
+    index: 0
+  - tagType: 11
+    index: 0
+  - tagType: 39
+    index: 0
+  - tagType: 0
+    index: 0
+  - tagType: 39
+    index: 1
+  - tagType: 36
+    index: 0
+  - tagType: 2
+    index: 0
+  - tagType: 36
+    index: 1
+  - tagType: 2
+    index: 1
+  - tagType: 39
+    index: 2
+  - tagType: 36
+    index: 2
+  - tagType: 2
+    index: 2
+  - tagType: 39
+    index: 3
+  - tagType: 39
+    index: 4
+  - tagType: 36
+    index: 3
+  - tagType: 2
+    index: 3
+  - tagType: 39
+    index: 5
+  - tagType: 36
+    index: 4
+  - tagType: 2
+    index: 4
+  - tagType: 39
+    index: 6
+  defineShapeTagDatas:
+  - type: 2
+    shapeId: 7
+    bitmapId: 6
+  - type: 2
+    shapeId: 9
+    bitmapId: 8
+  - type: 2
+    shapeId: 12
+    bitmapId: 11
+  - type: 2
+    shapeId: 16
+    bitmapId: 15
+  - type: 2
+    shapeId: 19
+    bitmapId: 18
+  defineBitsTagDatas:
+  - type: 36
+    characterID: 6
+  - type: 36
+    characterID: 8
+  - type: 36
+    characterID: 11
+  - type: 36
+    characterID: 15
+  - type: 36
+    characterID: 18
+  defineSpriteTagDatas:
+  - type: 0
+    spriteId: 3
+    frameCount: 1
+    tagTypeAndIndices:
+    - tagType: 26
+      index: 0
+    - tagType: 1
+      index: 0
+    - tagType: 0
+      index: -1
+  - type: 0
+    spriteId: 5
+    frameCount: 1
+    tagTypeAndIndices:
+    - tagType: 26
+      index: 1
+    - tagType: 1
+      index: 1
+    - tagType: 0
+      index: -1
+  - type: 0
+    spriteId: 10
+    frameCount: 1
+    tagTypeAndIndices:
+    - tagType: 26
+      index: 2
+    - tagType: 1
+      index: 2
+    - tagType: 0
+      index: -1
+  - type: 0
+    spriteId: 13
+    frameCount: 1
+    tagTypeAndIndices:
+    - tagType: 26
+      index: 3
+    - tagType: 1
+      index: 3
+    - tagType: 0
+      index: -1
+  - type: 0
+    spriteId: 14
+    frameCount: 2
+    tagTypeAndIndices:
+    - tagType: 26
+      index: 4
+    - tagType: 26
+      index: 5
+    - tagType: 1
+      index: 4
+    - tagType: 28
+      index: 0
+    - tagType: 26
+      index: 6
+    - tagType: 1
+      index: 5
+    - tagType: 0
+      index: -1
+  - type: 0
+    spriteId: 17
+    frameCount: 1
+    tagTypeAndIndices:
+    - tagType: 26
+      index: 7
+    - tagType: 1
+      index: 6
+    - tagType: 0
+      index: -1
+  - type: 0
+    spriteId: 20
+    frameCount: 1
+    tagTypeAndIndices:
+    - tagType: 26
+      index: 8
+    - tagType: 1
+      index: 7
+    - tagType: 0
+      index: -1
+  showFrameTagDatas:
+  - type: 0
+  - type: 0
+  - type: 0
+  - type: 0
+  - type: 0
+  - type: 0
+  - type: 0
+  - type: 0
+  placeObjectTagDatas: []
+  placeObject2TagDatas:
+  - type: 26
+    placeFlagHasClipActions: 0
+    placeFlagHasClipDepth: 0
+    placeFlagHasName: 0
+    placeFlagHasRatio: 0
+    placeFlagHasColorTransform: 0
+    placeFlagHasMatrix: 1
+    placeFlagHasCharacter: 1
+    placeFlagMove: 0
+    depth: 1
+    characterId: 2
+    ratio: 0
+    name: 
+    clipDepth: 0
+  - type: 26
+    placeFlagHasClipActions: 0
+    placeFlagHasClipDepth: 0
+    placeFlagHasName: 0
+    placeFlagHasRatio: 0
+    placeFlagHasColorTransform: 0
+    placeFlagHasMatrix: 1
+    placeFlagHasCharacter: 1
+    placeFlagMove: 0
+    depth: 1
+    characterId: 4
+    ratio: 0
+    name: 
+    clipDepth: 0
+  - type: 26
+    placeFlagHasClipActions: 0
+    placeFlagHasClipDepth: 0
+    placeFlagHasName: 0
+    placeFlagHasRatio: 0
+    placeFlagHasColorTransform: 0
+    placeFlagHasMatrix: 1
+    placeFlagHasCharacter: 1
+    placeFlagMove: 0
+    depth: 1
+    characterId: 9
+    ratio: 0
+    name: 
+    clipDepth: 0
+  - type: 26
+    placeFlagHasClipActions: 0
+    placeFlagHasClipDepth: 0
+    placeFlagHasName: 0
+    placeFlagHasRatio: 0
+    placeFlagHasColorTransform: 0
+    placeFlagHasMatrix: 1
+    placeFlagHasCharacter: 1
+    placeFlagMove: 0
+    depth: 1
+    characterId: 12
+    ratio: 0
+    name: 
+    clipDepth: 0
+  - type: 26
+    placeFlagHasClipActions: 0
+    placeFlagHasClipDepth: 0
+    placeFlagHasName: 0
+    placeFlagHasRatio: 0
+    placeFlagHasColorTransform: 0
+    placeFlagHasMatrix: 1
+    placeFlagHasCharacter: 1
+    placeFlagMove: 0
+    depth: 1
+    characterId: 7
+    ratio: 0
+    name: 
+    clipDepth: 0
+  - type: 26
+    placeFlagHasClipActions: 0
+    placeFlagHasClipDepth: 0
+    placeFlagHasName: 0
+    placeFlagHasRatio: 0
+    placeFlagHasColorTransform: 0
+    placeFlagHasMatrix: 1
+    placeFlagHasCharacter: 1
+    placeFlagMove: 0
+    depth: 2
+    characterId: 10
+    ratio: 0
+    name: 
+    clipDepth: 0
+  - type: 26
+    placeFlagHasClipActions: 0
+    placeFlagHasClipDepth: 0
+    placeFlagHasName: 0
+    placeFlagHasRatio: 1
+    placeFlagHasColorTransform: 0
+    placeFlagHasMatrix: 1
+    placeFlagHasCharacter: 1
+    placeFlagMove: 0
+    depth: 4
+    characterId: 13
+    ratio: 1
+    name: 
+    clipDepth: 0
+  - type: 26
+    placeFlagHasClipActions: 0
+    placeFlagHasClipDepth: 0
+    placeFlagHasName: 0
+    placeFlagHasRatio: 0
+    placeFlagHasColorTransform: 0
+    placeFlagHasMatrix: 1
+    placeFlagHasCharacter: 1
+    placeFlagMove: 0
+    depth: 1
+    characterId: 16
+    ratio: 0
+    name: 
+    clipDepth: 0
+  - type: 26
+    placeFlagHasClipActions: 0
+    placeFlagHasClipDepth: 0
+    placeFlagHasName: 0
+    placeFlagHasRatio: 0
+    placeFlagHasColorTransform: 0
+    placeFlagHasMatrix: 1
+    placeFlagHasCharacter: 1
+    placeFlagMove: 0
+    depth: 1
+    characterId: 19
+    ratio: 0
+    name: 
+    clipDepth: 0
+  placeObject3TagDatas: []
+  removeObjectTagDatas: []
+  removeObject2TagDatas:
+  - type: 0
+    depth: 1
+  frameLabelTagDatas: []
+  unknownTagDatas:
+  - type: 11
