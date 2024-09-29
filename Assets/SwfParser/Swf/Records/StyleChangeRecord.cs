@@ -1,5 +1,4 @@
 ﻿using System.Xml;
-using UnityEditor.Profiling.Memory.Experimental;
 
 public struct StyleChangeRecord : IShapeRecord { //:Shape Record
 

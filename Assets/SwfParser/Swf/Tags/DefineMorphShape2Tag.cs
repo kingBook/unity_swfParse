@@ -16,7 +16,7 @@ public class DefineMorphShape2Tag : SwfTag, ICharacterIdTag {
     public SHAPE startEdges;
     public SHAPE endEdges;
 
-    public DefineMorphShape2Tag(SwfReader swfReader, SwfByteArray bytes, TagHeaderRecord header) : base(header) {
+    public DefineMorphShape2Tag(SwfByteArray bytes, TagHeaderRecord header) : base(header) {
         characterId = bytes.ReadUI16();
         startBounds = new RectangleRecord(bytes);
         endBounds = new RectangleRecord(bytes);
@@ -28,8 +28,8 @@ public class DefineMorphShape2Tag : SwfTag, ICharacterIdTag {
         offset = bytes.ReadUI32();
         morphFillStyles = new MorphFillStyleArrayRecord(bytes);
         morphLineStyles = new MorphLineStyleArrayRecord(bytes, 2);
-        startEdges = new SHAPE(swfReader, bytes, 1);
-        endEdges = new SHAPE(swfReader, bytes, 1);
+        startEdges = new SHAPE(bytes, 1);
+        endEdges = new SHAPE(bytes, 1);
     }
 
     public void GetNeededCharacterIds(List<ushort> characterIds, Swf swf) {

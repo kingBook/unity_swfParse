@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Xml;
-using System.Text;
+﻿using System.Xml;
 
 public struct GradientGlowFilterRecord {
 

@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Xml;
+﻿using System.Xml;
 
 public class ShowFrameTag : SwfTag {
 

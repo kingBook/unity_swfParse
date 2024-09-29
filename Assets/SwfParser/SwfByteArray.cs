@@ -3,17 +3,17 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 
-#pragma warning disable
+//#pragma warning disable
 
 public class SwfByteArray {
 
     private static readonly int s_filter5 = (1 << 5) - 1;
     private static readonly int s_filter7 = (1 << 7) - 1;
-    private static readonly int s_filter8 = (1 << 8) - 1;
+    //private static readonly int s_filter8 = (1 << 8) - 1;
     private static readonly int s_filter10 = (1 << 10) - 1;
-    private static readonly int s_filter13 = (1 << 13) - 1;
+    //private static readonly int s_filter13 = (1 << 13) - 1;
     private static readonly int s_filter16 = (1 << 16) - 1;
-    private static readonly int s_filter23 = (1 << 23) - 1;
+    //private static readonly int s_filter23 = (1 << 23) - 1;
 
     private MemoryStream m_memoryStream;
     private BinaryReader m_binaryReader;

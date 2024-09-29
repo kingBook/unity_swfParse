@@ -1,6 +1,6 @@
 ﻿using System.Xml;
 
-public class MorphFillStyleRecord {
+public struct MorphFillStyleRecord {
 
     public byte fillStyleType;
     public RGBARecord startColor;
@@ -13,6 +13,16 @@ public class MorphFillStyleRecord {
     public MatrixRecord endBitmapMatrix;
 
     public MorphFillStyleRecord(SwfByteArray bytes) {
+        // default value
+        startColor = new RGBARecord();
+        endColor = new RGBARecord();
+        startGradientMatrix = new MatrixRecord();
+        endGradientMatrix = new MatrixRecord();
+        gradient = new MorphGradientRecord();
+        bitmapId = 0;
+        startBitmapMatrix = new MatrixRecord();
+        endBitmapMatrix = new MatrixRecord();
+        //
         fillStyleType = bytes.ReadUI8();
 
         var type = fillStyleType;

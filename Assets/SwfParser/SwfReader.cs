@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
-
-public static class SwfReader {
+﻿public static class SwfReader {
 
     public static Swf Read(SwfByteArray bytes) {
         var swf = new Swf(bytes);

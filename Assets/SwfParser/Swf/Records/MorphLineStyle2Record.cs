@@ -1,6 +1,6 @@
 ﻿using System.Xml;
 
-public class MorphLineStyle2Record : IMorphLineStyleRecord {
+public struct MorphLineStyle2Record : IMorphLineStyleRecord {
 
     public ushort startWidth;
     public ushort endWidth;
@@ -19,6 +19,12 @@ public class MorphLineStyle2Record : IMorphLineStyleRecord {
     public MorphFillStyleRecord fillType;
 
     public MorphLineStyle2Record(SwfByteArray bytes) {
+        // default value
+        miterLimitFactor = 0;
+        startColor = new RGBARecord();
+        endColor = new RGBARecord();
+        fillType = new MorphFillStyleRecord();
+        //
         startWidth = bytes.ReadUI16();
         endWidth = bytes.ReadUI16();
         startCapStyle = (byte)bytes.ReadUB(2);

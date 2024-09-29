@@ -1,5 +1,4 @@
-﻿[System.Serializable]
-public struct SymbolClassRecord {
+﻿public struct SymbolClassRecord {
 
     public ushort tagId;
     public string name;

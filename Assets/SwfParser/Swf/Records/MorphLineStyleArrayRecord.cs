@@ -1,12 +1,16 @@
 ﻿using System.Xml;
 
-public class MorphLineStyleArrayRecord {
+public struct MorphLineStyleArrayRecord {
 
     public byte lineStyleCount;
     public ushort lineStyleCountExtended;
     public IMorphLineStyleRecord[] lineStyles;
 
     public MorphLineStyleArrayRecord(SwfByteArray bytes, byte morphShapeType) {
+        // default value
+        lineStyleCountExtended = 0;
+        lineStyles = null;
+        //
         lineStyleCount = bytes.ReadUI8();
         if (lineStyleCount == 0xFF) {
             lineStyleCountExtended = bytes.ReadUI16();
@@ -17,7 +21,7 @@ public class MorphLineStyleArrayRecord {
                 lineStyles[i] = new MorphLineStyleRecord(bytes);
             }
         } else if (morphShapeType == 2) {
-            lineStyles = new MorphLineStyle2Record[lineStyleCount];
+            lineStyles = new IMorphLineStyleRecord[lineStyleCount];
             for (var i = 0; i < lineStyleCount; i++) {
                 lineStyles[i] = new MorphLineStyle2Record(bytes);
             }

@@ -14,17 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   symbolClassTags:
   - numSymbols: 5
-    symbols:
-    - tagId: 20
-      name: _OneFrame
-    - tagId: 17
-      name: _MultipleBitmap
-    - tagId: 14
-      name: _Mc
-    - tagId: 5
-      name: _TextDynamic
-    - tagId: 3
-      name: _TextStatic
   tagTypeAndIndices:
   - tagType: 0
     index: 0

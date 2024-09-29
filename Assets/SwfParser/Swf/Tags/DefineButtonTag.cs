@@ -1,8 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Xml;
-using UnityEngine.UI;
 
 public class DefineButtonTag : SwfTag, ICharacterIdTag {
 

@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
-public struct TextRecord {
+﻿public struct TextRecord {
 
     public byte textRecordType;
     public byte styleFlagsReserved;

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Xml;
+﻿using System.Xml;
 
 public struct LineStyleArrayRecord {
     public byte lineStyleCount;

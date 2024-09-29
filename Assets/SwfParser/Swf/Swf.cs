@@ -1,10 +1,7 @@
-﻿using System;
-using UnityEngine;
-using System.Collections;
+﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
-using System.Text;
 
 public class Swf {
 

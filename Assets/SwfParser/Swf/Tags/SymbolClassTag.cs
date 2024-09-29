@@ -1,4 +1,5 @@
 ﻿using System.Xml;
+
 [System.Serializable]
 public class SymbolClassTag : SwfTag {
 

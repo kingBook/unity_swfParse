@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
-public class SwfHeader {
+﻿public class SwfHeader {
     public static readonly string UNCOMPRESSED_SIGNATURE = "FWS";
     public static readonly string COMPRESSED_SIGNATURE = "CWS";
 

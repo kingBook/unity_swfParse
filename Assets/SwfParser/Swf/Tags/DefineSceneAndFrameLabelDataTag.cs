@@ -1,5 +1,4 @@
-﻿using System.Text;
-using System.Xml;
+﻿using System.Xml;
 
 public class DefineSceneAndFrameLabelDataTag : SwfTag {
 

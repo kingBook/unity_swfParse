@@ -1,8 +1,7 @@
 ﻿using System.IO;
-using UnityEngine;
 using zlib;
 
-public class ZlibUtil {
+public static class ZlibUtil {
 
     /// <summary>
     /// 复制流
