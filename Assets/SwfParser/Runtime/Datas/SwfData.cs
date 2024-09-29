@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class SwfData : ScriptableObject {
 
-    public List<SymbolClassTag> symbolClassTags = new List<SymbolClassTag>(256);
+    public List<SymbolClassTag> symbolClassTags;
 
     /// <summary>
     /// 以 CharacterId 为索引储存，{tagType: 标签类型, index: 表示标签在 SwfData 中对应列表中的储存索引}

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Xml;
+using UnityEngine;
 
 public class DefineBitsLossless2Tag : SwfTag, ICharacterIdTag {
 
@@ -52,6 +53,49 @@ public class DefineBitsLossless2Tag : SwfTag, ICharacterIdTag {
         ele.SetAttribute("bitmapColorTableSize", bitmapFormat.ToString());
         ele.AppendChild(zlibBitmapData.ToXml(doc));
         return ele;
+    }
+
+    public ImageData ToImageData() {
+        var texture = new Texture2D(bitmapWidth, bitmapHeight);
+        if (bitmapFormat == 3) {
+            //AlphaColorMapDataRecord
+            uint bitmapW = bitmapWidth;
+            while ((bitmapW % 4) != 0) {
+                bitmapW = (bitmapW / 4 + 1) * 4;
+            }
+            var alphaColorMapDataRecord = (AlphaColorMapDataRecord)zlibBitmapData;
+            var colors = new Color32[bitmapWidth * bitmapHeight];
+            int length = alphaColorMapDataRecord.colormapPixelData.Length;
+            int idx = 0;
+            for (int j = 0; j < length; j++) {
+                var colorIndex = alphaColorMapDataRecord.colormapPixelData[j];
+                var rgba = alphaColorMapDataRecord.colorTableRGB[colorIndex];
+                long index = j % bitmapW;
+                if (index < bitmapWidth) {
+                    colors[idx++] = new Color32(rgba.red, rgba.green, rgba.blue, rgba.alpha);
+                }
+            }
+            colors = BitmapUtil.FlipVerticalBitmapColors(colors, bitmapWidth, bitmapHeight);
+            texture.SetPixels32(colors);
+            texture.Apply();
+        } else if (bitmapFormat == 4 || bitmapFormat == 5) {
+            //AlphaBitmapDataRecord
+            var alphaBitmapDataRecord = (AlphaBitmapDataRecord)zlibBitmapData;
+            int length = alphaBitmapDataRecord.bitmapPixelData.Length;
+            var colors = new Color32[length];
+            for (int j = 0; j < length; j++) {
+                var argb = alphaBitmapDataRecord.bitmapPixelData[j];
+                colors[j] = new Color32(argb.red, argb.green, argb.blue, argb.alpha);
+            }
+            colors = BitmapUtil.FlipVerticalBitmapColors(colors, bitmapWidth, bitmapHeight);
+            texture.SetPixels32(colors);
+            texture.Apply();
+        }
+        var imageData = new ImageData();
+        imageData.characterID = characterID;
+        imageData.type = ImageType.Png;
+        imageData.bytes = texture.EncodeToPNG();
+        return imageData;
     }
 
     public void GetNeededCharacterIds(List<ushort> characterIds, Swf swf) {

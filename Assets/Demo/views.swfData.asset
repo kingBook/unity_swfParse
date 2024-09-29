@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbd06eb9277b49c1a27827257752ee4c, type: 3}
   m_Name: views.swfData
   m_EditorClassIdentifier: 
+  symbolClassTags: []
   tagTypeAndIndices:
   - tagType: 0
     index: 0

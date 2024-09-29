@@ -32,6 +32,16 @@ public class DefineBitsTag : SwfTag, ICharacterIdTag {
         return ele;
     }
 
+    public ImageData ToImageData() {
+        var imageData = new ImageData();
+        if (jpegData != null) {
+            imageData.characterID = characterID;
+            imageData.type = ImageType.Jpg;
+            imageData.bytes = jpegData;
+        }
+        return imageData;
+    }
+
     public void GetNeededCharacterIds(List<ushort> characterIds, Swf swf) {
         if (characterIds.IndexOf(characterID) < 0) {
             characterIds.Add(characterID);

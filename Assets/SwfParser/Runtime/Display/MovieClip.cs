@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -67,8 +68,8 @@ public class MovieClip : MonoBehaviour {
     /// <param name="swfData"></param>
     /// <param name="defineSpriteTagData"></param>
     public void SeDatas(SwfData swfData, DefineSpriteTagData defineSpriteTagData) {
-        m_swfData = swfData;
-        m_defineSpriteTagData = defineSpriteTagData;
+        //m_swfData = swfData;
+        //m_defineSpriteTagData = defineSpriteTagData;
     }
 
 #if UNITY_EDITOR
@@ -100,4 +101,12 @@ public class MovieClip : MonoBehaviour {
     private void Update() {
 
     }
+
+    [ContextMenu("Test")]
+    public void Test() {
+       
+
+    }
+
+
 }

@@ -33,6 +33,33 @@ public class DefineBitsJPEG2Tag : SwfTag, ICharacterIdTag {
         return ele;
     }
 
+    public virtual ImageData ToImageData() {
+        var imgData = new ImageData();
+        imgData.characterID = characterID;
+        bool isJpg = imageData[0] == 0xFF && (imageData[1] == 0xD8 || imageData[1] == 0xD9);
+        bool isPng = imageData[0] == 0x89
+                     && imageData[1] == 0x50
+                     && imageData[2] == 0x4E
+                     && imageData[3] == 0x47
+                     && imageData[4] == 0x0D
+                     && imageData[5] == 0x0A
+                     && imageData[6] == 0x1A
+                     && imageData[7] == 0x0A;
+        bool isGif = imageData[0] == 0x47
+                     && imageData[1] == 0x49
+                     && imageData[2] == 0x46
+                     && imageData[3] == 0x38
+                     && imageData[4] == 0x39
+                     && imageData[5] == 0x61;
+        if (isPng) {
+            imgData.type = ImageType.Png;
+        } else if (isJpg || isGif) {
+            imgData.type = ImageType.Jpg;
+        }
+        imgData.bytes = imageData;
+        return imgData;
+    }
+
     public void GetNeededCharacterIds(List<ushort> characterIds, Swf swf) {
         if (characterIds.IndexOf(characterID) < 0) {
             characterIds.Add(characterID);

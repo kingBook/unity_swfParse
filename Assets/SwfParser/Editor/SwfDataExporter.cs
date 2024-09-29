@@ -1,6 +1,6 @@
 using UnityEngine;
-using System.Linq;
 using UnityEditor;
+using System.IO;
 
 public class SwfDataExporter {
 
@@ -15,28 +15,21 @@ public class SwfDataExporter {
     /// </summary>
     /// <param name="swfPath"> 绝对路径 </param>
     public SwfData Export(string swfPath) {
-        SwfData swfData = m_swf.ToData(true);
-        Save(swfData, swfPath);
-        return swfData;
-    }
+        string swfDataRelativePath = $"{FileUtil.GetProjectRelativePath(swfPath)}.swfData.asset";
 
-    private void Save(SwfData swfData, string swfPath) {
-        int dotIdx = swfPath.LastIndexOf('.');
-        string swfDataPath = $"{swfPath.Substring(0, dotIdx)}.swfData";
-
-        if (SwfParseConfig.isExportSwfDataAsset) {
-            string swfDataRelativePath = $"{swfDataPath.Replace(Application.dataPath, "Assets")}.asset";
+        SwfData swfData;
+        if (File.Exists(swfDataRelativePath)) {
+            swfData = AssetDatabase.LoadAssetAtPath<SwfData>(swfDataRelativePath);
+            m_swf.ToData(swfData, true);
+            EditorUtility.SetDirty(swfData);
+            AssetDatabase.SaveAssetIfDirty(swfData);
+        } else {
+            swfData = ScriptableObject.CreateInstance<SwfData>();
+            m_swf.ToData(swfData, true);
             AssetDatabase.CreateAsset(swfData, swfDataRelativePath);
         }
-
-        // FileStream fileStream = new FileStream(swfDataPath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
-        // StreamWriter streamWriter = new StreamWriter(fileStream, System.Text.Encoding.UTF8);
-        // XmlSerializer xmlSerializer = new XmlSerializer(swfData.GetType());
-        // xmlSerializer.Serialize(streamWriter, swfData);
-        // streamWriter.Close();
-        // fileStream.Close();
+        return swfData;
     }
-
 
 
 }
