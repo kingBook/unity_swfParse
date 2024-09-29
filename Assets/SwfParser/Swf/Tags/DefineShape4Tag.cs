@@ -11,7 +11,7 @@ public class DefineShape4Tag : DefineShape3Tag {
     public bool usesScalingStrokes;
     //public ShapeWithStyleRecord shapes;
 
-    public DefineShape4Tag(SwfReader swfReader, SwfByteArray bytes, TagHeaderRecord header) : base(header) {
+    public DefineShape4Tag(SwfByteArray bytes, TagHeaderRecord header) : base(header) {
         shapeId = bytes.ReadUI16();
         shapeBounds = new RectangleRecord(bytes);
         edgeBounds = new RectangleRecord(bytes);
@@ -19,7 +19,7 @@ public class DefineShape4Tag : DefineShape3Tag {
         usesFillWindingRule = bytes.ReadFlag();
         usesNonScalingStrokes = bytes.ReadFlag();
         usesScalingStrokes = bytes.ReadFlag();
-        shapes = new ShapeWithStyleRecord(swfReader, bytes, 4);
+        shapes = new ShapeWithStyleRecord(bytes, 4);
     }
 
     public override XmlElement ToXml(XmlDocument doc) {

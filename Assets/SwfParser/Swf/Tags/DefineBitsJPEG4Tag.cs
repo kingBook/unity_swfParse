@@ -51,7 +51,7 @@ public class DefineBitsJPEG4Tag : DefineBitsJPEG3Tag {
         return ele;
     }
 
-    public ImageData ToImageData() {
+    public override ImageData ToImageData() {
         var imgData = new ImageData();
         imgData.characterID = characterID;
         bool isJpg = imageData[0] == 0xFF && (imageData[1] == 0xD8 || imageData[1] == 0xD9);

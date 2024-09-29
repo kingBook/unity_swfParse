@@ -10,7 +10,7 @@ public struct ShapeWithStyleRecord {
     public byte numLineBits;
     public IShapeRecord[] shapeRecords;
 
-    public ShapeWithStyleRecord(SwfReader swfReader, SwfByteArray bytes, byte shapeType) {
+    public ShapeWithStyleRecord(SwfByteArray bytes, byte shapeType) {
         fillStyles = new FillStyleArrayRecord(bytes, shapeType);
         lineStyles = new LineStyleArrayRecord(bytes, shapeType);
         bytes.AlignBytes();
@@ -18,7 +18,7 @@ public struct ShapeWithStyleRecord {
         numLineBits = (byte)bytes.ReadUB(4);
         var list = new List<IShapeRecord>();
         while (true) {
-            var shapeRecord = swfReader.ReadShapeRecord(bytes, numFillBits, numLineBits, shapeType);
+            var shapeRecord = SwfReader.ReadShapeRecord(bytes, numFillBits, numLineBits, shapeType);
             list.Add(shapeRecord);
             if (shapeRecord is StyleChangeRecord changeRecord) {
                 if (changeRecord.stateNewStyles) {

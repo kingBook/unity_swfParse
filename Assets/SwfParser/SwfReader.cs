@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class SwfReader {
+public static class SwfReader {
 
-    public Swf Read(SwfByteArray bytes) {
+    public static Swf Read(SwfByteArray bytes) {
         var swf = new Swf(bytes);
         //
-        TagFactory tagFactory = new TagFactory();
         while (bytes.GetBytesAvailable() > 0) {
             long preHeaderStart = bytes.GetBytePosition();
             TagHeaderRecord tagHeader = new TagHeaderRecord(bytes);
@@ -14,7 +13,7 @@ public class SwfReader {
             long startPosition = bytes.GetBytePosition();
             long expectedEndPosition = startPosition + tagHeader.length;
             //Debug2.Log("type:"+tagHeader.type,"preHeaderStart:"+preHeaderStart,"length:"+tagHeader.length);
-            SwfTag tag = tagFactory.CreateTag(tagFactory, this, bytes, tagHeader);
+            SwfTag tag = TagFactory.CreateTag(bytes, tagHeader);
             swf.tags.Add(tag);
             if (tag is DefineSpriteTag defineSpriteTag) {
                 swf.defineSpriteTags.Add(defineSpriteTag);
@@ -34,7 +33,7 @@ public class SwfReader {
         return swf;
     }
 
-    public IShapeRecord ReadShapeRecord(SwfByteArray bytes, byte numFillBits, byte numLineBits, byte shapeType) {
+    public static IShapeRecord ReadShapeRecord(SwfByteArray bytes, byte numFillBits, byte numLineBits, byte shapeType) {
         IShapeRecord record;
         bool typeFlag = bytes.ReadFlag();
         long start = bytes.GetBytePosition();

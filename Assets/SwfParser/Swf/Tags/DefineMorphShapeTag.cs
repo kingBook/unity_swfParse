@@ -12,15 +12,15 @@ public class DefineMorphShapeTag : SwfTag, ICharacterIdTag {
     public SHAPE startEdges;
     public SHAPE endEdges;
 
-    public DefineMorphShapeTag(SwfReader swfReader, SwfByteArray bytes, TagHeaderRecord header) : base(header) {
+    public DefineMorphShapeTag(SwfByteArray bytes, TagHeaderRecord header) : base(header) {
         characterId = bytes.ReadUI16();
         startBounds = new RectangleRecord(bytes);
         endBounds = new RectangleRecord(bytes);
         offset = bytes.ReadUI32();
         morphFillStyles = new MorphFillStyleArrayRecord(bytes);
         morphLineStyles = new MorphLineStyleArrayRecord(bytes, 1);
-        startEdges = new SHAPE(swfReader, bytes, 1);
-        endEdges = new SHAPE(swfReader, bytes, 1);
+        startEdges = new SHAPE(bytes, 1);
+        endEdges = new SHAPE(bytes, 1);
     }
 
 

@@ -7,7 +7,7 @@ public struct SHAPE {
     public byte numLineBits;
     public IShapeRecord[] shapeRecords;
 
-    public SHAPE(SwfReader swfReader, SwfByteArray bytes, byte morphShapeType) {
+    public SHAPE(SwfByteArray bytes, byte morphShapeType) {
         numFillBits = (byte)bytes.ReadUB(4);
         numLineBits = (byte)bytes.ReadUB(4);
         var list = new List<IShapeRecord>();
@@ -15,7 +15,7 @@ public struct SHAPE {
         //4:DefineMorphShape2最小支持版本是SWF8与DefineShape4一样
         var shapeType = morphShapeType == 1 ? 3 : 4;
         while (true) {
-            var shapeRecord = swfReader.ReadShapeRecord(bytes, numFillBits, numLineBits, (byte)shapeType);
+            var shapeRecord = SwfReader.ReadShapeRecord(bytes, numFillBits, numLineBits, (byte)shapeType);
             list.Add(shapeRecord);
             if (shapeRecord is StyleChangeRecord) {
                 if (((StyleChangeRecord)shapeRecord).stateNewStyles) {

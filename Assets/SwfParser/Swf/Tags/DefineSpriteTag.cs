@@ -7,19 +7,19 @@ public class DefineSpriteTag : SwfTag, ICharacterIdTag {
     public ushort frameCount;
     public SwfTag[] controlTags;
 
-    public DefineSpriteTag(TagFactory tagFactory, SwfReader swfReader, SwfByteArray bytes, TagHeaderRecord header) : base(header) {
+    public DefineSpriteTag(SwfByteArray bytes, TagHeaderRecord header) : base(header) {
         spriteId = bytes.ReadUI16();
         frameCount = bytes.ReadUI16();
-        controlTags = ReadControlTags(tagFactory, swfReader, bytes);
+        controlTags = ReadControlTags(bytes);
     }
 
-    private SwfTag[] ReadControlTags(TagFactory tagFactory, SwfReader swfReader, SwfByteArray bytes) {
+    private SwfTag[] ReadControlTags(SwfByteArray bytes) {
         var tempTags = new List<SwfTag>();
         while (true) {
             var header = new TagHeaderRecord(bytes);
             long startPosition = bytes.GetBytePosition();
             long expectedEndPosition = startPosition + header.length;
-            var tag = tagFactory.CreateTag(tagFactory, swfReader, bytes, header);
+            var tag = TagFactory.CreateTag(bytes, header);
             tempTags.Add(tag);
             bytes.SetBytePosition(expectedEndPosition);
             if (tag is EndTag) break;

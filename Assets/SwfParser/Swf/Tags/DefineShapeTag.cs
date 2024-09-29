@@ -11,10 +11,10 @@ public class DefineShapeTag : SwfTag, ICharacterIdTag {
         // empty constructor
     }
 
-    public DefineShapeTag(SwfReader swfReader, SwfByteArray bytes, TagHeaderRecord header) : base(header) {
+    public DefineShapeTag(SwfByteArray bytes, TagHeaderRecord header) : base(header) {
         shapeId = bytes.ReadUI16();
         shapeBounds = new RectangleRecord(bytes);
-        shapes = new ShapeWithStyleRecord(swfReader, bytes, 1);
+        shapes = new ShapeWithStyleRecord(bytes, 1);
     }
 
     public override XmlElement ToXml(XmlDocument doc) {

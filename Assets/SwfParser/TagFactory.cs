@@ -1,7 +1,7 @@
 using UnityEngine;
 
-public class TagFactory {
-    public SwfTag CreateTag(TagFactory tagFactory, SwfReader swfReader, SwfByteArray bytes, TagHeaderRecord header) {
+public static class TagFactory {
+    public static SwfTag CreateTag(SwfByteArray bytes, TagHeaderRecord header) {
         SwfTag tag;
         switch (header.type) {
             //============= Display list tags =======
@@ -68,16 +68,16 @@ public class TagFactory {
                 break;
             //============= Shape Tags =======
             case 2:
-                tag = new DefineShapeTag(swfReader, bytes, header);
+                tag = new DefineShapeTag(bytes, header);
                 break;
             case 22:
-                tag = new DefineShape2Tag(swfReader, bytes, header);
+                tag = new DefineShape2Tag(bytes, header);
                 break;
             case 32:
-                tag = new DefineShape3Tag(swfReader, bytes, header);
+                tag = new DefineShape3Tag(bytes, header);
                 break;
             case 83:
-                tag = new DefineShape4Tag(swfReader, bytes, header);
+                tag = new DefineShape4Tag(bytes, header);
                 break;
             //============= Bitmaps =======
             case 6:
@@ -103,7 +103,7 @@ public class TagFactory {
                 break;
             //============= Shape Morphing =======
             case 46:
-                tag = new DefineMorphShapeTag(swfReader, bytes, header);
+                tag = new DefineMorphShapeTag(bytes, header);
                 break;
             case 84:
                 tag = new UnknownTag(bytes, header);
@@ -131,7 +131,7 @@ public class TagFactory {
                 break;
             //============= Sprites and Movie Clips =======
             case 39:
-                tag = new DefineSpriteTag(tagFactory, swfReader, bytes, header);
+                tag = new DefineSpriteTag(bytes, header);
                 break;
 
             default:

@@ -12,12 +12,11 @@ public static class SwfProcessor {
         // 截取掉 /xx.swf 的文件夹路径，如：E:/kingBook/projects/unity_swfParse/Assets
         string swfFolderPath = FileUtil.GetLogicalPath(System.IO.Path.GetDirectoryName(swfPath));
 
-        var swfReader = new SwfReader();
         var swfBytes = new SwfByteArray(swfPath);
 
         Stopwatch sw = new Stopwatch();
         sw.Start();
-        var swf = swfReader.Read(swfBytes);
+        var swf = SwfReader.Read(swfBytes);
         swf.FindLinkageDefineTags();
         swfBytes.Close();
         sw.Stop();
