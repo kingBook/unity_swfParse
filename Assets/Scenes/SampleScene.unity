@@ -347,6 +347,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_swfData: {fileID: 11400000, guid: a5d688ed98815ee4da1e0ba10277b758, type: 2}
+  m_symbolClassName: _OneFrame
   currentFrame: 0
   currentFrameLabel: 
   currentLabel: 

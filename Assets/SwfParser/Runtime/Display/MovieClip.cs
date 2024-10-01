@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class MovieClip : MonoBehaviour {
 
     [SerializeField] private SwfData m_swfData;
+    [SerializeField] private string m_symbolClassName;
     //
     public int currentFrame;
     public string currentFrameLabel;
@@ -97,15 +98,15 @@ public class MovieClip : MonoBehaviour {
         Debug.Log("MovieClip::Awake();");
     }
 
-    private void Update() {
-
-    }
-
     [ContextMenu("Test")]
     public void Test() {
-       
+
 
     }
 
+    // ============================================
+    private void Init() {
+
+    }
 
 }

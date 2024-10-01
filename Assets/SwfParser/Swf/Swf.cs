@@ -8,10 +8,12 @@ public class Swf {
     public SwfHeader header;
     public readonly List<SwfTag> tags = new List<SwfTag>(256);
 
+    #region 为方便访问而增加的列表
     public readonly List<SymbolClassTag> symbolClassTags = new List<SymbolClassTag>(24);
     public readonly List<DefineSpriteTag> defineSpriteTags = new List<DefineSpriteTag>(128);
     public readonly List<ushort> linkageDefineCharacterIds = new List<ushort>(256);
     public readonly List<ICharacterIdTag> linkageDefineTags = new List<ICharacterIdTag>(256);
+    #endregion
 
     public Swf(SwfByteArray bytes) {
         header = new SwfHeader(bytes);
@@ -21,28 +23,31 @@ public class Swf {
     /// 查找有定义链接类名的 DefineSprite(在SymbolClassTag中定义) 的所有 Tag 与及使用到的 characterId
     /// </summary>
     public void FindLinkageDefineTags() {
-        for (int i = 0, len = defineSpriteTags.Count; i < len; i++) {
-            var defineSpriteTag = defineSpriteTags[i];
-            bool isLinkageDefineSpriteTag = false; // 是否有定义链接类名的 DefineSpriteTag
-            for (int j = 0, lenJ = symbolClassTags.Count; j < lenJ; j++) {
-                var symbols = symbolClassTags[j].symbols;
-                for (int k = 0, lenK = symbols.Length; k < lenK; k++) {
-                    if (defineSpriteTag.spriteId == symbols[k].tagId) {
-                        isLinkageDefineSpriteTag = true;
-                        break;
+        // 是否有定义链接类名的 DefineSpriteTag
+        bool IsLinkageDefineSpriteTag(DefineSpriteTag defineSpriteTag) {
+            for (int i = 0, c = symbolClassTags.Count; i < c; i++) {
+                var symbols = symbolClassTags[i].symbols;
+                for (int j = 0, len = symbols.Length; j < len; j++) {
+                    if (defineSpriteTag.spriteId == symbols[j].tagId) {
+                        return true;
                     }
                 }
-                if (isLinkageDefineSpriteTag) break;
             }
-            if (isLinkageDefineSpriteTag) {
+            return false;
+        }
+        // 有定义链接类名的 DefineSpriteTag，找出引用的 CharacterId
+        for (int i = 0, len = defineSpriteTags.Count; i < len; i++) {
+            var defineSpriteTag = defineSpriteTags[i];
+            if (IsLinkageDefineSpriteTag(defineSpriteTag)) {
                 defineSpriteTag.GetNeededCharacterIds(linkageDefineCharacterIds, this);
             }
         }
-
+        // 找到有定义链接类名的引用到的 ICharacterIdTag
         for (int i = 0, len = tags.Count; i < len; i++) {
             var tag = tags[i];
             if (tag is ICharacterIdTag characterIdTag) {
-                if (linkageDefineCharacterIds.IndexOf(characterIdTag.GetCharacterId()) > -1) {
+                bool isLinkageTag = linkageDefineCharacterIds.IndexOf(characterIdTag.GetCharacterId()) > -1;
+                if (isLinkageTag) {
                     linkageDefineTags.Add(characterIdTag);
                 }
             }
@@ -63,7 +68,7 @@ public class Swf {
             sw.Restart();
             var tagXml = tag.ToXml(doc);
             sw.Stop();
-            Debug.LogFormat("type:{0},time:{1}", tag.header.type, sw.ElapsedMilliseconds);
+            Debug.LogFormat("ToXml tag type:{0},time:{1}", tag.header.type, sw.ElapsedMilliseconds);
 
             swfElement.AppendChild(tagXml);
         }
@@ -72,70 +77,17 @@ public class Swf {
 
     public SwfData ToData(SwfData swfData, bool isOnlyExportLinkage) {
         // dispose
-        swfData.symbolClassTags = null;
-        swfData.tagTypeAndIndices = null;
-        swfData.defineShapeTagDatas.Clear();
-        swfData.defineBitsTagDatas.Clear();
-        swfData.defineSpriteTagDatas.Clear();
-        swfData.showFrameTagDatas.Clear();
-        swfData.placeObjectTagDatas.Clear();
-        swfData.placeObject2TagDatas.Clear();
-        swfData.placeObject3TagDatas.Clear();
-        swfData.removeObjectTagDatas.Clear();
-        swfData.removeObject2TagDatas.Clear();
-        swfData.frameLabelTagDatas.Clear();
-        swfData.unknownTagDatas.Clear();
-        //
+        swfData.Dispose();
+        // 
         swfData.symbolClassTags = symbolClassTags;
         swfData.tagTypeAndIndices = new TagTypeAndIndex[linkageDefineCharacterIds.Max() + 1];
+        // 
         for (int i = 0, len = linkageDefineTags.Count; i < len; i++) {
-            var characterIdTag = linkageDefineTags[i];
-            TagType tagType = (TagType)(((SwfTag)characterIdTag).header.type);
-            int dataIndex = -1;
+            ICharacterIdTag characterIdTag = linkageDefineTags[i];
             //-------------------------------------------------------------------------------
-            // 在运行时并没有使用所有的 Tag，Tag 的属性也不全都使用，因此创建需使用的 tag 的精简版
+            // 在运行时并非使用所有的 Tag，Tag 的属性也不全都使用，因此创建需使用的 tag 的精简版
             //-------------------------------------------------------------------------------
-            switch (tagType) {
-                // bitmap
-                case TagType.DefineBits:
-                case TagType.JPEGTables:
-                case TagType.DefineBitsJPEG2:
-                case TagType.DefineBitsJPEG3:
-                case TagType.DefineBitsJPEG4:
-                case TagType.DefineBitsLossless:
-                case TagType.DefineBitsLossless2:
-                    dataIndex = swfData.defineBitsTagDatas.Count;
-                    var defineBitsTagData = new DefineBitsTagData();
-                    defineBitsTagData.type = ((SwfTag)characterIdTag).header.type;
-                    defineBitsTagData.characterID = characterIdTag.GetCharacterId();
-                    swfData.defineBitsTagDatas.Add(defineBitsTagData);
-                    break;
-                // shape
-                case TagType.DefineShape:
-                case TagType.DefineShape2:
-                case TagType.DefineShape3:
-                case TagType.DefineShape4:
-                    dataIndex = swfData.defineShapeTagDatas.Count;
-                    var defineShapeTagData = ((DefineShapeTag)characterIdTag).ToData();
-                    swfData.defineShapeTagDatas.Add(defineShapeTagData);
-                    break;
-                // sprite and movieClip
-                case TagType.DefineSprite:
-                    dataIndex = swfData.defineSpriteTagDatas.Count;
-                    var defineSpriteData = ((DefineSpriteTag)characterIdTag).ToData(swfData);
-                    swfData.defineSpriteTagDatas.Add(defineSpriteData);
-                    break;
-                default:
-                    dataIndex = swfData.unknownTagDatas.Count;
-                    var unknownTagData = new UnknownTagData();
-                    unknownTagData.type = (uint)tagType;
-                    swfData.unknownTagDatas.Add(unknownTagData);
-                    break;
-            }
-
-            var tagTypeAndIndex = new TagTypeAndIndex();
-            tagTypeAndIndex.tagType = (uint)tagType;
-            tagTypeAndIndex.index = dataIndex;
+            TagTypeAndIndex tagTypeAndIndex = swfData.AddTagData((SwfTag)characterIdTag);
             swfData.tagTypeAndIndices[characterIdTag.GetCharacterId()] = tagTypeAndIndex;
         }
         return swfData;
@@ -194,4 +146,6 @@ public class Swf {
         }
         return imageDatas.ToArray();
     }
+
+
 }

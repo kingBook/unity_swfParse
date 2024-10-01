@@ -1,4 +1,6 @@
+using System.Diagnostics;
 using System.IO;
+using Debug = UnityEngine.Debug;
 
 public class SwfImagesExporter {
 
@@ -13,8 +15,15 @@ public class SwfImagesExporter {
     /// </summary>
     /// <param name="swfFolderPath"> 绝对路径，如：E:/kingBook/projects/unity_swfParse/Assets </param>
     public void Export(string swfFolderPath) {
+        Stopwatch sw = new Stopwatch();
+        sw.Start();
         ImageData[] imageDatas = m_swf.GetImageDatas(true);
+        sw.Stop();
+        Debug.Log("GetImageDatas passed time:" + sw.ElapsedMilliseconds);
+        sw.Restart();
         Save(imageDatas, swfFolderPath);
+        sw.Stop();
+        Debug.Log("Save image datas passed time:" + sw.ElapsedMilliseconds);
     }
 
     /// <summary>

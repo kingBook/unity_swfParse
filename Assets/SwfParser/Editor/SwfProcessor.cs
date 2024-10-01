@@ -13,7 +13,6 @@ public static class SwfProcessor {
         string swfFolderPath = FileUtil.GetLogicalPath(System.IO.Path.GetDirectoryName(swfPath));
 
         var swfBytes = new SwfByteArray(swfPath);
-
         Stopwatch sw = new Stopwatch();
         sw.Start();
         var swf = SwfReader.Read(swfBytes);
@@ -37,8 +36,8 @@ public static class SwfProcessor {
         }
         // ===============================================================
         AssetDatabase.Refresh();
-        Debug.Log($"Import complete {swfPath.Replace(Application.dataPath, "Assets")}");
-        //EditorUtility.DisplayDialog("Complete", $"Import complete\n\n{swfPath.Replace(Application.dataPath, "Assets")}", "OK");
+        Debug.Log($"Parseing completed: {FileUtil.GetProjectRelativePath(swfPath)}");
+        //EditorUtility.DisplayDialog("Complete", $"Import complete\n\n{FileUtil.GetProjectRelativePath(swfPath)}", "OK");
     }
 }
 #endif

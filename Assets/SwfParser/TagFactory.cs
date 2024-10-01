@@ -107,7 +107,7 @@ public static class TagFactory {
                 break;
             case 84:
                 tag = new UnknownTag(bytes, header);
-                Debug.LogError("DefineMorphShape2Tag is not implemented.");
+                Debug.LogWarning("DefineMorphShape2Tag is not implemented.");
                 //tag = new DefineMorphShape2Tag(this, bytes,header);
                 break;
             //============= Fonts and Text =======
