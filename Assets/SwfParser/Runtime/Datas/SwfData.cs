@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -56,6 +57,18 @@ public class SwfData : ScriptableObject {
         m_removeObject2TagDatas.Clear();
         m_frameLabelTagDatas.Clear();
         m_unknownTagDatas.Clear();
+    }
+
+    public TagTypeAndIndex GetTagTypeAndIndex(string symbolClassName) {
+        var symbolClassRecord = GetSymbolClassRecord(symbolClassName);
+        return tagTypeAndIndices[symbolClassRecord.tagId];
+    }
+
+    public SymbolClassRecord GetSymbolClassRecord(string symbolClassName) {
+        foreach (var symbolClassTag in symbolClassTags) {
+            return symbolClassTag.symbols.Single(symbol => symbol.name == symbolClassName);
+        }
+        return new SymbolClassRecord();
     }
 
     public TagData GetTagData(TagTypeAndIndex tagTypeAndIndex) {

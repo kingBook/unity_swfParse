@@ -19,8 +19,7 @@ public class SwfDataExporter {
     public SwfData Export(string swfPath) {
         Stopwatch sw = new Stopwatch();
         sw.Start();
-
-        string swfDataRelativePath = $"{FileUtil.GetProjectRelativePath(swfPath)}.swfData.asset";
+        string swfDataRelativePath = $"{FileUtil.GetProjectRelativePath(swfPath)}Data.asset";
 
         SwfData swfData;
         if (File.Exists(swfDataRelativePath)) {

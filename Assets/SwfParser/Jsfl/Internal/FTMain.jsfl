@@ -172,7 +172,7 @@
 	ftdoc.get_export_folder = function (doc) {
 		ft.type_assert(doc, Document);
 		return ft.combine_path(
-			ft.escape_path(doc.pathURI),
+			ft.escape_path(doc.pathURI).replace(".fla",""),
 			cfg.export_path_postfix + "/");
 	};
 
@@ -333,7 +333,7 @@
 		ft.type_assert(doc, Document);
 		return ft.combine_path(
 			ftdoc.get_export_folder(doc),
-			doc.name + ".swf");
+			doc.name.replace(".fla","") + ".swf");
 	};
 
 	//
@@ -1010,6 +1010,8 @@
 						ft.trace_fmt("[Document] '{0}' conversion started...", doc.name);
 						ftdoc.prepare(doc);
 						ft.trace_fmt("[Document] '{0}' conversion complete!", doc.name);
+						
+						ft.trace_fmt("[Document] {0}", ftdoc.get_export_swf_path(doc).replace("file:///","").replace("|",":").replace(/[/]+/g,"\\"));
 					} catch (e) {
 						ft.trace_fmt("[Document] '{0}' conversion error: '{1}'", doc.name, e);
 					}

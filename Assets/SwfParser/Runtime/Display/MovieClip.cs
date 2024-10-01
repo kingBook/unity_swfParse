@@ -96,6 +96,9 @@ public class MovieClip : MonoBehaviour {
 
     private void Awake() {
         Debug.Log("MovieClip::Awake();");
+        var tagTypeAndIndex = m_swfData.GetTagTypeAndIndex(m_symbolClassName);
+        DefineSpriteTagData defineSpriteTagData = (DefineSpriteTagData)m_swfData.GetTagData(tagTypeAndIndex);
+        Debug.Log(defineSpriteTagData.spriteId);
     }
 
     [ContextMenu("Test")]
