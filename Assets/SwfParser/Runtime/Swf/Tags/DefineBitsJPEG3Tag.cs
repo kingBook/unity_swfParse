@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text;
 using System.Xml;
 using UnityEngine;
@@ -51,7 +51,7 @@ public class DefineBitsJPEG3Tag : DefineBitsJPEG2Tag {
         ele.SetAttribute("bitmapAlphaData", alphaDataStrBuilder.ToString());
         return ele;
     }
-    
+
     public override ImageData ToImageData() {
         var imgData = new ImageData();
         imgData.characterID = characterID;

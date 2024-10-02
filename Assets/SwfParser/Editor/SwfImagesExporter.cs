@@ -18,6 +18,7 @@ public class SwfImagesExporter {
         Stopwatch sw = new Stopwatch();
         sw.Start();
         ImageData[] imageDatas = m_swf.GetImageDatas(true);
+        var swfSpriteAtlas = new SwfSpriteAtlas(imageDatas);
         sw.Stop();
         Debug.Log("GetImageDatas passed time:" + sw.ElapsedMilliseconds);
         sw.Restart();
