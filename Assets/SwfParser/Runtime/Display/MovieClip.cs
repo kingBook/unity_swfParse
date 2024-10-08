@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
+[RequireComponent(typeof(MeshFilter), typeof(MeshRenderer)), DisallowMultipleComponent]
 public class MovieClip : MonoBehaviour {
 
     [SerializeField] private SwfData m_swfData;
@@ -16,7 +17,6 @@ public class MovieClip : MonoBehaviour {
     //
     private DefineSpriteTagData m_defineSpriteTagData;
     private Texture2D m_texture2D;
-    private Sprite m_sprite;
 
     /// <summary>
     /// 从指定帧开始播放。
@@ -72,33 +72,14 @@ public class MovieClip : MonoBehaviour {
         //m_defineSpriteTagData = defineSpriteTagData;
     }
 
-#if UNITY_EDITOR
-    private void Reset() {
-        if (!m_sprite) {
-            Texture2D texture2D = new Texture2D(100, 100);
-            m_sprite = Sprite.Create(texture2D, new Rect(0, 0, 100, 100), new Vector2(0.5f, 0.5f));
 
-            SpriteRenderer spriteRenderer;
-            Image image;
-
-            if (spriteRenderer = gameObject.GetComponent<SpriteRenderer>()) {
-                spriteRenderer.sprite = m_sprite;
-            } else if (image = gameObject.GetComponent<Image>()) {
-                image.sprite = m_sprite;
-            } else {
-                spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
-                spriteRenderer.sprite = m_sprite;
-            }
-
-        }
-    }
-#endif
 
     private void Awake() {
         Debug.Log("MovieClip::Awake();");
         var tagTypeAndIndex = m_swfData.GetTagTypeAndIndex(m_symbolClassName);
         DefineSpriteTagData defineSpriteTagData = (DefineSpriteTagData)m_swfData.GetTagData(tagTypeAndIndex);
-        Debug.Log(defineSpriteTagData.spriteId);
+        //Debug.Log(defineSpriteTagData.spriteId);
+
     }
 
     [ContextMenu("Test")]

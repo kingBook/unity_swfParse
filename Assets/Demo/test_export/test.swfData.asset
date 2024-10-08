@@ -68,6 +68,48 @@ MonoBehaviour:
     index: 4
   - tagType: 39
     index: 6
+  atlasesData:
+    atlasAssets:
+    - {fileID: 2800000, guid: 197489b768dfe9d448d9fac88bb25955, type: 3}
+    atlasPaths:
+    - Assets/Demo/test_export/0.png
+    rectInfo2Ds:
+    - rectInfos:
+      - characterID: 6
+        rect:
+          serializedVersion: 2
+          x: 0.375
+          y: 0.47851562
+          width: 0.59375
+          height: 0.072265625
+      - characterID: 9
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0.25
+          width: 0.3984375
+          height: 0.22070312
+      - characterID: 11
+        rect:
+          serializedVersion: 2
+          x: 0.4140625
+          y: 0.25
+          width: 0.37109375
+          height: 0.19726562
+      - characterID: 14
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0.47851562
+          width: 0.359375
+          height: 0.22265625
+      - characterID: 18
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0.76171875
+          height: 0.2421875
   m_defineShapeTagDatas:
   - type: 2
     shapeId: 7

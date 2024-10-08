@@ -75,12 +75,13 @@ public class Swf {
         return doc;
     }
 
-    public SwfData ToData(SwfData swfData, bool isOnlyExportLinkage) {
+    public SwfData ToData(SwfData swfData, AtlasesData atlasesData, bool isOnlyExportLinkage) {
         // dispose
         swfData.Dispose();
         // 
         swfData.symbolClassTags = symbolClassTags;
         swfData.tagTypeAndIndices = new TagTypeAndIndex[linkageDefineCharacterIds.Max() + 1];
+        swfData.atlasesData = atlasesData;
         // 
         for (int i = 0, len = linkageDefineTags.Count; i < len; i++) {
             ICharacterIdTag characterIdTag = linkageDefineTags[i];

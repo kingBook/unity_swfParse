@@ -52,7 +52,7 @@
         "temp/": true,
         "Temp/": true
     },
-	"editor.autoClosingQuotes": "beforeWhitespace",
+    "editor.autoClosingQuotes": "beforeWhitespace",
     "editor.codeLens": false,
     //"editor.fontSize": 11.5,
     "editor.trimAutoWhitespace": false,
@@ -74,8 +74,11 @@
             "activityBar.foreground": "#333333"
         },
         "[One Monokai]": {
-            "editorHoverWidget.highlightForeground": "#2aaaff"
+            "editorHoverWidget.highlightForeground": "#2aaaff",
+            "editorLineNumber.foreground": "#818181"
         }
     },
-	"dotnet.defaultSolution": "unity_swfParse.sln"
+    "editor.tokenColorCustomizations": {
+    },
+    "dotnet.defaultSolution": "unity_swfParse.sln"
 }

@@ -15,12 +15,9 @@ public class EditorTest : Editor {
         if (EditorApplication.isPlaying) return;
         Debug.Log("== Tools/EditorTest ==");
 
-       
+
+
     }
-    
-   
-
-
 
 }
 #endif

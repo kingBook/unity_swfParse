@@ -26,6 +26,8 @@ public class SwfData : ScriptableObject {
     /// </code>
     /// </summary>
     public TagTypeAndIndex[] tagTypeAndIndices;
+    
+    public AtlasesData atlasesData;
 
     [SerializeField] private List<DefineShapeTagData> m_defineShapeTagDatas = new List<DefineShapeTagData>(256);
     [SerializeField] private List<DefineBitsTagData> m_defineBitsTagDatas = new List<DefineBitsTagData>(256);
@@ -46,6 +48,7 @@ public class SwfData : ScriptableObject {
     public void Dispose() {
         symbolClassTags = null;
         tagTypeAndIndices = null;
+        atlasesData = null;
         m_defineShapeTagDatas.Clear();
         m_defineBitsTagDatas.Clear();
         m_defineSpriteTagDatas.Clear();

@@ -27,12 +27,22 @@ public static class SwfProcessor {
             swfXmlExporter.Export(swfPath);
         }
         // =========== 导出位图 ==========================================
-        var swfImagesExporter = new SwfImagesExporter(swf);
-        swfImagesExporter.Export(swfFolderPath);
+        AtlasesData atlasesData = null;
+        switch (SwfParseConfig.exportImagesOption) {
+            case ExportImagesOption.OneByOne:
+                var swfImagesExporter = new SwfImagesExporter(swf);
+                atlasesData = swfImagesExporter.Export(swfFolderPath);
+                break;
+            case ExportImagesOption.Atlas:
+                var swfAtlasesExporter = new SwfAtlasesExporter(swf);
+                atlasesData = swfAtlasesExporter.Export(swfFolderPath);
+                break;
+        }
+        Debug.Log("atlasesData.rectInfo2Ds:" + atlasesData.rectInfo2Ds.Length);
         // =========== 导出运行时 .swfData ===============================
         if (SwfParseConfig.isExportSwfDataAsset) {
             var swfDataExporter = new SwfDataExporter(swf);
-            var swfData = swfDataExporter.Export(swfPath);
+            swfDataExporter.Export(swfPath, atlasesData);
         }
         // ===============================================================
         AssetDatabase.Refresh();
