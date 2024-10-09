@@ -10,7 +10,7 @@ public class TestComponent : MonoBehaviour {
         //texture2.SetPixels(0,0,100,100,colors);
         //texture2.SetPixels32() // 比SetPixels快
         
-        var sprite = Sprite.Create(texture2, new Rect(0, 0, 200, 200), new Vector2(0.5f, 0.5f));
+        var sprite = UnityEngine.Sprite.Create(texture2, new Rect(0, 0, 200, 200), new Vector2(0.5f, 0.5f));
         
         spriteRenderer.sprite = sprite;
         

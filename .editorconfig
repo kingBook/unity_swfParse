@@ -37,5 +37,6 @@ csharp_new_line_before_catch = false
 #     ...
 # }
 csharp_new_line_before_finally = false
+
 # 错误提示,如果不正常可以删掉
 dotnet_diagnostic.IDE0055.severity = none

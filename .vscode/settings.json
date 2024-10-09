@@ -78,7 +78,5 @@
             "editorLineNumber.foreground": "#818181"
         }
     },
-    "editor.tokenColorCustomizations": {
-    },
     "dotnet.defaultSolution": "unity_swfParse.sln"
 }

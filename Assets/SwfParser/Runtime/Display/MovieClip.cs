@@ -3,10 +3,13 @@ using UnityEngine.UI;
 
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer)), DisallowMultipleComponent]
-public class MovieClip : MonoBehaviour {
+public class MovieClip : Sprite {
 
     [SerializeField] private SwfData m_swfData;
     [SerializeField] private string m_symbolClassName;
+    private MeshFilter m_meshFilter;
+    private MeshRenderer m_meshRenderer;
+    private DefineSpritePlayer m_player;
     //
     public int currentFrame;
     public string currentFrameLabel;
@@ -14,9 +17,7 @@ public class MovieClip : MonoBehaviour {
     public string[] currentLabels;
     public bool isPlaying;
     public int totalFrames;
-    //
-    private DefineSpriteTagData m_defineSpriteTagData;
-    private Texture2D m_texture2D;
+
 
     /// <summary>
     /// 从指定帧开始播放。
@@ -62,34 +63,11 @@ public class MovieClip : MonoBehaviour {
 
     }
 
-    /// <summary>
-    /// 设置播放时使用的数据
-    /// </summary>
-    /// <param name="swfData"></param>
-    /// <param name="defineSpriteTagData"></param>
-    public void SeDatas(SwfData swfData, DefineSpriteTagData defineSpriteTagData) {
-        //m_swfData = swfData;
-        //m_defineSpriteTagData = defineSpriteTagData;
-    }
-
-
 
     private void Awake() {
         Debug.Log("MovieClip::Awake();");
-        var tagTypeAndIndex = m_swfData.GetTagTypeAndIndex(m_symbolClassName);
-        DefineSpriteTagData defineSpriteTagData = (DefineSpriteTagData)m_swfData.GetTagData(tagTypeAndIndex);
-        //Debug.Log(defineSpriteTagData.spriteId);
+        m_player = new DefineSpritePlayer(m_swfData, m_symbolClassName);
 
-    }
-
-    [ContextMenu("Test")]
-    public void Test() {
-
-
-    }
-
-    // ============================================
-    private void Init() {
 
     }
 
