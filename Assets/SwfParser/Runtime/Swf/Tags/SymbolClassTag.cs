@@ -1,7 +1,7 @@
 ﻿using System.Xml;
 
 [System.Serializable]
-public class SymbolClassTag : SwfTag {
+public class SymbolClassTag : Tag {
 
     public ushort numSymbols;
     public SymbolClassRecord[] symbols;

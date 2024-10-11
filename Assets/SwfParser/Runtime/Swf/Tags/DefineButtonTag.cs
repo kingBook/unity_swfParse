@@ -2,7 +2,7 @@
 using System.Xml;
 
 [System.Serializable]
-public class DefineButtonTag : SwfTag, ICharacterIdTag {
+public class DefineButtonTag : Tag, ICharacterIdTag {
 
     public ushort buttonId;
     public ButtonRecord[] characters;

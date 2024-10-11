@@ -1,7 +1,7 @@
 ﻿using System.Xml;
 
 [System.Serializable]
-public class ExportAssetsTag : SwfTag {
+public class ExportAssetsTag : Tag {
 
     public ExportAssetRecord[] list;
 

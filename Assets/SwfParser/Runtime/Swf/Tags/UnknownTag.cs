@@ -1,7 +1,7 @@
 ﻿using System.Xml;
 
 [System.Serializable]
-public class UnknownTag : SwfTag {
+public class UnknownTag : Tag {
 
     [System.NonSerialized]
     public byte[] content;

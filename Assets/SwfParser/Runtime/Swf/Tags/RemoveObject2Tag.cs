@@ -1,7 +1,7 @@
 ﻿using System.Xml;
 
 [System.Serializable]
-public class RemoveObject2Tag : SwfTag {
+public class RemoveObject2Tag : Tag {
 
     public ushort depth;
 

@@ -7,7 +7,7 @@ public class Swf : ScriptableObject {
 
     public SwfHeader header;
     [System.NonSerialized]
-    public List<SwfTag> tags;
+    public List<Tag> tags;
 
     #region 额外增加的属性
     public List<SymbolClassTag> symbolClassTags;
@@ -23,7 +23,7 @@ public class Swf : ScriptableObject {
     /// <param name="swfPath"> 绝对路径, 如：E:/kingBook/projects/unity_swfParse/Assets/xx.swf </param>
     public static Swf Create(string swfPath) {
         Swf swf = CreateInstance<Swf>();
-        swf.tags = new List<SwfTag>(256);
+        swf.tags = new List<Tag>(256);
         swf.symbolClassTags = new List<SymbolClassTag>(24);
         swf.usedCharacterIds = new List<ushort>(256);
         swf.usedCharacterIdTags = new List<ICharacterIdTag>(256);
@@ -92,7 +92,7 @@ public class Swf : ScriptableObject {
             long startPosition = bytes.GetBytePosition();
             long expectedEndPosition = startPosition + tagHeader.length;
             //Debug2.Log("type:"+tagHeader.type,"preHeaderStart:"+preHeaderStart,"length:"+tagHeader.length);
-            SwfTag tag = TagFactory.CreateTag(bytes, tagHeader);
+            Tag tag = TagFactory.CreateTag(bytes, tagHeader);
             AddTag(tag);
 
             bytes.AlignBytes();
@@ -106,7 +106,7 @@ public class Swf : ScriptableObject {
         }
     }
 
-    private void AddTag(SwfTag tag) {
+    private void AddTag(Tag tag) {
         tags.Add(tag);
 
         if (tag is SymbolClassTag symbolClassTag) {

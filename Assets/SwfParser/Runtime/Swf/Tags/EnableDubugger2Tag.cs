@@ -1,7 +1,7 @@
 ﻿using System.Xml;
 
 [System.Serializable]
-public class EnableDubugger2Tag : SwfTag {
+public class EnableDubugger2Tag : Tag {
 
     public ushort reserved;
     public string password;

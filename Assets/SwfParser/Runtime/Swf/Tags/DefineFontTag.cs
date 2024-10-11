@@ -3,7 +3,7 @@ using System.Xml;
 using System.Text;
 
 [System.Serializable]
-public class DefineFontTag : SwfTag, ICharacterIdTag {
+public class DefineFontTag : Tag, ICharacterIdTag {
 
     public ushort fontID;
     public ushort[] offsetTable;

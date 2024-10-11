@@ -2,8 +2,8 @@ using UnityEngine;
 
 public static class TagFactory {
 
-    public static SwfTag CreateTag(SwfByteArray bytes, TagHeaderRecord header) {
-        SwfTag tag;
+    public static Tag CreateTag(SwfByteArray bytes, TagHeaderRecord header) {
+        Tag tag;
         var tagType = (TagType)header.type;
         switch (tagType) {
             //============= Display list tags =======

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 [System.Serializable]
-public class DefineTextTag : SwfTag, ICharacterIdTag {
+public class DefineTextTag : Tag, ICharacterIdTag {
 
     public ushort characterID;
     public RectangleRecord textBounds;

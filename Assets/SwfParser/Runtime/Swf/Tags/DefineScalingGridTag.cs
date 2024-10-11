@@ -2,7 +2,7 @@
 using System.Xml;
 
 [System.Serializable]
-public class DefineScalingGridTag : SwfTag, ICharacterIdTag {
+public class DefineScalingGridTag : Tag, ICharacterIdTag {
 
     public ushort characterId;
     public RectangleRecord splitter;

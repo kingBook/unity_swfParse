@@ -1,7 +1,7 @@
 ﻿using System.Xml;
 
 [System.Serializable]
-public class DefineSceneAndFrameLabelDataTag : SwfTag {
+public class DefineSceneAndFrameLabelDataTag : Tag {
 
     public uint sceneCount;
     public DefineSceneRecord[] defineSceneList;

@@ -2,7 +2,7 @@
 using System.Xml;
 
 [System.Serializable]
-public class DefineButton2Tag : SwfTag, ICharacterIdTag {
+public class DefineButton2Tag : Tag, ICharacterIdTag {
 
     public ushort buttonId;
     public byte reservedFlags;

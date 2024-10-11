@@ -2,7 +2,7 @@
 using System.Xml;
 
 [System.Serializable]
-public class PlaceObjectTag : SwfTag, ICharacterIdTag {
+public class PlaceObjectTag : Tag, ICharacterIdTag {
 
     public ushort characterId;
     public ushort depth;

@@ -2,7 +2,7 @@
 using System.Xml;
 
 [System.Serializable]
-public class DefineMorphShapeTag : SwfTag, ICharacterIdTag {
+public class DefineMorphShapeTag : Tag, ICharacterIdTag {
 
     public ushort characterId;
     public RectangleRecord startBounds;

@@ -1,7 +1,7 @@
 ﻿using System.Xml;
 
 [System.Serializable]
-public class ScriptLimitsTag : SwfTag {
+public class ScriptLimitsTag : Tag {
 
     public ushort maxRecursionDepth;
     public ushort scriptTimeoutSeconds;

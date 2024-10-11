@@ -1,7 +1,7 @@
 ﻿using System.Xml;
 
 [System.Serializable]
-public class FileAttributesTag : SwfTag {
+public class FileAttributesTag : Tag {
 
     public bool useDirectBlit;
     public bool useGPU;

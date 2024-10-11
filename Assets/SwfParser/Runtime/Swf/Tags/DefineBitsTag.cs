@@ -3,7 +3,7 @@ using System.Text;
 using System.Xml;
 
 [System.Serializable]
-public class DefineBitsTag : SwfTag, ICharacterIdTag {
+public class DefineBitsTag : Tag, ICharacterIdTag {
 
     public ushort characterID;
     public byte[] jpegData;

@@ -3,7 +3,7 @@ using System.Xml;
 using UnityEngine;
 
 [System.Serializable]
-public class DefineBitsLosslessTag : SwfTag, ICharacterIdTag {
+public class DefineBitsLosslessTag : Tag, ICharacterIdTag {
 
     public ushort characterID;
     public byte bitmapFormat;

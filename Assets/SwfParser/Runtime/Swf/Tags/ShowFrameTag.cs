@@ -1,7 +1,7 @@
 ﻿using System.Xml;
 
 [System.Serializable]
-public class ShowFrameTag : SwfTag {
+public class ShowFrameTag : Tag {
 
     public ShowFrameTag(SwfByteArray bytes, TagHeaderRecord header) : base(header) {
 

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 [System.Serializable]
-public class DefineMorphShape2Tag : SwfTag, ICharacterIdTag {
+public class DefineMorphShape2Tag : Tag, ICharacterIdTag {
 
     public ushort characterId;
     public RectangleRecord startBounds;

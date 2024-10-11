@@ -1,7 +1,7 @@
 ﻿using System.Xml;
 
 [System.Serializable]
-public class FrameLabelTag : SwfTag {
+public class FrameLabelTag : Tag {
 
     public string name;
     public byte namedAnchorFlag;

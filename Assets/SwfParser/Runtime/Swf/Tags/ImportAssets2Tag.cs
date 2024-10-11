@@ -1,7 +1,7 @@
 ﻿using System.Xml;
 
 [System.Serializable]
-public class ImportAssets2Tag : SwfTag {
+public class ImportAssets2Tag : Tag {
 
     public string url;
     public ImportAssets2Record[] list;

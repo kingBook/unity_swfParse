@@ -1,7 +1,7 @@
 ﻿using System.Xml;
 
 [System.Serializable]
-public class ProtectTag : SwfTag {
+public class ProtectTag : Tag {
 
     public ProtectTag(SwfByteArray bytes, TagHeaderRecord header) : base(header) {
         

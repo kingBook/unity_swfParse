@@ -2,7 +2,7 @@
 using System.Xml;
 
 [System.Serializable]
-public class DefineShapeTag : SwfTag, ICharacterIdTag {
+public class DefineShapeTag : Tag, ICharacterIdTag {
 
     public ushort shapeId;
     public RectangleRecord shapeBounds;

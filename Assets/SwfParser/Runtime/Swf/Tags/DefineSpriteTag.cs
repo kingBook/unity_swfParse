@@ -3,12 +3,12 @@ using System.Xml;
 using UnityEngine;
 
 [System.Serializable]
-public class DefineSpriteTag : SwfTag, ICharacterIdTag {
+public class DefineSpriteTag : Tag, ICharacterIdTag {
 
     public ushort spriteId;
     public ushort frameCount;
     [SerializeReference]
-    public SwfTag[] controlTags;
+    public Tag[] controlTags;
 
     public DefineSpriteTag(SwfByteArray bytes, TagHeaderRecord header) : base(header) {
         spriteId = bytes.ReadUI16();
@@ -16,8 +16,8 @@ public class DefineSpriteTag : SwfTag, ICharacterIdTag {
         controlTags = ReadControlTags(bytes);
     }
 
-    private SwfTag[] ReadControlTags(SwfByteArray bytes) {
-        var tempTags = new List<SwfTag>();
+    private Tag[] ReadControlTags(SwfByteArray bytes) {
+        var tempTags = new List<Tag>();
         while (true) {
             var header = new TagHeaderRecord(bytes);
             long startPosition = bytes.GetBytePosition();

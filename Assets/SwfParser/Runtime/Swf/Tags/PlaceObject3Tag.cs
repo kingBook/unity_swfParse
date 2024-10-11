@@ -2,7 +2,7 @@
 using System.Xml;
 
 [System.Serializable]
-public class PlaceObject3Tag : SwfTag, ICharacterIdTag {
+public class PlaceObject3Tag : Tag, ICharacterIdTag {
 
     public bool placeFlagHasClipActions;
     public bool placeFlagHasClipDepth;

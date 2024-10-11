@@ -1,7 +1,7 @@
 ﻿using System.Xml;
 
 [System.Serializable]
-public class MetadataTag : SwfTag {
+public class MetadataTag : Tag {
 
     public string metadata;
 

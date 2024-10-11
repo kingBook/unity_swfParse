@@ -1,11 +1,11 @@
 ﻿using System.Xml;
 
 [System.Serializable]
-public abstract class SwfTag {
+public abstract class Tag {
 
     public TagHeaderRecord header;
 
-    public SwfTag(TagHeaderRecord header) {
+    public Tag(TagHeaderRecord header) {
         this.header = header;
     }
 
