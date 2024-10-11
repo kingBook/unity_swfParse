@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 
+[System.Serializable]
 public class DefineMorphShape2Tag : SwfTag, ICharacterIdTag {
 
     public ushort characterId;
@@ -32,7 +33,7 @@ public class DefineMorphShape2Tag : SwfTag, ICharacterIdTag {
         endEdges = new SHAPE(bytes, 1);
     }
 
-    public void GetNeededCharacterIds(List<ushort> characterIds, Swf swf) {
+    public void FindUsedCharacterIds(List<ushort> characterIds, Swf swf) {
         if (characterIds.IndexOf(characterId) < 0) {
             characterIds.Add(characterId);
 

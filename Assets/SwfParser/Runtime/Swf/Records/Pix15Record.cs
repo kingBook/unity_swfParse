@@ -1,5 +1,6 @@
 using System;
 
+[System.Serializable]
 public struct Pix15Record : IPixRecord {
 
     public byte reserved;

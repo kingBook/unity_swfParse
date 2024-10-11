@@ -1,5 +1,6 @@
 ﻿using System.Xml;
 
+[System.Serializable]
 public class DefineShape3Tag : DefineShape2Tag {
 
     //public ushort shapeId;

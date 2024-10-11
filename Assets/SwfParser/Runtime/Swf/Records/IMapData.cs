@@ -6,6 +6,7 @@
 /// <see cref="BitmapDataRecord"/>
 /// </summary>
 public interface IMapData {
+    
     XmlElement ToXml(XmlDocument doc);
 
 }

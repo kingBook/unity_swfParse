@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 
+[System.Serializable]
 public class DefineTextTag : SwfTag, ICharacterIdTag {
 
     public ushort characterID;
@@ -32,7 +33,7 @@ public class DefineTextTag : SwfTag, ICharacterIdTag {
         endOfRecordsFlag = 0;
     }
 
-    public void GetNeededCharacterIds(List<ushort> characterIds, Swf swf) {
+    public void FindUsedCharacterIds(List<ushort> characterIds, Swf swf) {
         if (characterIds.IndexOf(characterID) < 0) {
             characterIds.Add(characterID);
         }

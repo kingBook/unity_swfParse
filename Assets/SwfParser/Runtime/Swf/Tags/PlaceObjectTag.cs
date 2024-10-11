@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Xml;
 
+[System.Serializable]
 public class PlaceObjectTag : SwfTag, ICharacterIdTag {
 
     public ushort characterId;
@@ -27,7 +28,7 @@ public class PlaceObjectTag : SwfTag, ICharacterIdTag {
         return ele;
     }
 
-    public void GetNeededCharacterIds(List<ushort> characterIds, Swf swf) {
+    public void FindUsedCharacterIds(List<ushort> characterIds, Swf swf) {
         if (characterIds.IndexOf(characterId) < 0) {
             characterIds.Add(characterId);
         }
@@ -35,15 +36,5 @@ public class PlaceObjectTag : SwfTag, ICharacterIdTag {
 
     public ushort GetCharacterId() {
         return characterId;
-    }
-
-    public PlaceObjectTagData ToData() {
-        var data = new PlaceObjectTagData();
-        data.type = header.type;
-        data.characterId = characterId;
-        data.depth = depth;
-        data.matrix = matrix;
-        data.colorTransform = colorTransform;
-        return data;
     }
 }

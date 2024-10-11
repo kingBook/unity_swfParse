@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using System.Xml;
 
+[System.Serializable]
 public struct ColorMapDataRecord : IMapData {
 
     public RGBRecord[] colorTableRGB;

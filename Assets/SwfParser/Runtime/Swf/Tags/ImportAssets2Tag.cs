@@ -1,5 +1,6 @@
 ﻿using System.Xml;
 
+[System.Serializable]
 public class ImportAssets2Tag : SwfTag {
 
     public string url;

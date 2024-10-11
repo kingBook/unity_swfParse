@@ -1,0 +1,3 @@
+# https://docs.github.com/zh/get-started/getting-started-with-git/configuring-git-to-handle-line-endings
+# Auto detect text files and perform LF normalization
+* text=auto

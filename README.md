@@ -5,10 +5,14 @@ http://www.zlib.net/
 https://www.m2osw.com/swf_tag_definebitsjpeg3
 
 
+https://zhuzhonghua.github.io/2012/12/swf9%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F-%E5%BD%A2%E7%8A%B6-swf-file-format-version9-shape.html
+
+https://www.thegestalt.org/flash/stuff/SWF%20Reference/SWFfilereference.htm
+
 RemoveObject2Tag 需要导出但是没有characterID ，又不能继承 RemoveObjectTag
 
 
-
+```cs
 public static void CopyStream(System.IO.Stream input, System.IO.Stream output)
 {
 	byte[] buffer = new byte[2000];
@@ -53,6 +57,7 @@ private void decompressFile(string inFile, string outFile)
 		inFileStream.Close();
 	}
 }
+```
 
 ==============================================================================
 // swf 显示列表

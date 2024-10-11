@@ -2,6 +2,7 @@
 using System.Xml;
 using UnityEngine;
 
+[System.Serializable]
 public class DefineBitsLosslessTag : SwfTag, ICharacterIdTag {
 
     public ushort characterID;
@@ -94,7 +95,7 @@ public class DefineBitsLosslessTag : SwfTag, ICharacterIdTag {
         return imageData;
     }
 
-    public void GetNeededCharacterIds(List<ushort> characterIds, Swf swf) {
+    public void FindUsedCharacterIds(List<ushort> characterIds, Swf swf) {
         if (characterIds.IndexOf(characterID) < 0) {
             characterIds.Add(characterID);
         }

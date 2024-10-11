@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Xml;
 
+[System.Serializable]
 public struct ShapeWithStyleRecord {
 
     public FillStyleArrayRecord fillStyles;
@@ -17,7 +18,7 @@ public struct ShapeWithStyleRecord {
         numLineBits = (byte)bytes.ReadUB(4);
         var list = new List<IShapeRecord>();
         while (true) {
-            var shapeRecord = SwfReader.ReadShapeRecord(bytes, numFillBits, numLineBits, shapeType);
+            var shapeRecord = ShapeRecordReader.ReadShapeRecord(bytes, numFillBits, numLineBits, shapeType);
             list.Add(shapeRecord);
             if (shapeRecord is StyleChangeRecord changeRecord) {
                 if (changeRecord.stateNewStyles) {
@@ -34,11 +35,11 @@ public struct ShapeWithStyleRecord {
         var ele = doc.CreateElement("ShapeWithStyle");
         ele.AppendChild(fillStyles.ToXml(doc));
         ele.AppendChild(lineStyles.ToXml(doc));
-        //numFillBits
+        // numFillBits
         var numFillBitsEle = doc.CreateElement("NumFillBits");
         numFillBitsEle.InnerText = numFillBits.ToString();
         ele.AppendChild(numFillBitsEle);
-        //numLineBits
+        // numLineBits
         var numLineBitsEle = doc.CreateElement("NumLineBits");
         numLineBitsEle.InnerText = numLineBits.ToString();
         ele.AppendChild(numLineBitsEle);

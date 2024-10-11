@@ -1,6 +1,8 @@
 ﻿using System.Xml;
 
+[System.Serializable]
 public struct LineStyleArrayRecord {
+    
     public byte lineStyleCount;
     public ushort lineStyleCountExtended;
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Xml;
 
+[System.Serializable]
 public class DefineButtonTag : SwfTag, ICharacterIdTag {
 
     public ushort buttonId;
@@ -23,7 +24,7 @@ public class DefineButtonTag : SwfTag, ICharacterIdTag {
         return base.ToXml(doc);
     }
 
-    public void GetNeededCharacterIds(List<ushort> characterIds, Swf swf) {
+    public void FindUsedCharacterIds(List<ushort> characterIds, Swf swf) {
         if (characterIds.IndexOf(buttonId) < 0) {
             characterIds.Add(buttonId);
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 
+[System.Serializable]
 public struct ARGBRecord {
 
     public byte alpha;

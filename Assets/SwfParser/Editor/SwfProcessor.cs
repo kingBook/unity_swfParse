@@ -1,4 +1,4 @@
-﻿#if UNITY_EDITOR
+#if UNITY_EDITOR
 using System.Diagnostics;
 using UnityEditor;
 using UnityEngine;
@@ -12,12 +12,9 @@ public static class SwfProcessor {
         // 截取掉 /xx.swf 的文件夹路径，如：E:/kingBook/projects/unity_swfParse/Assets
         string swfFolderPath = FileUtil.GetLogicalPath(System.IO.Path.GetDirectoryName(swfPath));
 
-        var swfBytes = new SwfByteArray(swfPath);
         Stopwatch sw = new Stopwatch();
         sw.Start();
-        var swf = SwfReader.Read(swfBytes);
-        swf.FindLinkageDefineTags();
-        swfBytes.Close();
+        var swf = Swf.Create(swfPath);
         sw.Stop();
         Debug.Log("read swf passed time:" + sw.ElapsedMilliseconds);
 
@@ -39,10 +36,10 @@ public static class SwfProcessor {
                 break;
         }
         Debug.Log("atlasesData.rectInfo2Ds:" + atlasesData.rectInfo2Ds.Length);
-        // =========== 导出运行时 .swfData ===============================
-        if (SwfParseConfig.isExportSwfDataAsset) {
-            var swfDataExporter = new SwfDataExporter(swf);
-            swfDataExporter.Export(swfPath, atlasesData);
+        // =========== 导出运行时数据 (xx.swf.asset) ======================
+        if (SwfParseConfig.isExportSwfAsset) {
+            var swfAssetExporter = new SwfAssetExporter(swf);
+            swfAssetExporter.Export(swfPath, atlasesData);
         }
         // ===============================================================
         AssetDatabase.Refresh();

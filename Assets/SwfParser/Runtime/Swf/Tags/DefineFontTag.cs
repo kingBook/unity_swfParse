@@ -2,6 +2,7 @@
 using System.Xml;
 using System.Text;
 
+[System.Serializable]
 public class DefineFontTag : SwfTag, ICharacterIdTag {
 
     public ushort fontID;
@@ -34,7 +35,7 @@ public class DefineFontTag : SwfTag, ICharacterIdTag {
         return ele;
     }
 
-    public void GetNeededCharacterIds(List<ushort> characterIds, Swf swf) {
+    public void FindUsedCharacterIds(List<ushort> characterIds, Swf swf) {
         if (characterIds.IndexOf(fontID) < 0) {
             characterIds.Add(fontID);
         }

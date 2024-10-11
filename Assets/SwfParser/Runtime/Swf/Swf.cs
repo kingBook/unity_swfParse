@@ -1,57 +1,153 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections.Generic;
-using System.Linq;
 using System.Xml;
 
-public class Swf {
+[System.Serializable]
+public class Swf : ScriptableObject {
 
     public SwfHeader header;
-    public readonly List<SwfTag> tags = new List<SwfTag>(256);
+    [System.NonSerialized]
+    public List<SwfTag> tags;
 
-    #region 为方便访问而增加的列表
-    public readonly List<SymbolClassTag> symbolClassTags = new List<SymbolClassTag>(24);
-    public readonly List<DefineSpriteTag> defineSpriteTags = new List<DefineSpriteTag>(128);
-    public readonly List<ushort> linkageDefineCharacterIds = new List<ushort>(256);
-    public readonly List<ICharacterIdTag> linkageDefineTags = new List<ICharacterIdTag>(256);
+    #region 额外增加的属性
+    public List<SymbolClassTag> symbolClassTags;
+    public List<ushort> usedCharacterIds;
+    [SerializeReference]
+    public List<ICharacterIdTag> usedCharacterIdTags;
+    public AtlasesData atlasesData;
     #endregion
 
-    public Swf(SwfByteArray bytes) {
-        header = new SwfHeader(bytes);
+    /// <summary>
+    ///  根据 swf 绝对路径创建
+    /// </summary>
+    /// <param name="swfPath"> 绝对路径, 如：E:/kingBook/projects/unity_swfParse/Assets/xx.swf </param>
+    public static Swf Create(string swfPath) {
+        Swf swf = CreateInstance<Swf>();
+        swf.tags = new List<SwfTag>(256);
+        swf.symbolClassTags = new List<SymbolClassTag>(24);
+        swf.usedCharacterIds = new List<ushort>(256);
+        swf.usedCharacterIdTags = new List<ICharacterIdTag>(256);
+
+        var bytes = new SwfByteArray(swfPath);
+        swf.header = new SwfHeader(bytes);
+        swf.ReadTags(bytes);
+        bytes.Close();
+        // 查找使用到的标签
+        swf.FindUsedCharacterIds();
+        swf.FindUsedCharacterIdTags();
+        return swf;
+    }
+
+    public void SetTo(Swf target) {
+        header = target.header;
+        tags = target.tags;
+        symbolClassTags = target.symbolClassTags;
+        usedCharacterIds = target.usedCharacterIds;
+        usedCharacterIdTags = target.usedCharacterIdTags;
+        atlasesData = target.atlasesData;
+    }
+
+    public void SetAtlasesData(AtlasesData value) {
+        atlasesData = value;
     }
 
     /// <summary>
-    /// 查找有定义链接类名的 DefineSprite(在SymbolClassTag中定义) 的所有 Tag 与及使用到的 characterId
+    /// 根据 symbolClassName 获取 DefineSpriteTag
     /// </summary>
-    public void FindLinkageDefineTags() {
-        // 是否有定义链接类名的 DefineSpriteTag
-        bool IsLinkageDefineSpriteTag(DefineSpriteTag defineSpriteTag) {
-            for (int i = 0, c = symbolClassTags.Count; i < c; i++) {
-                var symbols = symbolClassTags[i].symbols;
-                for (int j = 0, len = symbols.Length; j < len; j++) {
-                    if (defineSpriteTag.spriteId == symbols[j].tagId) {
-                        return true;
-                    }
+    /// <param name="symbolClassName"> 链接类名 </param>
+    /// <returns></returns>
+    public DefineSpriteTag GetUsedDefineSpriteTag(string symbolClassName) {
+        for (int i = 0, c = symbolClassTags.Count; i < c; i++) {
+            var symbols = symbolClassTags[i].symbols;
+            for (int j = 0, len = symbols.Length; j < len; j++) {
+                var symobolClassRecord = symbols[j];
+                if (symbolClassName == symobolClassRecord.name) {
+                    return (DefineSpriteTag)GetUsedCharacterIdTag(symobolClassRecord.tagId);
                 }
             }
-            return false;
         }
-        // 有定义链接类名的 DefineSpriteTag，找出引用的 CharacterId
-        for (int i = 0, len = defineSpriteTags.Count; i < len; i++) {
-            var defineSpriteTag = defineSpriteTags[i];
-            if (IsLinkageDefineSpriteTag(defineSpriteTag)) {
-                defineSpriteTag.GetNeededCharacterIds(linkageDefineCharacterIds, this);
+        return null;
+    }
+
+    /// <summary>
+    /// 根据 characterId 获取标签
+    /// </summary>
+    /// <param name="characterId"></param>
+    /// <returns></returns>
+    public ICharacterIdTag GetUsedCharacterIdTag(ushort characterId) {
+        for (int i = 0, len = usedCharacterIdTags.Count; i < len; i++) {
+            var characterIdTag = usedCharacterIdTags[i];
+            if (characterIdTag.GetCharacterId() == characterId) {
+                return characterIdTag;
             }
         }
-        // 找到有定义链接类名的引用到的 ICharacterIdTag
+        return null;
+    }
+
+    private void ReadTags(SwfByteArray bytes) {
+        while (bytes.GetBytesAvailable() > 0) {
+            long preHeaderStart = bytes.GetBytePosition();
+            TagHeaderRecord tagHeader = new TagHeaderRecord(bytes);
+
+            long startPosition = bytes.GetBytePosition();
+            long expectedEndPosition = startPosition + tagHeader.length;
+            //Debug2.Log("type:"+tagHeader.type,"preHeaderStart:"+preHeaderStart,"length:"+tagHeader.length);
+            SwfTag tag = TagFactory.CreateTag(bytes, tagHeader);
+            AddTag(tag);
+
+            bytes.AlignBytes();
+            //long newPosition = bytes.GetBytePosition();
+
+            bytes.SetBytePosition(expectedEndPosition);
+
+            if (tag is EndTag) {
+                break;
+            }
+        }
+    }
+
+    private void AddTag(SwfTag tag) {
+        tags.Add(tag);
+
+        if (tag is SymbolClassTag symbolClassTag) {
+            symbolClassTags.Add(symbolClassTag);
+        }
+    }
+
+    private void FindUsedCharacterIds() {
+        for (int i = 0, len = tags.Count; i < len; i++) {
+            var tag = tags[i];
+            if (tag is DefineSpriteTag defineSpriteTag) {
+                if (IsUsedDefineSpriteTag(defineSpriteTag)) {
+                    defineSpriteTag.FindUsedCharacterIds(usedCharacterIds, this);
+                }
+            }
+        }
+    }
+
+    private void FindUsedCharacterIdTags() {
         for (int i = 0, len = tags.Count; i < len; i++) {
             var tag = tags[i];
             if (tag is ICharacterIdTag characterIdTag) {
-                bool isLinkageTag = linkageDefineCharacterIds.IndexOf(characterIdTag.GetCharacterId()) > -1;
-                if (isLinkageTag) {
-                    linkageDefineTags.Add(characterIdTag);
+                bool isUsed = usedCharacterIds.IndexOf(characterIdTag.GetCharacterId()) > -1;
+                if (isUsed) {
+                    usedCharacterIdTags.Add(characterIdTag);
                 }
             }
         }
+    }
+
+    /// <summary> 是否为使用到的 DefineSpriteTag（有定义链接类名）</summary>
+    private bool IsUsedDefineSpriteTag(DefineSpriteTag defineSpriteTag) {
+        for (int i = 0, c = symbolClassTags.Count; i < c; i++) {
+            var symbols = symbolClassTags[i].symbols;
+            for (int j = 0, len = symbols.Length; j < len; j++) {
+                if (defineSpriteTag.spriteId == symbols[j].tagId) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public XmlDocument ToXml() {
@@ -75,71 +171,51 @@ public class Swf {
         return doc;
     }
 
-    public SwfData ToData(SwfData swfData, AtlasesData atlasesData, bool isOnlyExportLinkage) {
-        // dispose
-        swfData.Dispose();
-        // 
-        swfData.symbolClassTags = symbolClassTags;
-        swfData.tagTypeAndIndices = new TagTypeAndIndex[linkageDefineCharacterIds.Max() + 1];
-        swfData.atlasesData = atlasesData;
-        // 
-        for (int i = 0, len = linkageDefineTags.Count; i < len; i++) {
-            ICharacterIdTag characterIdTag = linkageDefineTags[i];
-            //-------------------------------------------------------------------------------
-            // 在运行时并非使用所有的 Tag，Tag 的属性也不全都使用，因此创建需使用的 tag 的精简版
-            //-------------------------------------------------------------------------------
-            TagTypeAndIndex tagTypeAndIndex = swfData.AddTagData((SwfTag)characterIdTag);
-            swfData.tagTypeAndIndices[characterIdTag.GetCharacterId()] = tagTypeAndIndex;
-        }
-        return swfData;
-    }
-
     /// <summary>
     /// 获取所有图像数据
     /// </summary>
     /// <param name="isOnlyExportLinkage"> 仅导出有链接类名的库元件 </param>
     /// <returns></returns>
     public ImageData[] GetImageDatas(bool isOnlyExportLinkage) {
-        // 获取有链接类名的 DefineSprite(在SymbolClassTag中定义) 的所有 CharacterId
-
         var imageDatas = new List<ImageData>();
         for (int i = 0, len = tags.Count; i < len; i++) {
             var tag = tags[i];
-            if (tag.header.type == (uint)TagType.DefineBits) {
+            var tagType = (TagType)tag.header.type;
+            if (tagType == TagType.DefineBits) {
                 var defineBitsTag = (DefineBitsTag)tag;
-                if (isOnlyExportLinkage && linkageDefineCharacterIds.IndexOf(defineBitsTag.characterID) > -1) {
+                if (isOnlyExportLinkage && usedCharacterIds.IndexOf(defineBitsTag.characterID) > -1) {
                     var imageData = defineBitsTag.ToImageData();
                     if (imageData.bytes != null && imageData.bytes.Length > 0) {
                         imageDatas.Add(imageData);
                     }
                 }
-            } else if (tag.header.type == (uint)TagType.DefineBitsJPEG2) {
+            } else if (tagType == TagType.DefineBitsJPEG2) {
                 var defineBitsJpeg2Tag = (DefineBitsJPEG2Tag)tag;
-                if (isOnlyExportLinkage && linkageDefineCharacterIds.IndexOf(defineBitsJpeg2Tag.characterID) > -1) {
+                if (isOnlyExportLinkage && usedCharacterIds.IndexOf(defineBitsJpeg2Tag.characterID) > -1) {
                     var imageData = defineBitsJpeg2Tag.ToImageData();
                     imageDatas.Add(imageData);
                 }
-            } else if (tag.header.type == (uint)TagType.DefineBitsJPEG3) {
+            } else if (tagType == TagType.DefineBitsJPEG3) {
                 var defineBitsJpeg3Tag = (DefineBitsJPEG3Tag)tag;
-                if (isOnlyExportLinkage && linkageDefineCharacterIds.IndexOf(defineBitsJpeg3Tag.characterID) > -1) {
+                if (isOnlyExportLinkage && usedCharacterIds.IndexOf(defineBitsJpeg3Tag.characterID) > -1) {
                     var imageData = defineBitsJpeg3Tag.ToImageData();
                     imageDatas.Add(imageData);
                 }
-            } else if (tag.header.type == (uint)TagType.DefineBitsLossless) {
+            } else if (tagType == TagType.DefineBitsLossless) {
                 var defineBitsLosslessTag = (DefineBitsLosslessTag)tag;
-                if (isOnlyExportLinkage && linkageDefineCharacterIds.IndexOf(defineBitsLosslessTag.characterID) > -1) {
+                if (isOnlyExportLinkage && usedCharacterIds.IndexOf(defineBitsLosslessTag.characterID) > -1) {
                     var imageData = defineBitsLosslessTag.ToImageData();
                     imageDatas.Add(imageData);
                 }
-            } else if (tag.header.type == (uint)TagType.DefineBitsLossless2) {
+            } else if (tagType == TagType.DefineBitsLossless2) {
                 var defineBitsLossless2Tag = (DefineBitsLossless2Tag)tag;
-                if (isOnlyExportLinkage && linkageDefineCharacterIds.IndexOf(defineBitsLossless2Tag.characterID) > -1) {
+                if (isOnlyExportLinkage && usedCharacterIds.IndexOf(defineBitsLossless2Tag.characterID) > -1) {
                     var imageData = defineBitsLossless2Tag.ToImageData();
                     imageDatas.Add(imageData);
                 }
-            } else if (tag.header.type == (uint)TagType.DefineBitsJPEG4) {
+            } else if (tagType == TagType.DefineBitsJPEG4) {
                 var defineBitsJpeg4Tag = (DefineBitsJPEG4Tag)tag;
-                if (isOnlyExportLinkage && linkageDefineCharacterIds.IndexOf(defineBitsJpeg4Tag.characterID) > -1) {
+                if (isOnlyExportLinkage && usedCharacterIds.IndexOf(defineBitsJpeg4Tag.characterID) > -1) {
                     var imageData = defineBitsJpeg4Tag.ToImageData();
                     imageDatas.Add(imageData);
                 }

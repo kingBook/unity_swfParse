@@ -1,6 +1,8 @@
 ﻿using System.Xml;
 
+[System.Serializable]
 public struct LineStyle2Record : ILineStyleRecord {
+    
     public ushort width;
     public byte startCapStyle;
     public byte joinStyle;

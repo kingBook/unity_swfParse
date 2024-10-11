@@ -1,5 +1,6 @@
 ﻿using System.Xml;
 
+[System.Serializable]
 public class FrameLabelTag : SwfTag {
 
     public string name;
@@ -15,13 +16,6 @@ public class FrameLabelTag : SwfTag {
         ele.SetAttribute("name", name);
         ele.SetAttribute("namedAnchorFlag", namedAnchorFlag.ToString());
         return ele;
-    }
-
-    public FrameLabelTagData ToData() {
-        var data = new FrameLabelTagData();
-        data.name = name;
-        data.namedAnchorFlag = namedAnchorFlag;
-        return data;
     }
 
 }

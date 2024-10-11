@@ -1,4 +1,5 @@
-﻿public struct RectangleRecord {
+﻿[System.Serializable]
+public struct RectangleRecord {
 
     public int xMin;
     public int xMax;

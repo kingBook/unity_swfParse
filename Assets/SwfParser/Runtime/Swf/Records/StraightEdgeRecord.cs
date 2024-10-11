@@ -1,5 +1,6 @@
 ﻿using System.Xml;
 
+[System.Serializable]
 public struct StraightEdgeRecord : IEdgeRecord { //:EdgeRecord:ShapeRecord
 
     public bool typeFlag;

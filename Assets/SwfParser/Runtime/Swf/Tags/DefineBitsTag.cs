@@ -2,6 +2,7 @@
 using System.Text;
 using System.Xml;
 
+[System.Serializable]
 public class DefineBitsTag : SwfTag, ICharacterIdTag {
 
     public ushort characterID;
@@ -42,7 +43,7 @@ public class DefineBitsTag : SwfTag, ICharacterIdTag {
         return imageData;
     }
 
-    public void GetNeededCharacterIds(List<ushort> characterIds, Swf swf) {
+    public void FindUsedCharacterIds(List<ushort> characterIds, Swf swf) {
         if (characterIds.IndexOf(characterID) < 0) {
             characterIds.Add(characterID);
         }

@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Xml;
+using UnityEngine;
 
+[System.Serializable]
 public class DefineSpriteTag : SwfTag, ICharacterIdTag {
 
     public ushort spriteId;
     public ushort frameCount;
+    [SerializeReference]
     public SwfTag[] controlTags;
 
     public DefineSpriteTag(SwfByteArray bytes, TagHeaderRecord header) : base(header) {
@@ -38,7 +41,7 @@ public class DefineSpriteTag : SwfTag, ICharacterIdTag {
         return ele;
     }
 
-    public void GetNeededCharacterIds(List<ushort> characterIds, Swf swf) {
+    public void FindUsedCharacterIds(List<ushort> characterIds, Swf swf) {
         if (characterIds.IndexOf(spriteId) >= 0) return;
 
         characterIds.Add(spriteId);
@@ -46,7 +49,7 @@ public class DefineSpriteTag : SwfTag, ICharacterIdTag {
         for (int i = 0, len = controlTags.Length; i < len; i++) {
             var tag = controlTags[i];
             if (tag is ICharacterIdTag characterIdTag) {
-                characterIdTag.GetNeededCharacterIds(characterIds, swf);
+                characterIdTag.FindUsedCharacterIds(characterIds, swf);
 
                 bool isPlaceObjectTag = characterIdTag is PlaceObjectTag ||
                                         characterIdTag is PlaceObject2Tag ||
@@ -56,33 +59,17 @@ public class DefineSpriteTag : SwfTag, ICharacterIdTag {
                     for (int j = 0, lenJ = swf.tags.Count; j < lenJ; j++) {
                         var tempTag = swf.tags[j];
                         if (tempTag is ICharacterIdTag tempIdTag) {
-                            tempIdTag.GetNeededCharacterIds(characterIds, swf);
+                            tempIdTag.FindUsedCharacterIds(characterIds, swf);
                         }
                     }
                 }
-
             }
         }
-
     }
 
     public ushort GetCharacterId() {
         return spriteId;
     }
 
-    public DefineSpriteTagData ToData(SwfData swfData) {
-        var tagData = new DefineSpriteTagData();
-        tagData.spriteId = spriteId;
-        tagData.frameCount = frameCount;
-
-        int len = controlTags.Length;
-        tagData.tagTypeAndIndices = new TagTypeAndIndex[len];
-        for (int i = 0; i < len; i++) {
-            var controlTag = controlTags[i];
-            var tagTypeAndIndex = swfData.AddTagData(controlTag);
-            tagData.tagTypeAndIndices[i] = tagTypeAndIndex;
-        }
-        return tagData;
-    }
 
 }

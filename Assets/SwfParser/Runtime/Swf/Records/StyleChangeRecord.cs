@@ -1,5 +1,6 @@
 ﻿using System.Xml;
 
+[System.Serializable]
 public struct StyleChangeRecord : IShapeRecord { //:Shape Record
 
     public bool typeFlag;

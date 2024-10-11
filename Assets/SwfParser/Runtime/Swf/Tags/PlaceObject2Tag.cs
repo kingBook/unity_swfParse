@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Xml;
 
+[System.Serializable]
 public class PlaceObject2Tag : SwfTag, ICharacterIdTag {
 
     public bool placeFlagHasClipActions;
@@ -73,7 +74,7 @@ public class PlaceObject2Tag : SwfTag, ICharacterIdTag {
         return ele;
     }
 
-    public void GetNeededCharacterIds(List<ushort> characterIds, Swf swf) {
+    public void FindUsedCharacterIds(List<ushort> characterIds, Swf swf) {
         if (placeFlagHasCharacter && characterIds.IndexOf(characterId) < 0) {
             characterIds.Add(characterId);
         }
@@ -81,27 +82,6 @@ public class PlaceObject2Tag : SwfTag, ICharacterIdTag {
 
     public ushort GetCharacterId() {
         return characterId;
-    }
-
-    public PlaceObject2TagData ToData() {
-        var data = new PlaceObject2TagData();
-        data.type = header.type;
-        data.placeFlagHasClipActions = placeFlagHasClipActions;
-        data.placeFlagHasClipDepth = placeFlagHasClipDepth;
-        data.placeFlagHasName = placeFlagHasName;
-        data.placeFlagHasRatio = placeFlagHasRatio;
-        data.placeFlagHasColorTransform = placeFlagHasColorTransform;
-        data.placeFlagHasMatrix = placeFlagHasMatrix;
-        data.placeFlagHasCharacter = placeFlagHasCharacter;
-        data.placeFlagMove = placeFlagMove;
-        data.depth = depth;
-        data.characterId = characterId;
-        data.matrix = matrix;
-        data.colorTransform = colorTransform;
-        data.ratio = ratio;
-        data.name = name;
-        data.clipDepth = clipDepth;
-        return data;
     }
 
 }

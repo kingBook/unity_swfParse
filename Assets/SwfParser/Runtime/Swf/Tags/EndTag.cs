@@ -1,5 +1,6 @@
 ﻿using System.Xml;
 
+[System.Serializable]
 public class EndTag : SwfTag {
 
     public EndTag(SwfByteArray bytes, TagHeaderRecord header) : base(header) {

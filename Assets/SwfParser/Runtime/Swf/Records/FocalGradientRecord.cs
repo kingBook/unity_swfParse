@@ -1,5 +1,6 @@
 ﻿using System.Xml;
 
+[System.Serializable]
 public struct FocalGradientRecord {
 
     public byte spreadMode;

@@ -1,34 +1,4 @@
-﻿public static class SwfReader {
-
-    public static Swf Read(SwfByteArray bytes) {
-        var swf = new Swf(bytes);
-        //
-        while (bytes.GetBytesAvailable() > 0) {
-            long preHeaderStart = bytes.GetBytePosition();
-            TagHeaderRecord tagHeader = new TagHeaderRecord(bytes);
-
-            long startPosition = bytes.GetBytePosition();
-            long expectedEndPosition = startPosition + tagHeader.length;
-            //Debug2.Log("type:"+tagHeader.type,"preHeaderStart:"+preHeaderStart,"length:"+tagHeader.length);
-            SwfTag tag = TagFactory.CreateTag(bytes, tagHeader);
-            swf.tags.Add(tag);
-            if (tag is DefineSpriteTag defineSpriteTag) {
-                swf.defineSpriteTags.Add(defineSpriteTag);
-            } else if (tag is SymbolClassTag symbolClassTag) {
-                swf.symbolClassTags.Add(symbolClassTag);
-            }
-
-            bytes.AlignBytes();
-            //long newPosition = bytes.GetBytePosition();
-
-            bytes.SetBytePosition(expectedEndPosition);
-
-            if (tag is EndTag) {
-                break;
-            }
-        }
-        return swf;
-    }
+public static class ShapeRecordReader {
 
     public static IShapeRecord ReadShapeRecord(SwfByteArray bytes, byte numFillBits, byte numLineBits, byte shapeType) {
         IShapeRecord record;

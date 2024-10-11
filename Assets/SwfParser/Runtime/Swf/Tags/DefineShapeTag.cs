@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Xml;
 
+[System.Serializable]
 public class DefineShapeTag : SwfTag, ICharacterIdTag {
 
     public ushort shapeId;
@@ -25,24 +26,7 @@ public class DefineShapeTag : SwfTag, ICharacterIdTag {
         return ele;
     }
 
-    public DefineShapeTagData ToData() {
-        var data = new DefineShapeTagData();
-        data.type = header.type;
-        data.shapeId = shapeId;
-
-        // bitmapId
-        FillStyleRecord[] fillStyles = shapes.fillStyles.fillStyles;
-        if (fillStyles.Length >= 2) {
-            var fillStyle = fillStyles[1];
-            var type = fillStyle.fillStyleType;
-            if (type == 0x40 || type == 0x41 || type == 0x42 || type == 0x43) {
-                data.bitmapId = fillStyle.bitmapId;
-            }
-        }
-        return data;
-    }
-
-    public void GetNeededCharacterIds(List<ushort> characterIds, Swf swf) {
+    public void FindUsedCharacterIds(List<ushort> characterIds, Swf swf) {
         if (characterIds.IndexOf(shapeId) < 0) {
             characterIds.Add(shapeId);
 

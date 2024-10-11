@@ -1,5 +1,6 @@
 ﻿using System.Xml;
 
+[System.Serializable]
 public class ShowFrameTag : SwfTag {
 
     public ShowFrameTag(SwfByteArray bytes, TagHeaderRecord header) : base(header) {
@@ -10,7 +11,4 @@ public class ShowFrameTag : SwfTag {
         return CreateXmlElement(doc, "ShowFrame");
     }
 
-    public ShowFrameTagData ToData() {
-        return new ShowFrameTagData();
-    }
 }

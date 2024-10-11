@@ -1,5 +1,6 @@
 ﻿using System.Xml;
 
+[System.Serializable]
 public struct ConvolutionFilterRecord {
 
     public byte matrixX;

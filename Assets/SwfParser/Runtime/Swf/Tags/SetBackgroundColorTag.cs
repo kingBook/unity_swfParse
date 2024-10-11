@@ -1,5 +1,6 @@
 ﻿using System.Xml;
 
+[System.Serializable]
 public class SetBackgroundColorTag : SwfTag {
 
     public RGBRecord backgroundColor;

@@ -3,6 +3,7 @@ using System.Text;
 using System.Xml;
 using UnityEngine;
 
+[System.Serializable]
 public class DefineBitsJPEG3Tag : DefineBitsJPEG2Tag {
 
     //public ushort characterID;

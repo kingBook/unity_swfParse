@@ -1,6 +1,7 @@
 ﻿using System.Xml;
 
-public class SwfTag {
+[System.Serializable]
+public abstract class SwfTag {
 
     public TagHeaderRecord header;
 

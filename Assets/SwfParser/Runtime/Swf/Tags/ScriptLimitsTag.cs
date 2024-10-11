@@ -1,5 +1,6 @@
 ﻿using System.Xml;
 
+[System.Serializable]
 public class ScriptLimitsTag : SwfTag {
 
     public ushort maxRecursionDepth;

@@ -1,4 +1,5 @@
-﻿public struct GlyphEntryRecord {
+﻿[System.Serializable]
+public struct GlyphEntryRecord {
 
     public uint glyphIndex;
     public int glyphAdvance;

@@ -1,5 +1,6 @@
 ﻿using System.Xml;
 
+[System.Serializable]
 public class JPEGTablesTag : SwfTag {
 
     public byte[] jpegData;

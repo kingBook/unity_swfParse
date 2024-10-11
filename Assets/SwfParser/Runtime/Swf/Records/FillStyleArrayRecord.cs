@@ -1,5 +1,6 @@
 ﻿using System.Xml;
 
+[System.Serializable]
 public struct FillStyleArrayRecord {
 
     public byte fillStyleCount;

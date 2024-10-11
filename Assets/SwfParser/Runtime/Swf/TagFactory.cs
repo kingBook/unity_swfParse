@@ -1,139 +1,140 @@
 using UnityEngine;
 
 public static class TagFactory {
+
     public static SwfTag CreateTag(SwfByteArray bytes, TagHeaderRecord header) {
         SwfTag tag;
-        switch (header.type) {
+        var tagType = (TagType)header.type;
+        switch (tagType) {
             //============= Display list tags =======
-            case 4:
+            case TagType.PlaceObject: // 4
                 tag = new PlaceObjectTag(bytes, header);
                 break;
-            case 26:
+            case TagType.PlaceObject2: // 26
                 tag = new PlaceObject2Tag(bytes, header);
                 break;
-            case 70:
+            case TagType.PlaceObject3: // 70
                 tag = new PlaceObject3Tag(bytes, header);
                 break;
-            case 5:
+            case TagType.RemoveObject: // 5
                 tag = new RemoveObjectTag(bytes, header);
                 break;
-            case 28:
+            case TagType.RemoveObject2: // 28
                 tag = new RemoveObject2Tag(bytes, header);
                 break;
-            case 1:
+            case TagType.ShowFrame: // 1
                 tag = new ShowFrameTag(bytes, header);
                 break;
             //============= Control Tags =======
-            case 9:
+            case TagType.SetBackgroundColor: // 9
                 tag = new SetBackgroundColorTag(bytes, header);
                 break;
-            case 43:
+            case TagType.FrameLabel: // 43
                 tag = new FrameLabelTag(bytes, header);
                 break;
-            case 24:
+            case TagType.Protect: // 24
                 tag = new ProtectTag(bytes, header);
                 break;
-            case 0:
+            case TagType.End: // 0
                 tag = new EndTag(bytes, header);
                 break;
-            case 56:
+            case TagType.ExportAssets: // 56
                 tag = new ExportAssetsTag(bytes, header);
                 break;
-            case 64:
+            case TagType.EnableDebugger2: // 64
                 tag = new EnableDubugger2Tag(bytes, header);
                 break;
-            case 65:
+            case TagType.ScriptLimits: // 65
                 tag = new ScriptLimitsTag(bytes, header);
                 break;
-            case 66:
+            case TagType.SetTabIndex: // 66
                 tag = new SetTabIndexTag(bytes, header);
                 break;
-            case 69:
+            case TagType.FileAttributes: // 69
                 tag = new FileAttributesTag(bytes, header);
                 break;
-            case 71:
+            case TagType.ImportAssets2: // 71
                 tag = new ImportAssets2Tag(bytes, header);
                 break;
-            case 76:
+            case TagType.SymbolClass: // 76
                 tag = new SymbolClassTag(bytes, header);
                 break;
-            case 77:
+            case TagType.Metadata: // 77
                 tag = new MetadataTag(bytes, header);
                 break;
-            case 78:
+            case TagType.DefineScalingGrid: // 78
                 tag = new DefineScalingGridTag(bytes, header);
                 break;
-            case 86:
+            case TagType.DefineSceneAndFrameLabelData: // 86
                 tag = new DefineSceneAndFrameLabelDataTag(bytes, header);
                 break;
             //============= Shape Tags =======
-            case 2:
+            case TagType.DefineShape: // 2
                 tag = new DefineShapeTag(bytes, header);
                 break;
-            case 22:
+            case TagType.DefineShape2: // 22
                 tag = new DefineShape2Tag(bytes, header);
                 break;
-            case 32:
+            case TagType.DefineShape3: // 32
                 tag = new DefineShape3Tag(bytes, header);
                 break;
-            case 83:
+            case TagType.DefineShape4: // 83
                 tag = new DefineShape4Tag(bytes, header);
                 break;
             //============= Bitmaps =======
-            case 6:
+            case TagType.DefineBits: // 6
                 tag = new DefineBitsTag(bytes, header);
                 break;
-            case 8:
+            case TagType.JPEGTables: // 8
                 tag = new JPEGTablesTag(bytes, header);
                 break;
-            case 21:
+            case TagType.DefineBitsJPEG2: // 21
                 tag = new DefineBitsJPEG2Tag(bytes, header);
                 break;
-            case 35:
+            case TagType.DefineBitsJPEG3: // 35
                 tag = new DefineBitsJPEG3Tag(bytes, header);
                 break;
-            case 20:
+            case TagType.DefineBitsLossless: // 20
                 tag = new DefineBitsLosslessTag(bytes, header);
                 break;
-            case 36:
+            case TagType.DefineBitsLossless2: // 36
                 tag = new DefineBitsLossless2Tag(bytes, header);
                 break;
-            case 90:
+            case TagType.DefineBitsJPEG4: // 90
                 tag = new DefineBitsJPEG4Tag(bytes, header);
                 break;
             //============= Shape Morphing =======
-            case 46:
+            case TagType.DefineMorphShape: // 46
                 tag = new DefineMorphShapeTag(bytes, header);
                 break;
-            case 84:
+            case TagType.DefineMorphShape2: // 84
                 tag = new UnknownTag(bytes, header);
                 Debug.LogWarning("DefineMorphShape2Tag is not implemented.");
                 //tag = new DefineMorphShape2Tag(this, bytes,header);
                 break;
             //============= Fonts and Text =======
-            case 10:
+            case TagType.DefineFont: // 10
                 tag = new DefineFontTag(bytes, header);
                 break;
-            case 11:
+            case TagType.DefineText: // 11
                 tag = new DefineTextTag(bytes, header);
                 break;
-            case 33:
+            case TagType.DefineText2: // 33
                 tag = new DefineText2Tag(bytes, header);
                 break;
             //============= Buttons =======
-            case 7:
+            case TagType.DefineButton: // 7
                 tag = new UnknownTag(bytes, header);
                 Debug.LogError("DefineButtonTag is not implemented.");
                 //tag = new DefineButtonTag(bytes,header);
                 break;
-            case 34:
+            case TagType.DefineButton2: // 34
                 tag = new DefineButton2Tag(bytes, header);
                 break;
             //============= Sprites and Movie Clips =======
-            case 39:
+            case TagType.DefineSprite: // 39
                 tag = new DefineSpriteTag(bytes, header);
                 break;
-
             default:
                 tag = new UnknownTag(bytes, header);
                 break;

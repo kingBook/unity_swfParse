@@ -1,5 +1,6 @@
 ﻿using System.Xml;
 
+[System.Serializable]
 public struct CXFormRecord {
 
     public bool hasAddTerms;

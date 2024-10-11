@@ -1,5 +1,6 @@
 ﻿using System;
 
+[System.Serializable]
 public struct RGBRecord {
 
     public byte red;

@@ -1,4 +1,5 @@
-﻿public struct MatrixRecord {
+﻿[System.Serializable]
+public struct MatrixRecord {
 
     public bool hasScale;
     public byte nScaleBits;

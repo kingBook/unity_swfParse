@@ -1,5 +1,6 @@
 ﻿using System.Xml;
 
+[System.Serializable]
 public class EnableDubugger2Tag : SwfTag {
 
     public ushort reserved;

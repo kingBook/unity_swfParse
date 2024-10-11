@@ -1,5 +1,6 @@
 ﻿using System.Xml;
 
+[System.Serializable]
 public class MorphLineStyleRecord : IMorphLineStyleRecord {
 
     public ushort startWidth;

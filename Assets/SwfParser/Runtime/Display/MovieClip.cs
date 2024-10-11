@@ -5,7 +5,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer)), DisallowMultipleComponent]
 public class MovieClip : Sprite {
 
-    [SerializeField] private SwfData m_swfData;
+    [SerializeField] private Swf m_swf;
     [SerializeField] private string m_symbolClassName;
     private MeshFilter m_meshFilter;
     private MeshRenderer m_meshRenderer;
@@ -66,7 +66,7 @@ public class MovieClip : Sprite {
 
     private void Awake() {
         Debug.Log("MovieClip::Awake();");
-        m_player = new DefineSpritePlayer(m_swfData, m_symbolClassName);
+        m_player = new DefineSpritePlayer(m_swf, m_symbolClassName);
 
 
     }

@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿[System.Serializable]
 public struct RGBARecord {
 
     public byte red;
@@ -19,7 +18,7 @@ public struct RGBARecord {
         color = (color << 8) | green;
         color = (color << 8) | blue;
         color = (color << 8) | alpha;
-        string str = Convert.ToString(color, 16);
+        string str = System.Convert.ToString(color, 16);
         byte headZeroCount = (byte)(8 - str.Length);
         for (byte i = 0; i < headZeroCount; i++) str = '0' + str;
         return str;

@@ -1,4 +1,5 @@
-﻿public struct DefineSceneRecord {
+﻿[System.Serializable]
+public struct DefineSceneRecord {
 
     public uint offset;
     public string name;

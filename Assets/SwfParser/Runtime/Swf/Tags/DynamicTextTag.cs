@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 
+[System.Serializable]
 public class DynamicTextTag : SwfTag, ICharacterIdTag {
 
     public ushort characterID;
@@ -37,7 +38,7 @@ public class DynamicTextTag : SwfTag, ICharacterIdTag {
         // empty constructor
     }
 
-    public void GetNeededCharacterIds(List<ushort> characterIds, Swf swf) {
+    public void FindUsedCharacterIds(List<ushort> characterIds, Swf swf) {
         if (characterIds.IndexOf(characterID) < 0) {
             characterIds.Add(characterID);
         }

@@ -1,4 +1,5 @@
-﻿public struct FramelabelRecord {
+﻿[System.Serializable]
+public struct FramelabelRecord {
 
     public uint frameNum;
     public string frameLabel;

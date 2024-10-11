@@ -1,4 +1,5 @@
-﻿public struct TagHeaderRecord {
+﻿[System.Serializable]
+public struct TagHeaderRecord {
 
     public const uint SHORT_HEADER_MAX_LENGTH = 0x3F;
 

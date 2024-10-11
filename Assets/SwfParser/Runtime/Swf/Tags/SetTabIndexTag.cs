@@ -1,5 +1,6 @@
 ﻿using System.Xml;
 
+[System.Serializable]
 public class SetTabIndexTag : SwfTag {
 
     public ushort depth;

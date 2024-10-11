@@ -1,4 +1,5 @@
-﻿public struct TextRecord {
+﻿[System.Serializable]
+public struct TextRecord {
 
     public byte textRecordType;
     public byte styleFlagsReserved;

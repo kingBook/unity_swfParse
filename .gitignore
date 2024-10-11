@@ -1,6 +1,56 @@
-Library/
-Temp/
-.vs/
-obj/
+# 当已设置忽略指定文件夹，其内的文件发生修改，`git status` 时仍然能检测到修改，
+# 应该是此前已 `git add `追踪过该文件，此时需要执行，如:
+# git rm -r --cached Library
+# Library 可以是文件名或文件夹名
+
+# 已忽略过的文件或文件夹，重新添加--------------------------------------------
+# 在 .gitignore 文件中去除后，使用如下命令进行重新添加
+# git add -f 文件或文件夹路径
+
+
+# ----------------------------------------------------------------------
+# 只保留空文件夹，排除文件夹内的所有文件，如保留 Builds/Android,设置如下：
+# 创建 Builds/Android/.gitkeep, 在 .gitignore 加入以下内容
+# Builds/Android/*
+# !Builds/Android/.gitkeep
+
+# ----------------------------------------------------------------------
 *.csproj
 *.sln
+*.zip
+*.rar
+*.sln.DotSettings.user
+
+
+# ----------------------------------------------------------------------
+.vs/
+obj/
+Library/
+Logs/
+UserSettings/
+Temp/
+
+# Res ----------------------------------------------------------------------
+Res/*
+!Res/.gitkeep
+
+# Recordings ----------------------------------------------------------------
+Recordings/*
+!Recordings/.gitkeep
+
+# Builds --------------------------------------------------------------------
+# 忽略 Builds/Android 下的所有文件，只保留 Builds/Android/.gitkeep
+Builds/Android/*
+!Builds/Android/.gitkeep
+
+# 忽略 Builds/WebGL 下的所有文件，只保留 Builds/WebGL/.gitkeep
+Builds/WebGL/*
+!Builds/WebGL/.gitkeep
+
+# 忽略 Builds/iOS 下的所有文件，只保留 Builds/iOS/.gitkeep
+Builds/iOS/*
+!Builds/iOS/.gitkeep
+
+# 忽略 Builds/Windows 下的所有文件，只保留 Builds/Windows/.gitkeep
+Builds/Windows/*
+!Builds/Windows/.gitkeep
