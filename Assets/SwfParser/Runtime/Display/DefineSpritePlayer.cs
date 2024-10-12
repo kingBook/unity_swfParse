@@ -4,17 +4,11 @@ using UnityEngine;
 
 public class DefineSpritePlayer {
 
-    private Swf m_swf;
-    private string m_symbolClassName;
     private List<Tag>[] m_frameDatas;
 
     public DefineSpritePlayer(Swf swf, string symbolClassName) {
         DefineSpriteTag defineSpriteTag = swf.GetUsedDefineSpriteTag(symbolClassName);
-        // 
-        m_swf = swf;
-        m_symbolClassName = symbolClassName;
         m_frameDatas = CreateFrameDatas(defineSpriteTag);
-        // 
         GotoFrame(0);
     }
 
@@ -34,6 +28,7 @@ public class DefineSpritePlayer {
                 frameIndex++;
                 continue; // 不添加 ShowFrame
             }
+            //Debug2.Log(tagType);
             frameDatas[frameIndex].Add(tag);
         }
         return frameDatas;

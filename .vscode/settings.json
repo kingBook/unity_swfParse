@@ -80,7 +80,12 @@
         },
         "[One Monokai]": {
             "editorHoverWidget.highlightForeground": "#2aaaff",
-            "editorLineNumber.foreground": "#818181"
+            "editorLineNumber.foreground": "#818181",
+        }
+    },
+    "editor.semanticTokenColorCustomizations":{
+        "[One Monokai]": {
+            "enabled": true
         }
     },
     "dotnet.defaultSolution": "unity_swfParse.sln"

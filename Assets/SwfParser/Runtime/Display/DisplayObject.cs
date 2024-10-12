@@ -12,7 +12,7 @@ public abstract class DisplayObject : MonoBehaviour {
     public float rotation;
     public float scaleX;
     public float scaleY;
-    public Transform transformFlash;
+    public Transform transformFl;
     public bool visible;
     public float width;
     public float height;
