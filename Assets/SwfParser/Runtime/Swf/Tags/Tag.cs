@@ -22,6 +22,8 @@ public abstract class Tag {
         return ele;
     }
 
+    public virtual void Load(Swf swf, DisplayObjectContainer parent) { }
+
     public virtual XmlElement ToXml(XmlDocument doc) {
         return CreateXmlElement(doc);
     }

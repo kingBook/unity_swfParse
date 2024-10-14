@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Xml;
 
 [System.Serializable]
@@ -53,6 +54,33 @@ public class PlaceObject2Tag : Tag, ICharacterIdTag {
         /*if(tag.placeFlagHasClipActions){
             tag.clipActions=
         }*/
+    }
+
+    public override void Load(Swf swf, DisplayObjectContainer parent) {
+        if (placeFlagHasClipDepth) {
+
+        }
+        if (placeFlagHasName) {
+
+        }
+        if (placeFlagHasRatio) {
+
+        }
+        if (placeFlagHasColorTransform) {
+
+        }
+        if (placeFlagHasMatrix) {
+            Debug2.Log("placeObject2Tag.matrix:" + matrix);
+        }
+        if (placeFlagHasCharacter) {
+            Debug2.Log("placeObject2Tag.characterId:" + characterId);
+            Tag tag = (Tag)swf.GetUsedCharacterIdTag(characterId);
+            tag.Load(swf, parent);
+            Debug2.Log("placeObject2Tag.characterIdTagType:" + (TagType)tag.header.type);
+        }
+        if (placeFlagMove) {
+
+        }
     }
 
     public override XmlElement ToXml(XmlDocument doc) {

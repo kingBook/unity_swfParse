@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(CanvasRenderer), typeof(RectTransform)), DisallowMultipleComponent]
-public class MovieClipUI : MaskableGraphic {
+public class MovieClipComponentUI : MaskableGraphic {
 
     private Mesh m_mesh;
 
@@ -41,6 +41,9 @@ public class MovieClipUI : MaskableGraphic {
             Vector3.back,
             Vector3.back
         });
+        
+        //canvasRenderer.SetMesh(mesh);
+        //canvasRenderer.SetMaterial()
     }
 
     protected override void OnEnable() {

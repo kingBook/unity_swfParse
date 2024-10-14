@@ -1,8 +1,7 @@
 using UnityEngine;
 
-public abstract class DisplayObject : MonoBehaviour {
+public abstract class DisplayObject {
 
-    public Mesh mesh { get; protected set; }
     //
     public float alpha;
     //public filters
@@ -12,7 +11,7 @@ public abstract class DisplayObject : MonoBehaviour {
     public float rotation;
     public float scaleX;
     public float scaleY;
-    public Transform transformFl;
+    public Transform transform;
     public bool visible;
     public float width;
     public float height;

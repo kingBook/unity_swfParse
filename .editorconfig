@@ -1,4 +1,5 @@
 # https://learn.microsoft.com/zh-cn/dotnet/fundamentals/code-analysis/style-rules/csharp-formatting-options
+# https://learn.microsoft.com/zh-cn/dotnet/fundamentals/code-analysis/style-rules/naming-rules
 
 root = true
 
@@ -40,3 +41,57 @@ csharp_new_line_before_finally = false
 
 # 错误提示,如果不正常可以删掉
 dotnet_diagnostic.IDE0055.severity = none
+
+# Define the 'I_prefix' naming style
+dotnet_naming_style.I_prefix.capitalization = first_word_upper
+dotnet_naming_style.I_prefix.required_prefix = I
+
+# Define the 'm_camel_case' naming style
+dotnet_naming_style.m_camel_case.capitalization = camel_case
+dotnet_naming_style.m_camel_case.required_prefix = m_
+
+# Define the 's_camel_case' naming style
+dotnet_naming_style.s_camel_case.capitalization = camel_case
+dotnet_naming_style.s_camel_case.required_prefix = s_
+
+# Define the 'pascal_case' naming style
+dotnet_naming_style.pascal_case.capitalization = pascal_case
+
+# ==================== private_fields ===========================================
+# Define the 'private_fields' symbol group:
+dotnet_naming_symbols.private_fields.applicable_kinds = field
+dotnet_naming_symbols.private_fields.applicable_accessibilities = private
+# Define the 'private_fields_suggestion' naming rule
+dotnet_naming_rule.private_fields_suggestion.symbols = private_fields
+dotnet_naming_rule.private_fields_suggestion.style = m_camel_case
+dotnet_naming_rule.private_fields_suggestion.severity = suggestion
+# ==================== private_static_fields =====================================
+# Define the 'private_static_fields' symbol group:
+dotnet_naming_symbols.private_static_fields.applicable_kinds = field
+dotnet_naming_symbols.private_static_fields.applicable_accessibilities = private
+dotnet_naming_symbols.private_static_fields.required_modifiers = static
+# Define the 'private_static_fields_suggestion' naming rule
+dotnet_naming_rule.private_static_fields_suggestion.symbols = private_static_fields
+dotnet_naming_rule.private_static_fields_suggestion.style = s_camel_case
+dotnet_naming_rule.private_static_fields_suggestion.severity = suggestion
+# =================================== type_symbols ================================
+# Define the 'type_symbols' symbol group:
+dotnet_naming_symbols.type_symbols.applicable_kinds = namespace, class, struct, enum
+# Define the 'type_symbols_suggestion' naming rule
+dotnet_naming_rule.type_symbols_suggestion.symbols = type_symbols
+dotnet_naming_rule.type_symbols_suggestion.style = pascal_case
+dotnet_naming_rule.type_symbols_suggestion.severity = suggestion
+# =================================== interface_symbols =============================
+# Define the 'interface_symbols' symbol group:
+dotnet_naming_symbols.interface_symbols.applicable_kinds = interface
+# Define the 'interface_symbols_suggestion' naming rule
+dotnet_naming_rule.interface_symbols_suggestion.symbols = interface_symbols
+dotnet_naming_rule.interface_symbols_suggestion.style = I_prefix
+dotnet_naming_rule.interface_symbols_suggestion.severity = suggestion
+# =================================== method_delegate ===============================
+# Define the 'method_delegate' symbol group:
+dotnet_naming_symbols.method_delegate.applicable_kinds = method, delegate
+# Define the 'method_delegate_suggestion' naming rule
+dotnet_naming_rule.method_delegate_suggestion.symbols = method_delegate
+dotnet_naming_rule.method_delegate_suggestion.style = pascal_case
+dotnet_naming_rule.method_delegate_suggestion.severity = suggestion
