@@ -56,7 +56,7 @@ public class PlaceObject2Tag : Tag, ICharacterIdTag {
         }*/
     }
 
-    public override void Load(Swf swf, DisplayObjectContainer parent) {
+    public override void Load(Swf swf, DisplayObjectContainer parent, MeshHelperBase meshHelper) {
         if (placeFlagHasClipDepth) {
 
         }
@@ -70,13 +70,13 @@ public class PlaceObject2Tag : Tag, ICharacterIdTag {
 
         }
         if (placeFlagHasMatrix) {
-            Debug2.Log("placeObject2Tag.matrix:" + matrix);
+            //Debug2.Log("placeObject2Tag.matrix:" + matrix);
         }
         if (placeFlagHasCharacter) {
-            Debug2.Log("placeObject2Tag.characterId:" + characterId);
+            //Debug2.Log("placeObject2Tag.characterId:" + characterId);
             Tag tag = (Tag)swf.GetUsedCharacterIdTag(characterId);
-            tag.Load(swf, parent);
-            Debug2.Log("placeObject2Tag.characterIdTagType:" + (TagType)tag.header.type);
+            tag.Load(swf, parent, meshHelper);
+            //Debug2.Log("placeObject2Tag.characterIdTagType:" + (TagType)tag.header.type);
         }
         if (placeFlagMove) {
 

@@ -13,13 +13,15 @@ public class MovieClip : Sprite {
 
     //
     private Swf m_swf;
-    private List<Tag>[] m_frameDatas;
+    private List<Tag>[] m_frameTags;
+    private MeshHelperBase m_meshHelper;
 
-    public MovieClip(Swf swf, string symbolClassName) {
+    public MovieClip(MeshHelperBase meshHelper, Swf swf, string symbolClassName) : base() {
+        m_meshHelper = meshHelper;
         m_swf = swf;
 
         DefineSpriteTag defineSpriteTag = swf.GetUsedDefineSpriteTag(symbolClassName);
-        m_frameDatas = CreateFrameDatas(defineSpriteTag);
+        m_frameTags = GetFrameTags(defineSpriteTag);
         GotoFrame(0);
     }
 
@@ -67,7 +69,7 @@ public class MovieClip : Sprite {
 
     }
 
-    private List<Tag>[] CreateFrameDatas(DefineSpriteTag defineSpriteTag) {
+    private List<Tag>[] GetFrameTags(DefineSpriteTag defineSpriteTag) {
         int frameCount = defineSpriteTag.frameCount;
         var frameDatas = new List<Tag>[frameCount];
         for (int i = 0; i < frameCount; i++) {
@@ -83,19 +85,18 @@ public class MovieClip : Sprite {
                 frameIndex++;
                 continue; // 不添加 ShowFrame
             }
-            //Debug2.Log(tagType);
             frameDatas[frameIndex].Add(tag);
         }
         return frameDatas;
     }
 
     public void GotoFrame(int frameIndex) {
-        frameIndex = Math.Clamp(frameIndex, 0, m_frameDatas.Length - 1);
-        List<Tag> frameData = m_frameDatas[frameIndex];
+        frameIndex = Math.Clamp(frameIndex, 0, m_frameTags.Length - 1);
+        List<Tag> frameData = m_frameTags[frameIndex];
 
         for (int i = 0, len = frameData.Count; i < len; i++) {
             var tag = frameData[i];
-            tag.Load(m_swf, this);
+            tag.Load(m_swf, this, m_meshHelper);
         }
     }
 

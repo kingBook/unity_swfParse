@@ -46,6 +46,9 @@ dotnet_diagnostic.IDE0055.severity = none
 dotnet_naming_style.I_prefix.capitalization = first_word_upper
 dotnet_naming_style.I_prefix.required_prefix = I
 
+# Define the 'camel_case' naming style
+dotnet_naming_style.camel_case.capitalization = camel_case
+
 # Define the 'm_camel_case' naming style
 dotnet_naming_style.m_camel_case.capitalization = camel_case
 dotnet_naming_style.m_camel_case.required_prefix = m_
@@ -57,23 +60,23 @@ dotnet_naming_style.s_camel_case.required_prefix = s_
 # Define the 'pascal_case' naming style
 dotnet_naming_style.pascal_case.capitalization = pascal_case
 
-# ==================== private_fields ===========================================
-# Define the 'private_fields' symbol group:
-dotnet_naming_symbols.private_fields.applicable_kinds = field
-dotnet_naming_symbols.private_fields.applicable_accessibilities = private
-# Define the 'private_fields_suggestion' naming rule
-dotnet_naming_rule.private_fields_suggestion.symbols = private_fields
-dotnet_naming_rule.private_fields_suggestion.style = m_camel_case
-dotnet_naming_rule.private_fields_suggestion.severity = suggestion
-# ==================== private_static_fields =====================================
-# Define the 'private_static_fields' symbol group:
-dotnet_naming_symbols.private_static_fields.applicable_kinds = field
-dotnet_naming_symbols.private_static_fields.applicable_accessibilities = private
-dotnet_naming_symbols.private_static_fields.required_modifiers = static
-# Define the 'private_static_fields_suggestion' naming rule
-dotnet_naming_rule.private_static_fields_suggestion.symbols = private_static_fields
-dotnet_naming_rule.private_static_fields_suggestion.style = s_camel_case
-dotnet_naming_rule.private_static_fields_suggestion.severity = suggestion
+# ==================== private_protected_fields ===========================================
+# Define the 'private_protected_fields' symbol group:
+dotnet_naming_symbols.private_protected_fields.applicable_kinds = field
+dotnet_naming_symbols.private_protected_fields.applicable_accessibilities = private, protected
+# Define the 'private_protected_fields_suggestion' naming rule
+dotnet_naming_rule.private_protected_fields_suggestion.symbols = private_protected_fields
+dotnet_naming_rule.private_protected_fields_suggestion.style = m_camel_case
+dotnet_naming_rule.private_protected_fields_suggestion.severity = suggestion
+# ==================== private_protected_static_fields =====================================
+# Define the 'private_protected_static_fields' symbol group:
+dotnet_naming_symbols.private_protected_static_fields.applicable_kinds = field
+dotnet_naming_symbols.private_protected_static_fields.applicable_accessibilities = private, protected
+dotnet_naming_symbols.private_protected_static_fields.required_modifiers = static
+# Define the 'private_protected_static_fields_suggestion' naming rule
+dotnet_naming_rule.private_protected_static_fields_suggestion.symbols = private_protected_static_fields
+dotnet_naming_rule.private_protected_static_fields_suggestion.style = s_camel_case
+dotnet_naming_rule.private_protected_static_fields_suggestion.severity = suggestion
 # =================================== type_symbols ================================
 # Define the 'type_symbols' symbol group:
 dotnet_naming_symbols.type_symbols.applicable_kinds = namespace, class, struct, enum
@@ -90,7 +93,7 @@ dotnet_naming_rule.interface_symbols_suggestion.style = I_prefix
 dotnet_naming_rule.interface_symbols_suggestion.severity = suggestion
 # =================================== method_delegate ===============================
 # Define the 'method_delegate' symbol group:
-dotnet_naming_symbols.method_delegate.applicable_kinds = method, delegate
+dotnet_naming_symbols.method_delegate.applicable_kinds = method, delegate, local_function
 # Define the 'method_delegate_suggestion' naming rule
 dotnet_naming_rule.method_delegate_suggestion.symbols = method_delegate
 dotnet_naming_rule.method_delegate_suggestion.style = pascal_case

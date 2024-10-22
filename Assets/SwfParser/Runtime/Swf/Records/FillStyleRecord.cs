@@ -1,22 +1,23 @@
-﻿using System.Xml;
+﻿using System.Diagnostics;
+using System.Xml;
 
 [System.Serializable]
 public struct FillStyleRecord {
 
     public byte fillStyleType;
     public object color; //RGB|RGBA
-    public MatrixRecord? gradientMatrix;
+    public MatrixRecord gradientMatrix;
     public object gradient;
     public ushort bitmapId;
-    public MatrixRecord? bitmapMatrix;
+    public MatrixRecord bitmapMatrix;
 
     public FillStyleRecord(SwfByteArray bytes, byte shapeType) {
         // default value
         color = null;
-        gradientMatrix = null;
+        gradientMatrix = new MatrixRecord();
         gradient = null;
         bitmapId = 0;
-        bitmapMatrix = null;
+        bitmapMatrix = new MatrixRecord();
         //
         byte type = bytes.ReadUI8();
         fillStyleType = type;

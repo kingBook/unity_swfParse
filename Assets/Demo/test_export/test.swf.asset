@@ -30,24 +30,24 @@ MonoBehaviour:
       name: _TextStatic
   usedCharacterIds: 030002000500040006000700080009000a000b000c000d000e000f0010001100120013001400
   usedCharacterIdTags:
-  - rid: 7592505190367101080
-  - rid: 7592505190367101081
-  - rid: 7592505190367101082
-  - rid: 7592505190367101083
-  - rid: 7592505190367101084
-  - rid: 7592505190367101085
-  - rid: 7592505190367101086
-  - rid: 7592505190367101087
-  - rid: 7592505190367101088
-  - rid: 7592505190367101089
-  - rid: 7592505190367101090
-  - rid: 7592505190367101091
-  - rid: 7592505190367101092
-  - rid: 7592505190367101093
-  - rid: 7592505190367101094
-  - rid: 7592505190367101095
-  - rid: 7592505190367101096
-  - rid: 7592505190367101097
+  - rid: 7592505340914041176
+  - rid: 7592505340914041177
+  - rid: 7592505340914041178
+  - rid: 7592505340914041179
+  - rid: 7592505340914041180
+  - rid: 7592505340914041181
+  - rid: 7592505340914041182
+  - rid: 7592505340914041183
+  - rid: 7592505340914041184
+  - rid: 7592505340914041185
+  - rid: 7592505340914041186
+  - rid: 7592505340914041187
+  - rid: 7592505340914041188
+  - rid: 7592505340914041189
+  - rid: 7592505340914041190
+  - rid: 7592505340914041191
+  - rid: 7592505340914041192
+  - rid: 7592505340914041193
   atlasesData:
     atlasAssets:
     - {fileID: 2800000, guid: 197489b768dfe9d448d9fac88bb25955, type: 3}
@@ -93,7 +93,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 7592505190367101080
+    - rid: 7592505340914041176
       type: {class: DefineTextTag, ns: , asm: Assembly-CSharp}
       data:
         header:
@@ -108,8 +108,8 @@ MonoBehaviour:
         textMatrix:
           hasScale: 0
           nScaleBits: 0
-          scaleX: 0
-          scaleY: 0
+          scaleX: 1
+          scaleY: 1
           hasRotate: 0
           nRotateBits: 0
           rotateSkew0: 0
@@ -121,7 +121,7 @@ MonoBehaviour:
         advanceBits: 3
         textRecords: []
         endOfRecordsFlag: 0
-    - rid: 7592505190367101081
+    - rid: 7592505340914041177
       type: {class: DefineSpriteTag, ns: , asm: Assembly-CSharp}
       data:
         header:
@@ -130,10 +130,10 @@ MonoBehaviour:
         spriteId: 3
         frameCount: 1
         controlTags:
-        - rid: 7592505190367101098
-        - rid: 7592505190367101099
-        - rid: 7592505190367101100
-    - rid: 7592505190367101082
+        - rid: 7592505340914041194
+        - rid: 7592505340914041195
+        - rid: 7592505340914041196
+    - rid: 7592505340914041178
       type: {class: DefineSpriteTag, ns: , asm: Assembly-CSharp}
       data:
         header:
@@ -142,10 +142,10 @@ MonoBehaviour:
         spriteId: 5
         frameCount: 1
         controlTags:
-        - rid: 7592505190367101101
-        - rid: 7592505190367101102
-        - rid: 7592505190367101103
-    - rid: 7592505190367101083
+        - rid: 7592505340914041197
+        - rid: 7592505340914041198
+        - rid: 7592505340914041199
+    - rid: 7592505340914041179
       type: {class: DefineBitsLossless2Tag, ns: , asm: Assembly-CSharp}
       data:
         header:
@@ -156,7 +156,7 @@ MonoBehaviour:
         bitmapWidth: 152
         bitmapHeight: 37
         bitmapColorTableSize: 0
-    - rid: 7592505190367101084
+    - rid: 7592505340914041180
       type: {class: DefineShapeTag, ns: , asm: Assembly-CSharp}
       data:
         header:
@@ -174,15 +174,63 @@ MonoBehaviour:
             fillStyleCountExtended: 0
             fillStyles:
             - fillStyleType: 65
+              gradientMatrix:
+                hasScale: 0
+                nScaleBits: 0
+                scaleX: 0
+                scaleY: 0
+                hasRotate: 0
+                nRotateBits: 0
+                rotateSkew0: 0
+                rotateSkew1: 0
+                nTranslateBits: 0
+                translateX: 0
+                translateY: 0
               bitmapId: 65535
+              bitmapMatrix:
+                hasScale: 1
+                nScaleBits: 22
+                scaleX: 20
+                scaleY: 20
+                hasRotate: 0
+                nRotateBits: 0
+                rotateSkew0: 0
+                rotateSkew1: 0
+                nTranslateBits: 0
+                translateX: 0
+                translateY: 0
             - fillStyleType: 65
+              gradientMatrix:
+                hasScale: 0
+                nScaleBits: 0
+                scaleX: 0
+                scaleY: 0
+                hasRotate: 0
+                nRotateBits: 0
+                rotateSkew0: 0
+                rotateSkew1: 0
+                nTranslateBits: 0
+                translateX: 0
+                translateY: 0
               bitmapId: 6
+              bitmapMatrix:
+                hasScale: 1
+                nScaleBits: 22
+                scaleX: 19
+                scaleY: 19
+                hasRotate: 0
+                nRotateBits: 0
+                rotateSkew0: 0
+                rotateSkew1: 0
+                nTranslateBits: 12
+                translateX: -1506
+                translateY: -377
           lineStyles:
             lineStyleCount: 0
             lineStyleCountExtended: 0
           numFillBits: 2
           numLineBits: 0
-    - rid: 7592505190367101085
+    - rid: 7592505340914041181
       type: {class: DefineSpriteTag, ns: , asm: Assembly-CSharp}
       data:
         header:
@@ -191,10 +239,10 @@ MonoBehaviour:
         spriteId: 8
         frameCount: 1
         controlTags:
-        - rid: 7592505190367101104
-        - rid: 7592505190367101105
-        - rid: 7592505190367101106
-    - rid: 7592505190367101086
+        - rid: 7592505340914041200
+        - rid: 7592505340914041201
+        - rid: 7592505340914041202
+    - rid: 7592505340914041182
       type: {class: DefineBitsLossless2Tag, ns: , asm: Assembly-CSharp}
       data:
         header:
@@ -205,7 +253,7 @@ MonoBehaviour:
         bitmapWidth: 102
         bitmapHeight: 113
         bitmapColorTableSize: 0
-    - rid: 7592505190367101087
+    - rid: 7592505340914041183
       type: {class: DefineShapeTag, ns: , asm: Assembly-CSharp}
       data:
         header:
@@ -223,15 +271,63 @@ MonoBehaviour:
             fillStyleCountExtended: 0
             fillStyles:
             - fillStyleType: 65
+              gradientMatrix:
+                hasScale: 0
+                nScaleBits: 0
+                scaleX: 0
+                scaleY: 0
+                hasRotate: 0
+                nRotateBits: 0
+                rotateSkew0: 0
+                rotateSkew1: 0
+                nTranslateBits: 0
+                translateX: 0
+                translateY: 0
               bitmapId: 65535
+              bitmapMatrix:
+                hasScale: 1
+                nScaleBits: 22
+                scaleX: 20
+                scaleY: 20
+                hasRotate: 0
+                nRotateBits: 0
+                rotateSkew0: 0
+                rotateSkew1: 0
+                nTranslateBits: 0
+                translateX: 0
+                translateY: 0
             - fillStyleType: 65
+              gradientMatrix:
+                hasScale: 0
+                nScaleBits: 0
+                scaleX: 0
+                scaleY: 0
+                hasRotate: 0
+                nRotateBits: 0
+                rotateSkew0: 0
+                rotateSkew1: 0
+                nTranslateBits: 0
+                translateX: 0
+                translateY: 0
               bitmapId: 9
+              bitmapMatrix:
+                hasScale: 1
+                nScaleBits: 22
+                scaleX: 19
+                scaleY: 19
+                hasRotate: 0
+                nRotateBits: 0
+                rotateSkew0: 0
+                rotateSkew1: 0
+                nTranslateBits: 12
+                translateX: -1014
+                translateY: -1134
           lineStyles:
             lineStyleCount: 0
             lineStyleCountExtended: 0
           numFillBits: 2
           numLineBits: 0
-    - rid: 7592505190367101088
+    - rid: 7592505340914041184
       type: {class: DefineBitsLossless2Tag, ns: , asm: Assembly-CSharp}
       data:
         header:
@@ -242,7 +338,7 @@ MonoBehaviour:
         bitmapWidth: 95
         bitmapHeight: 101
         bitmapColorTableSize: 0
-    - rid: 7592505190367101089
+    - rid: 7592505340914041185
       type: {class: DefineShapeTag, ns: , asm: Assembly-CSharp}
       data:
         header:
@@ -260,15 +356,63 @@ MonoBehaviour:
             fillStyleCountExtended: 0
             fillStyles:
             - fillStyleType: 65
+              gradientMatrix:
+                hasScale: 0
+                nScaleBits: 0
+                scaleX: 0
+                scaleY: 0
+                hasRotate: 0
+                nRotateBits: 0
+                rotateSkew0: 0
+                rotateSkew1: 0
+                nTranslateBits: 0
+                translateX: 0
+                translateY: 0
               bitmapId: 65535
+              bitmapMatrix:
+                hasScale: 1
+                nScaleBits: 22
+                scaleX: 20
+                scaleY: 20
+                hasRotate: 0
+                nRotateBits: 0
+                rotateSkew0: 0
+                rotateSkew1: 0
+                nTranslateBits: 0
+                translateX: 0
+                translateY: 0
             - fillStyleType: 65
+              gradientMatrix:
+                hasScale: 0
+                nScaleBits: 0
+                scaleX: 0
+                scaleY: 0
+                hasRotate: 0
+                nRotateBits: 0
+                rotateSkew0: 0
+                rotateSkew1: 0
+                nTranslateBits: 0
+                translateX: 0
+                translateY: 0
               bitmapId: 11
+              bitmapMatrix:
+                hasScale: 1
+                nScaleBits: 22
+                scaleX: 20
+                scaleY: 20
+                hasRotate: 0
+                nRotateBits: 0
+                rotateSkew0: 0
+                rotateSkew1: 0
+                nTranslateBits: 11
+                translateX: -960
+                translateY: -1020
           lineStyles:
             lineStyleCount: 0
             lineStyleCountExtended: 0
           numFillBits: 2
           numLineBits: 0
-    - rid: 7592505190367101090
+    - rid: 7592505340914041186
       type: {class: DefineSpriteTag, ns: , asm: Assembly-CSharp}
       data:
         header:
@@ -277,10 +421,10 @@ MonoBehaviour:
         spriteId: 13
         frameCount: 1
         controlTags:
-        - rid: 7592505190367101107
-        - rid: 7592505190367101108
-        - rid: 7592505190367101109
-    - rid: 7592505190367101091
+        - rid: 7592505340914041203
+        - rid: 7592505340914041204
+        - rid: 7592505340914041205
+    - rid: 7592505340914041187
       type: {class: DefineBitsLossless2Tag, ns: , asm: Assembly-CSharp}
       data:
         header:
@@ -291,7 +435,7 @@ MonoBehaviour:
         bitmapWidth: 92
         bitmapHeight: 114
         bitmapColorTableSize: 0
-    - rid: 7592505190367101092
+    - rid: 7592505340914041188
       type: {class: DefineShapeTag, ns: , asm: Assembly-CSharp}
       data:
         header:
@@ -309,15 +453,63 @@ MonoBehaviour:
             fillStyleCountExtended: 0
             fillStyles:
             - fillStyleType: 65
+              gradientMatrix:
+                hasScale: 0
+                nScaleBits: 0
+                scaleX: 0
+                scaleY: 0
+                hasRotate: 0
+                nRotateBits: 0
+                rotateSkew0: 0
+                rotateSkew1: 0
+                nTranslateBits: 0
+                translateX: 0
+                translateY: 0
               bitmapId: 65535
+              bitmapMatrix:
+                hasScale: 1
+                nScaleBits: 22
+                scaleX: 20
+                scaleY: 20
+                hasRotate: 0
+                nRotateBits: 0
+                rotateSkew0: 0
+                rotateSkew1: 0
+                nTranslateBits: 0
+                translateX: 0
+                translateY: 0
             - fillStyleType: 65
+              gradientMatrix:
+                hasScale: 0
+                nScaleBits: 0
+                scaleX: 0
+                scaleY: 0
+                hasRotate: 0
+                nRotateBits: 0
+                rotateSkew0: 0
+                rotateSkew1: 0
+                nTranslateBits: 0
+                translateX: 0
+                translateY: 0
               bitmapId: 14
+              bitmapMatrix:
+                hasScale: 1
+                nScaleBits: 22
+                scaleX: 20
+                scaleY: 20
+                hasRotate: 0
+                nRotateBits: 0
+                rotateSkew0: 0
+                rotateSkew1: 0
+                nTranslateBits: 12
+                translateX: -920
+                translateY: -1140
           lineStyles:
             lineStyleCount: 0
             lineStyleCountExtended: 0
           numFillBits: 2
           numLineBits: 0
-    - rid: 7592505190367101093
+    - rid: 7592505340914041189
       type: {class: DefineSpriteTag, ns: , asm: Assembly-CSharp}
       data:
         header:
@@ -326,10 +518,10 @@ MonoBehaviour:
         spriteId: 16
         frameCount: 1
         controlTags:
-        - rid: 7592505190367101110
-        - rid: 7592505190367101111
-        - rid: 7592505190367101112
-    - rid: 7592505190367101094
+        - rid: 7592505340914041206
+        - rid: 7592505340914041207
+        - rid: 7592505340914041208
+    - rid: 7592505340914041190
       type: {class: DefineSpriteTag, ns: , asm: Assembly-CSharp}
       data:
         header:
@@ -338,14 +530,14 @@ MonoBehaviour:
         spriteId: 17
         frameCount: 2
         controlTags:
-        - rid: 7592505190367101113
-        - rid: 7592505190367101114
-        - rid: 7592505190367101115
-        - rid: 7592505190367101116
-        - rid: 7592505190367101117
-        - rid: 7592505190367101118
-        - rid: 7592505190367101119
-    - rid: 7592505190367101095
+        - rid: 7592505340914041209
+        - rid: 7592505340914041210
+        - rid: 7592505340914041211
+        - rid: 7592505340914041212
+        - rid: 7592505340914041213
+        - rid: 7592505340914041214
+        - rid: 7592505340914041215
+    - rid: 7592505340914041191
       type: {class: DefineBitsLossless2Tag, ns: , asm: Assembly-CSharp}
       data:
         header:
@@ -356,7 +548,7 @@ MonoBehaviour:
         bitmapWidth: 195
         bitmapHeight: 124
         bitmapColorTableSize: 0
-    - rid: 7592505190367101096
+    - rid: 7592505340914041192
       type: {class: DefineShapeTag, ns: , asm: Assembly-CSharp}
       data:
         header:
@@ -374,15 +566,63 @@ MonoBehaviour:
             fillStyleCountExtended: 0
             fillStyles:
             - fillStyleType: 65
+              gradientMatrix:
+                hasScale: 0
+                nScaleBits: 0
+                scaleX: 0
+                scaleY: 0
+                hasRotate: 0
+                nRotateBits: 0
+                rotateSkew0: 0
+                rotateSkew1: 0
+                nTranslateBits: 0
+                translateX: 0
+                translateY: 0
               bitmapId: 65535
+              bitmapMatrix:
+                hasScale: 1
+                nScaleBits: 22
+                scaleX: 20
+                scaleY: 20
+                hasRotate: 0
+                nRotateBits: 0
+                rotateSkew0: 0
+                rotateSkew1: 0
+                nTranslateBits: 0
+                translateX: 0
+                translateY: 0
             - fillStyleType: 65
+              gradientMatrix:
+                hasScale: 0
+                nScaleBits: 0
+                scaleX: 0
+                scaleY: 0
+                hasRotate: 0
+                nRotateBits: 0
+                rotateSkew0: 0
+                rotateSkew1: 0
+                nTranslateBits: 0
+                translateX: 0
+                translateY: 0
               bitmapId: 18
+              bitmapMatrix:
+                hasScale: 1
+                nScaleBits: 22
+                scaleX: 19
+                scaleY: 20
+                hasRotate: 0
+                nRotateBits: 0
+                rotateSkew0: 0
+                rotateSkew1: 0
+                nTranslateBits: 12
+                translateX: -1945
+                translateY: -1240
           lineStyles:
             lineStyleCount: 0
             lineStyleCountExtended: 0
           numFillBits: 2
           numLineBits: 0
-    - rid: 7592505190367101097
+    - rid: 7592505340914041193
       type: {class: DefineSpriteTag, ns: , asm: Assembly-CSharp}
       data:
         header:
@@ -391,10 +631,10 @@ MonoBehaviour:
         spriteId: 20
         frameCount: 1
         controlTags:
-        - rid: 7592505190367101120
-        - rid: 7592505190367101121
-        - rid: 7592505190367101122
-    - rid: 7592505190367101098
+        - rid: 7592505340914041216
+        - rid: 7592505340914041217
+        - rid: 7592505340914041218
+    - rid: 7592505340914041194
       type: {class: PlaceObject2Tag, ns: , asm: Assembly-CSharp}
       data:
         header:
@@ -413,8 +653,8 @@ MonoBehaviour:
         matrix:
           hasScale: 0
           nScaleBits: 0
-          scaleX: 0
-          scaleY: 0
+          scaleX: 1
+          scaleY: 1
           hasRotate: 0
           nRotateBits: 0
           rotateSkew0: 0
@@ -437,19 +677,19 @@ MonoBehaviour:
         ratio: 0
         name: 
         clipDepth: 0
-    - rid: 7592505190367101099
+    - rid: 7592505340914041195
       type: {class: ShowFrameTag, ns: , asm: Assembly-CSharp}
       data:
         header:
           type: 1
           length: 0
-    - rid: 7592505190367101100
+    - rid: 7592505340914041196
       type: {class: EndTag, ns: , asm: Assembly-CSharp}
       data:
         header:
           type: 0
           length: 0
-    - rid: 7592505190367101101
+    - rid: 7592505340914041197
       type: {class: PlaceObject2Tag, ns: , asm: Assembly-CSharp}
       data:
         header:
@@ -468,8 +708,8 @@ MonoBehaviour:
         matrix:
           hasScale: 0
           nScaleBits: 0
-          scaleX: 0
-          scaleY: 0
+          scaleX: 1
+          scaleY: 1
           hasRotate: 0
           nRotateBits: 0
           rotateSkew0: 0
@@ -492,19 +732,19 @@ MonoBehaviour:
         ratio: 0
         name: 
         clipDepth: 0
-    - rid: 7592505190367101102
+    - rid: 7592505340914041198
       type: {class: ShowFrameTag, ns: , asm: Assembly-CSharp}
       data:
         header:
           type: 1
           length: 0
-    - rid: 7592505190367101103
+    - rid: 7592505340914041199
       type: {class: EndTag, ns: , asm: Assembly-CSharp}
       data:
         header:
           type: 0
           length: 0
-    - rid: 7592505190367101104
+    - rid: 7592505340914041200
       type: {class: PlaceObject2Tag, ns: , asm: Assembly-CSharp}
       data:
         header:
@@ -523,8 +763,8 @@ MonoBehaviour:
         matrix:
           hasScale: 0
           nScaleBits: 0
-          scaleX: 0
-          scaleY: 0
+          scaleX: 1
+          scaleY: 1
           hasRotate: 0
           nRotateBits: 0
           rotateSkew0: 0
@@ -547,19 +787,19 @@ MonoBehaviour:
         ratio: 0
         name: 
         clipDepth: 0
-    - rid: 7592505190367101105
+    - rid: 7592505340914041201
       type: {class: ShowFrameTag, ns: , asm: Assembly-CSharp}
       data:
         header:
           type: 1
           length: 0
-    - rid: 7592505190367101106
+    - rid: 7592505340914041202
       type: {class: EndTag, ns: , asm: Assembly-CSharp}
       data:
         header:
           type: 0
           length: 0
-    - rid: 7592505190367101107
+    - rid: 7592505340914041203
       type: {class: PlaceObject2Tag, ns: , asm: Assembly-CSharp}
       data:
         header:
@@ -578,8 +818,8 @@ MonoBehaviour:
         matrix:
           hasScale: 0
           nScaleBits: 0
-          scaleX: 0
-          scaleY: 0
+          scaleX: 1
+          scaleY: 1
           hasRotate: 0
           nRotateBits: 0
           rotateSkew0: 0
@@ -602,19 +842,19 @@ MonoBehaviour:
         ratio: 0
         name: 
         clipDepth: 0
-    - rid: 7592505190367101108
+    - rid: 7592505340914041204
       type: {class: ShowFrameTag, ns: , asm: Assembly-CSharp}
       data:
         header:
           type: 1
           length: 0
-    - rid: 7592505190367101109
+    - rid: 7592505340914041205
       type: {class: EndTag, ns: , asm: Assembly-CSharp}
       data:
         header:
           type: 0
           length: 0
-    - rid: 7592505190367101110
+    - rid: 7592505340914041206
       type: {class: PlaceObject2Tag, ns: , asm: Assembly-CSharp}
       data:
         header:
@@ -633,8 +873,8 @@ MonoBehaviour:
         matrix:
           hasScale: 0
           nScaleBits: 0
-          scaleX: 0
-          scaleY: 0
+          scaleX: 1
+          scaleY: 1
           hasRotate: 0
           nRotateBits: 0
           rotateSkew0: 0
@@ -657,19 +897,19 @@ MonoBehaviour:
         ratio: 0
         name: 
         clipDepth: 0
-    - rid: 7592505190367101111
+    - rid: 7592505340914041207
       type: {class: ShowFrameTag, ns: , asm: Assembly-CSharp}
       data:
         header:
           type: 1
           length: 0
-    - rid: 7592505190367101112
+    - rid: 7592505340914041208
       type: {class: EndTag, ns: , asm: Assembly-CSharp}
       data:
         header:
           type: 0
           length: 0
-    - rid: 7592505190367101113
+    - rid: 7592505340914041209
       type: {class: PlaceObject2Tag, ns: , asm: Assembly-CSharp}
       data:
         header:
@@ -688,8 +928,8 @@ MonoBehaviour:
         matrix:
           hasScale: 0
           nScaleBits: 0
-          scaleX: 0
-          scaleY: 0
+          scaleX: 1
+          scaleY: 1
           hasRotate: 0
           nRotateBits: 0
           rotateSkew0: 0
@@ -712,7 +952,7 @@ MonoBehaviour:
         ratio: 0
         name: 
         clipDepth: 0
-    - rid: 7592505190367101114
+    - rid: 7592505340914041210
       type: {class: PlaceObject2Tag, ns: , asm: Assembly-CSharp}
       data:
         header:
@@ -731,8 +971,8 @@ MonoBehaviour:
         matrix:
           hasScale: 0
           nScaleBits: 0
-          scaleX: 0
-          scaleY: 0
+          scaleX: 1
+          scaleY: 1
           hasRotate: 0
           nRotateBits: 0
           rotateSkew0: 0
@@ -755,20 +995,20 @@ MonoBehaviour:
         ratio: 0
         name: 
         clipDepth: 0
-    - rid: 7592505190367101115
+    - rid: 7592505340914041211
       type: {class: ShowFrameTag, ns: , asm: Assembly-CSharp}
       data:
         header:
           type: 1
           length: 0
-    - rid: 7592505190367101116
+    - rid: 7592505340914041212
       type: {class: RemoveObject2Tag, ns: , asm: Assembly-CSharp}
       data:
         header:
           type: 28
           length: 2
         depth: 1
-    - rid: 7592505190367101117
+    - rid: 7592505340914041213
       type: {class: PlaceObject2Tag, ns: , asm: Assembly-CSharp}
       data:
         header:
@@ -787,8 +1027,8 @@ MonoBehaviour:
         matrix:
           hasScale: 0
           nScaleBits: 0
-          scaleX: 0
-          scaleY: 0
+          scaleX: 1
+          scaleY: 1
           hasRotate: 0
           nRotateBits: 0
           rotateSkew0: 0
@@ -811,19 +1051,19 @@ MonoBehaviour:
         ratio: 1
         name: 
         clipDepth: 0
-    - rid: 7592505190367101118
+    - rid: 7592505340914041214
       type: {class: ShowFrameTag, ns: , asm: Assembly-CSharp}
       data:
         header:
           type: 1
           length: 0
-    - rid: 7592505190367101119
+    - rid: 7592505340914041215
       type: {class: EndTag, ns: , asm: Assembly-CSharp}
       data:
         header:
           type: 0
           length: 0
-    - rid: 7592505190367101120
+    - rid: 7592505340914041216
       type: {class: PlaceObject2Tag, ns: , asm: Assembly-CSharp}
       data:
         header:
@@ -842,8 +1082,8 @@ MonoBehaviour:
         matrix:
           hasScale: 0
           nScaleBits: 0
-          scaleX: 0
-          scaleY: 0
+          scaleX: 1
+          scaleY: 1
           hasRotate: 0
           nRotateBits: 0
           rotateSkew0: 0
@@ -866,13 +1106,13 @@ MonoBehaviour:
         ratio: 0
         name: 
         clipDepth: 0
-    - rid: 7592505190367101121
+    - rid: 7592505340914041217
       type: {class: ShowFrameTag, ns: , asm: Assembly-CSharp}
       data:
         header:
           type: 1
           length: 0
-    - rid: 7592505190367101122
+    - rid: 7592505340914041218
       type: {class: EndTag, ns: , asm: Assembly-CSharp}
       data:
         header:

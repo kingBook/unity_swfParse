@@ -23,8 +23,8 @@ public struct MatrixRecord {
             scaleY = bytes.ReadFB(nScaleBits);
         } else {
             nScaleBits = 0;
-            scaleX = 0;
-            scaleY = 0;
+            scaleX = 1.0f;
+            scaleY = 1.0f;
         }
         hasRotate = bytes.ReadFlag();
         if (hasRotate) {
@@ -51,6 +51,10 @@ public struct MatrixRecord {
         float tx = translateX;
         float ty = translateY;
         return scaleX + "," + skewX + "," + tx + "," + skewY + "," + scaleY + "," + ty;
+    }
+
+    public Matrix ToMatrix() {
+        return new Matrix(scaleX, rotateSkew0, rotateSkew1, scaleY, translateX, translateY);
     }
 
 }

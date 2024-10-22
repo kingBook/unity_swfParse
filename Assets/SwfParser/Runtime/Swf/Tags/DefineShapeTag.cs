@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Xml;
 
 [System.Serializable]
@@ -18,16 +19,17 @@ public class DefineShapeTag : Tag, ICharacterIdTag {
         shapes = new ShapeWithStyleRecord(bytes, 1);
     }
 
-    public override void Load(Swf swf, DisplayObjectContainer parent) {
+    public override void Load(Swf swf, DisplayObjectContainer parent, MeshHelperBase meshHelper) {
         // bitmapId
         FillStyleRecord[] fillStyles = shapes.fillStyles.fillStyles;
         if (fillStyles.Length >= 2) {
             var fillStyle = fillStyles[1];
             var type = fillStyle.fillStyleType;
             if (type == 0x40 || type == 0x41 || type == 0x42 || type == 0x43) {
-                var data = swf.atlasesData.GetData(fillStyle.bitmapId);
-
-                var shape = new Shape();
+                var atlasData = swf.atlasesData.GetAtlasData(fillStyle.bitmapId);
+                //Debug2.Log(fillStyle.bitmapMatrix);
+                var shape = new Shape(meshHelper, atlasData, fillStyle.bitmapMatrix.ToMatrix());
+                parent.AddChild(shape);
             }
         }
     }

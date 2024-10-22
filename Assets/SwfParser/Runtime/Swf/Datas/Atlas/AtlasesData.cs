@@ -7,7 +7,7 @@ public class AtlasesData {
     public string[] atlasPaths;
     public RectInfoArray[] rectInfo2Ds;
 
-    public (Texture2D atlas, string atlasPath, RectInfo? rectInfo) GetData(ushort characterID) {
+    public (Texture2D atlas, string atlasPath, RectInfo? rectInfo) GetAtlasData(ushort characterID) {
         Texture2D atlas = null;
         RectInfo? rectInfo = null;
         string atlasPath = null;
