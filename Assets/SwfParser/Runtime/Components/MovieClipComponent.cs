@@ -10,7 +10,7 @@ public class MovieClipComponent : MonoBehaviour {
     private MovieClip m_movieClip;
 
     private void Awake() {
-        Debug.Log("MovieClip::Awake();");
+        Debug.Log("MovieClipComponent::Awake();");
 
         MeshFilter meshFilter = GetComponent<MeshFilter>();
         MeshRenderer meshRenderer = GetComponent<MeshRenderer>();

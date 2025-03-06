@@ -54,7 +54,7 @@ public struct MatrixRecord {
     }
 
     public Matrix ToMatrix() {
-        return new Matrix(scaleX, rotateSkew0, rotateSkew1, scaleY, translateX, translateY);
+        return new Matrix(scaleX / 20.0f, rotateSkew0 / 20.0f, rotateSkew1 / 20.0f, scaleY / 20.0f, translateX / 20.0f, translateY / 20.0f);
     }
 
 }

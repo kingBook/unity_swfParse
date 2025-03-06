@@ -13,16 +13,16 @@ public abstract class MeshHelperBase {
     protected readonly List<Vector3> m_normals = new();
     protected readonly List<Material> m_materials = new();
 
-    public virtual void AddRectInfo(Texture2D atlas, RectInfo rectInfo, out int vertexStartIndex, out int vertexEndIndex, out int subMeshIndex) {
+    public virtual void AddRectInfo(Texture2D atlas, RectInfo rectInfo, Matrix matrix, out int vertexStartIndex, out int vertexEndIndex, out int subMeshIndex) {
         float w = rectInfo.rect.width * atlas.width;
         float h = rectInfo.rect.height * atlas.height;
         // 添加顶点 -------------------------------------
         vertexStartIndex = m_vertices.Count;
         vertexEndIndex = vertexStartIndex + 3;
-        m_vertices.Add(new(0, 0, 0));
-        m_vertices.Add(new(0, h, 0));
-        m_vertices.Add(new(w, h, 0));
-        m_vertices.Add(new(w, 0, 0));
+        m_vertices.Add(matrix.TransformPoint(new(0, 0)));
+        m_vertices.Add(matrix.TransformPoint(new(0, h)));
+        m_vertices.Add(matrix.TransformPoint(new(w, h)));
+        m_vertices.Add(matrix.TransformPoint(new(w, 0)));
         m_mesh.SetVertices(m_vertices);
 
         // UV -------------------------------------------
