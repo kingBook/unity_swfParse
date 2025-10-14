@@ -2,7 +2,7 @@
 using UnityEditor;
 
 /// <summary>
-/// swf 文件环境菜单
+/// .swf 文件环境菜单
 /// </summary>
 public class SwfContextMenu : Editor {
 

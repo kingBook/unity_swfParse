@@ -6,7 +6,7 @@ using Debug = UnityEngine.Debug;
 
 public class SwfXmlExporter {
 
-    private Swf m_swf;
+    private readonly Swf m_swf;
 
     public SwfXmlExporter(Swf swf) {
         m_swf = swf;

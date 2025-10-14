@@ -36,9 +36,9 @@ public static class SwfProcessor {
                 break;
         }
         Debug.Log("atlasesData.rectInfo2Ds:" + atlasesData.rectInfo2Ds.Length);
-        // =========== 导出运行时数据 (xx.swf.asset) ======================
-        if (SwfParseConfig.isExportSwfAsset) {
-            var swfAssetExporter = new SwfAssetExporter(swf);
+        // =========== 导出运行时数据 (xx.swfData) ======================
+        if (SwfParseConfig.isExportSwfData) {
+            var swfAssetExporter = new SwfDataExporter(swf);
             swfAssetExporter.Export(swfPath, atlasesData);
         }
         // ===============================================================

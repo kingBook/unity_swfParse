@@ -70,7 +70,6 @@
     "files.trimTrailingWhitespace": false,
     "dotnet.completion.showCompletionItemsFromUnimportedNamespaces": true,
     "dotnet.completion.triggerCompletionInArgumentLists": false,
-    "omnisharp.organizeImportsOnFormat": true,
     "omnisharp.enableEditorConfigSupport": true,
     "workbench.sideBar.location": "right",
     "workbench.colorCustomizations": {
@@ -88,5 +87,6 @@
             "enabled": true
         }
     },
-    "dotnet.defaultSolution": "unity_swfParse.sln"
+    "dotnet.defaultSolution": "unity_swfParse.sln",
+    "dotnet.formatting.organizeImportsOnFormat": true
 }

@@ -3,11 +3,11 @@ using System.IO;
 using System.Diagnostics;
 using Debug = UnityEngine.Debug;
 
-public class SwfAssetExporter {
+public class SwfDataExporter {
 
-    private Swf m_swf;
+    private readonly Swf m_swf;
 
-    public SwfAssetExporter(Swf swf) {
+    public SwfDataExporter(Swf swf) {
         m_swf = swf;
     }
 
@@ -34,7 +34,7 @@ public class SwfAssetExporter {
         }
 
         sw.Stop();
-        Debug.Log("Create swf.asset passed time:" + sw.ElapsedMilliseconds);
+        Debug.Log("Create .swfData passed time:" + sw.ElapsedMilliseconds);
     }
 
 

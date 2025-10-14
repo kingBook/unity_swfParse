@@ -6,7 +6,7 @@ using Debug = UnityEngine.Debug;
 
 public class SwfImagesExporter {
 
-    private Swf m_swf;
+    private readonly Swf m_swf;
 
     public SwfImagesExporter(Swf swf) {
         m_swf = swf;

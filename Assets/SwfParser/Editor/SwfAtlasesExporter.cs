@@ -14,7 +14,7 @@ public class SwfAtlasesExporter {
         public int padding;
     }
 
-    private Swf m_swf;
+    private readonly Swf m_swf;
 
     public SwfAtlasesExporter(Swf swf) {
         m_swf = swf;
