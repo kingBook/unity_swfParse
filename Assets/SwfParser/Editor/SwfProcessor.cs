@@ -38,7 +38,7 @@ public static class SwfProcessor {
         Debug.Log("atlasesData.rectInfo2Ds:" + atlasesData.rectInfo2Ds.Length);
         // =========== 导出运行时数据 (xx.swfData) ======================
         if (SwfParseConfig.isExportSwfData) {
-            var swfAssetExporter = new SwfDataExporter(swf);
+            var swfAssetExporter = new SwfAssetExporter(swf);
             swfAssetExporter.Export(swfPath, atlasesData);
         }
         // ===============================================================
