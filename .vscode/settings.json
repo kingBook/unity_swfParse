@@ -71,7 +71,6 @@
     "dotnet.completion.showCompletionItemsFromUnimportedNamespaces": true,
     "dotnet.completion.triggerCompletionInArgumentLists": false,
     "omnisharp.enableEditorConfigSupport": true,
-    "workbench.sideBar.location": "right",
     "workbench.colorCustomizations": {
         "[Default Light+]": {
             "activityBar.background": "#dddddd",
