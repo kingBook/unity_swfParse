@@ -10,7 +10,7 @@ public class MovieClipComponentUI : MaskableGraphic {
 
     private void Init() {
         var meshHelper = new MeshHelperUI(canvasRenderer);
-        m_movieClip = new MovieClip(meshHelper, m_swf, m_symbolClassName);
+        m_movieClip = new MovieClip(m_swf, meshHelper, m_symbolClassName);
     }
 
     protected override void OnValidate() {

@@ -22,7 +22,7 @@ public abstract class Tag {
         return ele;
     }
 
-    public virtual void Load(Swf swf, DisplayObjectContainer parent, MeshHelperBase meshHelper) {
+    public virtual void Load(Swf swf, MeshHelperBase meshHelper, DisplayObjectContainer parent) {
         // 子类重写
         Debug2.Log((TagType)header.type+" Load() 方法未实现");
     }

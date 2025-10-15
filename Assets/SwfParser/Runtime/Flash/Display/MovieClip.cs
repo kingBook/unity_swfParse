@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class MovieClip : Sprite {
 
@@ -16,14 +17,25 @@ public class MovieClip : Sprite {
     private List<Tag>[] m_frameTags;
     private MeshHelperBase m_meshHelper;
 
-    public MovieClip(MeshHelperBase meshHelper, Swf swf, string symbolClassName) : base() {
+    public MovieClip(Swf swf, MeshHelperBase meshHelper, string symbolClassName) : base() {
+        // 获取与类名匹配的 DefineSpriteTag
+        DefineSpriteTag defineSpriteTag = swf.GetUsedDefineSpriteTag(symbolClassName);
+        Init(swf, meshHelper, defineSpriteTag);
+    }
+
+    public MovieClip(Swf swf, MeshHelperBase meshHelper, DefineSpriteTag defineSpriteTag) : base() {
+        Init(swf, meshHelper, defineSpriteTag);
+    }
+
+    private void Init(Swf swf, MeshHelperBase meshHelper, DefineSpriteTag defineSpriteTag) {
         m_meshHelper = meshHelper;
         m_swf = swf;
 
-        // 获取与类名匹配的 DefineSpriteTag
-        DefineSpriteTag defineSpriteTag = swf.GetUsedDefineSpriteTag(symbolClassName);
-        // 获取 DefineSpriteTag 所有帧的 controlTags
+        // 获取 defineSpriteTag 所有帧的 controlTags
         m_frameTags = GetFrameTags(defineSpriteTag);
+
+        // 跳到指定帧
+        GotoFrame(0);
     }
 
     /// <summary>
@@ -77,7 +89,6 @@ public class MovieClip : Sprite {
     /// <returns> 返回一个二维列表，一维：帧索引；二维：当前帧的 controlTags </returns>
     private List<Tag>[] GetFrameTags(DefineSpriteTag defineSpriteTag) {
         int frameCount = defineSpriteTag.frameCount;
-        Debug.Log(frameCount);
         var frameDatas = new List<Tag>[frameCount];
         for (int i = 0; i < frameCount; i++) {
             frameDatas[i] = new List<Tag>();
@@ -107,7 +118,7 @@ public class MovieClip : Sprite {
 
         for (int i = 0, len = frameData.Count; i < len; i++) {
             var tag = frameData[i];
-            tag.Load(m_swf, this, m_meshHelper);
+            tag.Load(m_swf, m_meshHelper, this);
         }
     }
 

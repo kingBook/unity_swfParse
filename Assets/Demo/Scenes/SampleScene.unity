@@ -647,7 +647,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_swf: {fileID: 11400000, guid: 9439dee32bc49f14f835c8d8180bee05, type: 2}
-  m_symbolClassName: _OneFrame
+  m_symbolClassName: _Mc
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

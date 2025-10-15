@@ -30,6 +30,11 @@ public class DefineSpriteTag : Tag, ICharacterIdTag {
         return tempTags.ToArray();
     }
 
+    public override void Load(Swf swf, MeshHelperBase meshHelper, DisplayObjectContainer parent) {
+        var mc = new MovieClip(swf, meshHelper, this);
+        parent.AddChild(mc);
+    }
+
     public override XmlElement ToXml(XmlDocument doc) {
         var ele = CreateXmlElement(doc, "DefineSprite");
         ele.SetAttribute("spriteId", spriteId.ToString());
@@ -56,7 +61,7 @@ public class DefineSpriteTag : Tag, ICharacterIdTag {
                                         characterIdTag is PlaceObject3Tag;
 
                 if (isPlaceObjectTag) {
-                    for (int j = 0, lenJ = swf.tags.Count; j < lenJ; j++) {
+                    for (int j = 0, count = swf.tags.Count; j < count; j++) {
                         var tempTag = swf.tags[j];
                         if (tempTag is ICharacterIdTag tempIdTag) {
                             tempIdTag.FindUsedCharacterIds(characterIds, swf);

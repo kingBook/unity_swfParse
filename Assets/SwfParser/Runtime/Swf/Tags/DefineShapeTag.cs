@@ -19,7 +19,7 @@ public class DefineShapeTag : Tag, ICharacterIdTag {
         shapes = new ShapeWithStyleRecord(bytes, 1);
     }
 
-    public override void Load(Swf swf, DisplayObjectContainer parent, MeshHelperBase meshHelper) {
+    public override void Load(Swf swf, MeshHelperBase meshHelper, DisplayObjectContainer parent) {
         // bitmapId
         FillStyleRecord[] fillStyles = shapes.fillStyles.fillStyles;
         if (fillStyles.Length >= 2) {
