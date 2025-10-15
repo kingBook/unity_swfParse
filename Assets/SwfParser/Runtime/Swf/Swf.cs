@@ -62,7 +62,7 @@ public class Swf : ScriptableObject {
             for (int j = 0, len = symbols.Length; j < len; j++) {
                 var symobolClassRecord = symbols[j];
                 if (symbolClassName == symobolClassRecord.name) {
-                    return (DefineSpriteTag)GetUsedCharacterIdTag(symobolClassRecord.tagId);
+                    return (DefineSpriteTag)GetCharacterIdTag(symobolClassRecord.tagId);
                 }
             }
         }
@@ -74,7 +74,7 @@ public class Swf : ScriptableObject {
     /// </summary>
     /// <param name="characterId"></param>
     /// <returns></returns>
-    public ICharacterIdTag GetUsedCharacterIdTag(ushort characterId) {
+    public ICharacterIdTag GetCharacterIdTag(ushort characterId) {
         for (int i = 0, len = usedCharacterIdTags.Count; i < len; i++) {
             var characterIdTag = usedCharacterIdTags[i];
             if (characterIdTag.GetCharacterId() == characterId) {

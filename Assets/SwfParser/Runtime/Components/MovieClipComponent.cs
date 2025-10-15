@@ -17,6 +17,7 @@ public class MovieClipComponent : MonoBehaviour {
 
         var meshHelper = new MeshHelper(meshFilter, meshRenderer);
         m_movieClip = new MovieClip(meshHelper, m_swf, m_symbolClassName);
+        m_movieClip.GotoFrame(1);
     }
 
 }

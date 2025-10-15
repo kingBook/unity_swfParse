@@ -74,7 +74,7 @@ public class PlaceObject2Tag : Tag, ICharacterIdTag {
         }
         if (placeFlagHasCharacter) {
             //Debug2.Log("placeObject2Tag.characterId:" + characterId);
-            Tag tag = (Tag)swf.GetUsedCharacterIdTag(characterId);
+            Tag tag = (Tag)swf.GetCharacterIdTag(characterId);
             tag.Load(swf, parent, meshHelper);
             //Debug2.Log("placeObject2Tag.characterIdTagType:" + (TagType)tag.header.type);
         }

@@ -20,9 +20,10 @@ public class MovieClip : Sprite {
         m_meshHelper = meshHelper;
         m_swf = swf;
 
+        // 获取与类名匹配的 DefineSpriteTag
         DefineSpriteTag defineSpriteTag = swf.GetUsedDefineSpriteTag(symbolClassName);
+        // 获取 DefineSpriteTag 所有帧的 controlTags
         m_frameTags = GetFrameTags(defineSpriteTag);
-        GotoFrame(0);
     }
 
     /// <summary>
@@ -69,8 +70,14 @@ public class MovieClip : Sprite {
 
     }
 
+    /// <summary>
+    /// 获取一个 DefineSpriteTag 所有帧的 controlTags
+    /// </summary>
+    /// <param name="defineSpriteTag"></param>
+    /// <returns> 返回一个二维列表，一维：帧索引；二维：当前帧的 controlTags </returns>
     private List<Tag>[] GetFrameTags(DefineSpriteTag defineSpriteTag) {
         int frameCount = defineSpriteTag.frameCount;
+        Debug.Log(frameCount);
         var frameDatas = new List<Tag>[frameCount];
         for (int i = 0; i < frameCount; i++) {
             frameDatas[i] = new List<Tag>();
@@ -90,6 +97,10 @@ public class MovieClip : Sprite {
         return frameDatas;
     }
 
+    /// <summary>
+    /// 跳至指定帧
+    /// </summary>
+    /// <param name="frameIndex"> 帧索引 </param>
     public void GotoFrame(int frameIndex) {
         frameIndex = Math.Clamp(frameIndex, 0, m_frameTags.Length - 1);
         List<Tag> frameData = m_frameTags[frameIndex];

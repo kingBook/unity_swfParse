@@ -16,6 +16,7 @@ public abstract class MeshHelperBase {
     public virtual void AddRectInfo(Texture2D atlas, RectInfo rectInfo, Matrix matrix, out int vertexStartIndex, out int vertexEndIndex, out int subMeshIndex) {
         float w = rectInfo.rect.width * atlas.width;
         float h = rectInfo.rect.height * atlas.height;
+        
         // 添加顶点 -------------------------------------
         vertexStartIndex = m_vertices.Count;
         vertexEndIndex = vertexStartIndex + 3;
@@ -52,10 +53,12 @@ public abstract class MeshHelperBase {
         m_mesh.subMeshCount = m_subMeshCount;
         m_mesh.SetTriangles(m_tempInts, subMeshIndex);
         m_tempInts.Clear();
+        
         // 材质 ------------------------------------------
         var material = new Material(Shader.Find("Sprites/Default"));
         material.mainTexture = atlas;
         m_materials.Add(material);
+        
         // 由子类重写此方法，将材质应用到渲染器
     }
 

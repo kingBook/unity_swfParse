@@ -540,7 +540,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_swf: {fileID: 11400000, guid: 9439dee32bc49f14f835c8d8180bee05, type: 2}
+  m_swf: {fileID: 0}
   m_symbolClassName: _OneFrame
 --- !u!222 &1673573243
 CanvasRenderer:
